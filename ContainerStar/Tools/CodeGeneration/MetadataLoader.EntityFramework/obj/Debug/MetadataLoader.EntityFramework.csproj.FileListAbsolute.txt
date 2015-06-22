@@ -1,0 +1,8 @@
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.EntityFramework\bin\Debug\MetadataLoader.EntityFramework.dll.config
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.EntityFramework\bin\Debug\MetadataLoader.EntityFramework.dll
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.EntityFramework\bin\Debug\MetadataLoader.EntityFramework.pdb
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.EntityFramework\bin\Debug\MetadataLoader.Contracts.dll
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.EntityFramework\bin\Debug\MetadataLoader.Contracts.pdb
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.EntityFramework\obj\Debug\MetadataLoader.EntityFramework.csprojResolveAssemblyReference.cache
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.EntityFramework\obj\Debug\MetadataLoader.EntityFramework.dll
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.EntityFramework\obj\Debug\MetadataLoader.EntityFramework.pdb

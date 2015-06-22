@@ -1,0 +1,147 @@
+﻿<#@ import namespace="System.Text" #>
+<#@ import namespace="MetadataLoader.Contracts.Generation" #>
+<#@ include file="..\ContainerStar.GenerationContext.ttinclude"  once="true" #>
+<#
+    IWebGenerationContext context = generationContext;
+    foreach (var model in context.WebModels)
+    {
+        var entityContent = model.Table.Content;
+        context.FileManager.StartNewFile(entityContent.CodeName + ".js");
+		//Model
+#>
+define(function () {
+	'use strict';
+
+	var model = Backbone.Model.extend({
+	    urlRoot: 'api/<#=entityContent.CodeNamePlural#>',
+		fields: {
+			id: { type: "number", editable: false }
+<#
+        foreach (var property in model.ModelProperties)
+        {
+            var propContent = property.Column.Content;
+            var type = GetPropertyType(context, property);
+            var validation = GetPropertyValidation(context, property);
+#>
+			,<#=property.Name #>: { type: "<#=type#>", 
+			                        editable: Application.canTableItemBeEdit('<#=entityContent.CodeName #>', '<#=property.Name #>'), 
+				                    validation: { required: <#=propContent.IsModelRequired.ToString().ToLower()#><#=validation.Prefix(", ") #> } }			
+<#
+        }
+#>
+		},
+		defaults: function () {
+			var dnf = new Date();
+			var dnt = new Date(2070,11,31);
+			return {
+				fromDate: dnf, 
+				toDate: dnt
+			};
+		}
+	});
+	return model;
+});
+<#
+        context.FileManager.EndBlock();
+
+		//Filter
+		if(entityContent.GenerateFilter)
+		{
+			context.FileManager.StartNewFile(string.Format("Filter{0}.js", model.Table.Content.CodeName));
+#>
+define(function () {
+    'use strict';
+
+    var model = Backbone.Model.extend({
+        fields: {
+            name: { type: "string", editable: true },
+        }
+    });
+    return model;
+});
+<#
+			context.FileManager.EndBlock();
+		}
+    }
+    context.FileManager.Process();
+#>
+<#+
+    private string GetPropertyType(IWebGenerationContext context, PropertyModelInfo property, bool forValidation = false)
+    {
+        if (!forValidation && !string.IsNullOrWhiteSpace(property.Content.JsModelType))
+        {
+            return property.Content.JsModelType;
+        }
+        var shortName = property.Type.ShortName;
+        if (string.IsNullOrEmpty(shortName))
+        {
+            shortName = property.Type.Name.ToLower();
+        }
+
+        switch (shortName)
+        {
+            case "char":
+            case "string":
+                return "string";
+            case "bool":
+                return "boolean";
+            case "byte":
+            case "short":
+            case "int":
+            case "long":
+            case "sbyte":
+            case "ushort":
+            case "uint":
+            case "ulong":
+            case "decimal":
+            case "float":
+            case "double":
+                return "number";
+            case "datetime":
+                return "date";
+            case "object":
+                if (!forValidation)
+                {
+                    context.AddWarning("Model property type is object. 'string' will be used");
+                }
+                return "string";
+            default:
+                if (!forValidation)
+                {
+                    context.AddError(String.Format("Unknown type '{0}' for model property {1}. 'string' will be used", shortName, property.Name));
+                }
+                return "string";
+        }
+    }
+    private string GetPropertyValidation(IWebGenerationContext context, PropertyModelInfo property)
+    {
+        if (property.Content.JsSkipStandardValidation)
+        {
+            return property.Content.JsExtraValidation;
+        }
+        //string/number/date/boolean
+        var jstype = GetPropertyType(context, property);
+        var standardValidation = string.Empty;
+        switch (jstype)
+        {
+            case "date":
+                standardValidation = "date: true";
+                break;
+            case "string":
+            {
+                if (property.Property.Length.HasValue && !property.Property.IsMaxLength &&
+					property.Property.Length.Value > 0)
+                {
+                    standardValidation = String.Format("maxLength: {0}", property.Property.Length);
+                }
+            }
+                break;
+        }
+
+        return string.Join(", ", new[]
+        {
+            standardValidation,
+            property.Content.JsExtraValidation
+        }.Where(s => !string.IsNullOrWhiteSpace(s)));
+    }
+#>

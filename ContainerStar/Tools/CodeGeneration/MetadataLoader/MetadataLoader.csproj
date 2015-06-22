@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{984D6904-55DA-4C6E-BCD6-D66E3E478A4C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MetadataLoader</RootNamespace>
+    <AssemblyName>MetadataLoader</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Content\ContentLoaderExtensions.cs" />
+    <Compile Include="Content\ExcelContentLoader.cs" />
+    <Compile Include="Content\ContentLoaderConfiguration.cs" />
+    <Compile Include="Content\ContentLoadType.cs" />
+    <Compile Include="Content\ContentMapper.cs" />
+    <Compile Include="Content\IExcelContentLoader.cs" />
+    <Compile Include="Content\IContentMapper.cs" />
+    <Compile Include="Content\IPropertyMapper.cs" />
+    <Compile Include="Content\PropertyMapper.cs" />
+    <Compile Include="Database\DbObjectExtractor.cs" />
+    <Compile Include="Database\IAdditionalExtractor.cs" />
+    <Compile Include="Database\IExtractor.cs" />
+    <Compile Include="Database\IRelationshipExtractor.cs" />
+    <Compile Include="Database\ITableLoader.cs" />
+    <Compile Include="Database\KeyDesc.cs" />
+    <Compile Include="Database\RelationshipDesc.cs" />
+    <Compile Include="Database\TableLoader.cs" />
+    <Compile Include="Database\TableLoadOptions.cs" />
+    <Compile Include="Excel\DataSheetManager.cs" />
+    <Compile Include="Excel\OfficeOpenXML\ExcelCell.cs" />
+    <Compile Include="Excel\OfficeOpenXML\ExcelColumn.cs" />
+    <Compile Include="Excel\OfficeOpenXML\ExcelHeaderFooter.cs" />
+    <Compile Include="Excel\OfficeOpenXML\ExcelHeaderFooterText.cs" />
+    <Compile Include="Excel\OfficeOpenXML\ExcelPackage.cs" />
+    <Compile Include="Excel\OfficeOpenXML\ExcelRow.cs" />
+    <Compile Include="Excel\OfficeOpenXML\ExcelWorkbook.cs" />
+    <Compile Include="Excel\OfficeOpenXML\ExcelWorksheet.cs" />
+    <Compile Include="Excel\OfficeOpenXML\ExcelWorksheets.cs" />
+    <Compile Include="Excel\OfficeOpenXML\ExcelWorksheetView.cs" />
+    <Compile Include="Excel\OfficeOpenXML\OfficeProperties.cs" />
+    <Compile Include="Excel\OpenXmlManager.cs" />
+    <Compile Include="Excel\TableDescriptor.cs" />
+    <Compile Include="Excel\TableKeyDescriptor.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MetadataLoader.Contracts\MetadataLoader.Contracts.csproj">
+      <Project>{82842163-16CD-4106-A510-4A502CE89CF2}</Project>
+      <Name>MetadataLoader.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\model.xlsx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

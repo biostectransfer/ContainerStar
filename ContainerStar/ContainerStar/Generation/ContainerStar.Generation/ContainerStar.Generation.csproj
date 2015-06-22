@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E9A661B8-1C6E-40AA-91B9-909D604152EB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ContainerStar.Generation</RootNamespace>
+    <AssemblyName>ContainerStar.Generation</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MetadataLoader">
+      <HintPath>..\..\..\Tools\CodeGeneration\bin\MetadataLoader.dll</HintPath>
+    </Reference>
+    <Reference Include="MetadataLoader.Contracts">
+      <HintPath>..\..\..\Tools\CodeGeneration\bin\MetadataLoader.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="MetadataLoader.EntityFramework">
+      <HintPath>..\..\..\Tools\CodeGeneration\bin\MetadataLoader.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="MetadataLoader.MSSQL">
+      <HintPath>..\..\..\Tools\CodeGeneration\bin\MetadataLoader.MSSQL.dll</HintPath>
+    </Reference>
+    <Reference Include="MetadataLoader.MSSQL.Contracts">
+      <HintPath>..\..\..\Tools\CodeGeneration\bin\MetadataLoader.MSSQL.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="MetadataLoader.MSSQL.EntityFramework">
+      <HintPath>..\..\..\Tools\CodeGeneration\bin\MetadataLoader.MSSQL.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AttributeDictionary.cs" />
+    <Compile Include="BaseMasterDataContent.cs" />
+    <Compile Include="ColumnContent.cs" />
+    <Compile Include="ContentGroup.cs" />
+    <Compile Include="EntitiesManager.cs" />
+    <Compile Include="EntityExtractor.cs" />
+    <Compile Include="EntityPropertyExtractor.cs" />
+    <Compile Include="EntityRelationshipExtractor.cs" />
+    <Compile Include="ModelInfo.cs" />
+    <Compile Include="ModelsManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyModelInfo.cs" />
+    <Compile Include="TableContent.cs" />
+    <Compile Include="TablesManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Declarations\Stammdaten.xlsx" />
+    <None Include="TTCommon\Assemblies.ttinclude" />
+    <None Include="TTCommon\Context.ttinclude" />
+    <None Include="TTCommon\Context.Interface.ttinclude" />
+    <None Include="TTMasterData\DuplicateChecker.ttinclude" />
+    <None Include="TTCommon\DynamicTextTransformation.ttinclude" />
+    <None Include="TTCommon\Entities.Interfaces.ttinclude" />
+    <None Include="TTCommon\Entities.ttinclude" />
+    <None Include="TTCommon\FileManager.ttinclude" />
+    <None Include="TTCommon\GenerationContext.Base.ttinclude" />
+    <None Include="TTCommon\GenerationContext.Interfaces.ttinclude" />
+    <None Include="TTCommon\GenerationContext.ttinclude" />
+    <None Include="TTCommon\Mapping.ttinclude" />
+    <None Include="TTCommon\TextTransformProxy.ttinclude" />
+    <None Include="TTMasterData\ContainerStar.Settings.ttinclude" />
+    <None Include="TTMasterData\Permissions.sql.ttinclude" />
+    <None Include="TTMasterData\Permissions.ttinclude" />
+    <None Include="TTMasterData\UnityConfiguration.DuplicateCheckers.ttinclude" />
+    <None Include="TTMasterData\ViewCollectionFactories.ttinclude" />
+    <None Include="TTMasterData\CollectionTypes.ttinclude" />
+    <None Include="TTMasterData\Custom.Controller.ttinclude" />
+    <None Include="TTMasterData\Controller.ttinclude" />
+    <None Include="TTMasterData\Model.ttinclude" />
+    <None Include="TTMasterData\Manager.ttinclude" />
+    <None Include="TTMasterData\Manager.Interface.ttinclude" />
+    <None Include="TTMasterData\ContainerStar.Assemblies.ttinclude" />
+    <None Include="TTMasterData\ContainerStar.GenerationContext.ttinclude" />
+    <None Include="TTMasterData\JsonHelper.TableMapping.ttinclude" />
+    <None Include="TTMasterData\UnityConfiguration.Manager.ttinclude" />
+    <None Include="TTMasterData\Web\add.view.ttinclude" />
+    <None Include="TTMasterData\Web\router.ttinclude" />
+    <None Include="TTMasterData\Web\menu.resources.ttinclude" />
+    <None Include="TTMasterData\Web\menu.template.ttinclude" />
+    <None Include="TTMasterData\Web\filter.resources.ttinclude" />
+    <None Include="TTMasterData\Web\add.resources.ttinclude" />
+    <None Include="TTMasterData\Web\add.templates.ttinclude" />
+    <None Include="TTMasterData\Web\relationships.templates.ttinclude" />
+    <None Include="TTMasterData\Web\relationships.resources.ttinclude" />
+    <None Include="TTMasterData\Web\resources.ttinclude" />
+    <None Include="TTMasterData\Web\templates.ttinclude" />
+    <None Include="TTMasterData\Web\relationships.views.ttinclude" />
+    <None Include="TTMasterData\Web\related.views.ttinclude" />
+    <None Include="TTMasterData\Web\views.ttinclude" />
+    <None Include="TTMasterData\Web\models.ttinclude" />
+    <None Include="TTMasterData\Web\collection.ttinclude" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

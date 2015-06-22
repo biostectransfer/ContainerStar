@@ -1,0 +1,104 @@
+﻿<#@ import namespace="System.Text" #>
+<#@ include file="ContainerStar.GenerationContext.ttinclude"  once="true" #>
+<#
+    IModelGenerationContext context = generationContext;
+    var code = context.Code;
+
+    foreach (var model in context.Models)
+    {
+        //if (model.Content.SkipController)
+        //{
+        //    continue;
+        //}
+
+        var controllerType = new ClassInfo
+        {
+            IsPartial = true,
+            Name = string.Format("{0}Controller", model.Content.CodeNamePlural),
+			Description = string.Format("Controller for <see cref=\"{0}\"/> entity", model.Entity.Name)
+        };
+		//ClientApiController<EmpEmployeeModel, EmpEmployee, int, IEmpEmployeeManager>
+		var baseType = TypeUsageInfo.CreateClass("ClientApiController", "", new[]
+        {
+            model.GetTypeUsage(),
+			model.Entity.GetTypeUsage(),
+            typeof (int).ToUsageInfo(),
+			TypeUsageInfo.CreateInterface(String.Format("I{0}Manager",model.Entity.Name),"ContainerStar.Contracts.Managers")
+        });
+        
+		controllerType.InheritsFrom(baseType);
+        
+        context.FileManager.StartNewFile(controllerType.Name + ".cs");
+        
+		context.WriteAllUsings(new[]
+        {
+            "ContainerStar.API.Models", 
+			"ContainerStar.Contracts.Entities",
+            "ContainerStar.Contracts.Managers",
+            "ContainerStar.Contracts",
+			"ContainerStar.Contracts.Enums",
+			"ContainerStar.API.Security"
+        }, controllerType);
+
+        code.WriteLine();
+        code.WriteNamespace(); //Area: Namespace
+
+		if(model.Content.PermissionId > 0)
+		{
+			code.WriteLine("[AuthorizeByPermissions(PermissionTypes = new[] {{ Permissions.{0} }})]", model.Entity.Name);
+        }
+
+		code.WriteClassDeclaration(controllerType); //Area: Type
+		code.WriteLine();
+
+		if (!model.Content.SkipControllerConstructor)
+        {
+
+            code.WriteLine("public {0}(I{1}Manager manager): base(manager){{}}",controllerType.Name, model.Entity.Name);
+            code.WriteLine();
+        }
+
+		code.WriteLine("protected override void EntityToModel({0} entity, {1} model)",model.Entity.Name, model.Name);
+        code.StartArea(); // Area: Method
+        foreach (var property in model.ModelProperties)
+        {
+            code.WriteLine("model.{0} = entity.{1};", property.Name, property.Property.Name);
+        }
+
+		
+		var createDate = model.Entity.SimpleProperties.FirstOrDefault(p => p.Name == "CreateDate");
+        var changeDate = model.Entity.SimpleProperties.FirstOrDefault(p => p.Name == "ChangeDate");
+        if (createDate != null && changeDate != null)
+        {
+			code.WriteLine("model.createDate = ((ISystemFields)entity).{0};", createDate.Name);
+			code.WriteLine("model.changeDate = ((ISystemFields)entity).{0};", changeDate.Name);
+		}
+
+        if (model.Content.ExtraEntityToModel)
+        {
+		    code.WriteLine();
+            code.WriteLine("ExtraEntityToModel(entity, model);");
+        }
+		code.EndArea(); // End Area: Method
+
+
+		code.WriteLine("protected override void ModelToEntity({1} model, {0} entity, ActionTypes actionType)",model.Entity.Name, model.Name);
+        code.StartArea(); // Area: Method
+        foreach (var property in model.ModelProperties)
+        {
+            code.WriteLine("entity.{1} = model.{0};", property.Name, property.Property.Name);
+        }
+		
+        if (model.Content.ExtraModelToEntity)
+        {
+		    code.WriteLine();
+            code.WriteLine("ExtraModelToEntity(entity, model, actionType);");
+        }
+		code.EndArea(); // End Area: Method
+		
+        code.EndArea(); //End Area:  Type
+        code.EndArea(); //End Area:  Namespace
+        context.FileManager.EndBlock();
+    }
+    context.FileManager.Process();
+#>

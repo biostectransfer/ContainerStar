@@ -1,0 +1,171 @@
+﻿<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+<#+
+    public sealed class CodeBuilder
+    {
+	    private const int INDENT_TABS = 4;
+
+        private readonly StringBuilder _sbuilder = new StringBuilder();
+		private int _indent;
+		private string _indentString = string.Empty;
+
+        public CodeBuilder Append(string value)
+        {
+            _sbuilder.Append(HandleIndent(value));
+			return this;
+        }
+
+        public int Indent
+        {
+            get { return _indent; }
+            set
+            {
+                _indent = value;
+                _indentString = _indent == 0 ? String.Empty : new string(' ', _indent*INDENT_TABS);
+            }
+        }
+
+        public CodeBuilder AppendLine()
+        {
+            _sbuilder.AppendLine();
+			return this;
+        }
+        public CodeBuilder AppendLine(string value)
+        {
+            _sbuilder.AppendLine(HandleIndent(value));
+            return this;
+        }
+        public CodeBuilder AppendFormat(string value, params object[] args)
+        {
+            _sbuilder.Append(HandleIndent(string.Format(value,args)));
+            return this;
+        }
+
+        private static Regex regex = new Regex("(\\s*\\n|\\A)", RegexOptions.CultureInvariant | RegexOptions.Compiled);
+        private string HandleIndent(string value)
+        {
+            return regex.Replace(value, "$1" + _indentString).TrimEnd();
+        }
+
+        public string ToString(int startIndex, int length)
+        {
+            return _sbuilder.ToString(startIndex, length);
+        }
+		public override string ToString()
+        {
+            return _sbuilder.ToString();
+        }
+    }
+
+
+    public sealed class GenerationContext
+    {
+        public bool PropertyWithBackField { get; set; }
+    }
+
+	/*
+	public string GetCode(GenerationContext context)
+        {
+            var sbuilder = new StringBuilder();
+            GenerateCode(sbuilder, context);
+            return sbuilder.ToString();
+        }
+
+        protected void GenerateAttributes(StringBuilder sbuilder, GenerationContext context)
+        {
+            foreach (var att in Attributes)
+            {
+                if (!string.IsNullOrWhiteSpace(att))
+                {
+                    sbuilder.AppendLine(att);
+                }
+            }
+        }
+
+        protected abstract void GenerateCode(StringBuilder sbuilder, GenerationContext context);
+
+	*/
+
+    public abstract class BaseInfo
+    {
+        protected BaseInfo()
+        {
+            Accessibility = "public";
+            Attributes = new List<string>();
+        }
+
+        public string Name { get; set; }
+        public string Accessibility { get; set; }
+        public List<string> Attributes { get; set; }
+		
+        public override string ToString()
+        {
+            return string.Format("{0} {1}", Accessibility, Name);
+        }
+    }
+
+	public sealed class PropertySetterInfo : BaseInfo
+    {
+	    public PropertySetterInfo()
+	    {
+	        Name = "set";
+	    }
+    }
+
+    public sealed class PropertyGetterInfo : BaseInfo
+    {
+        public PropertyGetterInfo()
+        {
+            Name = "get";
+        }
+    }
+
+    public enum PropertyModelType
+    {
+        None = 0,
+        Simple = 1,
+        Complex = 2,
+        Navigation = 3
+    }
+
+	public sealed class PropertyInfo : BaseInfo
+    {
+	    private PropertySetterInfo _setter;
+        private PropertyGetterInfo _getter;
+
+	    public PropertyInfo()
+	    {
+	        InViewModelClass = true;
+	    }
+
+	    ///<summary>
+		/// Is required field in db. Also means Nullable for value type
+		/// </summary>
+		public bool IsRequired { get; set; }
+		public PropertyModelType ModelType { get; set; }
+        public string Type { get; set; }
+		public bool IsVirtual { get; set; }
+	    public bool InViewModelClass { get; set; }
+			
+        public bool HasSetter
+        {
+            get { return _setter != null; }
+        }
+
+        public PropertySetterInfo Setter
+        {
+            get { return _setter ?? (_setter = new PropertySetterInfo()); }
+        }
+
+        public bool HasGetter
+        {
+            get { return _getter != null; }
+        }
+
+        public PropertyGetterInfo Getter
+        {
+            get { return _getter ?? (_getter = new PropertyGetterInfo()); }
+        }
+    }
+#>

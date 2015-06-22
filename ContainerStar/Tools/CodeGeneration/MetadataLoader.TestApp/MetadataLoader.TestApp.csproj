@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E92CEDE0-B678-4A1D-A601-91A1B2CD55A7}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MetadataLoader.TestApp</RootNamespace>
+    <AssemblyName>MetadataLoader.TestApp</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="PrepareData\DataMigration.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MasterDataModule.Generation\MasterDataModule.Generation.csproj">
+      <Project>{E9A661B8-1C6E-40AA-91B9-909D604152EB}</Project>
+      <Name>MasterDataModule.Generation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MetadataLoader.Contracts.MSSQL\MetadataLoader.MSSQL.Contracts.csproj">
+      <Project>{4f1e2c28-e204-49e4-996f-150cdf0838e9}</Project>
+      <Name>MetadataLoader.MSSQL.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MetadataLoader.Contracts\MetadataLoader.Contracts.csproj">
+      <Project>{82842163-16cd-4106-a510-4a502ce89cf2}</Project>
+      <Name>MetadataLoader.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MetadataLoader.EntityFramework\MetadataLoader.EntityFramework.csproj">
+      <Project>{0BF61EBC-8DFC-48EE-9F50-1F312CE32078}</Project>
+      <Name>MetadataLoader.EntityFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MetadataLoader.MSSQL.EntityFramework\MetadataLoader.MSSQL.EntityFramework.csproj">
+      <Project>{A1BA0430-5FE8-464E-84EC-7BE7D54E14EF}</Project>
+      <Name>MetadataLoader.MSSQL.EntityFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MetadataLoader.MSSQL\MetadataLoader.MSSQL.csproj">
+      <Project>{ffbfac0b-a504-4e5e-b009-b5ad091e96d2}</Project>
+      <Name>MetadataLoader.MSSQL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MetadataLoader\MetadataLoader.csproj">
+      <Project>{984d6904-55da-4c6e-bcd6-d66e3e478a4c}</Project>
+      <Name>MetadataLoader</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

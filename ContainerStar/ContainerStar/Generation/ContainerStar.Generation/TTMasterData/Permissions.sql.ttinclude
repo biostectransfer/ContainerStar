@@ -1,0 +1,34 @@
+﻿<#@ import namespace="System.Text" #>
+<#@ include file="ContainerStar.GenerationContext.ttinclude"  once="true" #>
+<#
+    IEntitiesGenerationContext<TableContent> context = generationContext;
+
+    var code = context.Code;
+#>
+	SET IDENTITY_INSERT [ContainerStar].[dbo].[PERMISSION] ON;
+<#
+	foreach (var entity in context.Entities)
+	{
+	    var content = context.GetTableContent(entity);
+	    var description = content.PermissionDescription;
+		if(!String.IsNullOrEmpty(description) && content.PermissionId > 0)
+		{
+#>	
+	IF NOT EXISTS (SELECT ID FROM [ContainerStar].[dbo].[PERMISSION] WHERE ID = <#=content.PermissionId#> )
+	BEGIN
+		INSERT INTO [ContainerStar].[dbo].[PERMISSION] ([Id], [Name], [Description], [CreateDate], [ChangeDate], [DeleteDate])
+		VALUES(<#=content.PermissionId#>, '<#=entity.Name#>', '<#=description#>' ,GETDATE() ,GETDATE() ,NULL);
+		INSERT INTO [ContainerStar].dbo.ROLE_PERMISSION_RSP(RoleId ,PermissionId ,CreateDate ,ChangeDate) 
+		VALUES (1 ,<#=content.PermissionId#> ,getdate() ,getdate());
+	END
+	ELSE
+	BEGIN
+		UPDATE [ContainerStar].[dbo].[PERMISSION]
+		SET [DESCRIPTION] = '<#=description#>'
+		WHERE ID = <#=content.PermissionId#>
+	END
+<#
+	    }
+	}
+#>
+	SET IDENTITY_INSERT [ContainerStar].[dbo].[PERMISSION] OFF;

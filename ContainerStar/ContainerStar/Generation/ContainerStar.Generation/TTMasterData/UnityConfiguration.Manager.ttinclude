@@ -1,0 +1,41 @@
+﻿<#@ import namespace="System.Text" #>
+<#@ include file="..\TTCommon\GenerationContext.ttinclude"  once="true" #>
+<#
+
+    IEntitiesGenerationContext context = generationContext;
+    var code = context.Code;
+    var contextInfo = new ClassInfo
+    {
+        Name = "UnityConfiguration",
+		IsStatic = true,
+        IsPartial = true
+    };
+
+    context.WriteAllUsings(new[]
+    {
+	    "ContainerStar.Contracts.Managers",
+		"ContainerStar.Lib.Managers",
+        "Microsoft.Practices.Unity"
+    }, contextInfo);
+
+    code.WriteLine();
+    code.WriteNamespace(); //Area: Namespace
+    code.WriteClassDeclaration(contextInfo); //Area: Class
+
+    code.WriteLine("private static void Initialize{0}{1}(IUnityContainer container)", context.ContextName, tableGroup);
+	code.StartArea(); //Area: OnModelCreating
+    foreach (var entityInfo in context.Entities)
+    {
+        code.WriteLine("container.RegisterType<I{0}Manager, {0}Manager>(new PerRequestLifetimeManager());", entityInfo.Name);
+    }
+	code.EndArea(); //End Area: OnModelCreating
+
+	code.WriteLine();
+
+    foreach (var property in contextInfo.Properties)
+    {
+        code.WriteProperty(property, contextInfo);
+    }
+    code.EndArea(); //End Area:  End Class
+    code.EndArea(); //End Area:  End Namespace
+#>

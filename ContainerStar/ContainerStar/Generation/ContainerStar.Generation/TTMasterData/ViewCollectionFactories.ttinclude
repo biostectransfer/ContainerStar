@@ -1,0 +1,50 @@
+﻿<#@ import namespace="System.Text" #>
+<#@ include file="ContainerStar.GenerationContext.ttinclude"  once="true" #>
+<#
+    IModelGenerationContext context = generationContext;
+    var code = context.Code;
+
+	var classType = new ClassInfo
+    {
+        Name = string.Format(masterData + "ViewCollectionControllerFactory"),
+		Description = string.Format(masterData + "ViewCollectionControllerFactory class")
+    };
+	
+	var baseType = TypeUsageInfo.CreateClass("ViewCollectionControllerFactoryBase", "ContainerStar.API.Controllers");
+	classType.InheritsFrom(baseType);
+
+    context.FileManager.StartNewFile(masterData + "ViewCollectionControllerFactory.cs");
+        
+	context.WriteAllUsings(new[]
+    {
+        "System",
+		"System.Collections.Generic",
+		"ContainerStar.Contracts.Entities",
+		"ContainerStar.Contracts.Managers",
+		"System.Web.Http.Dependencies"
+    }, classType);
+
+    code.WriteLine();
+    code.WriteNamespace(); //Area: Namespace
+    code.WriteClassDeclaration(classType); //Area: Type
+
+	code.WriteLine("public void GetViewCollections(IDependencyResolver resolver, CollectionTypesModel model, Dictionary<string, IEnumerable<object>> result)");
+	code.StartArea(); //Area: Method
+            
+    foreach (var model in context.Models)
+    {
+        if (model.Content.GenerateViewCollection)
+        {
+			code.WriteLine("if (model.{0})", model.Entity.Name);
+            code.WriteLine("	result.Add(\"{0}\", GetViewCollection<{0}, int, I{0}Manager>(", model.Entity.Name);
+            code.WriteLine("		(I{0}Manager)resolver.GetService(typeof(I{0}Manager))));\n", model.Entity.Name);
+		}
+    }
+
+    code.EndArea(); //End Area:  Method
+    code.EndArea(); //End Area:  Type
+    code.EndArea(); //End Area:  Namespace
+    context.FileManager.EndBlock();
+
+    context.FileManager.Process();
+#>

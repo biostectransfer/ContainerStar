@@ -1,0 +1,42 @@
+﻿<#@ import namespace="System.Text" #>
+<#@ include file="..\TTCommon\GenerationContext.ttinclude"  once="true" #>
+<#
+	ITablesGenerationContext<TableContent, ColumnContent> tablesContext  = generationContext;
+    IEntitiesGenerationContext context = generationContext;
+    var code = context.Code;
+    var contextInfo = new ClassInfo
+    {
+        Name = "UnityConfiguration",
+		IsStatic = true,
+        IsPartial = true
+    };
+
+    context.WriteAllUsings(new[]
+    {
+        "Microsoft.Practices.Unity"
+    }, contextInfo);
+
+    code.WriteLine();
+    code.WriteNamespace(); //Area: Namespace
+    code.WriteClassDeclaration(contextInfo); //Area: Class
+
+    code.WriteLine("private static void Initialize{0}DuplicateCheckers(IUnityContainer container)", context.ContextName);
+	code.StartArea(); //Area: OnModelCreating
+    foreach (var table in tablesContext.Tables)
+    {
+		if (table.Columns.Any(c => c.Content.IsBusinessKey))
+		{
+			code.WriteLine("container.RegisterType<I{0}DuplicateChecker, {1}DuplicateChecker>(\"{2}\", new PerRequestLifetimeManager());", context.ContextName, table.Content.CodeName, table.Content.CodeNameCamelCase);
+		}
+    }
+	code.EndArea(); //End Area: OnModelCreating
+
+	code.WriteLine();
+
+    foreach (var property in contextInfo.Properties)
+    {
+        code.WriteProperty(property, contextInfo);
+    }
+    code.EndArea(); //End Area:  End Class
+    code.EndArea(); //End Area:  End Namespace
+#>

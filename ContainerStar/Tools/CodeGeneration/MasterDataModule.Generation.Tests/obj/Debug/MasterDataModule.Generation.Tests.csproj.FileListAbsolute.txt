@@ -1,0 +1,5 @@
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MasterDataModule.Generation.Tests\bin\Debug\MasterDataModule.Generation.Tests.dll
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MasterDataModule.Generation.Tests\bin\Debug\MasterDataModule.Generation.Tests.pdb
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MasterDataModule.Generation.Tests\obj\Debug\MasterDataModule.Generation.Tests.csprojResolveAssemblyReference.cache
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MasterDataModule.Generation.Tests\obj\Debug\MasterDataModule.Generation.Tests.dll
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MasterDataModule.Generation.Tests\obj\Debug\MasterDataModule.Generation.Tests.pdb

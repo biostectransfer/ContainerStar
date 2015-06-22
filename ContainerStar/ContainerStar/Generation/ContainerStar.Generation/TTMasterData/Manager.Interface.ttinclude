@@ -1,0 +1,38 @@
+﻿<#@ import namespace="System.Text" #>
+<#@ include file="..\TTCommon\GenerationContext.ttinclude"  once="true" #>
+<#
+    IEntitiesGenerationContext context = generationContext;
+    var code = context.Code;
+
+    foreach (var entity in context.Entities)
+    {
+        var managerInterface = new InterfaceInfo()
+        {
+            IsPartial = true,
+            Name = string.Format("I{0}Manager", entity.Name)
+        };
+
+		var baseInterface = TypeUsageInfo.CreateInterface("IEntityManager", "", new[]
+        {
+            entity.GetTypeUsage(),
+            typeof (int).ToUsageInfo()
+        });
+        managerInterface.InheritsFrom(baseInterface);
+
+
+        context.FileManager.StartNewFile(managerInterface.Name + ".cs");
+        context.WriteAllUsings(new[]
+        {
+            "ContainerStar.Contracts.Entities",
+            "ContainerStar.Contracts.Managers.Base"
+        }, managerInterface);
+        code.WriteLine();
+        code.WriteNamespace(); //Area: Namespace
+        code.WriteInterfaceDeclaration(managerInterface); //Area: Interface
+		
+        code.EndArea(); //End Area:  End Interface
+        code.EndArea(); //End Area:  End Namespace
+        context.FileManager.EndBlock();
+    }
+    context.FileManager.Process();
+#>

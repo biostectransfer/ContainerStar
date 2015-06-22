@@ -1,0 +1,7 @@
+﻿<#@ include file="EF.Utility.CS.Modified.ttinclude" once="true" #>
+<#@ include file="CommonClasses.ttinclude" once="true" #>
+<#@ include file="CommonClasses.EFPowerTools.ttinclude" once="true" #>
+<#@ include file="EntityClasses.ttinclude" once="true"#>
+<#@ include file="EntityLoader.ttinclude" once="true" #>
+<#@ include file="InterfacesHelper.ttinclude" once="true" #>
+<#@ include file="GenerationContext.ttinclude" once="true" #>

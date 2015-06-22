@@ -1,0 +1,9 @@
+﻿<#@ template language="C#" debug="true" hostspecific="true" linePragmas="true"#>
+<#@ output extension=".cs"#>
+<#@ include file="..\FE.Settings.ttinclude" once="true"#>
+<# 
+    const string filesDir = @"..\Declarations\";
+    var extraUsages = new []{"MetadataLoader.TTIncludes.MasterDataModule.Entities"};
+#>
+<#@ include file="..\Model.GenerationContext.ttinclude" once="true"#>
+<#@ include file="..\..\Mapping.ttinclude"  once="true"#>

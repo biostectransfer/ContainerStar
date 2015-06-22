@@ -1,0 +1,49 @@
+﻿<#@ import namespace="System.Text" #>
+<#@ include file="ContainerStar.GenerationContext.ttinclude"  once="true" #>
+<#
+    IEntitiesGenerationContext<TableContent> context = generationContext;
+    var code = context.Code;
+
+    foreach (var entity in context.Entities)
+    {
+        var managerType = new ClassInfo
+        {
+            IsPartial = true,
+            Name = string.Format("{0}Manager", entity.Name)
+        };
+
+		var baseType = TypeUsageInfo.CreateClass("EntityManager", "ContainerStar.Lib.Managers.Base", new[]
+        {
+            entity.GetTypeUsage(),
+            typeof (int).ToUsageInfo()
+        });
+        var baseInterface = TypeUsageInfo.CreateInterface(string.Format("I{0}Manager", entity.Name), "");
+
+		managerType.InheritsFrom(baseType);
+        managerType.InheritsFrom(baseInterface);
+
+
+        context.FileManager.StartNewFile(managerType.Name + ".cs");
+        context.WriteAllUsings(new[]
+        {
+            "ContainerStar.Contracts.Entities",
+            "ContainerStar.Contracts.Managers",
+            "ContainerStar.Contracts"
+        }, managerType);
+        code.WriteLine();
+        code.WriteNamespace(); //Area: Namespace
+        code.WriteClassDeclaration(managerType); //Area: Type
+		code.WriteLine();
+
+        var content = context.GetTableContent(entity);
+        if (!content.SkipManagerConstructor)
+        {
+            code.WriteLine("public {1}(I{0}Entities context): base(context){{}}", context.ContextName, managerType.Name);
+            code.WriteLine();
+        }
+        code.EndArea(); //End Area:  Type
+        code.EndArea(); //End Area:  Namespace
+        context.FileManager.EndBlock();
+    }
+    context.FileManager.Process();
+#>

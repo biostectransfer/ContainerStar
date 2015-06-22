@@ -1,0 +1,27 @@
+﻿<#@ import namespace="System.Text" #>
+<#@ include file="..\ContainerStar.GenerationContext.ttinclude"  once="true" #>
+<#
+    IWebGenerationContext context = generationContext;
+    foreach (var model in context.WebModels)
+    {
+        context.FileManager.StartNewFile(model.Table.Content.CodeNamePlural + ".js");
+
+#>
+define([
+	'base/base-collection',
+	'models/<#=context.CurrentRelatedWebPath #>/<#=model.Table.Content.CodeName #>'
+], function (BaseCollection, Model) {
+	'use strict';
+
+	var collection = BaseCollection.extend({
+	    url: 'api/<#=model.Table.Content.CodeNamePlural #>',
+		model: Model
+	});
+
+	return collection;
+});
+<#
+        context.FileManager.EndBlock();
+    }
+    context.FileManager.Process();
+#>

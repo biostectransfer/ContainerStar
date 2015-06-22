@@ -1,0 +1,35 @@
+﻿<#@ import namespace="System.Text" #>
+<#@ include file="GenerationContext.ttinclude"  once="true" #>
+<#
+
+    IEntitiesGenerationContext context = generationContext;
+    var code = context.Code;
+    var contextInfo = new InterfaceInfo
+    {
+        Name = String.Format("I{0}Entities", context.ContextName),
+        IsPartial = true,
+        Description = string.Format("Interface for {0} context", context.ContextName)
+    };
+	
+    foreach (var entity in context.Entities)
+    {
+        var property = new MetadataLoader.Contracts.CSharp.PropertyInfo(entity.Name,
+            typeof (IQueryable<>).ToGenericUsageInfo(entity.GetTypeUsage()), new PropertyInvokerInfo())
+        {
+            Description = String.Format("Set of <see cref=\"{0}\"/> entities from table {1}", entity.Name, entity.GetFullTableName())
+        };
+        contextInfo.AddProperty(property);
+    }
+
+    context.WriteAllUsings(new[] {"System.Linq"}, contextInfo);
+
+    code.WriteLine();
+    code.WriteNamespace(); //Area: Namespace
+    code.WriteInterfaceDeclaration(contextInfo); //Area: Interface
+    foreach (var property in contextInfo.Properties)
+    {
+        code.WriteProperty(property, contextInfo);
+    }
+    code.EndArea(); //End Area:  End Interface
+    code.EndArea(); //End Area:  End Namespace
+#>

@@ -1,0 +1,50 @@
+﻿<#@ import namespace="System.Text" #>
+<#@ include file="..\ContainerStar.GenerationContext.ttinclude"  once="true" #>
+
+
+<#
+    IWebGenerationContext context = generationContext;
+    context.FileManager.StartNewFile(menuResourcesFileName + ".de.js");
+#>
+define(function () {
+	'use strict';
+
+	var resources = {
+<#
+    foreach (var model in context.WebModels)
+    {
+
+#>
+        <#=model.Table.Content.CodeNamePlural #>: '<#=model.Table.Content.De #>',
+<#        
+    }
+#>
+	};
+
+	return resources;
+});
+<#
+	context.FileManager.EndBlock();
+	context.FileManager.StartNewFile(menuResourcesFileName + ".en.js");
+#>
+define(function () {
+	'use strict';
+
+	var resources = {
+<#
+    foreach (var model in context.WebModels)
+    {
+
+#>
+        <#=model.Table.Content.CodeNamePlural #>: '<#=model.Table.Content.En #>',
+<#        
+    }
+#>
+	};
+
+	return resources;
+});
+<#
+	context.FileManager.EndBlock();
+    context.FileManager.Process();
+#>

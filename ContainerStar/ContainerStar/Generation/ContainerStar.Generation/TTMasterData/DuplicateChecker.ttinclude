@@ -1,0 +1,106 @@
+﻿<#@ import namespace="System.Text" #>
+<#@ include file="ContainerStar.GenerationContext.ttinclude"  once="true" #>
+<#
+    IEntitiesGenerationContext<TableContent> context = generationContext;
+	ITablesGenerationContext<TableContent, ColumnContent> tablesContext  = generationContext;
+    var code = context.Code;
+
+    foreach (var table in tablesContext.Tables)
+    {
+		if (!table.Columns.Any(c => c.Content.IsBusinessKey))
+		{
+			continue;
+		}
+				
+        var duplicateManagerType = string.Format("{0}DuplicateChecker", table.Content.CodeName);
+
+		context.FileManager.StartNewFile(duplicateManagerType + ".cs");
+
+		code.WriteLine();
+		context.WriteAllUsings();
+        code.WriteNamespace(); //Area: Namespace
+#>
+	public class <#=duplicateManagerType#> : BaseDuplicateChecker<<#=table.Content.CodeName#>>, I<#=context.ContextName#>DuplicateChecker
+	{
+		private readonly Lazy<I<#=table.Content.CodeName#>Manager> manager;
+
+		public <#=duplicateManagerType#> (Lazy<I<#=table.Content.CodeName#>Manager> manager)
+		{
+			this.manager = manager;
+		}
+
+		public override string[] BusinessKeys 
+		{
+			get 
+			{
+				return new[] 
+				{
+<#                  bool first = true;
+					foreach(var column in table.Columns)
+					{ 
+				
+						var content = column.Content;	
+						if (content.IsBusinessKey)
+						{
+						    if (!first)
+						    { #>
+							,
+<#							}
+#>
+					 "<#=content.CodeNameCamelCase#>"
+<#							first = false;
+					}
+
+					}
+#>
+				};
+			}
+		}
+
+		protected override bool HasDuplicate(<#=table.Content.CodeName#> entity)
+		{
+			var query = manager.Value.GetEntities().Where(o => o.Id != entity.Id &&
+			<#
+			var hasDateRangeColumns = false;
+			foreach(var column in table.Columns)
+			{ 
+				
+				if (hasDateRangeColumns || column.Content.CodeName == "FromDate" || column.Content.CodeName == "ToDate")
+				{
+					hasDateRangeColumns = true;
+				}
+				var content = column.Content;	
+				if (content.IsBusinessKey)
+				{		
+			#>
+			o.<#=content.CodeName#> == entity.<#=content.CodeName#> &&
+				<#
+				}
+			}
+			#>
+			<#
+			if (hasDateRangeColumns)
+			{
+			#>
+				o.FromDate <= entity.ToDate && o.ToDate >= entity.FromDate);
+			<#
+			}
+			else
+			{ 
+			#>
+			 true);
+			<#
+			 }
+			 #>
+			 return query.Any();
+		}
+	}
+<#
+		
+        code.EndArea(); //End Area:  Namespace
+        context.FileManager.EndBlock();
+    }
+    context.FileManager.Process();
+
+
+#>

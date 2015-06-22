@@ -1,0 +1,38 @@
+﻿<#@ import namespace="System.Text" #>
+<#@ include file="ContainerStar.GenerationContext.ttinclude"  once="true" #>
+<#
+    IModelGenerationContext context = generationContext;
+    var code = context.Code;
+
+	var classType = new ClassInfo
+    {
+		IsPartial = true,
+        Name = string.Format("CollectionTypesModel"),
+		Description = string.Format("CollectionTypesModel class")
+    };
+        
+    context.FileManager.StartNewFile("CollectionTypesModel.cs");
+        
+	context.WriteAllUsings(new[]
+    {
+        "System"
+    }, classType);
+
+    code.WriteLine();
+    code.WriteNamespace(); //Area: Namespace
+    code.WriteClassDeclaration(classType); //Area: Type
+	
+    foreach (var model in context.Models)
+    {
+        if (model.Content.GenerateViewCollection)
+        {        
+			code.WriteLine("public bool " + model.Entity.Name + " { get; set;}");
+		}
+    }
+
+    code.EndArea(); //End Area:  Type
+    code.EndArea(); //End Area:  Namespace
+    context.FileManager.EndBlock();
+
+    context.FileManager.Process();
+#>

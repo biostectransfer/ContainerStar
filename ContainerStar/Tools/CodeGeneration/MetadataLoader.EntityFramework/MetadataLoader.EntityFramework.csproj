@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0BF61EBC-8DFC-48EE-9F50-1F312CE32078}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MetadataLoader.EntityFramework</RootNamespace>
+    <AssemblyName>MetadataLoader.EntityFramework</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ContentEntityHandler.cs" />
+    <Compile Include="DatabaseGeneratedOption.cs" />
+    <Compile Include="EntityRelationship.cs" />
+    <Compile Include="EntityRelationSide.cs" />
+    <Compile Include="Extractors\EntityExtractor.cs" />
+    <Compile Include="EntityInfo.cs" />
+    <Compile Include="EntityLoader.cs" />
+    <Compile Include="Extractors\EntityPropertyExtractor.cs" />
+    <Compile Include="Extractors\EntityRelationshipExtractor.cs" />
+    <Compile Include="Extractors\IEntityExtractor.cs" />
+    <Compile Include="Extractors\IEntityPropertyExtractor.cs" />
+    <Compile Include="Extractors\IEntityRelationshipExtractor.cs" />
+    <Compile Include="Extractors\INavigationPropertyNameData.cs" />
+    <Compile Include="Extractors\IRelationshipData.cs" />
+    <Compile Include="Extractors\IPropertyMetadata.cs" />
+    <Compile Include="Extractors\IRelationshipSideData.cs" />
+    <Compile Include="Extractors\NavigationPropertyName.cs" />
+    <Compile Include="Extractors\NavigationPropertyNameData.cs" />
+    <Compile Include="Extractors\RelationshipExtensions.cs" />
+    <Compile Include="Extractors\RelationshipData.cs" />
+    <Compile Include="Extractors\PropertyMetadata.cs" />
+    <Compile Include="Extractors\RelationshipSideData.cs" />
+    <Compile Include="IEntityHandler.cs" />
+    <Compile Include="IEntityLoader.cs" />
+    <Compile Include="NavigationPropertyEntityInfo.cs" />
+    <Compile Include="NavigationType.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimplePropertyEntityInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <Compile Include="EntityClasses.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MetadataLoader.Contracts\MetadataLoader.Contracts.csproj">
+      <Project>{82842163-16CD-4106-A510-4A502CE89CF2}</Project>
+      <Name>MetadataLoader.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

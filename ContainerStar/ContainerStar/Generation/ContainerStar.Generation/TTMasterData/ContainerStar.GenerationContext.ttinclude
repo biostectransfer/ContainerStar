@@ -1,0 +1,112 @@
+﻿<#@ template language="C#" debug="false" hostspecific="true" linePragmas="false" #>
+<#@ include file="ContainerStar.Assemblies.ttinclude"  once="true" #>
+<#@ import namespace="ContainerStar.Generation" #>
+<#@ import namespace="MetadataLoader.Contracts.Database" #>
+<#@ import namespace="MetadataLoader.Contracts.Generation" #>
+<#@ import namespace="MetadataLoader.MSSQL.Contracts.Database" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ include file="..\TTCommon\GenerationContext.ttinclude"  once="true" #>
+<#
+    var generationContext = new ModelGenerationContext(this, conn, filesDir, tableContext, tableGroup, tableSubGroup,defaultNamespace, extraUsages);
+    generationContext.ContextName = contextName;
+#>
+<#+
+    public sealed class ModelGenerationContext : GenerationContext
+        , IEntitiesGenerationContext<TableContent>
+        , ITablesGenerationContext<TableContent, ColumnContent>
+		, IWebGenerationContext
+    {
+        private readonly Lazy<List<MSSQLTable<TableContent, ColumnContent>>> _tables;
+        private readonly Lazy<List<EntityInfo>> _entities;
+		private readonly Lazy<List<ModelInfo>> _models;
+
+
+        public ModelGenerationContext(object transform,
+            string conn,
+            string filesDir,
+			string tableContext,
+            string tableGroup,
+            string tableSubGroup,
+			string defaultNamespace,
+			string[] extraUsages)
+            : base(transform,defaultNamespace,extraUsages)
+        {
+            var contentFiles = new[]
+            {
+                filesDir + "Stammdaten.xlsx"
+            }.Select(ResolveFilePath).Select(info => info.FullName).ToArray();
+
+            var tableManager = TablesManager.LoadFromDatabase(conn, tableContext, tableGroup, tableSubGroup);
+            _tables = new Lazy<List<MSSQLTable<TableContent, ColumnContent>>>(() => tableManager.Load(contentFiles));
+
+            var entitiesManager = EntitiesManager.Create();
+            _entities = new Lazy<List<EntityInfo>>(() => entitiesManager.Load(_tables.Value));
+
+            var modelManager = new ModelsManager();
+            _models = new Lazy<List<ModelInfo>>(() => modelManager.Generate(Tables, Entities));
+        }
+
+        public string ContextName { get; set; }
+
+        public IReadOnlyCollection<ITable<TableContent, ColumnContent>> Tables
+        {
+            get { return _tables.Value; }
+        }
+
+        public TableContent GetTableContent(EntityInfo entity)
+        {
+            return Tables.First(table => table.Name == entity.TableName && table.Schema == entity.TableSchemaName).Content;
+        }
+
+        public IReadOnlyCollection<EntityInfo> Entities
+        {
+            get { return _entities.Value; }
+        }
+
+		public IReadOnlyCollection<ModelInfo> Models
+        {
+            get { return _models.Value; }
+        }
+
+		public IEnumerable<ModelInfo> WebModels
+        {
+            get { return Models.Where(m => !m.Table.Content.IsSystem); }
+        }
+
+        private static readonly string[] webRoots = new[] {"web", "web-g"}; 
+
+		public string CurrentRelatedWebPath
+        {
+		    get
+		    {
+		        var path = TextTransform.Host.ResolvePath(string.Empty);
+		        var parts = path.Split('\\');
+		        var i = 0;
+		        for (; i < parts.Length; i++)
+		        {
+		            if (webRoots.Contains(parts[i]))
+		            {
+		                //NOTE: skip type folder part (collections, models and etc.)
+		                i += 2;
+		                break;
+		            }
+		        }
+		        return string.Join("/", parts.Skip(i));
+		    }
+        }
+    }
+
+	public interface IModelGenerationContext:IGenerationContext
+	{
+	    string ContextName { get; }
+	    IReadOnlyCollection<ModelInfo> Models { get; }
+	}
+
+	public interface IWebGenerationContext:IModelGenerationContext
+	{
+	    string CurrentRelatedWebPath { get; }	
+		IEnumerable<ModelInfo> WebModels { get; }    
+	}
+
+#>

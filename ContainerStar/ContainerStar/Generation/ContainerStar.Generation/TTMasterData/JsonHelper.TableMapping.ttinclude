@@ -1,0 +1,43 @@
+﻿<#@ import namespace="System.Text" #>
+<#@ include file="ContainerStar.GenerationContext.ttinclude"  once="true" #>
+<#
+
+    IModelGenerationContext context = generationContext;
+    var code = context.Code;
+    var contextInfo = new ClassInfo
+    {
+        Name = "JsonHelper",
+		IsStatic = true,
+        IsPartial = true
+    };
+
+    context.WriteAllUsings(new[]
+    {
+        "System.Collections.Generic"
+    }, contextInfo);
+
+    code.WriteLine();
+    code.WriteNamespace(); //Area: Namespace
+    code.WriteClassDeclaration(contextInfo); //Area: Class
+
+    code.WriteLine("private static void {0}{1}TableMappings(IDictionary<string, TableMapping> tables)", context.ContextName, tableGroup);
+	code.StartArea(); //Area: Method
+    foreach (var model in context.Models)
+    {
+        code.WriteLine("tables.Add(\"{0}\", new TableMapping(\"{0}\", \"{1}\", {2})", model.Table.Name, model.Entity.Name, model.ModelProperties.Count);
+		code.StartArea(); //Area: Collection Initializer
+
+        foreach (var property in model.ModelProperties)
+        {
+            code.WriteLine("{{\"{0}\", \"{1}\"}},", property.Column.Name, property.Name);
+        }
+
+		code.PopIndent();
+		code.WriteLine("});"); //End Area: Collection Initializer
+        code.WriteLine();
+    }
+	code.EndArea(); //End Area: Method
+
+    code.EndArea(); //End Area:  End Class
+    code.EndArea(); //End Area:  End Namespace
+#>

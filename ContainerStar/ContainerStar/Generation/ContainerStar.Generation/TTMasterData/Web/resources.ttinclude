@@ -1,0 +1,90 @@
+﻿<#@ import namespace="System.Text" #>
+<#@ import namespace="MetadataLoader.Contracts.Generation" #>
+<#@ include file="..\ContainerStar.GenerationContext.ttinclude"  once="true" #>
+<#
+    IWebGenerationContext context = generationContext;
+		
+	var tableGroupNameDe = "FE Stammdaten";
+	var tableGroupNameEn = "FE masterdata";
+	
+    foreach (var model in context.WebModels)
+    {
+        var entityContent = model.Table.Content;
+
+		if(entityContent.Group == "Common")
+		{
+			tableGroupNameDe = "Allgemeine Stammdaten";
+			tableGroupNameEn = "Common masterdata";
+		}
+		else if(entityContent.Group == "TP")
+		{
+			tableGroupNameDe = "TP Stammdaten";
+			tableGroupNameEn = "TP masterdata";
+		}  
+		else if (entityContent.Group == "Settings")
+		{
+			tableGroupNameDe = "Einstellungen";
+			tableGroupNameEn = "Settings";
+		}
+
+        context.FileManager.StartNewFile(entityContent.CodeNamePlural + ".de.js");
+		//resources de
+#>
+define(function () {
+	'use strict';
+
+	var resources = {
+
+		add: '<#=entityContent.De#> anlegen',
+	    edit: '<#=entityContent.De#> editieren',
+	    masterData: '<#= tableGroupNameDe #>',
+	    pageTitle: '<#=entityContent.De#>',
+		pleaseSelect: 'Bitte auswählen',
+<#
+        foreach (var property in model.ModelProperties)
+        {
+            var propContent = property.Column.Content;
+#>
+		<#=property.Name #>: '<#=propContent.De#>',	
+<#
+        }
+#>
+	};
+
+	return resources;
+});
+<#
+		context.FileManager.EndBlock();
+		context.FileManager.StartNewFile(entityContent.CodeNamePlural + ".en.js");
+		//resources en
+#>
+define(function () {
+	'use strict';
+
+	var resources = {
+
+		add: 'Add <#=entityContent.En#>',
+	    edit: 'Edit <#=entityContent.En#>',
+	    masterData: '<#= tableGroupNameEn #>',
+		driverLicenceMasterData: 'Driver licence masterdata',
+	    pageTitle: '<#=entityContent.En#>',
+		pleaseSelect: 'Please select',
+<#
+        
+		foreach (var property in model.ModelProperties)
+        {
+            var propContent = property.Column.Content;
+#>
+		<#=property.Name #>: '<#=propContent.En#>',	
+<#
+        }
+#>
+	};
+
+	return resources;
+});
+<#
+		context.FileManager.EndBlock();
+    }
+    context.FileManager.Process();
+#>

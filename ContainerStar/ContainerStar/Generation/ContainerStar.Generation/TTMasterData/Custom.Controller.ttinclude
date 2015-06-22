@@ -1,0 +1,59 @@
+﻿<#@ import namespace="System.Text" #>
+<#@ include file="ContainerStar.GenerationContext.ttinclude"  once="true" #>
+<#
+    IModelGenerationContext context = generationContext;
+    var code = context.Code;
+
+    foreach (var model in context.Models)
+    {
+        //if (model.Content.SkipController)
+        //{
+        //    continue;
+        //}
+
+        var controllerType = new ClassInfo
+        {
+            IsPartial = true,
+            Name = string.Format("{0}Controller", model.Content.CodeNamePlural),
+			Description = string.Format("Custom Controller for <see cref=\"{0}\"/> entity", model.Entity.Name)
+        };
+		        
+        context.FileManager.StartNewFile(string.Format("Custom.{0}Controller.cs", model.Content.CodeNamePlural));
+        
+		context.WriteAllUsings(new[]
+        {
+            "ContainerStar.API.Models", 
+			"ContainerStar.Contracts.Entities",
+            "ContainerStar.Contracts.Managers",
+			"System.Collections.Generic"
+        }, controllerType);
+
+        code.WriteLine();
+        code.WriteNamespace(); //Area: Namespace
+        code.WriteClassDeclaration(controllerType); //Area: Type
+		
+		code.WriteLine("protected override string BuildWhereClause<T>(Filter filter)");
+		code.WriteLine("{");
+        code.WriteLine("    if (filter.Field == \"name\")");
+        code.WriteLine("    {");
+        code.WriteLine("        var clauses = new List<string>();");
+		code.WriteLine();
+        code.WriteLine("        clauses.AddRange(new[] { ");
+		code.WriteLine("				base.BuildWhereClause<T>(new Filter { Field = \"Name\", Operator = filter.Operator, Value = filter.Value }),");
+		code.WriteLine("				base.BuildWhereClause<T>(new Filter { Field = \"Description\", Operator = filter.Operator, ");
+        code.WriteLine("                    Value = filter.Value }),");
+		code.WriteLine("			});");
+		code.WriteLine();
+        code.WriteLine("        return string.Join(\" or \", clauses);");
+        code.WriteLine("    }");
+		code.WriteLine();
+        code.WriteLine("    return base.BuildWhereClause<T>(filter);");
+        code.WriteLine("}");
+        
+		
+        code.EndArea(); //End Area:  Type
+        code.EndArea(); //End Area:  Namespace
+        context.FileManager.EndBlock();
+    }
+    context.FileManager.Process();
+#>

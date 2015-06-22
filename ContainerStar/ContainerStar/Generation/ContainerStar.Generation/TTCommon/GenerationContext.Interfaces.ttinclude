@@ -1,0 +1,37 @@
+﻿<#@ include file="Assemblies.ttinclude"  once="true" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Runtime.InteropServices" #>
+<#@ import namespace="MetadataLoader.Contracts.CSharp" #>
+<#@ import namespace="MetadataLoader.EntityFramework" #>
+<#@ import namespace="MetadataLoader.Contracts.Generation" #>
+<#@ import namespace="MetadataLoader.Contracts.Database" #>
+<#@ include file="GenerationContext.Base.ttinclude"  once="true" #>
+<#+
+
+    public interface ITablesGenerationContext<out TTableContent, out TColumnContent> : IGenerationContext
+    {
+        IReadOnlyCollection<ITable<TTableContent, TColumnContent>> Tables { get; }
+    }
+
+	public interface IEntitiesGenerationContext<out TTableContent> : IEntitiesGenerationContext
+	{
+	    TTableContent GetTableContent(EntityInfo entity);
+	}
+
+    public interface IEntitiesGenerationContext : IGenerationContext
+    {
+        IReadOnlyCollection<EntityInfo> Entities { get; }
+
+        string ContextName { get;set; }
+    }
+
+    public interface IGenerationContext : IGenerationContextBase
+    {
+        CodeGenerationTools Code { get; }
+
+		void WriteAllUsings(params Info[] infos);
+
+        void WriteAllUsings(string[] usings, params Info[] infos);
+    }
+#>

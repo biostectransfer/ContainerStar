@@ -1,0 +1,88 @@
+﻿<#@ import namespace="System.Text" #>
+<#@ include file="GenerationContext.ttinclude"  once="true" #>
+<#
+    IEntitiesGenerationContext context = generationContext;
+    var code = context.Code;
+
+    foreach (var entity in context.Entities)
+    {
+        context.FileManager.StartNewFile(entity.Name + ".cs");
+        context.WriteAllUsings(entity);
+        code.WriteLine();
+        code.WriteNamespace(); //Area: Namespace
+        code.WriteClassDeclaration(entity); //Area: Class
+#>
+/// <summary>
+/// Table name
+/// </summary>
+public static readonly string EntityTableName = "<#=entity.GetFullTableName() #>";
+#region Fields
+/// <summary>
+/// Columns names
+/// </summary>
+public static class Fields
+{
+<#
+         foreach (var property in entity.SimpleProperties)
+         {
+#>
+    /// <summary>
+    /// Column name '<#=property.ColumnName #>' for property <see cref="<#=entity.Name #>.<#=property.Name #>"/>
+    /// </summary>
+    public static readonly string <#=property.Name #> = "<#=property.ColumnName #>";
+<#
+         }
+#>  
+}
+#endregion
+<#
+        //Note: Skip key values with defaults 
+        var propertiesWithDefaults = entity.SimpleProperties.Where(p => p.HasDefaultValue && !p.IsKey).ToArray();
+
+        if (propertiesWithDefaults.Length != 0 && entity.NavigationProperties.Any(p=>p.HasInitialization))
+        {
+            code.WriteDefaultConstructor(entity); //Area: Constructor
+            
+			foreach (var property in propertiesWithDefaults)
+            {
+                code.WriteLine("{0} = {1}", property.Name, property.DefaultValue);
+            }
+
+            foreach (var property in entity.NavigationProperties.Where(p => p.HasInitialization))
+            {
+                code.WriteLine("{0} = {1}", property.Name, property.InitializeType.CodeName());
+            }
+
+            code.EndArea(); //End Area: Constructor    
+        }
+
+        //properties
+        foreach (var property in entity.Properties)
+        {
+            code.WriteProperty(property);
+        }
+#>        
+
+/// <summary>
+/// Shallow copy of object. Exclude navigation properties and PK properties
+/// </summary>
+public <#=entity.Name #> ShallowCopy()
+{
+    return new <#=entity.Name #> {
+<#
+        foreach (var property in entity.SimpleProperties.Where(p => !p.IsKey && p.IncludeToShallowCopy))
+        {
+#>
+               <#=property.Name #> = <#=property.Name #>,
+<#
+        }
+#>
+	           };
+}
+<#
+        code.EndArea(); //End Area:  End Class
+        code.EndArea(); //End Area:  End Namespace
+        context.FileManager.EndBlock();
+    }
+    context.FileManager.Process();
+#>

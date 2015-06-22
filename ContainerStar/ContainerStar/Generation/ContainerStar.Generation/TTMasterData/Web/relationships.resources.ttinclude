@@ -1,0 +1,83 @@
+﻿<#@ import namespace="System.Text" #>
+<#@ import namespace="MetadataLoader.Contracts.Generation" #>
+<#@ include file="..\ContainerStar.GenerationContext.ttinclude"  once="true" #>
+<#
+    IWebGenerationContext context = generationContext;
+    foreach (var model in context.WebModels)
+    {
+        var entityContent = model.Table.Content;
+		
+		//skip related objects
+		if(entityContent.IsRelated)
+		{
+			continue;
+		}
+
+        context.FileManager.StartNewFile(entityContent.CodeName + "Relationships.de.js");
+		//Model de
+#>
+define(function () {
+	'use strict';
+
+	var resources = {
+	    title: 'Zuordnungen',
+		dataLoading: 'Daten werden geladen. Bitte warten...',
+<#
+		if(!String.IsNullOrEmpty(entityContent.RelationShipsDe) &&
+		   !String.IsNullOrEmpty(entityContent.RelationShipsSelectors))
+		{
+			var textsDe = entityContent.RelationShipsDe.Split(',');
+			var selectors = entityContent.RelationShipsSelectors.Split(',');
+
+			for(int i = 0; i < textsDe.Length; i++)
+			{
+				var textDe = textsDe[i];
+				var selector = selectors[i];		
+#>
+	    <#= selector #>: '<#= textDe #>',
+<#
+			}
+		}
+#>
+	};
+
+	return resources;
+});
+<#
+		context.FileManager.EndBlock();
+
+		context.FileManager.StartNewFile(entityContent.CodeName + "Relationships.en.js");
+		//Model en
+#>
+define(function () {
+	'use strict';
+
+	var resources = {
+	     title: 'Relationships',
+		 dataLoading: 'Data is loading. Please wait...',
+<#
+		if(!String.IsNullOrEmpty(entityContent.RelationShipsEn) &&
+		   !String.IsNullOrEmpty(entityContent.RelationShipsSelectors))
+		{
+			var textsEn = entityContent.RelationShipsEn.Split(',');
+			var selectors = entityContent.RelationShipsSelectors.Split(',');
+
+			for(int i = 0; i < textsEn.Length; i++)
+			{
+				var textEn = textsEn[i];
+				var selector = selectors[i];		
+#>
+	    <#= selector #>: '<#= textEn #>',
+<#
+			}
+		}
+#>
+	};
+
+	return resources;
+});
+<#
+	context.FileManager.EndBlock();
+    }
+    context.FileManager.Process();
+#>

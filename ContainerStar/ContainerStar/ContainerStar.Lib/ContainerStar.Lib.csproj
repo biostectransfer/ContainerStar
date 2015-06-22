@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A61D4577-F99E-4516-8E15-0B63F6894F53}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ContainerStar.Lib</RootNamespace>
+    <AssemblyName>ContainerStar.Lib</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\..\packages\NPOI.Excel.2.1.1\lib\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\..\packages\NPOI.Excel.2.1.1\lib\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>..\..\packages\NPOI.Excel.2.1.1\lib\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>..\..\packages\NPOI.Excel.2.1.1\lib\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats">
+      <HintPath>..\..\packages\NPOI.Excel.2.1.1\lib\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Data\AdditionalCostsMapping.cs">
+      <DependentUpon>ContainerStar.EntityMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\CommunicationPartnersMapping.cs">
+      <DependentUpon>ContainerStar.EntityMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ContainerEquipmentRspMapping.cs">
+      <DependentUpon>ContainerStar.EntityMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ContainersMapping.cs">
+      <DependentUpon>ContainerStar.EntityMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ContainerStarEntities.Context.cs">
+      <DependentUpon>ContainerStarEntities.Context.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Data\ContainerStarConfiguration.Context.Configuration.cs" />
+    <Compile Include="Data\ContainerStarEntities.Custom.cs" />
+    <Compile Include="Data\ContainerTypeEquipmentRspMapping.cs">
+      <DependentUpon>ContainerStar.EntityMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ContainerTypesMapping.cs">
+      <DependentUpon>ContainerStar.EntityMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\CustomersMapping.cs">
+      <DependentUpon>ContainerStar.EntityMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntitiesBase.cs" />
+    <Compile Include="Data\EquipmentsMapping.cs">
+      <DependentUpon>ContainerStar.EntityMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\OrdersMapping.cs">
+      <DependentUpon>ContainerStar.EntityMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\PermissionMapping.cs">
+      <DependentUpon>ContainerStar.EntityMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\PositionsMapping.cs">
+      <DependentUpon>ContainerStar.EntityMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\RoleMapping.cs">
+      <DependentUpon>ContainerStar.EntityMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\RolePermissionRspMapping.cs">
+      <DependentUpon>ContainerStar.EntityMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SaveActors\Base\SaveActorManager.cs" />
+    <Compile Include="Data\SaveActors\ContainerStarSaveActorManager.cs" />
+    <Compile Include="Data\TaxesMapping.cs">
+      <DependentUpon>ContainerStar.EntityMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\TransportProductsMapping.cs">
+      <DependentUpon>ContainerStar.EntityMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\UserMapping.cs">
+      <DependentUpon>ContainerStar.EntityMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DuplicateCheckers\Base\BaseDuplicateChecker.cs" />
+    <Compile Include="DuplicateCheckers\Base\BaseDuplicateCheckerSaveActor.cs" />
+    <Compile Include="DuplicateCheckers\Interfaces\IDuplicateChecker.cs" />
+    <Compile Include="DuplicateCheckers\Interfaces\IContainerStarDuplicateChecker.cs" />
+    <Compile Include="DuplicateCheckers\ContainerStarDuplicateCheckerSaveActor.cs" />
+    <Compile Include="Managers\AdditionalCostsManager.cs">
+      <DependentUpon>Managers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\Base\EntityManager.cs" />
+    <Compile Include="Managers\Base\Manager.cs" />
+    <Compile Include="Managers\Base\ManagerBase.cs" />
+    <Compile Include="Managers\Base\ReadOnlyEntityManager.cs" />
+    <Compile Include="Managers\Base\ReadOnlyManagerBase.cs" />
+    <Compile Include="Managers\CommunicationPartnersManager.cs">
+      <DependentUpon>Managers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\ContainerEquipmentRspManager.cs">
+      <DependentUpon>Managers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\ContainersManager.cs">
+      <DependentUpon>Managers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\ContainerTypeEquipmentRspManager.cs">
+      <DependentUpon>Managers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\ContainerTypesManager.cs">
+      <DependentUpon>Managers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\Custom.OrdersManager.cs" />
+    <Compile Include="Managers\CustomersManager.cs">
+      <DependentUpon>Managers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\EquipmentsManager.cs">
+      <DependentUpon>Managers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\OrdersManager.cs">
+      <DependentUpon>Managers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\PermissionManager.cs">
+      <DependentUpon>Managers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\PositionsManager.cs">
+      <DependentUpon>Managers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\RoleManager.cs">
+      <DependentUpon>Managers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\RolePermissionRspManager.cs">
+      <DependentUpon>Managers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\TaxesManager.cs">
+      <DependentUpon>Managers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\TransportProductsManager.cs">
+      <DependentUpon>Managers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\UserManager.cs">
+      <DependentUpon>Managers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\UserManager.Custom.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CoreBase\CoreBase\CoreBase.csproj">
+      <Project>{c8295c9a-6d2c-4034-8880-bc05b7d83c4f}</Project>
+      <Name>CoreBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ContainerStar.Contracts\ContainerStar.Contracts.csproj">
+      <Project>{2e9c34f0-651a-4b2f-9a9a-0c6c6ec11f4b}</Project>
+      <Name>MasterDataModule.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\ContainerStar.EntityMapping.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ContainerStar.EntityMapping.txt</LastGenOutput>
+    </None>
+    <None Include="Data\ContainerStarEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ContainerStarEntities.Context.cs</LastGenOutput>
+    </None>
+    <None Include="DuplicateCheckers\DuplicateChecker.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DuplicateChecker.txt</LastGenOutput>
+    </None>
+    <None Include="Managers\Managers.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Managers.txt</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\ContainerStar.EntityMapping.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContainerStar.EntityMapping.tt</DependentUpon>
+    </Content>
+    <Content Include="DuplicateCheckers\DuplicateChecker.txt">
+      <DependentUpon>DuplicateChecker.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Content>
+    <Content Include="Managers\Managers.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Managers.tt</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

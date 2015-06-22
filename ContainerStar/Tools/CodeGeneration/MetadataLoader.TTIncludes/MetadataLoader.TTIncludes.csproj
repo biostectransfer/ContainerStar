@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{01373B8B-3D38-4CFB-A005-185B3D03199C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MetadataLoader.TTIncludes</RootNamespace>
+    <AssemblyName>MetadataLoader.TTIncludes</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MasterDataModule\EntitiesMapping\ArgeVersionMapping.cs">
+      <DependentUpon>FE.Mapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\EntitiesMapping\AuthorityMapping.cs">
+      <DependentUpon>FE.Mapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\EntitiesMapping\CommunityMapping.cs">
+      <DependentUpon>FE.Mapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\EntitiesMapping\ExamClassArgeMapMapping.cs">
+      <DependentUpon>FE.Mapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\EntitiesMapping\ExamClassInclusiveClassMapping.cs">
+      <DependentUpon>FE.Mapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\EntitiesMapping\ExamClassMapMapping.cs">
+      <DependentUpon>FE.Mapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\EntitiesMapping\ExamClassMapping.cs">
+      <DependentUpon>FE.Mapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\EntitiesMapping\ExamClassRequiredClassMapping.cs">
+      <DependentUpon>FE.Mapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\EntitiesMapping\ExamClassRestrictedClassMapping.cs">
+      <DependentUpon>FE.Mapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\EntitiesMapping\ExamConstraintExamClassMapping.cs">
+      <DependentUpon>FE.Mapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\EntitiesMapping\ExamConstraintMapping.cs">
+      <DependentUpon>FE.Mapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\EntitiesMapping\ExamPossibleResultMapping.cs">
+      <DependentUpon>FE.Mapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\EntitiesMapping\ExamRecognitionTypeExamClassMapping.cs">
+      <DependentUpon>FE.Mapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\EntitiesMapping\ExamRecognitionTypeMapping.cs">
+      <DependentUpon>FE.Mapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\EntitiesMapping\ExamRoomMapping.cs">
+      <DependentUpon>FE.Mapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\EntitiesMapping\ExamStationExamRecognitionTypeMapping.cs">
+      <DependentUpon>FE.Mapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\EntitiesMapping\ExamStationMapping.cs">
+      <DependentUpon>FE.Mapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\EntitiesMapping\FE.Mapping1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FE.Mapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\EntitiesMapping\HolidayMapping.cs">
+      <DependentUpon>FE.Mapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\EntitiesMapping\HolidayOrdFederalStateMapping.cs">
+      <DependentUpon>FE.Mapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\EntitiesMapping\LanguageMapping.cs">
+      <DependentUpon>FE.Mapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\EntitiesMapping\LegalBasisMapping.cs">
+      <DependentUpon>FE.Mapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\EntitiesMapping\MeetingPointMapping.cs">
+      <DependentUpon>FE.Mapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\EntitiesMapping\MeetingPointOrganizationalUnitMapping.cs">
+      <DependentUpon>FE.Mapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\EntitiesMapping\MessageLocalizationMapping.cs">
+      <DependentUpon>FE.Mapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\EntitiesMapping\ReturnReasonMapping.cs">
+      <DependentUpon>FE.Mapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\EntitiesMapping\SchoolInfoMapping.cs">
+      <DependentUpon>FE.Mapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\EntitiesMapping\ValidationErrorMapping.cs">
+      <DependentUpon>FE.Mapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\Entities\ArgeVersion.cs">
+      <DependentUpon>FE.Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\Entities\Authority.cs">
+      <DependentUpon>FE.Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\Entities\Community.cs">
+      <DependentUpon>FE.Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\Entities\ExamClass.cs">
+      <DependentUpon>FE.Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\Entities\ExamClassArgeMap.cs">
+      <DependentUpon>FE.Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\Entities\ExamClassInclusiveClass.cs">
+      <DependentUpon>FE.Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\Entities\ExamClassMap.cs">
+      <DependentUpon>FE.Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\Entities\ExamClassRequiredClass.cs">
+      <DependentUpon>FE.Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\Entities\ExamClassRestrictedClass.cs">
+      <DependentUpon>FE.Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\Entities\ExamConstraint.cs">
+      <DependentUpon>FE.Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\Entities\ExamConstraintExamClass.cs">
+      <DependentUpon>FE.Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\Entities\ExamPossibleResult.cs">
+      <DependentUpon>FE.Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\Entities\ExamRecognitionType.cs">
+      <DependentUpon>FE.Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\Entities\ExamRecognitionTypeExamClass.cs">
+      <DependentUpon>FE.Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\Entities\ExamRoom.cs">
+      <DependentUpon>FE.Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\Entities\ExamStation.cs">
+      <DependentUpon>FE.Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\Entities\ExamStationExamRecognitionType.cs">
+      <DependentUpon>FE.Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\Entities\FE.Entities1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FE.Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\Entities\Holiday.cs">
+      <DependentUpon>FE.Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\Entities\HolidayOrdFederalState.cs">
+      <DependentUpon>FE.Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\Entities\Language.cs">
+      <DependentUpon>FE.Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\Entities\LegalBasis.cs">
+      <DependentUpon>FE.Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\Entities\MeetingPoint.cs">
+      <DependentUpon>FE.Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\Entities\MeetingPointOrganizationalUnit.cs">
+      <DependentUpon>FE.Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\Entities\MessageLocalization.cs">
+      <DependentUpon>FE.Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\Entities\ReturnReason.cs">
+      <DependentUpon>FE.Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\Entities\SchoolInfo.cs">
+      <DependentUpon>FE.Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDataModule\Entities\ValidationError.cs">
+      <DependentUpon>FE.Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DynamicTextTransformation.ttinclude" />
+    <None Include="Entities.Interfaces.ttinclude" />
+    <None Include="FileManager.ttinclude" />
+    <None Include="GenerationContext.Interfaces.ttinclude" />
+    <None Include="GenerationContext.Base.ttinclude" />
+    <None Include="GenerationContext.ttinclude" />
+    <None Include="Legacy\Context.Interface.ttinclude" />
+    <None Include="Legacy\Context.ttinclude" />
+    <None Include="Legacy\New\CodeGenerationTools.ttinclude" />
+    <None Include="Legacy\EF.Utility.CS.Modified.ttinclude" />
+    <None Include="Legacy\EntityClasses.ttinclude" />
+    <None Include="Legacy\EntityCodeGeneration.ttinclude" />
+    <None Include="Legacy\EntityConfigClasses.ttinclude" />
+    <None Include="Legacy\EntityLoader.ttinclude" />
+    <None Include="Legacy\GenerationContext.ttinclude" />
+    <None Include="Legacy\Include.ttinclude" />
+    <None Include="Legacy\InterfacesHelper.ttinclude" />
+    <None Include="Legacy\Mapping.ttinclude" />
+    <None Include="Legacy\Model.FromEntityClasses.ttinclude" />
+    <None Include="Legacy\Model.ttinclude" />
+    <None Include="Mapping.ttinclude" />
+    <None Include="MasterDataModule\Declarations\FE.Stammdaten.xlsx" />
+    <None Include="Entities.ttinclude" />
+    <None Include="Assemblies.ttinclude" />
+    <None Include="MasterDataModule\EntitiesMapping\FE.Mapping.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FE.Mapping1.cs</LastGenOutput>
+    </None>
+    <None Include="MasterDataModule\Entities\FE.Entities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FE.Entities1.cs</LastGenOutput>
+    </None>
+    <None Include="MasterDataModule\FE.Settings.ttinclude" />
+    <None Include="TextTransformProxy.ttinclude" />
+    <None Include="MasterDataModule\Model.GenerationContext.ttinclude" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MasterDataModule\Managers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

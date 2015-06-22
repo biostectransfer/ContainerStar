@@ -1,0 +1,72 @@
+<% var title = typeof id !== 'undefined' ? '<label data-localized="edit"></label>' : '<label data-localized="add"></label>'; %>
+
+<span class="breadcrumbs"><a href="#Settings" data-localized="masterData"></a> / 
+	<a href="#CommunicationPartners" data-localized="pageTitle"></a> / <%= title %></span>
+
+<form method="post" class="add-model">
+    <table style="width: 100%; vertical-align: top; padding: 0px; margin: 0px; white-space: nowrap;" cellpadding="0" cellspacing="0">
+		<tr>
+			<td style="padding-right: 25px; vertical-align: top; ">
+				<div class="editor-label">
+					<label for="name" data-localized="name"></label>
+				</div>
+				<div class="editor-field">
+					<textarea type="text" class="k-textbox" rows="5" style="width: 362px" id="name" name="name" />
+				</div> 
+				<div class="editor-label">
+					<label for="firstName" data-localized="firstName"></label>
+				</div>
+				<div class="editor-field">
+					<textarea type="text" class="k-textbox" rows="5" style="width: 362px" id="firstName" name="firstName" />
+				</div> 
+				<div class="editor-label">
+					<label for="customerId" data-localized="customerId"></label>
+				</div>
+				<div class="editor-field">
+					<input type="text" data-role="numerictextbox" id="customerId" name="customerId" />
+				</div> 
+				<div class="editor-label">
+					<label for="phone" data-localized="phone"></label>
+				</div>
+				<div class="editor-field">
+					<input type="text" class="k-textbox" style="width: 362px" id="phone" name="phone" />
+				</div> 
+				<div class="editor-label">
+					<label for="mobile" data-localized="mobile"></label>
+				</div>
+				<div class="editor-field">
+					<input type="text" class="k-textbox" style="width: 362px" id="mobile" name="mobile" />
+				</div> 
+				<div class="editor-label">
+					<label for="fax" data-localized="fax"></label>
+				</div>
+				<div class="editor-field">
+					<input type="text" class="k-textbox" style="width: 362px" id="fax" name="fax" />
+				</div> 
+				<div class="editor-label">
+					<label for="email" data-localized="email"></label>
+				</div>
+				<div class="editor-field">
+					<input type="text" class="k-textbox" style="width: 362px" id="email" name="email" />
+				</div> 
+			</td>
+			<td style="width: 100%;">&nbsp;</td>
+		</tr>
+	</table>
+	<div class="inline-block">        
+    </div>      
+
+    <br />
+    <br />
+
+    <div class="relations-container">
+    </div>
+
+    <br />
+
+    <div>
+        <button class="k-primary k-button save" data-localized="save"></button>
+        <button class="k-button remove" data-localized="delete"></button>
+        <button class="k-button cancel" data-localized="cancel"></button>
+    </div>
+</form>

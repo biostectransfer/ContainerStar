@@ -1,0 +1,153 @@
+
+<#@ import namespace="System.Text" #>
+<#@ include file="GenerationContext.ttinclude"  once="true" #>
+<#
+    IEntitiesGenerationContext context = generationContext;
+    var code = context.Code;
+
+    foreach (var entity in context.Entities)
+    {
+        var mapping = entity.Mapping;
+        context.FileManager.StartNewFile(mapping.Name + ".cs");
+
+        code.WriteUsing(new[] {"System.ComponentModel.DataAnnotations.Schema"}.Union(context.ExtraUsages).ToArray(), mapping);
+        code.WriteLine();
+        code.WriteNamespace(); //Area: Namespace
+        code.WriteClassDeclaration(mapping); //Area: Class
+#>
+
+public static readonly <#= mapping.Name #> Instance = new <#= mapping.Name #>();
+
+<#
+        code.WriteDefaultConstructor(mapping, AccessibilityLevels.Private); //Area: Default Constructor
+        code.WriteLine();
+        code.WriteLine("ToTable(\"{0}\", \"{1}\");", entity.TableName, entity.TableSchemaName);
+        {
+            var keyProperties = entity.SimpleProperties.Where(info => info.IsKey).OrderBy(info => info.KeyOrder).ToArray();
+            if (keyProperties.Length != 0)
+            {
+                code.WriteLine("// Primary Key");
+                code.WriteLine("HasKey({0});", ResolveKey(keyProperties));
+            }
+        }
+        code.WriteLine();
+        code.WriteLine("//Properties");
+        foreach (var property in entity.SimpleProperties)
+        {
+            WritePropertyConfiguration(code, entity, property);
+        }
+		
+		code.WriteLine();
+        code.WriteLine("//Relationships");
+		foreach (var relation in entity.GetFromRelationships().Where(r=>!r.From.IsUndirect))
+        {
+            WriteRelationConfiguration(code, relation);
+        }
+
+        foreach (var relation in entity.GetToRelationships().Where(r => r.From.IsUndirect))
+        {
+            WriteRelationConfiguration(code, relation, true);
+        }
+
+        code.EndArea(); //End Area:  End Default Constructor
+        code.EndArea(); //End Area:  End Class
+        code.EndArea(); //End Area:  End Namespace
+        context.FileManager.EndBlock();
+    }
+    context.FileManager.Process();
+#>
+<#+
+    public void WritePropertyConfiguration(CodeGenerationTools code, EntityInfo entity, SimplePropertyEntityInfo property)
+    {
+        code.WriteLine("Property(t => t.{0})", property.Name);
+        code.PushIndent();
+        code.Write(".HasColumnName({0}.Fields.{1})", entity.Name, property.Name);
+
+        if (property.DatabaseGeneratedOption != DatabaseGeneratedOption.None)
+        {
+            code.WriteLine();
+            code.Write(".HasDatabaseGeneratedOption(DatabaseGeneratedOption.{0})", property.DatabaseGeneratedOption);
+        }
+        if (property.IsRequired)
+        {
+            code.WriteLine();
+            code.Write(".IsRequired()");
+        }
+        if (property.IsUnicode)
+        {
+            code.WriteLine();
+            code.Write(".IsUnicode()");
+        }
+        if (property.Length.HasValue)
+        {
+            code.WriteLine();
+            code.Write(property.IsMaxLength ? ".IsMaxLength()" : string.Format(".HasMaxLength({0})", property.Length.Value));
+        }
+        if (property.IsFixedLength)
+        {
+            code.WriteLine();
+            code.Write(".IsFixedLength()");
+        }
+        if (property.IsConcurrencyToken)
+        {
+            code.WriteLine();
+            code.Write(".IsConcurrencyToken()");
+        }
+        code.WriteLine(";");
+        code.PopIndent();
+        code.WriteLine();
+    }
+
+    private string ResolveRelationSide(EntityRelationSide side, string prefix)
+    {
+        string action;
+        switch (side.NavigationType)
+        {
+            case NavigationType.Optional:
+                action = "Optional";
+                break;
+            case NavigationType.Required:
+                action = "Required";
+                break;
+            case NavigationType.Many:
+                action = "Many";
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+        var letter = side.Entity.Name[0].ToString().ToLower();
+        var propertyExpression = string.Format("{0} => {0}.{1}", letter, side.Property.Name);
+
+        return string.Format("{0}{1}({2})", prefix, action, side.IsUndirect ? string.Empty : propertyExpression);
+    }
+
+    public void WriteRelationConfiguration(CodeGenerationTools code, EntityRelationship relation, bool toDirection=false)
+    {
+        var first = toDirection ? relation.To : relation.From;
+		var	second= toDirection ? relation.From : relation.To;
+        code.WriteLine(ResolveRelationSide(first, "Has"));
+        code.PushIndent();
+        code.WriteLine(ResolveRelationSide(second, ".With"));
+
+        if (relation.From.NavigationType == NavigationType.Many
+            && relation.To.NavigationType == NavigationType.Many)
+        {
+            //TODO: Implement many to many generation
+            code.WriteLine("#error: Many-To-Many relationship generation not implemented");
+        }
+        else
+        {
+            code.WriteLine(".HasForeignKey({0});",ResolveKey(relation.From.KeyColumns));
+        }
+		code.PopIndent();
+    }
+
+    private static string ResolveKey(SimplePropertyEntityInfo[] keyProperties, string variableName = "t")
+    {
+        return keyProperties.Length == 1
+            ? string.Format("{0} => {0}.{1}", variableName, keyProperties[0].Name)
+            : string.Format("{0} => new {{{0}.{1}}}", variableName, string.Join(", t.", keyProperties.Select(info => info.Name)));
+    }
+#>
+
+

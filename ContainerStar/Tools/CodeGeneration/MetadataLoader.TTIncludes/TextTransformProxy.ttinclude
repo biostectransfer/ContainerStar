@@ -1,0 +1,44 @@
+﻿<#@ template language="C#" debug="false" hostspecific="true" linePragmas="false" #>
+<#@ include file="Assemblies.ttinclude"  once="true" #>
+<#@ import namespace="MetadataLoader.Contracts.Generation" #>
+<#@ include file="DynamicTextTransformation.ttinclude" once = "true" #>
+<#+
+
+    public class TextTransformProxy : ITextTransform
+    {
+        private static string Prepare(string value, object[] args)
+        {
+            if (args != null && args.Length != 0)
+            {
+                value = String.Format(value, args);
+            }
+            return value;
+        }
+
+        private readonly DynamicTextTransformation _transformation;
+
+        public TextTransformProxy(DynamicTextTransformation transformation)
+        {
+            _transformation = transformation;
+        }
+
+        public void Write(string value, params object[] args)
+        {
+            _transformation.Write(Prepare(value, args));
+        }
+
+        public void WriteLine(string value, params object[] args)
+        {
+            _transformation.WriteLine(Prepare(value, args));
+        }
+        public void PushIndent(string indent)
+        {
+            _transformation.PushIndent(indent);
+        }
+        public void PopIndent()
+        {
+            _transformation.PopIndent();
+        }
+    }
+
+#>

@@ -1,0 +1,9 @@
+﻿<#@ template language="C#" debug="true" hostspecific="true" linePragmas="true"#>
+<#@ output extension=".cs"#>
+<#@ include file="..\Generation\ContainerStar.Generation\TTMasterData\ContainerStar.Settings.ttinclude" once="true"#>
+<# 
+    const string filesDir = @"..\Generation\ContainerStar.Generation\Declarations\";
+    extraUsages = new[] {"ContainerStar.Contracts.Entities"};
+#>
+<#@ include file="..\Generation\ContainerStar.Generation\TTMasterData\ContainerStar.GenerationContext.ttinclude" once="true"#>
+<#@ include file="..\Generation\ContainerStar.Generation\TTCommon\Context.Interface.ttinclude"  once="true"#>

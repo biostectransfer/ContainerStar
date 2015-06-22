@@ -1,0 +1,302 @@
+<#@ import namespace="System.Collections.Generic" #>
+<#
+
+//#@ include file="Include.ttinclude" once="true" #
+
+    EntitiesGenerationContext context = generationContext;
+	
+	var xmlMSL = context.MetadataLoader.CreateMslXmlDoc(context.EdmxFile.FullName);
+	var mappings = new EdmMapping(xmlMSL, context.EdmItemCollection, context.StoreItemCollection);
+
+    if (!context.TypeMapper.VerifyCaseInsensitiveTypeUniqueness(context.TypeMapper.GetAllGlobalItems(context.EdmItemCollection), context.EdmxFile.FullName))
+    {
+        return string.Empty;
+    }
+
+    WriteHeader(context.CodeStringGenerator, context.FileManager);
+
+    foreach (var entityClass in context.EntityClasses)
+    {
+        var className = entityClass.Name;
+        context.FileManager.StartNewFile(className + "Mapping.cs");
+
+        var tableSet = mappings.EntityMappings[entityClass.Entity].Item1;
+        var propertyToColumnMappings = mappings.EntityMappings[entityClass.Entity].Item2;
+        var manyToManyMappings = mappings.ManyToManyMappings;
+#>
+using System.ComponentModel.DataAnnotations.Schema;    
+using System.Data.Entity.ModelConfiguration;
+<#=context.ExtraUsages #>
+<#
+        BeginNamespace(context.Code);
+#>
+    /// <summary>
+    /// Database mapping for <see cref="<#= className #>"/> to table <#= entityClass.Entity.Name #>
+    /// </summary>
+    internal sealed class <#= className #>Mapping : EntityTypeConfiguration<<#= className #>>
+    {
+	    public static readonly <#= className #>Mapping Instance = new <#= className #>Mapping();
+	    /// <summary>
+        /// Instance constructor
+        /// </summary>
+        private <#= className #>Mapping()
+        {
+            // Primary Key
+<#
+        var keyMembers = entityClass.Properties.Where(info => info.IsKey).ToList();
+        if (keyMembers.Count == 1)
+        {
+#>
+            this.HasKey(t => t.<#= context.Code.Escape(keyMembers.Single().Name) #>);
+<#
+        }
+        else
+        {
+#>
+            this.HasKey(t => new { <#= string.Join(", ", keyMembers.Select(m => "t." + m.Name)) #> });
+<#
+        }
+#>
+
+            // Properties
+<#
+    foreach (var propInfo in entityClass.GetPlainProperties())
+    {
+        PrimitiveType type = (PrimitiveType) propInfo.EdmProperty.TypeUsage.EdmType;
+        //var isKey = keyMembers.Contains(prop);
+        
+		var storeProp = propertyToColumnMappings[(EdmProperty) propInfo.EdmProperty];
+        var sgpFacet = storeProp.TypeUsage.Facets.SingleOrDefault(f => f.Name == "StoreGeneratedPattern");
+        var storeGeneratedPattern = sgpFacet == null
+                ? StoreGeneratedPattern.None
+                : (StoreGeneratedPattern) sgpFacet.Value;
+
+        var configLines = new List<string>();
+
+        if (type.ClrEquivalentType == typeof (int)
+            || type.ClrEquivalentType == typeof (decimal)
+            || type.ClrEquivalentType == typeof (short)
+            || type.ClrEquivalentType == typeof (long))
+        {
+            if (propInfo.IsKey && !propInfo.HasDefaultValue && storeGeneratedPattern != StoreGeneratedPattern.Identity)
+            {
+                configLines.Add(".HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)");
+            }
+            else if ((propInfo.IsKey && propInfo.HasDefaultValue) || storeGeneratedPattern == StoreGeneratedPattern.Identity)
+            {
+                configLines.Add(".HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)");
+            }
+        }
+
+        if (type.ClrEquivalentType == typeof (string)
+            || type.ClrEquivalentType == typeof (byte[]))
+        {
+            if (propInfo.IsRequired)
+            {
+                configLines.Add(".IsRequired()");
+            }
+
+            var unicodeFacet = propInfo.EdmProperty.TypeUsage.Facets.SingleOrDefault(f => f.Name == "Unicode");
+            if (unicodeFacet != null && (bool) unicodeFacet.Value)
+            {
+                configLines.Add(".IsUnicode()");
+            }
+
+            var fixedLengthFacet = propInfo.EdmProperty.TypeUsage.Facets.SingleOrDefault(f => f.Name == "FixedLength");
+            if (fixedLengthFacet != null && (bool) fixedLengthFacet.Value)
+            {
+                configLines.Add(".IsFixedLength()");
+            }
+
+            var maxLengthFacet = propInfo.EdmProperty.TypeUsage.Facets.SingleOrDefault(f => f.Name == "MaxLength");
+            if (maxLengthFacet != null && !maxLengthFacet.IsUnbounded)
+            {
+                configLines.Add(string.Format(".HasMaxLength({0})", maxLengthFacet.Value));
+
+                if (storeGeneratedPattern == StoreGeneratedPattern.Computed
+                    && type.ClrEquivalentType == typeof (byte[])
+                    && (int) maxLengthFacet.Value == 8 && propInfo.EdmProperty.Name.EndsWith("ROW_VERSION"))
+                {
+                    configLines.Add(".IsRowVersion()");
+                }
+            }
+        }
+
+        if (!configLines.Any(line=> line.StartsWith(".HasDatabaseGeneratedOption")||line.StartsWith(".IsRowVersion")) &&
+			 storeGeneratedPattern == StoreGeneratedPattern.Computed)
+        {
+			configLines.Add(".HasDatabaseGeneratedOption(DatabaseGeneratedOption.Computed)");
+        }
+
+        context.ApplyColumnMappingConfig(propInfo, configLines);
+
+        if (configLines.Any())
+        {
+#>
+            this.Property(t => t.<#= propInfo.Name #>)
+                <#= string.Join("\r\n                ", configLines) #>;
+
+<#
+        }
+    }
+        var tableName = (string) tableSet.MetadataProperties["Table"].Value
+                        ?? tableSet.Name;
+
+        var schemaName = (string)tableSet.MetadataProperties["Schema"].Value;
+		var schemaProp = tableSet.MetadataProperties.FirstOrDefault(p => p.Name.EndsWith(":Schema"));
+		if	(string.IsNullOrWhiteSpace(schemaName)&& schemaProp!=null)
+		{		
+		  schemaName = (string)schemaProp.Value;
+		}
+#>
+            // Table & Column Mappings
+<#
+    if (schemaName == "dbo" || string.IsNullOrWhiteSpace(schemaName))
+    {
+#>
+            this.ToTable("<#= tableName #>");
+<#
+    }
+    else
+    {
+#>
+            this.ToTable("<#= tableName #>", "<#= schemaName #>");
+<#
+    }
+
+    foreach (var property in entityClass.GetPlainProperties())
+    {
+#>
+            this.Property(t => t.<#= property.Name #>).HasColumnName(<#= entityClass.Name#>.Fields.<#=property.Name #>);
+<#
+    }
+
+        // Find m:m relationshipsto configure 
+        var manyManyRelationships = entityClass.Entity.NavigationProperties
+                .Where(np => np.DeclaringType == entityClass.Entity
+                             && np.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many
+                             && np.FromEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many
+                             && np.RelationshipType.RelationshipEndMembers.First() == np.FromEndMember).ToList(); // <- ensures we only configure from one end
+
+        // Find FK relationships that this entity is the dependent of
+        var fkRelationships = entityClass.Entity.NavigationProperties
+                .Where(np => np.DeclaringType == entityClass.Entity
+                             && ((AssociationType) np.RelationshipType).IsForeignKey
+                             && ((AssociationType) np.RelationshipType).ReferentialConstraints.Single().ToRole == np.FromEndMember).ToList();
+
+        if (manyManyRelationships.Any() || fkRelationships.Any())
+        {
+#>
+
+            // Relationships
+<#
+        foreach (var navProperty in manyManyRelationships)
+        {
+		   var otherNavProperty = navProperty.ToEndMember.GetEntityType().NavigationProperties.Where(n => n.RelationshipType == navProperty.RelationshipType && n != navProperty).Single();
+
+            var association = (AssociationType) navProperty.RelationshipType;
+            var mapping = manyToManyMappings[association];
+            var item1 = mapping.Item1;
+            var mappingTableName = (string) mapping.Item1.MetadataProperties["Table"].Value ?? item1.Name;
+            var mappingSchemaName = (string) item1.MetadataProperties["Schema"].Value;
+
+            // Need to ensure that FKs are decalred in the same order as the PK properties on each principal type
+            var leftType = (EntityType) navProperty.DeclaringType;
+            var leftKeyMappings = mapping.Item2[navProperty.FromEndMember];
+            var leftKeyMembers =context.GetKeyColumns(leftType);
+            var leftColumns = string.Join(", ", leftKeyMembers.Select(m => "\"" + leftKeyMappings[m] + "\""));
+            
+			var rightType = (EntityType) otherNavProperty.DeclaringType;
+            var rightKeyMappings = mapping.Item2[otherNavProperty.FromEndMember];
+			var rightKeyMembers = context.GetKeyColumns(rightType);
+            var rightColumns = string.Join(", ", rightKeyMembers.Select(m => "\"" + rightKeyMappings[m] + "\""));
+#>
+            this.HasMany(t => t.<#= context.Pluralize(context.Code.Escape(navProperty)) #>)
+                .WithMany(t => t.<#= context.Pluralize(context.Code.Escape(otherNavProperty)) #>)
+                .Map(m =>
+                    {
+<#
+            if (mappingSchemaName == "dbo" || string.IsNullOrWhiteSpace(mappingSchemaName))
+            {
+#>
+                        m.ToTable("<#= mappingTableName #>");
+<#
+            }
+            else
+            {
+#>
+                        m.ToTable("<#= mappingTableName #>", "<#= mappingSchemaName #>");
+<#
+            }
+#>
+                        m.MapLeftKey(<#= leftColumns #>);
+                        m.MapRightKey(<#= rightColumns #>);
+                    });
+
+<#
+        }
+            
+        foreach (var navProperty in fkRelationships)
+        {
+            var otherNavProperty = navProperty.ToEndMember.GetEntityType().NavigationProperties.Where(n => n.RelationshipType == navProperty.RelationshipType && n != navProperty).Single();
+            var association = (AssociationType) navProperty.RelationshipType;
+
+            if (navProperty.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.One)
+            {
+#>
+            this.HasRequired(t => t.<#= context.Code.Escape(navProperty) #>)
+<#
+            }
+			else if(navProperty.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many)
+            {
+#>
+            this.HasOptional(t => t.<#= context.Pluralize(context.Code.Escape(navProperty)) #>)
+<#
+            }
+            else
+            {
+#>
+            this.HasOptional(t => t.<#= context.Code.Escape(navProperty) #>)
+<#
+            }
+                
+            if (navProperty.FromEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many)
+            {
+#>
+                .WithMany(t => t.<#= context.Pluralize(context.Code.Escape(otherNavProperty)) #>)
+<#
+                if (association.ReferentialConstraints.Single().ToProperties.Count == 1)
+                {
+#>
+                .HasForeignKey(d => d.<#= context.Code.Escape(association.ReferentialConstraints.Single().ToProperties.Single().Name) #>);
+<#
+                }
+                else
+                {
+#>
+                .HasForeignKey(d => new { <#= string.Join(", ", association.ReferentialConstraints.Single().ToProperties.Select(p => "d." + context.Code.Escape(p.Name))) #> });
+<#
+                }
+            }
+            else
+            {
+                // NOTE: We can assume that this is a required:optional relationship 
+                //       as EDMGen will never create an optional:optional relationship
+                // 		 because everything is one:many except PK-PK relationships which must be required
+#>
+                .WithOptional(t => t.<#= context.Code.Escape(otherNavProperty) #>);
+<#
+            }
+        }
+        }
+
+		#>
+<#=context.CustomMapping(entityClass)#>
+
+        }
+    }
+<#
+        EndNamespace(context.Code);
+    }
+    context.FileManager.Process();
+#>        

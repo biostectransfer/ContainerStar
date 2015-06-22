@@ -1,0 +1,33 @@
+﻿<#@ import namespace="System.Text" #>
+<#@ include file="ContainerStar.GenerationContext.ttinclude"  once="true" #>
+<#
+    IEntitiesGenerationContext<TableContent> context = generationContext;
+    var code = context.Code;
+
+	code.WriteNamespace(); //Area: Namespace
+#>
+	public partial class Permissions
+	{
+	 
+<#
+	foreach (var entity in context.Entities)
+	{
+	    var content = context.GetTableContent(entity);
+		if(content.PermissionId > 0)
+		{
+#>
+		///<summary>
+		/// Grant for edit <#=entity.TableName#> table
+		///</summary>
+		public const int <#=entity.Name#> = <#=content.PermissionId#>;
+<#
+		}
+	}
+#>
+	}
+<#
+	code.EndArea();
+#>
+
+
+

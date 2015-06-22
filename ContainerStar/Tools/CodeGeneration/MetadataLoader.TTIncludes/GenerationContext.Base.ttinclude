@@ -1,0 +1,51 @@
+﻿<#@ include file="FileManager.ttinclude" once="true" #>
+<#+
+    public interface IGenerationContextBase
+    {
+        DynamicTextTransformation TextTransform { get; }
+        TemplateFileManager FileManager { get; }
+        
+		FileInfo ResolveFilePath(string file);
+
+        void AddWarning(string message, string file = null);
+        void AddError(string message, string file = null);
+    }
+
+    /// <summary>///   Generation context/// </summary>
+    public class BaseGenerationContext : IGenerationContextBase
+    {
+        public BaseGenerationContext(object transform)
+        {
+            TextTransform = DynamicTextTransformation.Create(transform);
+            FileManager = TemplateFileManager.Create(TextTransform);
+        }
+
+        public DynamicTextTransformation TextTransform { get; set; }
+        public TemplateFileManager FileManager { get; set; }
+
+        public FileInfo ResolveFilePath(string file)
+        {
+            return new FileInfo(TextTransform.Host.ResolvePath(file ?? string.Empty));
+        }
+
+        public void AddWarning(string message, string file = null)
+        {
+            TextTransform.Errors.Add(new CompilerError
+            {
+                FileName = file ?? FileManager.CurrentFileName,
+                ErrorText = message,
+                IsWarning = true
+            });
+        }
+
+        public void AddError(string message, string file = null)
+        {
+            TextTransform.Errors.Add(new CompilerError
+            {
+                FileName = file ?? FileManager.CurrentFileName,
+                ErrorText = message
+            });
+        }
+    }
+
+#>

@@ -1,0 +1,173 @@
+﻿<#@ import namespace="System.Text" #>
+<#@ import namespace="MetadataLoader.Contracts.Generation" #>
+<#@ include file="..\ContainerStar.GenerationContext.ttinclude"  once="true" #>
+<#
+    IWebGenerationContext context = generationContext;
+    foreach (var model in context.WebModels)
+    {
+        var entityContent = model.Table.Content;
+        //skip related objects
+		if(entityContent.IsRelated)
+		{
+			continue;
+		}
+		
+		context.FileManager.StartNewFile(entityContent.CodeNamePlural + ".js");
+		//Model
+		var defines = String.Format("{0}\n{1}\n{2}{3}{4}{5}{6}",
+			"'base/base-object-grid-view',",
+			"'collections/" + context.CurrentRelatedWebPath + "/" + entityContent.CodeNamePlural + "',",
+			"'l!t!" + context.CurrentRelatedWebPath + "/Filter" + entityContent.CodeName + "'",
+			!String.IsNullOrEmpty(entityContent.RelationShips) ?
+				",\n'l!t!" + context.CurrentRelatedWebPath + "/" + entityContent.CodeName + "Relationships'" : "",
+			entityContent.ShowExtraFields ? 
+				",\n'" + context.CurrentRelatedWebPath+ "/Custom." + entityContent.CodeName + "'" : "",
+			entityContent.CustomEvents ? 
+				",\n'" + context.CurrentRelatedWebPath+ "/Custom.Events." + entityContent.CodeName + "'" : "",
+			entityContent.ExcelExport ? ",\n'jszip'" : "");
+
+		var defineMembers = String.Format("{0}{1}{2}{3}",
+				!String.IsNullOrEmpty(entityContent.RelationShips) ? ", DetailView" : "", 
+				entityContent.ShowExtraFields ? ", CustomColumns" : "",
+				entityContent.CustomEvents ? ", CustomEvents" : "",
+				entityContent.ExcelExport ? ", JSZip" : "");
+
+		var columnsOpenText = entityContent.ShowExtraFields ? "return $.merge( CustomColumns(),\n[" : "return [";
+		var columnsCloseText = entityContent.ShowExtraFields ? "]);" : "];";
+#>
+define([
+<#= defines #>
+], function (BaseView, Collection, FilterView<#= defineMembers #>) {
+	'use strict';		
+<#
+		if(entityContent.ExcelExport)
+		{
+#>
+	window.JSZip = JSZip;
+<#
+		}
+#>
+	var view = BaseView.extend({
+
+        collectionType: Collection,
+        <#= !String.IsNullOrEmpty(entityContent.RelationShips) ? "detailView: DetailView," : "" #>
+        filterView: FilterView,
+        tableName: '<#=entityContent.CodeName#>',
+        editUrl: '#<#=entityContent.CodeNamePlural#>',
+		<#= entityContent.AddNewItemInline ? "addNewModelInline: true," : "" #>
+		<#= entityContent.ShowAddButton ? "showAddButton: true," : "" #>
+		<#= entityContent.ShowEditButton ? "showEditButton: true," : "" #>
+		<#= entityContent.ShowDeleteButton ? "showDeleteButton: true," : "" #>
+
+	    editItemTitle: function () {
+	        return this.resources.edit;
+	    },
+<#
+		if(entityContent.ExcelExport)
+		{
+#>
+		toolbar: function () {
+            var result = view.__super__.toolbar.apply(this, arguments);
+
+            result.push({ template: function () { return '<a class="k-button k-button-icontext k-grid-excel" href="#"><span class="k-icon k-i-excel"></span>Excel</a>'; } });
+
+            return result;
+        },
+<#
+		}
+#>
+		columns: function () {
+			
+			<#= columnsOpenText #>
+<#        
+		foreach (var property in model.ModelProperties)
+        {
+            var propContent = property.Column.Content;
+            var columnInfo = GetColumnInfo(context, property);
+			if (propContent.ShowInGrid)
+            {
+#>
+				{ field: '<#=property.Name#>', title: this.resources.<#=property.Name#> <#=columnInfo#>},
+<#
+			}
+		}
+#>
+			<#= columnsCloseText #>
+		}
+
+<#	
+		if(entityContent.CustomEvents)
+		{
+#>
+		,events: CustomEvents
+<#
+		}
+#>
+	});
+
+	return view;
+});
+<#
+		context.FileManager.EndBlock();
+
+		//Filter
+		if(entityContent.GenerateFilter)
+		{
+			context.FileManager.StartNewFile("Filter" + entityContent.CodeName + ".js");
+#>
+define([
+	'base/base-object-filter-view',
+	'models/<#= context.CurrentRelatedWebPath #>/<#= "Filter" + entityContent.CodeName #>'
+], function (BaseFilterView, Filter) {
+    'use strict'
+
+    var view = BaseFilterView.extend({
+
+        filter: Filter
+    });
+
+    return view;
+});
+<#
+			context.FileManager.EndBlock();
+		}
+    }
+    context.FileManager.Process();
+#>
+<#+
+    private string GetColumnInfo(IWebGenerationContext context, PropertyModelInfo property, bool forValidation = false)
+    {
+        var shortName = property.Type.ShortName;
+        if (string.IsNullOrEmpty(shortName))
+        {
+            shortName = property.Type.Name.ToLower();
+        }
+
+        switch (shortName)
+        {
+            case "bool":
+                return ", headerTitle: this.resources." + property.Name + ", checkbox: true";
+            case "byte":
+            case "short":
+            case "int":
+            case "long":
+            case "sbyte":
+            case "ushort":
+            case "uint":
+            case "ulong":
+            case "decimal":
+            case "float":
+            case "double":
+                var result = String.Empty;
+				if(!String.IsNullOrEmpty(property.Column.Content.ViewCollection))
+				{
+					result = String.Format(", collection: this.options.{0}, defaultText: this.resources.pleaseSelect", property.Column.Content.ViewCollection);
+				}
+                return result;
+            case "datetime":
+                return ", format: '{0:d}'";
+            default:
+				return "";
+        }
+    }
+#>

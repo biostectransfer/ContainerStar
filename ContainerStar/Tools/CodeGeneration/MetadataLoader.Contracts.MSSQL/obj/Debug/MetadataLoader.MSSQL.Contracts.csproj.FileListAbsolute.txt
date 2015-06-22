@@ -1,0 +1,6 @@
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.Contracts.MSSQL\bin\Debug\MetadataLoader.MSSQL.Contracts.dll
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.Contracts.MSSQL\bin\Debug\MetadataLoader.MSSQL.Contracts.pdb
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.Contracts.MSSQL\bin\Debug\MetadataLoader.Contracts.dll
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.Contracts.MSSQL\bin\Debug\MetadataLoader.Contracts.pdb
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.Contracts.MSSQL\obj\Debug\MetadataLoader.MSSQL.Contracts.dll
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.Contracts.MSSQL\obj\Debug\MetadataLoader.MSSQL.Contracts.pdb

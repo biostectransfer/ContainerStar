@@ -1,0 +1,22 @@
+﻿<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ include file="TextTransformProxy.ttinclude"  once="true" #>
+<#@ include file="GenerationContext.Base.ttinclude"  once="true" #>
+<#@ include file="GenerationContext.Interfaces.ttinclude"  once="true" #>
+<#+
+
+    /// <summary>///   Generation context/// </summary>
+    public class GenerationContext : BaseGenerationContext, IGenerationContext
+    {
+        public GenerationContext(object transform, params string[] extraUsages)
+            : base(transform)
+        {
+            Code = new CodeGenerationTools(new TextTransformProxy(TextTransform), TextTransform.VsNamespaceSuggestion());
+            ExtraUsages = extraUsages;
+        }
+
+        public CodeGenerationTools Code { get; private set; }
+        public string[] ExtraUsages { get; private set; }
+    }
+
+#>

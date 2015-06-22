@@ -1,0 +1,34 @@
+﻿<#@ import namespace="System.Text" #>
+<#@ include file="..\ContainerStar.GenerationContext.ttinclude"  once="true" #>
+
+
+<#
+    IWebGenerationContext context = generationContext;
+    context.FileManager.StartNewFile(menuFileName);
+#>
+<h2 data-localized="title"></h2>
+<table class="settings">
+    <tr>        
+        <td>
+            <ul>
+<#
+    foreach (var model in context.WebModels)
+    {
+		if(model.Table.Content.ShowInMenu)
+		{
+#>
+                <li data-permission="<#=model.Entity.Name#>">
+                    <a href="#<#=model.Table.Content.CodeNamePlural #>" data-localized="<#=model.Table.Content.CodeNamePlural #>"></a>
+                </li>
+<#        
+		}
+	}
+#>
+			</ul>
+        </td>
+    </tr>
+</table>
+<#
+	context.FileManager.EndBlock();
+    context.FileManager.Process();
+#>

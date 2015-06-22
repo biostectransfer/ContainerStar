@@ -1,0 +1,5 @@
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\bin\MasterDataModule.Generation.dll
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\bin\MasterDataModule.Generation.pdb
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MasterDataModule.Generation\obj\Debug\MasterDataModule.Generation.csprojResolveAssemblyReference.cache
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MasterDataModule.Generation\obj\Debug\MasterDataModule.Generation.dll
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MasterDataModule.Generation\obj\Debug\MasterDataModule.Generation.pdb

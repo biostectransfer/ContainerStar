@@ -1,0 +1,28 @@
+﻿<#@ include file="TextTransformProxy.ttinclude"  once="true" #>
+<#@ include file="GenerationContext.Base.ttinclude"  once="true" #>
+<#@ include file="GenerationContext.Interfaces.ttinclude"  once="true" #>
+<#+
+    public class GenerationContext : BaseGenerationContext, IGenerationContext
+    {
+        public GenerationContext(object transform, string defaultNamespace, params string[] extraUsages)
+            : base(transform)
+        {
+            Code = new CodeGenerationTools(new TextTransformProxy(TextTransform), 
+			string.IsNullOrEmpty(defaultNamespace) ? TextTransform.VsNamespaceSuggestion() : defaultNamespace);
+            ExtraUsages = extraUsages;
+        }
+
+        public CodeGenerationTools Code { get; private set; }
+		public string[] ExtraUsages { get; private set; }
+
+        public void WriteAllUsings(params Info[] infos)
+        {
+            WriteAllUsings(new string[] {}, infos);
+        }
+        public void WriteAllUsings(string[] usings, params Info[] infos)
+        {
+		   Code.WriteUsing(usings.Union(ExtraUsages).ToArray(), infos);
+        }
+    }
+
+#>

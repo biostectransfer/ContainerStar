@@ -1,0 +1,150 @@
+<% var title = typeof id !== 'undefined' ? '<label data-localized="edit"></label>' : '<label data-localized="add"></label>'; %>
+
+<span class="breadcrumbs"><a href="#Settings" data-localized="masterData"></a> / 
+	<a href="#Containers" data-localized="pageTitle"></a> / <%= title %></span>
+
+<form method="post" class="add-model">
+    <table style="width: 100%; vertical-align: top; padding: 0px; margin: 0px; white-space: nowrap;" cellpadding="0" cellspacing="0">
+		<tr>
+			<td style="padding-right: 25px; vertical-align: top; ">
+				<div class="editor-label">
+					<label for="number" data-localized="number"></label>
+				</div>
+				<div class="editor-field">
+					<input type="text" class="k-textbox" style="width: 362px" id="number" name="number" />
+				</div> 
+			</td>
+			<td style="padding-right: 25px; vertical-align: top; ">
+				<div class="editor-label">
+					<label for="containerTypeId" data-localized="containerTypeId"></label>
+				</div>
+				<div class="editor-field">
+					<select style="width: 362px" id="containerTypeId" name="containerTypeId" />
+				</div> 
+			</td>
+			<td style="padding-right: 25px; vertical-align: top; ">
+				<div class="editor-label">
+					<label for="color" data-localized="color"></label>
+				</div>
+				<div class="editor-field">
+					<input type="text" class="k-textbox" style="width: 362px" id="color" name="color" />
+				</div> 
+			</td>
+			<td style="width: 100%;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="padding-right: 25px; vertical-align: top; ">
+				<div class="editor-label">
+					<label for="length" data-localized="length"></label>
+				</div>
+				<div class="editor-field">
+					<input type="text" data-role="numerictextbox" id="length" name="length" />
+				</div> 
+			</td>
+			<td style="padding-right: 25px; vertical-align: top; ">
+				<div class="editor-label">
+					<label for="width" data-localized="width"></label>
+				</div>
+				<div class="editor-field">
+					<input type="text" data-role="numerictextbox" id="width" name="width" />
+				</div> 
+			</td>
+			<td style="padding-right: 25px; vertical-align: top; ">
+				<div class="editor-label">
+					<label for="height" data-localized="height"></label>
+				</div>
+				<div class="editor-field">
+					<input type="text" data-role="numerictextbox" id="height" name="height" />
+				</div> 
+			</td>
+			<td style="width: 100%;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="padding-right: 25px; vertical-align: top; ">
+				<div class="editor-label">
+					<label for="price" data-localized="price"></label>
+				</div>
+				<div class="editor-field">
+					<input type="text" data-role="numerictextbox" id="price" name="price" />
+				</div> 
+			</td>
+			<td style="padding-right: 25px; vertical-align: top; ">
+				<div class="editor-label">
+					<label for="sellPrice" data-localized="sellPrice"></label>
+				</div>
+				<div class="editor-field">
+					<input type="text" data-role="numerictextbox" id="sellPrice" name="sellPrice" />
+				</div> 
+			</td>
+			<td style="padding-right: 25px; vertical-align: top; ">
+				<div class="editor-label">
+					<label for="proceedsAccount" data-localized="proceedsAccount"></label>
+				</div>
+				<div class="editor-field">
+					<input type="text" data-role="numerictextbox" id="proceedsAccount" name="proceedsAccount" />
+				</div> 
+			</td>
+			<td style="width: 100%;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="padding-right: 25px; vertical-align: top; ">
+				<div class="editor-label">
+					<label for="manufactureDate" data-localized="manufactureDate"></label>
+				</div>
+				<div class="editor-field">
+					<input type="text" data-role="datepicker" id="manufactureDate" name="manufactureDate" />
+				</div> 
+			</td>
+			<td style="padding-right: 25px; vertical-align: top; ">
+				<div class="editor-label">
+					<label for="boughtPrice" data-localized="boughtPrice"></label>
+				</div>
+				<div class="editor-field">
+					<input type="text" data-role="numerictextbox" id="boughtPrice" name="boughtPrice" />
+				</div> 
+			</td>
+			<td style="padding-right: 25px; vertical-align: top; ">
+				<div class="editor-label">
+					<label for="isVirtual" data-localized="isVirtual"></label>
+					<input type="checkbox" id="isVirtual" name="isVirtual" />
+				</div> 
+			</td>
+			<td style="width: 100%;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="padding-right: 25px; vertical-align: top; ">
+				<div class="editor-label">
+					<label for="comment" data-localized="comment"></label>
+				</div>
+				<div class="editor-field">
+					<textarea type="text" class="k-textbox" rows="5" style="width: 362px" id="comment" name="comment" />
+				</div> 
+			</td>
+			<td style="padding-right: 25px; vertical-align: top; ">
+				<div class="editor-label">
+					<label for="boughtFrom" data-localized="boughtFrom"></label>
+				</div>
+				<div class="editor-field">
+					<textarea type="text" class="k-textbox" rows="5" style="width: 362px" id="boughtFrom" name="boughtFrom" />
+				</div> 
+			</td>
+			<td style="width: 100%;">&nbsp;</td>
+		</tr>
+	</table>
+	<div class="inline-block">        
+    </div>      
+
+    <br />
+    <br />
+
+    <div class="relations-container">
+    </div>
+
+    <br />
+
+    <div>
+        <button class="k-primary k-button save" data-localized="save"></button>
+        <button class="k-button remove" data-localized="delete"></button>
+        <button class="k-button cancel" data-localized="cancel"></button>
+    </div>
+</form>

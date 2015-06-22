@@ -1,0 +1,124 @@
+﻿@using System.Web.Http
+@using ContainerStar.API
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html class="k-default">
+<head>
+    <title>ContainerStar</title>
+    <link href="/css/kendo/kendo.common.css" rel="stylesheet" />
+    <link href="/css/kendo/kendo.default.css" rel="stylesheet" />
+    <link href="/css/jquery-ui/jquery-ui.css" rel="stylesheet" />
+
+    <link href="/css/select-box.css" rel="stylesheet" />
+    <link href="/css/site.css" rel="stylesheet" />
+</head>
+<body>
+    <script src="/web.libs/require.js"></script>
+    <script>
+        require.config({
+
+            urlArgs: "bust=" + (new Date()).getTime(),
+            baseUrl: 'web',
+            paths: {
+                underscore: '../web.libs/underscore',
+                jquery: '../web.libs/jquery-2.1.1',
+                jqueryui: '../web.libs/jquery-ui',
+                jquerySignalR: '../web.libs/jquery.signalR-2.2.0',
+                signalrHubs: '../signalr/hubs?noext',
+                backbone: '../web.libs/backbone',
+                'backbone.stickit': '../web.libs/backbone.stickit',
+                'globalize': '../web.libs/globalize/globalize',
+                'globalize.de': '../web.libs/globalize/cultures/globalize.culture.de',
+                jszip: '../web.libs/jszip',
+
+                // requirejs modules
+                text: '../web.libs/require.text',
+                lr: '../web.libs/require.localized.resource',
+                t: '../web.libs/require.templated.view',
+                l: '../web.libs/require.localized.view',
+                lk: '../web.libs/require.localized.kendo.widget',
+
+                //short paths
+                base: '../web.components/base',
+                mixins: '../web.components/mixins',
+                kendo: '../web.components/kendo',
+                widgets: '../web.components/widgets',
+                'kendo.backbone': '../web.components/kendo.backbone',
+                'kendo.editors': '../web.components/kendo.editors',
+                'kendo.filters': '../web.components/kendo.filters',
+
+
+                errors: 'views/errors',
+                home: 'views/home',
+                Settings: 'views/Settings',
+                Orders: 'views/Orders'
+            },
+            shim: {
+                'backbone': {
+                    deps: ['underscore', 'jquery'],
+                    exports: 'Backbone'
+                },
+                'underscore': {
+                    exports: '_'
+                },
+                'jquery': {
+                    exports: '$'
+                },
+                'jqueryui': {
+                    exports: '$'
+                },
+                'signalrHubs': {
+                    deps: ['jquerySignalR']
+                }
+
+            }
+        });
+        require(['backbone'], function () {
+            Application = {
+                german: true,
+                apiUrl: '@ContainerStar.API.Configuration.CombineUrl(Request.ApplicationPath, "api")',
+                user: new Backbone.Model(@Html.Raw(JsonHelper.GetCurrentUserJson(GlobalConfiguration.Configuration.DependencyResolver))),
+                tables: new Backbone.Model(@Html.Raw(JsonHelper.GetSystemTablesJson(GlobalConfiguration.Configuration.DependencyResolver))),
+                hasPermission: function (tableName) {
+                    var permissions = Application.user.get('permissions');
+                    return permissions.indexOf(tableName) !== -1;
+                },
+                canTableItemBeCreated: function (tableName) {
+
+                    var self = this,
+                        itemEditMode = new Backbone.Model(self.tables.get('TableNames')).get(tableName);
+                    result = !itemEditMode || itemEditMode.EditMode >= 2;
+
+                    return result;
+                },
+                canTableItemBeDeleted: function (tableName) {
+
+                    var self = this,
+                        itemEditMode = new Backbone.Model(self.tables.get('TableNames')).get(tableName);
+                    result = !itemEditMode || itemEditMode.EditMode == 3;
+
+                    return result;
+                },
+                canTableItemBeEdit: function (tableName, columnName) {
+
+                    var self = this,
+                        itemEditMode = new Backbone.Model(self.tables.get('TableNames')).get(tableName);
+                    result = !itemEditMode || itemEditMode.EditMode >= 1;
+
+                    if (itemEditMode && result) {
+                        var isColumnReadOnly = _.contains(itemEditMode.ReadOnlyColumns, columnName);
+                        result = !isColumnReadOnly;
+                    }
+
+                    return result;
+                }
+            };
+            require(['application-start']);
+        });
+    </script>
+</body>
+</html>

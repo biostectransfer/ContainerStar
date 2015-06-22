@@ -1,0 +1,8 @@
+﻿<#@ template language="C#" debug="true" hostspecific="true" linePragmas="true"#>
+<#@ output extension=".txt"#>
+<#@ include file="..\..\..\..\Generation\ContainerStar.Generation\TTMasterData\ContainerStar.Settings.ttinclude" once="true"#>
+<#
+    const string filesDir = @"..\..\..\..\Generation\ContainerStar.Generation\Declarations\";
+#>
+<#@ include file="..\..\..\..\Generation\ContainerStar.Generation\TTMasterData\ContainerStar.GenerationContext.ttinclude" once="true"#>
+<#@ include file="..\..\..\..\Generation\ContainerStar.Generation\TTMasterData\Web\filter.resources.ttinclude"  once="true"#>

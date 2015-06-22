@@ -1,0 +1,467 @@
+﻿<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+<#+
+    /// <summary>
+    /// Generation context
+    /// </summary>
+    public abstract class  GenerationContext
+    {
+	    protected GenerationContext(object transform, string extraUsages = null)
+        {
+            TextTransform = DynamicTextTransformation.Create(transform);
+            Code = new CodeGenerationTools(TextTransform, NameTransform);
+            FileManager = EntityFrameworkTemplateFileManager.Create(TextTransform);
+            MetaTools = new MetadataTools(TextTransform);
+            TypeMapper = new TypeMapper(Code, MetaTools, TextTransform.Errors);
+            CodeStringGenerator = new CodeStringGenerator(Code, TypeMapper, MetaTools);
+			ExtraUsages = extraUsages;
+        }
+
+		public string ExtraUsages { get; set; }
+        public DynamicTextTransformation TextTransform { get; private set; }
+        public CodeGenerationTools Code { get; private set; }
+        public EntityFrameworkTemplateFileManager FileManager { get; private set; }
+
+        /// <summary>
+        /// ef
+        /// </summary>
+        public MetadataTools MetaTools { get; private set; }
+
+        public TypeMapper TypeMapper { get; private set; }
+        public CodeStringGenerator CodeStringGenerator { get; private set; }
+
+		private static readonly PluralizationService pluralizationService = PluralizationService.CreateService(CultureInfo.GetCultureInfo("en-US"));
+        public string Pluralize(string name)
+        {
+            int lastUpper = name.Length - 1;
+            for (; lastUpper > 0; lastUpper--)
+            {
+                if (char.IsUpper(name[lastUpper]))
+                {
+
+                }
+            }
+            var lastWord = name.Substring(lastUpper);
+            if (pluralizationService.IsPlural(lastWord))
+            {
+                return name;
+            }
+            name = name.Remove(lastUpper);
+            return name + pluralizationService.Pluralize(lastWord);
+        }
+
+		public FileInfo ResolveFilePath(string file)
+		{
+
+		    return new FileInfo(TextTransform.Host.ResolvePath(file ?? string.Empty));
+		}
+
+        protected virtual string NameTransform(string name)
+        {
+            return name;
+        }
+
+		public virtual string GetFuncSchema(EdmFunction func)
+		{
+		   return string.Empty;
+		} 
+
+		public virtual bool InterfaceSupported(List<InterfacePropertyTemplate> implicitProperties)
+		{
+			return false;
+		}
+
+		public virtual string GetGetForImplicitInterfaceProperty(PropertyEntityInfo property, InterfacePropertyTemplate implicitProperty)
+		{
+			throw new NotSupportedException();
+		}
+
+		public virtual string GetSetForImplicitInterfaceProperty(PropertyEntityInfo property, InterfacePropertyTemplate implicitProperty)
+		{
+			throw new NotSupportedException();
+		}
+    }
+
+    public class EntitiesGenerationContext : GenerationContext
+    {
+        private readonly object syncObj = new object();
+        private volatile List<EntityInfo> entityClasses;
+		private volatile List<InterfaceTemplate> entityInterfaces;
+
+        private readonly Lazy<Dictionary<string, string>> comments;
+        private readonly Lazy<Dictionary<string, string>> defaults;
+		private readonly Lazy<Dictionary<string, string>> enums;
+		private readonly Lazy<Dictionary<string, string[]>> customKeys;
+
+        protected EntitiesGenerationContext(object transform,
+                string edmxFile,
+				string edmxFileProcedures=null,
+                string extraUsages = null,
+                string commentFile = null,
+                string defaultsFile = null,
+                string enumsFile = null,
+                string interfacesFile = null,
+				string customKeysFile = null)
+                : base(transform, extraUsages)
+        {
+            EdmxFile = ResolveFilePath(edmxFile);
+			EdmxFileProcedures = ResolveFilePath(edmxFileProcedures);
+            CommentFile = ResolveFilePath(commentFile);
+            DefaultsFile = ResolveFilePath(defaultsFile);
+            EnumsFile = ResolveFilePath(enumsFile);
+            InterfacesFile = ResolveFilePath(interfacesFile);
+			CustomKeysFile = ResolveFilePath(customKeysFile);
+			
+			MetadataLoader = new EdmMetadataLoader(TextTransform.Host, TextTransform.Errors);
+
+
+            EdmItemCollection = MetadataLoader.CreateEdmItemCollection(edmxFile);
+            StoreItemCollection = MetadataLoader.CreateStoreItemCollection(edmxFile);
+            EntityContainer = EdmItemCollection.OfType<EntityContainer>().FirstOrDefault();
+
+            if (EdmxFileProcedures.Exists)
+            {
+                EdmItemCollectionProcedures = MetadataLoader.CreateEdmItemCollection(edmxFileProcedures);
+                StoreItemCollectionProcedures = MetadataLoader.CreateStoreItemCollection(edmxFileProcedures);
+                EntityContainerProcedures = EdmItemCollectionProcedures.OfType<EntityContainer>().FirstOrDefault();
+            }
+
+            ForceEntityIsPartial = true;
+
+            comments = new Lazy<Dictionary<string, string>>(GetComments);
+            defaults = new Lazy<Dictionary<string, string>>(GetDefaults);
+			enums = new Lazy<Dictionary<string, string>>(GetEnums);
+			customKeys = new Lazy<Dictionary<string, string[]>>(GetCustomKeys);
+        }
+
+        public CompilerErrorCollection Errors
+        {
+            get { return TextTransform.Errors; }
+        }
+
+		public virtual string DefaultSchema { get{ return "dbo";} }
+
+		public override string GetFuncSchema(EdmFunction func)
+		{
+		   return DefaultSchema;
+		} 
+
+        public EdmMetadataLoader MetadataLoader { get; private set; }
+
+        public List<EntityInfo> EntityClasses
+        {
+            get
+            {
+                GenerateClasses();
+                return entityClasses;
+            }
+        }
+
+        public List<InterfaceTemplate> EntityInterfaces
+        {
+            get
+            {
+                GenerateClasses();
+                return entityInterfaces;
+            }
+        }
+
+		public FileInfo InterfacesFile { get; private set; }
+        public FileInfo EnumsFile { get; private set; }
+        public FileInfo DefaultsFile { get; private set; }
+        public FileInfo CommentFile { get; private set; }
+        public FileInfo EdmxFile { get; private set; }
+		public FileInfo EdmxFileProcedures { get; private set; }
+		public FileInfo CustomKeysFile { get; private set; }
+
+        public EntityContainer EntityContainer { get; private set; }
+        public EdmItemCollection EdmItemCollection { get; private set; }
+        public StoreItemCollection StoreItemCollection { get; private set; }
+
+        public bool HasEdmxProcedures
+        {
+            get { return EdmxFileProcedures.Exists; }
+        }
+
+        public EntityContainer EntityContainerProcedures { get; private set; }
+        public EdmItemCollection EdmItemCollectionProcedures { get; private set; }
+        public StoreItemCollection StoreItemCollectionProcedures { get; private set; }
+
+		public bool ForceEntityIsPartial { get ;protected set;}
+
+		public void AddWarning(string message)
+		{
+		    Errors.Add(new CompilerError
+		    {
+		        FileName = FileManager.CurrentFileName,
+		        ErrorText = message,
+		        IsWarning = true
+		    });
+		}
+
+        public void AddError(string message)
+        {
+            Errors.Add(new CompilerError
+            {
+                FileName = FileManager.CurrentFileName,
+                ErrorText = message
+            });
+        }
+
+
+        private void GenerateClasses()
+        {
+
+            if (entityClasses == null)
+            {
+                lock (syncObj)
+                {
+                    if (entityClasses != null)
+                    {
+                        return;
+                    }
+                    entityClasses = EntityLoader.GetEntities(this);
+                    entityInterfaces = InterfacesHelper.Load(this);
+                    InterfacesHelper.MapInterfaces(this, entityInterfaces, entityClasses);
+                }
+            }
+        }
+
+        public List<EdmMember> GetKeyColumns(EntityType entity)
+        {
+            var entityClass = EntityClasses.FirstOrDefault(info => info.Entity.Name == entity.Name);
+            if (entityClass == null)
+            {
+                return null;
+            }
+            return GetKeyColumns(entityClass);
+        }
+
+        public List<EdmMember> GetKeyColumns(EntityInfo entityInfo)
+        {
+            var customKey = GetCustomKey(entityInfo);
+            if (customKey != null)
+            {
+                List<EdmMember> result = new List<EdmMember>();
+                foreach (var property in entityInfo.Entity.Properties)
+                {
+                    if (customKey.Any(s => s == property.Name))
+                    {
+                        result.Add(property);
+                    }
+                }
+                return result;
+            }
+            return ResolveKeyColumns(entityInfo.Entity.KeyMembers);
+        }
+
+        public virtual List<EdmMember> ResolveKeyColumns(IEnumerable<EdmMember> originalKeys)
+        {
+            return originalKeys.ToList();
+        }
+
+
+        ///Custom config lines for column mapping
+        public virtual void ApplyColumnMappingConfig(PropertyEntityInfo property, List<string> configLines)
+        {
+            //Note: Handle non standard type for key like uniqueidentifier 
+            if (property.IsKey && !configLines.Any(s => s.StartsWith(".HasDatabaseGeneratedOption")))
+            {
+                if (property.HasDefaultValue)
+                {
+                    configLines.Add(".HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)");
+                }
+                else
+                {
+                    configLines.Add(".HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)");
+                }
+            }
+        }
+
+		///Custom  mapping
+        public virtual string CustomMapping(EntityInfo entity)
+        {
+            return string.Empty;
+        }
+
+        private string GetKey(EntityInfo entity, string column)
+        {
+            //var key = string.Format("{0}.{1}", string.IsNullOrEmpty(entity.TableSchemaName) ? DefaultSchema : entity.TableSchemaName, entity.TableName);
+			var key = entity.TableName;
+            if (!string.IsNullOrEmpty(column))
+            {
+                key += "." + column;
+            }
+            return key;
+        }
+
+		private string GetKey(string entityName, string column)
+        {
+            //var key = string.Format("{0}.{1}", DefaultSchema, entityName);
+			var key = entityName;
+            if (!string.IsNullOrEmpty(column))
+            {
+                key += "." + column;
+            }
+            return key;
+        }
+
+        private static Regex CommentRegEx = new Regex(@"^(?<SCHEMA_NAME>\w(\w|_)+)\.(?<NAME>\w(\w|_|\.|@)+) (?<TYPE>\w+) (?<COMMENT>.+?)$", RegexOptions.Multiline | RegexOptions.CultureInvariant | RegexOptions.Compiled);
+        private Dictionary<string, string> GetComments()
+        {
+            if (!CommentFile.Exists)
+            {
+                return new Dictionary<string, string>();
+            }
+            var result = new Dictionary<string, string>();
+            var match = CommentRegEx.Match(File.ReadAllText(CommentFile.FullName));
+            while (match.Success)
+            {
+                result.Add(match.Groups["NAME"].Value, match.Groups["COMMENT"].Value.Replace('\r',' ').Replace('\n',' ').Replace("  "," "));
+                match = match.NextMatch();
+            }
+            return result;
+        }
+
+        public string GetComment(EntityInfo entity, string column = null)
+        {
+            var key = GetKey(entity, column);
+            string comment;
+            comments.Value.TryGetValue(key, out comment);
+            return comment;
+        }
+
+		public string GetComment(string entityName, string column = null)
+        {
+            var key = GetKey(entityName, column);
+            string comment;
+            comments.Value.TryGetValue(key, out comment);
+            return comment;
+        }
+
+        private static Regex DefaultsRegEx = new Regex(@"^(?<SCHEMA_NAME>\w(\w|_)+)\.(?<NAME>\w(\w|_|\.)+) (?<STATUS>\w+?) (?<TYPE>\w+?) (?<VALUE>.+?)$",
+                RegexOptions.Multiline
+                | RegexOptions.CultureInvariant
+                | RegexOptions.Compiled
+                );
+        private Dictionary<string, string> GetDefaults()
+        {
+            if (!DefaultsFile.Exists)
+            {
+                return new Dictionary<string, string>();
+            }
+            var result = new Dictionary<string, string>();
+            var match = DefaultsRegEx.Match(File.ReadAllText(DefaultsFile.FullName));
+            while (match.Success)
+            {
+                var name = match.Groups["NAME"].Value;
+                var status = match.Groups["STATUS"].Value;
+                var type = match.Groups["TYPE"].Value;
+                var value = match.Groups["VALUE"].Value.Trim('\r').Trim('\n');
+
+                if (!HandleDefaultValue(status.ToUpper() == "RAW", name, type, ref value))
+                {
+                    AddWarning(String.Format("Unhandled default value '{2}' found. Column: {0} type: {1}", name, type, value));
+                    value = null;
+                }
+                if (!string.IsNullOrEmpty(value))
+                {
+                    result.Add(name, value);
+                }
+                match = match.NextMatch();
+            }
+            return result;
+        }
+
+        public string GetDefault(EntityInfo entity, string column)
+        {
+            var key = GetKey(entity, column);
+            string dflt;
+            defaults.Value.TryGetValue(key, out dflt);
+            return dflt;
+        }
+
+        protected virtual bool HandleDefaultValue(bool isRaw,string name, string type, ref string value)
+        {
+            return !isRaw;
+        }
+
+
+		private static readonly Regex EnumRegEx = new Regex(@"^(?<SCHEMA_NAME>\w(\w|_)+)\.(?<NAME>\w(\w|_|\.)+) (?<ENUM>.+?)$", RegexOptions.Multiline | RegexOptions.CultureInvariant | RegexOptions.Compiled);
+        private Dictionary<string, string> GetEnums()
+        {
+            if (!EnumsFile.Exists)
+            {
+                return new Dictionary<string, string>();
+            }
+            var result = new Dictionary<string, string>();
+            var match = EnumRegEx.Match(File.ReadAllText(EnumsFile.FullName));
+            while (match.Success)
+            {
+                result.Add(match.Groups["NAME"].Value, match.Groups["ENUM"].Value.Trim('\r').Trim('\n'));
+                match = match.NextMatch();
+            }
+            return result;
+        }
+
+        public string GetEnum(EntityInfo entity, string column)
+        {
+            var key = GetKey(entity, column);
+            string value;
+            if (!enums.Value.TryGetValue(key, out value))
+            {
+                return null;
+            }
+            return value;
+        }
+
+
+		private static Regex CustomKeyRegEx = new Regex(@"^(?<SCHEMA_NAME>\w(\w|_)+)\.(?<NAME>\w(\w|_|\.)+) (?<COLUMNS>.+?)$", RegexOptions.Multiline | RegexOptions.CultureInvariant | RegexOptions.Compiled);
+        private Dictionary<string, string[]> GetCustomKeys()
+        {
+            if (!CustomKeysFile.Exists)
+            {
+                return new Dictionary<string, string[]>();
+            }
+            var result = new Dictionary<string, string[]>();
+            var match = CustomKeyRegEx.Match(File.ReadAllText(CustomKeysFile.FullName));
+            while (match.Success)
+            {
+                var columns =
+                        match.Groups["COLUMNS"].Value.Trim('\r')
+                                .Trim('\n')
+                                .Split(new[] {',', ';'}, StringSplitOptions.RemoveEmptyEntries)
+                                .Where(s => !string.IsNullOrWhiteSpace(s))
+                                .Select(s => s.Trim()).ToArray();
+				
+                result.Add(match.Groups["NAME"].Value, columns);
+                match = match.NextMatch();
+            }
+            return result;
+        }
+
+        public string[] GetCustomKey(EntityInfo entity)
+        {
+            var key = GetKey(entity, null);
+            string[] value;
+            customKeys.Value.TryGetValue(key, out value);
+            return value;
+        }
+
+        public virtual string GenerateFilteredNavigationCollection(EntityInfo entity, PropertyEntityInfo property)
+        {
+            return string.Empty;
+        }
+
+        public virtual bool IncludeToEntityShallowCopy(EntityInfo entity, PropertyEntityInfo property)
+        {
+            return true;
+        }
+
+        public virtual string HandleNavigationPropertyName(EntityInfo entity, string name)
+        {
+            return name;
+        }
+    }
+#>

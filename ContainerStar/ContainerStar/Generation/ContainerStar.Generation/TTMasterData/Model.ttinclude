@@ -1,0 +1,28 @@
+﻿<#@ import namespace="System.Text" #>
+<#@ include file="ContainerStar.GenerationContext.ttinclude"  once="true" #>
+<#
+    IModelGenerationContext context = generationContext;
+    var code = context.Code;
+
+    foreach (var model in context.Models)
+    {
+        context.FileManager.StartNewFile(model.Name + ".cs");
+        context.WriteAllUsings(new[] {"ContainerStar.Contracts.Entities"}, model);
+		code.WriteLine("// ReSharper disable InconsistentNaming");
+        code.WriteLine();
+        code.WriteNamespace(); //Area: Namespace
+        code.WriteClassDeclaration(model); //Area: Type
+		code.WriteLine();
+
+        foreach (var property in model.Properties)
+        {
+            code.WriteProperty(property, model);
+        }
+		code.WriteLine();
+
+        code.EndArea(); //End Area:  Type
+        code.EndArea(); //End Area:  Namespace
+        context.FileManager.EndBlock();
+    }
+    context.FileManager.Process();
+#>

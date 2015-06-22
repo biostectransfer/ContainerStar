@@ -1,0 +1,51 @@
+﻿<#@ import namespace="System.Text" #>
+<#@ import namespace="MetadataLoader.Contracts.Generation" #>
+<#@ include file="..\ContainerStar.GenerationContext.ttinclude"  once="true" #>
+<#
+    IWebGenerationContext context = generationContext;
+    foreach (var model in context.WebModels)
+    {
+        var entityContent = model.Table.Content;
+				
+		//skip related objects
+		if(entityContent.IsRelated)
+		{
+			continue;
+		}
+
+        context.FileManager.StartNewFile(entityContent.CodeName + "Relationships.html");
+
+		//Model
+		if(!String.IsNullOrEmpty(entityContent.RelationShipsSelectors))
+		{
+#>
+<div class="tab-strip">
+    <ul>
+<#
+			var selectors = entityContent.RelationShipsSelectors.Split(',');
+
+			for(int i = 0; i < selectors.Length; i++)
+			{
+				var selector = selectors[i];
+				var selectedItem = i == 0 ? "k-state-active" : String.Empty;
+#>
+        <li class="<#= selectedItem #>" data-localized="<#= selector #>:a"><#= selector #></li>
+<#
+			}
+#>
+    </ul>
+<#
+			foreach(var selector in selectors)
+			{
+#>
+    <div class="<#= selector #>"><label data-localized="dataLoading"></label></div>
+<#
+			}
+#>
+</div>
+<#
+		}
+		context.FileManager.EndBlock();
+    }
+    context.FileManager.Process();
+#>

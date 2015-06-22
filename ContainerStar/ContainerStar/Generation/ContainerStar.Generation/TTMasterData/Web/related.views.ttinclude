@@ -1,0 +1,141 @@
+﻿<#@ import namespace="System.Text" #>
+<#@ import namespace="MetadataLoader.Contracts.Generation" #>
+<#@ include file="..\ContainerStar.GenerationContext.ttinclude"  once="true" #>
+<#
+    IWebGenerationContext context = generationContext;
+    foreach (var model in context.WebModels)
+    {
+        var entityContent = model.Table.Content;
+
+		//skip main objects
+		if(!entityContent.IsRelated)
+		{
+			continue;
+		}
+
+        context.FileManager.StartNewFile(entityContent.CodeNamePlural + ".js");
+		//Model
+		var defines = String.Format("{0}\n{1}\n{2}{3}{4}",
+			"'base/related-object-grid-view',",
+			"'collections/" + context.CurrentRelatedWebPath + "/" + entityContent.CodeNamePlural + "',",
+			"'l!t!" + context.CurrentRelatedWebPath + "/" + "Add" + entityContent.CodeName + "'",
+			entityContent.ShowExtraFields ? 
+				",\n'" + context.CurrentRelatedWebPath+ "/Custom." + entityContent.CodeName + "'" : "",
+			entityContent.CustomEvents ? 
+				",\n'" + context.CurrentRelatedWebPath+ "/Custom.Events." + entityContent.CodeName + "'" : "");
+
+		var defineMembers = String.Format("{0}{1}", 
+				entityContent.ShowExtraFields ? ", CustomColumns" : "",
+				entityContent.CustomEvents ? ", CustomEvents" : "");
+
+		var columnsOpenText = entityContent.ShowExtraFields ? "return $.merge( CustomColumns(),\n[" : "return [";
+		var columnsCloseText = entityContent.ShowExtraFields ? "]);" : "];";
+#>
+define([	
+    <#= defines #>
+], function (BaseView, Collection, AddNewModelView<#= defineMembers #>) {
+	'use strict';
+
+	var view = BaseView.extend({
+
+		addNewModelView: AddNewModelView,
+		collectionType: Collection,
+		gridSelector: '.grid',
+		tableName: '<#=entityContent.CodeNamePlural#>',
+        
+        addingInPopup: false,
+
+		initialize: function() {
+			view.__super__.initialize.apply(this, arguments);
+
+			this.defaultFiltering = { field: '<#= entityContent.RelationFieldName#>', operator: 'eq', value: this.model.id };
+
+			this.collection = new Collection();
+		},
+
+		columns: function () {
+		   
+		   <#= columnsOpenText #>
+<#
+        foreach (var property in model.ModelProperties)
+        {
+            var propContent = property.Column.Content;
+            var columnInfo = GetColumnInfo(context, property);
+			if (propContent.ShowInGrid)
+            {
+#>
+				{ field: '<#=property.Name#>', title: this.resources.<#=property.Name#> <#=columnInfo#>},
+<#
+			}
+		}
+#>
+			<#= columnsCloseText #>
+		},
+		
+		render: function () {
+		    var self = this;
+
+		    view.__super__.render.apply(self, arguments);
+
+		    self.grid.bind('edit', function (e) {
+		        e.model.<#= entityContent.RelationFieldName#> = self.model.id;
+
+				if (e.model.isNew()) {
+                    var dt = new Date(2070, 11, 31);
+		            e.model.toDate = dt;
+		            var numeric = e.container.find("input[name=toDate]");
+					
+					if(numeric != undefined && numeric.length > 0)
+						numeric[0].value = dt.toLocaleDateString();
+		        }
+		    });
+
+		    return self;
+		}
+	});
+
+	return view;
+});
+<#
+		context.FileManager.EndBlock();
+
+    }
+    context.FileManager.Process();
+#>
+<#+
+    private string GetColumnInfo(IWebGenerationContext context, PropertyModelInfo property, bool forValidation = false)
+    {
+        var shortName = property.Type.ShortName;
+        if (string.IsNullOrEmpty(shortName))
+        {
+            shortName = property.Type.Name.ToLower();
+        }
+
+        switch (shortName)
+        {
+            case "bool":
+                return ", headerTitle: this.resources." + property.Name + ", checkbox: true";
+            case "byte":
+            case "short":
+            case "int":
+            case "long":
+            case "sbyte":
+            case "ushort":
+            case "uint":
+            case "ulong":
+            case "decimal":
+            case "float":
+            case "double":
+				var result = String.Empty;
+				if(!String.IsNullOrEmpty(property.Column.Content.ViewCollection))
+				{
+					result = String.Format(", collection: this.options.{0}, defaultText: this.resources.pleaseSelect", property.Column.Content.ViewCollection);
+				}
+                return result;
+            case "datetime":
+                return ", format: '{0:d}'";
+            default:
+				return "";
+        }
+    }
+#>

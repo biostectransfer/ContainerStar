@@ -1,0 +1,9 @@
+﻿<#@ template language="C#" debug="true" hostspecific="true" linePragmas="true"#>
+<#@ output extension=".cs"#>
+<#@ include file="..\FE.Settings.ttinclude" once="true"#>
+<# 
+    const string filesDir = @"..\Declarations\";
+    var extraUsages = new string[0];
+#>
+<#@ include file="..\Model.GenerationContext.ttinclude" once="true"#>
+<#@ include file="..\..\Entities.ttinclude"  once="true"#>

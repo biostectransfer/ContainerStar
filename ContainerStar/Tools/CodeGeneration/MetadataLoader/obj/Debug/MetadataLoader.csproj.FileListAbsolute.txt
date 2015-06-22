@@ -1,0 +1,7 @@
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader\bin\Debug\MetadataLoader.dll
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader\bin\Debug\MetadataLoader.pdb
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader\bin\Debug\MetadataLoader.Contracts.dll
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader\bin\Debug\MetadataLoader.Contracts.pdb
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader\obj\Debug\MetadataLoader.csprojResolveAssemblyReference.cache
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader\obj\Debug\MetadataLoader.dll
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader\obj\Debug\MetadataLoader.pdb

@@ -1,0 +1,54 @@
+﻿<#@ import namespace="System.Text" #>
+<#@ import namespace="MetadataLoader.Contracts.Generation" #>
+<#@ include file="..\ContainerStar.GenerationContext.ttinclude"  once="true" #>
+
+<#
+    IWebGenerationContext context = generationContext;
+    context.FileManager.StartNewFile("router-" + routerName + ".js");
+#>
+define([
+    'base-router'
+], function (BaseRouter) {
+	'use strict';
+    
+	var factory = {
+	    
+	    getAllMasterDataRoutes: function(baseRouter)
+	    {
+	        var routes = {
+<#
+    foreach (var model in context.WebModels)
+    {
+        var entityContent = model.Table.Content;
+		var path = relatedPath + entityContent.SubGroup;
+
+		var viewCollections = ", false";
+		if(!String.IsNullOrEmpty(entityContent.ViewCollections))
+		{
+			var parts = entityContent.ViewCollections.Split(',');
+			viewCollections = ", { ";
+			foreach(var part in parts)
+			{
+				viewCollections += String.Format("{0}: true, ", part);
+			}
+			viewCollections += "}";
+		}
+#>
+				'<#=entityContent.CodeNamePlural#>': _.partial(BaseRouter.showView, baseRouter, 'l!t!<#=path #>/<#=entityContent.CodeNamePlural#>'<#= viewCollections #>),
+	            '<#=entityContent.CodeNamePlural#>/create': _.partial(BaseRouter.showViewWithModel, baseRouter, 'l!t!<#=path #>/Add<#=entityContent.CodeName#>', 'models/<#=path #>/<#=entityContent.CodeName#>'<#= viewCollections #>),
+	            '<#=entityContent.CodeNamePlural#>/:id': _.partial(BaseRouter.showViewWithModel, baseRouter, 'l!t!<#=path #>/Add<#=entityContent.CodeName#>', 'models/<#=path #>/<#=entityContent.CodeName#>'<#= viewCollections #>),
+<#
+    }
+#>
+			}
+        
+	        return routes;
+	    }
+	};
+
+	return factory;
+});
+<#	
+	context.FileManager.EndBlock();
+    context.FileManager.Process();
+#>

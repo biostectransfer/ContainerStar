@@ -1,0 +1,131 @@
+﻿<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+<#+
+/*
+
+#@ include file="EntityClasses.ttinclude" #
+
+*/
+    private static Regex LineRegEx = new Regex(@"(/\*(?<COMMENT>.+?)\*/)?(?<NAME>\w+)(\<(?<GEN_PARAM>(\w+,?)+)\>)?(:(?<BASE>\w+(,\s*\w+)*))?\s+(?<PROP>.*)", RegexOptions.CultureInvariant | RegexOptions.Compiled);
+    private static Regex PropertiesRegEx = new Regex(@"(/\*(?<COMMENT>.+?)\*/)?(?<NAME>\w+)\s*(\[\s*(?<TYPE>\w+\?*)\]\s*)?\s*(;|$)", RegexOptions.CultureInvariant | RegexOptions.Compiled);
+
+    public static class InterfacesHelper
+    {
+        public static List<InterfaceTemplate> Load(EntitiesGenerationContext context)
+        {
+            var result = new List<InterfaceTemplate>();
+            if (!context.InterfacesFile.Exists)
+            {
+                return new List<InterfaceTemplate>();
+            }
+
+            var lines = File.ReadAllLines(context.InterfacesFile.FullName);
+            foreach (var line in lines)
+            {
+                var current = new InterfaceTemplate();
+                var match = LineRegEx.Match(line);
+                if (!match.Success)
+                {
+                    continue;
+                }
+                current.Name = match.Groups["NAME"].Value;
+                current.Comment = match.Groups["COMMENT"].Value;
+				current.GenericParameters.AddRange(match.Groups["GEN_PARAM"].Value.Split(new[]{','},StringSplitOptions.RemoveEmptyEntries).Select(s=> s.Trim()));
+
+                if (match.Groups["BASE"].Success)
+                {
+                    current.BaseNames = match.Groups["BASE"].Value.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries);
+                }
+
+                match = PropertiesRegEx.Match(match.Groups["PROP"].Value);
+                if (!match.Success)
+                {
+                    continue;
+                }
+                while (match.Success)
+                {
+					var prop = new InterfacePropertyTemplate {Interface = current, 
+						                                                  Name = match.Groups["NAME"].Value, 
+						                                                  Type = match.Groups["TYPE"].Value, 
+						                                                  Comment = match.Groups["COMMENT"].Value};
+					if(prop.IsTypeDefined)
+					{
+						prop.IsTypeGeneric = current.GenericParameters.Contains(prop.Type);
+					}
+					current.Properties.Add(prop);
+                    match = match.NextMatch();
+                }
+                result.Add(current);
+            }
+
+			//TODO: Need check for circular depends
+            foreach (var interfaceTemplate in result)
+            {
+                if (interfaceTemplate.BaseNames.Length != 0)
+                {
+                    foreach (var baseName in interfaceTemplate.BaseNames)
+                    {
+                        var baseInterface = result.FirstOrDefault(template => template.Name == baseName);
+                        if (baseInterface == null)
+                        {
+                            context.AddWarning(string.Format("Base interface {0} not defined in file {1}", baseName, context.InterfacesFile.Name));
+                            continue;
+                        }
+                        interfaceTemplate.BaseInterfaces.Add(baseInterface);
+                    }
+                }
+            }
+            return result;
+        }
+
+        public static void MapInterfaces(GenerationContext context, List<InterfaceTemplate> interfaces, List<EntityInfo> entities)
+        {
+		    //TODO: Add warnings
+            foreach (var entity in entities.OrderBy(e => e.Name))
+            {
+                foreach (var iface in interfaces)
+                {
+                    var supported = true;
+					var supportedImplicitProperties = true;
+					var interfaceImplicitProperties = new List<InterfacePropertyTemplate>();
+					var genericTypes = new Dictionary<string, string>();
+
+                    var properties = iface.GetAllProperties().ToList();
+
+                    foreach (InterfacePropertyTemplate property in properties)
+                    {
+						var entityProperty = entity.Properties.FirstOrDefault(ep => string.Equals(ep.Name, property.Name));
+						if(entityProperty == null)
+						{
+							supportedImplicitProperties = supported = false;
+							break;
+                        }
+						if(property.IsTypeGeneric)
+                        {
+						   genericTypes.Add(property.Type, entityProperty.FullType);
+                        }
+                        else if (!property.CheckType(entityProperty.FullType) && property.Interface.Name == iface.Name)
+                        {
+                            interfaceImplicitProperties.Add(property);
+                            supported = false;
+                        }
+                    }
+                    if (supported ||(supportedImplicitProperties && context.InterfaceSupported(interfaceImplicitProperties)))
+                    {
+						var ifaceName=iface.Name;
+						if(iface.IsGeneric)
+                        {
+						  ifaceName=string.Format("{0}<{1}>",ifaceName,	
+								                  string.Join(", ",iface.GenericParameters.Select(gp=>genericTypes[gp])));
+                        }
+                        entity.Interfaces.Add(new InterfaceItem(ifaceName, iface));
+						entity.InterfaceImplicitProperties.AddRange(interfaceImplicitProperties);
+                    }
+                }
+            }
+        }
+    }
+
+    
+#>

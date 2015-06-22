@@ -1,0 +1,1423 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1F05F68E-3474-4053-A64E-3CAB99759A5D}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ContainerStarWeb</RootNamespace>
+    <AssemblyName>ContainerStarWeb</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+    <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core">
+      <HintPath>..\..\packages\Microsoft.AspNet.SignalR.Core.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb">
+      <HintPath>..\..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.0\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\CommonServiceLocator.1.2\lib\portable-windows8+net40+sl5+windowsphone8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Core.5.2.0\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.0\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Unity.WebApi">
+      <HintPath>..\..\packages\Unity.WebAPI.5.1\lib\net45\Unity.WebApi.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="css\images\Logo.png" />
+    <Content Include="css\jquery-ui\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="css\jquery-ui\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="css\jquery-ui\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="css\jquery-ui\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="css\jquery-ui\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="css\jquery-ui\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="css\jquery-ui\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="css\jquery-ui\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="css\jquery-ui\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="css\jquery-ui\images\ui-icons_222222_256x240.png" />
+    <Content Include="css\jquery-ui\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="css\jquery-ui\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="css\jquery-ui\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="css\jquery-ui\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="css\jquery-ui\jquery-ui.css" />
+    <Content Include="css\kendo\default\editor.png" />
+    <Content Include="css\kendo\default\imagebrowser.png" />
+    <Content Include="css\kendo\default\indeterminate.gif" />
+    <Content Include="css\kendo\default\loading-image.gif" />
+    <Content Include="css\kendo\default\loading.gif" />
+    <Content Include="css\kendo\default\loading_2x.gif" />
+    <Content Include="css\kendo\default\slider-h.gif" />
+    <Content Include="css\kendo\default\slider-v.gif" />
+    <Content Include="css\kendo\default\sprite.png" />
+    <Content Include="css\kendo\default\sprite_2x.png" />
+    <Content Include="css\kendo\default\sprite_kpi.png" />
+    <Content Include="css\kendo\default\sprite_kpi_2x.png" />
+    <Content Include="css\kendo\kendo.common.core.css" />
+    <Content Include="css\kendo\kendo.common.css" />
+    <Content Include="css\kendo\kendo.default.css" />
+    <Content Include="css\kendo\textures\brushed-metal.png" />
+    <Content Include="css\kendo\textures\dots1.png" />
+    <Content Include="css\kendo\textures\dots10.png" />
+    <Content Include="css\kendo\textures\dots11.png" />
+    <Content Include="css\kendo\textures\dots12.png" />
+    <Content Include="css\kendo\textures\dots13.png" />
+    <Content Include="css\kendo\textures\dots2.png" />
+    <Content Include="css\kendo\textures\dots3.png" />
+    <Content Include="css\kendo\textures\dots4.png" />
+    <Content Include="css\kendo\textures\dots5.png" />
+    <Content Include="css\kendo\textures\dots6.png" />
+    <Content Include="css\kendo\textures\dots7.png" />
+    <Content Include="css\kendo\textures\dots8.png" />
+    <Content Include="css\kendo\textures\dots9.png" />
+    <Content Include="css\kendo\textures\glass-lighter.png" />
+    <Content Include="css\kendo\textures\glass.png" />
+    <Content Include="css\kendo\textures\highlight.png" />
+    <Content Include="css\kendo\textures\hsv-gradient.png" />
+    <Content Include="css\kendo\textures\hue.png" />
+    <Content Include="css\kendo\textures\leather1.png" />
+    <Content Include="css\kendo\textures\leather2.png" />
+    <Content Include="css\kendo\textures\noise.png" />
+    <Content Include="css\kendo\textures\stripe1.png" />
+    <Content Include="css\kendo\textures\stripe2.png" />
+    <Content Include="css\kendo\textures\stripe3.png" />
+    <Content Include="css\kendo\textures\stripe4.png" />
+    <Content Include="css\kendo\textures\stripe5.png" />
+    <Content Include="css\kendo\textures\stripe6.png" />
+    <Content Include="css\kendo\textures\transparency.png" />
+    <Content Include="css\kendo\textures\transtexture.png" />
+    <Content Include="css\select-box.css" />
+    <Content Include="css\kendo\images\back.png" />
+    <Content Include="css\kendo\images\kendoui.svg" />
+    <Content Include="css\kendo\images\wp8_icons.png" />
+    <Content Include="css\kendo\images\wp8_inverseicons.png" />
+    <Content Include="css\site.css" />
+    <Content Include="Global.asax" />
+    <Content Include="web.components\base\information-view.js" />
+    <Content Include="web.components\base\templates\information-view.html" />
+    <Content Include="web.libs\jquery.signalR-2.2.0.js" />
+    <Content Include="web.libs\jquery.signalR-2.2.0.min.js" />
+    <Content Include="web.libs\jszip.js" />
+    <Content Include="web\collections\Positions.js" />
+    <Content Include="web\collections\Orders.js" />
+    <Content Include="web\collections\Settings\AdditionalCosts.js">
+      <DependentUpon>web.collections.tt</DependentUpon>
+    </Content>
+    <Content Include="web\collections\Settings\CommunicationPartners.js">
+      <DependentUpon>web.collections.tt</DependentUpon>
+    </Content>
+    <Content Include="web\collections\Settings\ContainerEquipmentRsps.js">
+      <DependentUpon>web.collections.tt</DependentUpon>
+    </Content>
+    <Content Include="web\collections\Settings\Containers.js">
+      <DependentUpon>web.collections.tt</DependentUpon>
+    </Content>
+    <Content Include="web\collections\Settings\ContainerTypeEquipmentRsps.js">
+      <DependentUpon>web.collections.tt</DependentUpon>
+    </Content>
+    <Content Include="web\collections\Settings\ContainerTypes.js">
+      <DependentUpon>web.collections.tt</DependentUpon>
+    </Content>
+    <Content Include="web\collections\Settings\Customers.js">
+      <DependentUpon>web.collections.tt</DependentUpon>
+    </Content>
+    <Content Include="web\collections\Settings\Equipments.js">
+      <DependentUpon>web.collections.tt</DependentUpon>
+    </Content>
+    <Content Include="web\collections\Settings\Permissions.js">
+      <DependentUpon>web.collections.tt</DependentUpon>
+    </Content>
+    <Content Include="web\collections\Settings\RolePermissionRsps.js">
+      <DependentUpon>web.collections.tt</DependentUpon>
+    </Content>
+    <Content Include="web\collections\Settings\Roles.js">
+      <DependentUpon>web.collections.tt</DependentUpon>
+    </Content>
+    <Content Include="web\collections\Settings\Taxes.js">
+      <DependentUpon>web.collections.tt</DependentUpon>
+    </Content>
+    <Content Include="web\collections\Settings\TransportProducts.js">
+      <DependentUpon>web.collections.tt</DependentUpon>
+    </Content>
+    <Content Include="web\collections\Settings\Users.js">
+      <DependentUpon>web.collections.tt</DependentUpon>
+    </Content>
+    <Content Include="web\collections\Settings\web.collections.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>web.collections.tt</DependentUpon>
+    </Content>
+    <Content Include="web\models\FilterOrders.js" />
+    <Content Include="web\models\login.js" />
+    <Content Include="web\models\Positions.js" />
+    <Content Include="web\models\Orders.js" />
+    <Content Include="web\models\Settings\AdditionalCosts.js">
+      <DependentUpon>web.models.tt</DependentUpon>
+    </Content>
+    <Content Include="web\models\Settings\CommunicationPartners.js">
+      <DependentUpon>web.models.tt</DependentUpon>
+    </Content>
+    <Content Include="web\models\Settings\ContainerEquipmentRsp.js">
+      <DependentUpon>web.models.tt</DependentUpon>
+    </Content>
+    <Content Include="web\models\Settings\Containers.js">
+      <DependentUpon>web.models.tt</DependentUpon>
+    </Content>
+    <Content Include="web\models\Settings\ContainerTypeEquipmentRsp.js">
+      <DependentUpon>web.models.tt</DependentUpon>
+    </Content>
+    <Content Include="web\models\Settings\ContainerTypes.js">
+      <DependentUpon>web.models.tt</DependentUpon>
+    </Content>
+    <Content Include="web\models\Settings\Customers.js">
+      <DependentUpon>web.models.tt</DependentUpon>
+    </Content>
+    <Content Include="web\models\Settings\Equipments.js">
+      <DependentUpon>web.models.tt</DependentUpon>
+    </Content>
+    <Content Include="web\models\Settings\FilterAdditionalCosts.js">
+      <DependentUpon>web.models.tt</DependentUpon>
+    </Content>
+    <Content Include="web\models\Settings\FilterContainers.js">
+      <DependentUpon>web.models.tt</DependentUpon>
+    </Content>
+    <Content Include="web\models\Settings\FilterContainerTypes.js">
+      <DependentUpon>web.models.tt</DependentUpon>
+    </Content>
+    <Content Include="web\models\Settings\FilterCustomers.js">
+      <DependentUpon>web.models.tt</DependentUpon>
+    </Content>
+    <Content Include="web\models\Settings\FilterEquipments.js">
+      <DependentUpon>web.models.tt</DependentUpon>
+    </Content>
+    <Content Include="web\models\Settings\FilterPermission.js">
+      <DependentUpon>web.models.tt</DependentUpon>
+    </Content>
+    <Content Include="web\models\Settings\FilterRole.js">
+      <DependentUpon>web.models.tt</DependentUpon>
+    </Content>
+    <Content Include="web\models\Settings\FilterTaxes.js" />
+    <Content Include="web\models\Settings\FilterTransportProducts.js">
+      <DependentUpon>web.models.tt</DependentUpon>
+    </Content>
+    <Content Include="web\models\Settings\FilterUser.js">
+      <DependentUpon>web.models.tt</DependentUpon>
+    </Content>
+    <Content Include="web\models\Settings\Permission.js">
+      <DependentUpon>web.models.tt</DependentUpon>
+    </Content>
+    <Content Include="web\models\Settings\Role.js">
+      <DependentUpon>web.models.tt</DependentUpon>
+    </Content>
+    <Content Include="web\models\Settings\RolePermissionRsp.js">
+      <DependentUpon>web.models.tt</DependentUpon>
+    </Content>
+    <Content Include="web\models\Settings\Taxes.js">
+      <DependentUpon>web.models.tt</DependentUpon>
+    </Content>
+    <Content Include="web\models\Settings\TransportProducts.js">
+      <DependentUpon>web.models.tt</DependentUpon>
+    </Content>
+    <Content Include="web\models\Settings\User.js">
+      <DependentUpon>web.models.tt</DependentUpon>
+    </Content>
+    <Content Include="web\models\Settings\web.models.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>web.models.tt</DependentUpon>
+    </Content>
+    <Content Include="web\models\view-collection.js" />
+    <Content Include="web\resources\Orders\AddPositions.de.js" />
+    <Content Include="web\resources\Orders\AddOrders.de.js" />
+    <Content Include="web\resources\Orders\AddPositions.en.js" />
+    <Content Include="web\resources\Orders\AddOrders.en.js" />
+    <Content Include="web\resources\Errors\Forbidden.de.js" />
+    <Content Include="web\resources\Errors\Forbidden.en.js" />
+    <Content Include="web\resources\Orders\FilterOrders.de.js" />
+    <Content Include="web\resources\Orders\FilterOrders.en.js" />
+    <Content Include="web\resources\Home\Home.de.js" />
+    <Content Include="web\resources\Home\Home.en.js" />
+    <Content Include="web\resources\Home\Login.de.js" />
+    <Content Include="web\resources\Home\Login.en.js" />
+    <Content Include="web\resources\master.de.js" />
+    <Content Include="web\resources\master.en.js" />
+    <Content Include="web\resources\Orders\Offers.de.js" />
+    <Content Include="web\resources\Orders\Offers.en.js" />
+    <Content Include="web\resources\Orders\Positions.de.js" />
+    <Content Include="web\resources\Orders\Orders.de.js" />
+    <Content Include="web\resources\Orders\Positions.en.js" />
+    <Content Include="web\resources\Orders\Orders.en.js" />
+    <Content Include="web\resources\Orders\OrdersRelationships.de.js" />
+    <Content Include="web\resources\Orders\OrdersRelationships.en.js" />
+    <Content Include="web\resources\Orders\SelectCustomer.de.js" />
+    <Content Include="web\resources\Orders\SelectCustomer.en.js" />
+    <Content Include="web\resources\Settings\AddAdditionalCosts.de.js">
+      <DependentUpon>web.add.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\AddAdditionalCosts.en.js">
+      <DependentUpon>web.add.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\AddCommunicationPartners.de.js">
+      <DependentUpon>web.add.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\AddCommunicationPartners.en.js">
+      <DependentUpon>web.add.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\AddContainerEquipmentRsp.de.js">
+      <DependentUpon>web.add.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\AddContainerEquipmentRsp.en.js">
+      <DependentUpon>web.add.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\AddContainers.de.js">
+      <DependentUpon>web.add.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\AddContainers.en.js">
+      <DependentUpon>web.add.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\AddContainerTypeEquipmentRsp.de.js">
+      <DependentUpon>web.add.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\AddContainerTypeEquipmentRsp.en.js">
+      <DependentUpon>web.add.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\AddContainerTypes.de.js">
+      <DependentUpon>web.add.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\AddContainerTypes.en.js">
+      <DependentUpon>web.add.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\AddCustomers.de.js">
+      <DependentUpon>web.add.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\AddCustomers.en.js">
+      <DependentUpon>web.add.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\AddEquipments.de.js">
+      <DependentUpon>web.add.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\AddEquipments.en.js">
+      <DependentUpon>web.add.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\AdditionalCosts.de.js">
+      <DependentUpon>web.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\AdditionalCosts.en.js">
+      <DependentUpon>web.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\AdditionalCostsRelationships.de.js">
+      <DependentUpon>web.relationships.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\AdditionalCostsRelationships.en.js">
+      <DependentUpon>web.relationships.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\AddPermission.de.js">
+      <DependentUpon>web.add.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\AddPermission.en.js">
+      <DependentUpon>web.add.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\AddRole.de.js">
+      <DependentUpon>web.add.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\AddRole.en.js">
+      <DependentUpon>web.add.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\AddRolePermissionRsp.de.js">
+      <DependentUpon>web.add.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\AddRolePermissionRsp.en.js">
+      <DependentUpon>web.add.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\AddTaxes.de.js">
+      <DependentUpon>web.add.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\AddTaxes.en.js">
+      <DependentUpon>web.add.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\AddTransportProducts.de.js">
+      <DependentUpon>web.add.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\AddTransportProducts.en.js">
+      <DependentUpon>web.add.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\AddUser.de.js">
+      <DependentUpon>web.add.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\AddUser.en.js">
+      <DependentUpon>web.add.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\CommunicationPartners.de.js">
+      <DependentUpon>web.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\CommunicationPartners.en.js">
+      <DependentUpon>web.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\ContainerEquipmentRsps.de.js">
+      <DependentUpon>web.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\ContainerEquipmentRsps.en.js">
+      <DependentUpon>web.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\Containers.de.js">
+      <DependentUpon>web.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\Containers.en.js">
+      <DependentUpon>web.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\ContainersRelationships.de.js">
+      <DependentUpon>web.relationships.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\ContainersRelationships.en.js">
+      <DependentUpon>web.relationships.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\ContainerTypeEquipmentRsps.de.js">
+      <DependentUpon>web.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\ContainerTypeEquipmentRsps.en.js">
+      <DependentUpon>web.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\ContainerTypes.de.js">
+      <DependentUpon>web.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\ContainerTypes.en.js">
+      <DependentUpon>web.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\ContainerTypesRelationships.de.js">
+      <DependentUpon>web.relationships.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\ContainerTypesRelationships.en.js">
+      <DependentUpon>web.relationships.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\Custom.ChangePassword.de.js" />
+    <Content Include="web\resources\Settings\Custom.User.de.js" />
+    <Content Include="web\resources\Settings\Custom.ChangePassword.en.js" />
+    <Content Include="web\resources\Settings\Custom.User.en.js" />
+    <Content Include="web\resources\Settings\Customers.de.js">
+      <DependentUpon>web.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\Customers.en.js">
+      <DependentUpon>web.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Orders\CustomerSearch.de.js" />
+    <Content Include="web\resources\Orders\CustomerSearch.en.js" />
+    <Content Include="web\resources\Settings\CustomersRelationships.de.js">
+      <DependentUpon>web.relationships.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\CustomersRelationships.en.js">
+      <DependentUpon>web.relationships.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\Equipments.de.js">
+      <DependentUpon>web.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\Equipments.en.js">
+      <DependentUpon>web.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\EquipmentsRelationships.de.js">
+      <DependentUpon>web.relationships.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\EquipmentsRelationships.en.js">
+      <DependentUpon>web.relationships.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\FilterAdditionalCosts.de.js">
+      <DependentUpon>web.filter.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\FilterAdditionalCosts.en.js">
+      <DependentUpon>web.filter.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\FilterContainers.de.js">
+      <DependentUpon>web.filter.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\FilterContainers.en.js">
+      <DependentUpon>web.filter.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\FilterContainerTypes.de.js">
+      <DependentUpon>web.filter.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\FilterContainerTypes.en.js">
+      <DependentUpon>web.filter.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\FilterCustomers.de.js">
+      <DependentUpon>web.filter.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\FilterCustomers.en.js">
+      <DependentUpon>web.filter.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\FilterEquipments.de.js">
+      <DependentUpon>web.filter.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\FilterEquipments.en.js">
+      <DependentUpon>web.filter.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\FilterPermission.de.js">
+      <DependentUpon>web.filter.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\FilterPermission.en.js">
+      <DependentUpon>web.filter.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\FilterRole.de.js">
+      <DependentUpon>web.filter.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\FilterRole.en.js">
+      <DependentUpon>web.filter.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\FilterTaxes.de.js" />
+    <Content Include="web\resources\Settings\FilterTaxes.en.js" />
+    <Content Include="web\resources\Settings\FilterTransportProducts.de.js">
+      <DependentUpon>web.filter.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\FilterTransportProducts.en.js">
+      <DependentUpon>web.filter.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\FilterUser.de.js">
+      <DependentUpon>web.filter.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\FilterUser.en.js">
+      <DependentUpon>web.filter.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\PermissionRelationships.de.js">
+      <DependentUpon>web.relationships.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\PermissionRelationships.en.js">
+      <DependentUpon>web.relationships.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\Permissions.de.js">
+      <DependentUpon>web.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\Permissions.en.js">
+      <DependentUpon>web.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\RolePermissionRsps.de.js">
+      <DependentUpon>web.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\RolePermissionRsps.en.js">
+      <DependentUpon>web.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\RoleRelationships.de.js">
+      <DependentUpon>web.relationships.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\RoleRelationships.en.js">
+      <DependentUpon>web.relationships.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\Roles.de.js">
+      <DependentUpon>web.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\Roles.en.js">
+      <DependentUpon>web.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\Settings.de.js">
+      <DependentUpon>web.menu.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\Settings.en.js">
+      <DependentUpon>web.menu.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\Taxes.de.js">
+      <DependentUpon>web.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\Taxes.en.js">
+      <DependentUpon>web.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\TaxesRelationships.de.js">
+      <DependentUpon>web.relationships.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\TaxesRelationships.en.js">
+      <DependentUpon>web.relationships.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\TransportProducts.de.js">
+      <DependentUpon>web.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\TransportProducts.en.js">
+      <DependentUpon>web.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\TransportProductsRelationships.de.js">
+      <DependentUpon>web.relationships.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\TransportProductsRelationships.en.js">
+      <DependentUpon>web.relationships.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\UserRelationships.de.js">
+      <DependentUpon>web.relationships.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\UserRelationships.en.js">
+      <DependentUpon>web.relationships.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\Users.de.js">
+      <DependentUpon>web.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\Users.en.js">
+      <DependentUpon>web.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\web.menu.resources.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>web.menu.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\web.add.resources.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>web.add.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\web.filter.resources.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>web.filter.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\web.relationships.resources.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>web.relationships.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\resources\Settings\web.resources.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>web.resources.tt</DependentUpon>
+    </Content>
+    <Content Include="web\base-router.js" />
+    <Content Include="web\router-masterdata.js">
+      <DependentUpon>web.router.template.tt</DependentUpon>
+    </Content>
+    <Content Include="web\router.js" />
+    <Content Include="web\templates\Orders\AddPositions.html" />
+    <Content Include="web\templates\Orders\AddOrders.html" />
+    <Content Include="web\templates\Errors\Forbidden.html" />
+    <Content Include="web\templates\Orders\FilterOrders.html" />
+    <Content Include="web\templates\Home\Home.html" />
+    <Content Include="web\templates\Home\Login.html" />
+    <Content Include="web\templates\master-footer.html" />
+    <Content Include="web\templates\master.html" />
+    <Content Include="web\templates\Orders\Offers.html" />
+    <Content Include="web\templates\Orders\Positions.html" />
+    <Content Include="web\templates\Orders\Orders.html" />
+    <Content Include="web\templates\Orders\OrdersRelationships.html" />
+    <Content Include="web\templates\Orders\SelectCustomer.html" />
+    <Content Include="web\templates\Settings\AddAdditionalCosts.html">
+      <DependentUpon>web.add.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\AddCommunicationPartners.html">
+      <DependentUpon>web.add.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\AddContainerEquipmentRsp.html">
+      <DependentUpon>web.add.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\AddContainers.html">
+      <DependentUpon>web.add.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\AddContainerTypeEquipmentRsp.html">
+      <DependentUpon>web.add.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\AddContainerTypes.html">
+      <DependentUpon>web.add.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\AddCustomers.html">
+      <DependentUpon>web.add.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\AddEquipments.html">
+      <DependentUpon>web.add.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\AdditionalCosts.html">
+      <DependentUpon>web.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\AdditionalCostsRelationships.html">
+      <DependentUpon>web.relationships.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\AddPermission.html">
+      <DependentUpon>web.add.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\AddRole.html">
+      <DependentUpon>web.add.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\AddRolePermissionRsp.html">
+      <DependentUpon>web.add.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\AddTaxes.html">
+      <DependentUpon>web.add.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\AddTransportProducts.html">
+      <DependentUpon>web.add.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\AddUser.html">
+      <DependentUpon>web.add.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\CommunicationPartners.html">
+      <DependentUpon>web.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\ContainerEquipmentRsps.html">
+      <DependentUpon>web.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\Containers.html">
+      <DependentUpon>web.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\ContainersRelationships.html">
+      <DependentUpon>web.relationships.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\ContainerTypeEquipmentRsps.html">
+      <DependentUpon>web.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\ContainerTypes.html">
+      <DependentUpon>web.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\ContainerTypesRelationships.html">
+      <DependentUpon>web.relationships.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\Customers.html">
+      <DependentUpon>web.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Orders\CustomerSearch.html" />
+    <Content Include="web\templates\Settings\CustomersRelationships.html">
+      <DependentUpon>web.relationships.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\Equipments.html">
+      <DependentUpon>web.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\EquipmentsRelationships.html">
+      <DependentUpon>web.relationships.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\FilterAdditionalCosts.html">
+      <DependentUpon>web.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\FilterContainers.html">
+      <DependentUpon>web.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\FilterContainerTypes.html">
+      <DependentUpon>web.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\FilterCustomers.html">
+      <DependentUpon>web.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\FilterEquipments.html">
+      <DependentUpon>web.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\FilterPermission.html">
+      <DependentUpon>web.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\FilterRole.html">
+      <DependentUpon>web.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\FilterTaxes.html" />
+    <Content Include="web\templates\Settings\FilterTransportProducts.html">
+      <DependentUpon>web.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\FilterUser.html">
+      <DependentUpon>web.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\PermissionRelationships.html">
+      <DependentUpon>web.relationships.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\Permissions.html">
+      <DependentUpon>web.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\RolePermissionRsps.html">
+      <DependentUpon>web.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\RoleRelationships.html">
+      <DependentUpon>web.relationships.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\Roles.html">
+      <DependentUpon>web.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\ChangePassword.html" />
+    <Content Include="web\templates\Settings\Settings.html">
+      <DependentUpon>web.menu.template.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\Taxes.html">
+      <DependentUpon>web.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\TaxesRelationships.html">
+      <DependentUpon>web.relationships.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\TransportProducts.html">
+      <DependentUpon>web.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\TransportProductsRelationships.html">
+      <DependentUpon>web.relationships.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\UserRelationships.html">
+      <DependentUpon>web.relationships.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\Users.html">
+      <DependentUpon>web.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\web.menu.template.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>web.menu.template.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\web.add.templates.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>web.add.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\web.relationships.templates.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>web.relationships.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\templates\Settings\web.templates.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>web.templates.tt</DependentUpon>
+    </Content>
+    <Content Include="web\application-start.js" />
+    <Content Include="web\views\Orders\Offers.js" />
+    <Content Include="web\views\Orders\AddPositions.js" />
+    <Content Include="web\views\Orders\AddOrders.js" />
+    <Content Include="web\views\Errors\Forbidden.js" />
+    <Content Include="web\views\Orders\FilterOrders.js" />
+    <Content Include="web\views\Home\Home.js" />
+    <Content Include="web\views\Home\Login.js" />
+    <Content Include="web\master-footer.js" />
+    <Content Include="web\master.js" />
+    <Content Include="web\views\Orders\Positions.js" />
+    <Content Include="web\views\Orders\Orders.js" />
+    <Content Include="web\views\Orders\OrdersRelationships.js" />
+    <Content Include="web\views\Orders\SelectCustomer.js" />
+    <Content Include="web\views\Settings\AddAdditionalCosts.js">
+      <DependentUpon>web.add.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\AddCommunicationPartners.js">
+      <DependentUpon>web.add.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\AddContainerEquipmentRsp.js">
+      <DependentUpon>web.add.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\AddContainers.js">
+      <DependentUpon>web.add.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\AddContainerTypeEquipmentRsp.js">
+      <DependentUpon>web.add.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\AddContainerTypes.js">
+      <DependentUpon>web.add.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\AddCustomers.js">
+      <DependentUpon>web.add.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\AddEquipments.js">
+      <DependentUpon>web.add.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\AdditionalCosts.js">
+      <DependentUpon>web.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\AdditionalCostsRelationships.js">
+      <DependentUpon>web.relationships.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\AddPermission.js">
+      <DependentUpon>web.add.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\AddRole.js">
+      <DependentUpon>web.add.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\AddRolePermissionRsp.js">
+      <DependentUpon>web.add.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\AddTaxes.js">
+      <DependentUpon>web.add.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\AddTransportProducts.js">
+      <DependentUpon>web.add.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\AddUser.js">
+      <DependentUpon>web.add.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\CommunicationPartners.js">
+      <DependentUpon>web.related.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\ContainerEquipmentRsps.js">
+      <DependentUpon>web.related.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\Containers.js">
+      <DependentUpon>web.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\ContainersRelationships.js">
+      <DependentUpon>web.relationships.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\ContainerTypeEquipmentRsps.js">
+      <DependentUpon>web.related.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\ContainerTypes.js">
+      <DependentUpon>web.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\ContainerTypesRelationships.js">
+      <DependentUpon>web.relationships.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\Customers.js">
+      <DependentUpon>web.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Orders\CustomerSearch.js" />
+    <Content Include="web\views\Settings\CustomersRelationships.js">
+      <DependentUpon>web.relationships.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\Equipments.js">
+      <DependentUpon>web.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\EquipmentsRelationships.js">
+      <DependentUpon>web.relationships.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\FilterAdditionalCosts.js">
+      <DependentUpon>web.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\FilterContainers.js">
+      <DependentUpon>web.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\FilterContainerTypes.js">
+      <DependentUpon>web.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\FilterCustomers.js">
+      <DependentUpon>web.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\FilterEquipments.js">
+      <DependentUpon>web.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\FilterPermission.js">
+      <DependentUpon>web.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\FilterRole.js">
+      <DependentUpon>web.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\FilterTaxes.js" />
+    <Content Include="web\views\Settings\FilterTransportProducts.js">
+      <DependentUpon>web.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\FilterUser.js">
+      <DependentUpon>web.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\PermissionRelationships.js">
+      <DependentUpon>web.relationships.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\Permissions.js">
+      <DependentUpon>web.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\RolePermissionRsps.js">
+      <DependentUpon>web.related.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\RoleRelationships.js">
+      <DependentUpon>web.relationships.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\Roles.js">
+      <DependentUpon>web.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\ChangePassword.js" />
+    <Content Include="web\views\Settings\Custom.Events.User.js" />
+    <Content Include="web\views\Settings\Custom.User.js" />
+    <Content Include="web\views\Settings\Settings.js" />
+    <Content Include="web\views\Settings\Taxes.js">
+      <DependentUpon>web.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\TaxesRelationships.js">
+      <DependentUpon>web.relationships.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\TransportProducts.js">
+      <DependentUpon>web.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\TransportProductsRelationships.js">
+      <DependentUpon>web.relationships.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\UserRelationships.js">
+      <DependentUpon>web.relationships.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\Users.js">
+      <DependentUpon>web.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\web.add.views.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>web.add.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\web.related.views.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>web.related.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\web.relationships.views.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>web.relationships.views.txt</LastGenOutput>
+    </Content>
+    <Content Include="web\views\Settings\web.relationships.views.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>web.relationships.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web\views\Settings\web.views.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>web.views.tt</DependentUpon>
+    </Content>
+    <Content Include="web.components\base\base-filter-view.js" />
+    <Content Include="web.components\base\confirmation-view.js" />
+    <Content Include="web.components\base\base-edit-model-view.js" />
+    <Content Include="web.components\base\base-object-add-view.js" />
+    <Content Include="web.components\base\base-object-filter-view.js" />
+    <Content Include="web.components\base\base-object-tab-view.js" />
+    <Content Include="web.components\base\related-object-grid-view.js" />
+    <Content Include="web.components\base\resources\base-add-model-view.de.js" />
+    <Content Include="web.components\base\resources\base-add-model-view.en.js" />
+    <Content Include="web.components\base\resources\confirmation-view.de.js" />
+    <Content Include="web.components\base\resources\confirmation-view.en.js" />
+    <Content Include="web.components\base\templates\confirmation-view.html" />
+    <Content Include="web.components\kendo.backbone\backbone.client.transport.js" />
+    <Content Include="web.components\kendo.editors\dropdownlist.js" />
+    <Content Include="web.components\kendo.filters\resources\select-box.de.js" />
+    <Content Include="web.components\kendo.filters\resources\select-box.en.js" />
+    <Content Include="web.components\kendo.filters\resources\multiselect.de.js" />
+    <Content Include="web.components\kendo.filters\resources\multiselect.en.js" />
+    <Content Include="web.components\kendo\cultures\kendo.culture.en-US.js" />
+    <Content Include="web.components\kendo\messages\kendo.messages.en.js" />
+    <Content Include="web.components\mixins\bound-form.js" />
+    <Content Include="web.libs\globalize\cultures\globalize.culture.de.js" />
+    <Content Include="web.libs\globalize\globalize.js" />
+    <Content Include="web.components\base\resources\base-edit-model-view.en.js" />
+    <Content Include="web.components\base\resources\base-grid-view.en.js" />
+    <Content Include="web.components\base\resources\base-grid-view.de.js" />
+    <Content Include="web.components\kendo.editors\select-box.js" />
+    <Content Include="web.components\kendo.filters\select-box.js" />
+    <Content Include="web.components\kendo\cultures\kendo.culture.de-DE.js" />
+    <Content Include="web.components\kendo\kendo.all.js" />
+    <Content Include="web.components\kendo\kendo.angular.js" />
+    <Content Include="web.components\kendo\kendo.autocomplete.js" />
+    <Content Include="web.components\kendo\kendo.binder.js" />
+    <Content Include="web.components\kendo\kendo.button.js" />
+    <Content Include="web.components\kendo\kendo.calendar.js" />
+    <Content Include="web.components\kendo\kendo.color.js" />
+    <Content Include="web.components\kendo\kendo.colorpicker.js" />
+    <Content Include="web.components\kendo\kendo.columnmenu.js" />
+    <Content Include="web.components\kendo\kendo.columnsorter.js" />
+    <Content Include="web.components\kendo\kendo.combobox.js" />
+    <Content Include="web.components\kendo\kendo.core.js" />
+    <Content Include="web.components\kendo\kendo.data.js" />
+    <Content Include="web.components\kendo\kendo.data.odata.js" />
+    <Content Include="web.components\kendo\kendo.data.signalr.js" />
+    <Content Include="web.components\kendo\kendo.data.xml.js" />
+    <Content Include="web.components\kendo\kendo.dataviz.barcode.js" />
+    <Content Include="web.components\kendo\kendo.dataviz.chart.funnel.js" />
+    <Content Include="web.components\kendo\kendo.dataviz.chart.js" />
+    <Content Include="web.components\kendo\kendo.dataviz.chart.polar.js" />
+    <Content Include="web.components\kendo\kendo.dataviz.core.js" />
+    <Content Include="web.components\kendo\kendo.dataviz.diagram.js" />
+    <Content Include="web.components\kendo\kendo.dataviz.gauge.js" />
+    <Content Include="web.components\kendo\kendo.dataviz.js" />
+    <Content Include="web.components\kendo\kendo.dataviz.map.js" />
+    <Content Include="web.components\kendo\kendo.dataviz.mobile.js" />
+    <Content Include="web.components\kendo\kendo.dataviz.qrcode.js" />
+    <Content Include="web.components\kendo\kendo.dataviz.sparkline.js" />
+    <Content Include="web.components\kendo\kendo.dataviz.stock.js" />
+    <Content Include="web.components\kendo\kendo.dataviz.themes.js" />
+    <Content Include="web.components\kendo\kendo.dataviz.treemap.js" />
+    <Content Include="web.components\kendo\kendo.datepicker.js" />
+    <Content Include="web.components\kendo\kendo.datetimepicker.js" />
+    <Content Include="web.components\kendo\kendo.dom.js" />
+    <Content Include="web.components\kendo\kendo.draganddrop.js" />
+    <Content Include="web.components\kendo\kendo.drawing.js" />
+    <Content Include="web.components\kendo\kendo.dropdownlist.js" />
+    <Content Include="web.components\kendo\kendo.editable.js" />
+    <Content Include="web.components\kendo\kendo.editor.js" />
+    <Content Include="web.components\kendo\kendo.excel.js" />
+    <Content Include="web.components\kendo\kendo.filebrowser.js" />
+    <Content Include="web.components\kendo\kendo.filtercell.js" />
+    <Content Include="web.components\kendo\kendo.filtermenu.js" />
+    <Content Include="web.components\kendo\kendo.fx.js" />
+    <Content Include="web.components\kendo\kendo.gantt.js" />
+    <Content Include="web.components\kendo\kendo.gantt.list.js" />
+    <Content Include="web.components\kendo\kendo.gantt.timeline.js" />
+    <Content Include="web.components\kendo\kendo.grid.js" />
+    <Content Include="web.components\kendo\kendo.groupable.js" />
+    <Content Include="web.components\kendo\kendo.imagebrowser.js" />
+    <Content Include="web.components\kendo\kendo.list.js" />
+    <Content Include="web.components\kendo\kendo.listview.js" />
+    <Content Include="web.components\kendo\kendo.maskedtextbox.js" />
+    <Content Include="web.components\kendo\kendo.menu.js" />
+    <Content Include="web.components\kendo\kendo.mobile.actionsheet.js" />
+    <Content Include="web.components\kendo\kendo.mobile.application.js" />
+    <Content Include="web.components\kendo\kendo.mobile.button.js" />
+    <Content Include="web.components\kendo\kendo.mobile.buttongroup.js" />
+    <Content Include="web.components\kendo\kendo.mobile.drawer.js" />
+    <Content Include="web.components\kendo\kendo.mobile.js" />
+    <Content Include="web.components\kendo\kendo.mobile.listview.js" />
+    <Content Include="web.components\kendo\kendo.mobile.loader.js" />
+    <Content Include="web.components\kendo\kendo.mobile.modalview.js" />
+    <Content Include="web.components\kendo\kendo.mobile.navbar.js" />
+    <Content Include="web.components\kendo\kendo.mobile.pane.js" />
+    <Content Include="web.components\kendo\kendo.mobile.popover.js" />
+    <Content Include="web.components\kendo\kendo.mobile.scroller.js" />
+    <Content Include="web.components\kendo\kendo.mobile.scrollview.js" />
+    <Content Include="web.components\kendo\kendo.mobile.shim.js" />
+    <Content Include="web.components\kendo\kendo.mobile.splitview.js" />
+    <Content Include="web.components\kendo\kendo.mobile.switch.js" />
+    <Content Include="web.components\kendo\kendo.mobile.tabstrip.js" />
+    <Content Include="web.components\kendo\kendo.mobile.view.js" />
+    <Content Include="web.components\kendo\kendo.multiselect.js" />
+    <Content Include="web.components\kendo\kendo.notification.js" />
+    <Content Include="web.components\kendo\kendo.numerictextbox.js" />
+    <Content Include="web.components\kendo\kendo.ooxml.js" />
+    <Content Include="web.components\kendo\kendo.pager.js" />
+    <Content Include="web.components\kendo\kendo.panelbar.js" />
+    <Content Include="web.components\kendo\kendo.pdf.js" />
+    <Content Include="web.components\kendo\kendo.pivot.configurator.js" />
+    <Content Include="web.components\kendo\kendo.pivot.fieldmenu.js" />
+    <Content Include="web.components\kendo\kendo.pivotgrid.js" />
+    <Content Include="web.components\kendo\kendo.popup.js" />
+    <Content Include="web.components\kendo\kendo.progressbar.js" />
+    <Content Include="web.components\kendo\kendo.reorderable.js" />
+    <Content Include="web.components\kendo\kendo.resizable.js" />
+    <Content Include="web.components\kendo\kendo.router.js" />
+    <Content Include="web.components\kendo\kendo.scheduler.agendaview.js" />
+    <Content Include="web.components\kendo\kendo.scheduler.dayview.js" />
+    <Content Include="web.components\kendo\kendo.scheduler.js" />
+    <Content Include="web.components\kendo\kendo.scheduler.monthview.js" />
+    <Content Include="web.components\kendo\kendo.scheduler.recurrence.js" />
+    <Content Include="web.components\kendo\kendo.scheduler.timelineview.js" />
+    <Content Include="web.components\kendo\kendo.scheduler.view.js" />
+    <Content Include="web.components\kendo\kendo.selectable.js" />
+    <Content Include="web.components\kendo\kendo.slider.js" />
+    <Content Include="web.components\kendo\kendo.sortable.js" />
+    <Content Include="web.components\kendo\kendo.splitter.js" />
+    <Content Include="web.components\kendo\kendo.tabstrip.js" />
+    <Content Include="web.components\kendo\kendo.timepicker.js" />
+    <Content Include="web.components\kendo\kendo.timezones.js" />
+    <Content Include="web.components\kendo\kendo.toolbar.js" />
+    <Content Include="web.components\kendo\kendo.tooltip.js" />
+    <Content Include="web.components\kendo\kendo.touch.js" />
+    <Content Include="web.components\kendo\kendo.treelist.js" />
+    <Content Include="web.components\kendo\kendo.treeview.js" />
+    <Content Include="web.components\kendo\kendo.upload.js" />
+    <Content Include="web.components\kendo\kendo.userevents.js" />
+    <Content Include="web.components\kendo\kendo.validator.js" />
+    <Content Include="web.components\kendo\kendo.view.js" />
+    <Content Include="web.components\kendo\kendo.web.js" />
+    <Content Include="web.components\kendo\kendo.window.js" />
+    <Content Include="web.components\kendo\messages\kendo.messages.de.js" />
+    <Content Include="web.components\mixins\localized-view.js" />
+    <Content Include="web.components\widgets\kendo-select-box.js" />
+    <Content Include="web.components\widgets\resources\select-box.de.js" />
+    <Content Include="web.components\widgets\resources\select-box.en.js" />
+    <Content Include="web.components\widgets\select-box.js" />
+    <Content Include="web.components\widgets\templates\select-box.html" />
+    <Content Include="web.libs\jquery-ui.js" />
+    <Content Include="web.libs\jquery-ui.min.js" />
+    <Content Include="web.libs\require.localized.kendo.widget.js" />
+    <Content Include="web.components\base\base-grid-view.js" />
+    <Content Include="web.components\base\base-add-model-view.js" />
+    <Content Include="web.components\base\base-collection.js" />
+    <Content Include="web.components\base\base-window-view.js" />
+    <Content Include="web.components\base\base-view.js" />
+    <Content Include="web.components\kendo.editors\multiselect.js" />
+    <Content Include="web.components\kendo.filters\multiselect.js" />
+    <Content Include="web.components\kendo.filters\filter-factory.js" />
+    <Content Include="web.components\kendo.editors\editor-factory.js" />
+    <Content Include="web.libs\backbone.stickit.js" />
+    <Content Include="web.libs\require.localized.resource.js" />
+    <Content Include="web.libs\require.localized.view.js" />
+    <Content Include="web.libs\require.templated.view.js" />
+    <Content Include="web.components\mixins\kendo-validator-form.js" />
+    <Content Include="web.components\mixins\kendo-widget-form.js" />
+    <Content Include="web.components\mixins\resources\kendo-validator-form.en.js" />
+    <Content Include="web.components\kendo.backbone\backbone.datasource.js" />
+    <Content Include="web.components\kendo.backbone\backbone.transport.js" />
+    <Content Include="web.components\kendo.backbone\collection.adapter.js" />
+    <Content Include="web.components\kendo.backbone\kendo.backbone.collection.js" />
+    <Content Include="web.components\kendo.backbone\kendo.backbone.model.js" />
+    <Content Include="web.components\kendo.backbone\kendo.backbone.viewevents.js" />
+    <Content Include="web.libs\backbone.js" />
+    <Content Include="web.libs\backbone.min.js" />
+    <Content Include="web.libs\jquery-2.1.1.js" />
+    <Content Include="web.libs\jquery-2.1.1.min.js" />
+    <Content Include="web.libs\require.text.js" />
+    <Content Include="web.libs\underscore.js" />
+    <Content Include="web.libs\underscore.min.js" />
+    <Content Include="web.libs\require.js" />
+    <Content Include="web.components\base\base-object-grid-view.js" />
+    <Content Include="web.libs\json2.js" />
+    <Content Include="web.libs\json2.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="web\web.router.template.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>web.router.template.txt</LastGenOutput>
+    </Content>
+    <Content Include="web\web.router.template.txt">
+      <DependentUpon>web.router.template.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <Content Include="default.cshtml" />
+    <Content Include="css\kendo\images\kendoui.ttf" />
+    <Content Include="css\kendo\images\kendoui.woff" />
+    <Content Include="web.components\mixins\resources\kendo-validator-form.de.js" />
+    <Content Include="web.components\base\resources\base-edit-model-view.de.js" />
+    <None Include="Properties\PublishProfiles\ContainerStar.pubxml" />
+    <None Include="Properties\PublishProfiles\MasterData.pubxml" />
+    <None Include="Properties\PublishProfiles\RTNU.deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\test.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <Content Include="web\views\Settings\web.add.views.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>web.add.views.txt</LastGenOutput>
+    </Content>
+    <Content Include="web\views\Settings\web.related.views.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>web.related.views.txt</LastGenOutput>
+    </Content>
+    <Content Include="web\views\Settings\web.views.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>web.views.txt</LastGenOutput>
+    </Content>
+    <Content Include="web\templates\Settings\web.add.templates.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>web.add.templates.txt</LastGenOutput>
+    </Content>
+    <Content Include="web\templates\Settings\web.relationships.templates.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>web.relationships.templates.txt</LastGenOutput>
+    </Content>
+    <Content Include="web\templates\Settings\web.templates.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>web.templates.txt</LastGenOutput>
+    </Content>
+    <Content Include="web\resources\Settings\web.add.resources.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>web.add.resources.txt</LastGenOutput>
+    </Content>
+    <Content Include="web\resources\Settings\web.filter.resources.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>web.filter.resources.txt</LastGenOutput>
+    </Content>
+    <Content Include="web\resources\Settings\web.relationships.resources.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>web.relationships.resources.txt</LastGenOutput>
+    </Content>
+    <Content Include="web\resources\Settings\web.resources.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>web.resources.txt</LastGenOutput>
+    </Content>
+    <Content Include="web\models\Settings\web.models.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>web.models.txt</LastGenOutput>
+    </Content>
+    <Content Include="web\collections\Settings\web.collections.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>web.collections.txt</LastGenOutput>
+    </Content>
+    <Content Include="web\templates\Settings\web.menu.template.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>web.menu.template.txt</LastGenOutput>
+    </Content>
+    <Content Include="web\resources\Settings\web.menu.resources.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>web.menu.resources.txt</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ContainerStar.API\ContainerStar.API.csproj">
+      <Project>{3da064a2-e4c1-423a-b4d9-ac51792943ae}</Project>
+      <Name>ContainerStar.API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ContainerStar.Configuration\ContainerStar.Configuration.csproj">
+      <Project>{07b1a6b8-bc39-4477-8164-22b79a8e2145}</Project>
+      <Name>ContainerStar.Configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ContainerStar.Contracts\ContainerStar.Contracts.csproj">
+      <Project>{2e9c34f0-651a-4b2f-9a9a-0c6c6ec11f4b}</Project>
+      <Name>ContainerStar.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ContainerStar.Lib\ContainerStar.Lib.csproj">
+      <Project>{a61d4577-f99e-4516-8e15-0b63f6894f53}</Project>
+      <Name>ContainerStar.Lib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <FilesToIncludeForPublish>AllFilesInTheProject</FilesToIncludeForPublish>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>40909</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:59991/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,326 @@
+﻿<#@ import namespace="System.Globalization" #>
+<#@ import namespace="System.Text" #>
+<#@ include file="GenerationContext.ttinclude"  once="true" #>
+<#
+    IEntitiesGenerationContext context = generationContext;
+    var code = context.Code;
+
+    foreach (var entity in context.Entities)
+    {
+        context.FileManager.StartNewFile(entity.Name + ".cs");
+        code.WriteUsing(entity);
+        code.WriteNamespace(); //Area: Namespace
+        code.WriteClassDeclaration(entity); //Area: Class
+#>
+/// <summary>
+/// Table name
+/// </summary>
+public static readonly string EntityTableName = "<#=entity.GetFullTableName() #>";
+#region Fields
+/// <summary>
+/// Columns names
+/// </summary>
+public static class Fields
+{
+<#
+         foreach (var property in entity.SimpleProperties)
+         {
+#>
+    /// <summary>
+    /// Column name '<#=property.ColumnName #>' for property <see cref="<#=entity.Name #>.<#=property.Name #>"/>
+    /// </summary>
+    public static readonly string <#=property.Name #> = "<#=property.ColumnName #>";
+<#
+         }
+#>  
+}
+#endregion
+<#
+        //Note: Skip key values with defaults 
+        var propertiesWithDefaults = entity.SimpleProperties.Where(p => p.HasDefaultValue && !p.IsKey).ToArray();
+        //TODO: Check for navigation collection properties
+        if (propertiesWithDefaults.Length != 0)
+        {
+            code.WriteDefaultConstructor(entity); //Area: Constructor
+            foreach (var property in propertiesWithDefaults)
+            {
+#>
+this.<#=property.Name #> = <#=property.DefaultValue #>;
+<#
+            }
+            code.EndArea(); //End Area: Constructor    
+        }
+
+        //properties
+        foreach (var property in entity.Properties)
+        {
+            code.WriteProperty(property);
+        }
+#>        
+
+/// <summary>
+/// Shallow copy of object. Exclude navigation properties and PK properties
+/// </summary>
+public <#=entity.Name #> ShallowCopy()
+{
+    return new <#=entity.Name #> {
+<#
+        foreach (var property in entity.SimpleProperties.Where(p => !p.IsKey && p.IncludeToShallowCopy))
+        {
+#>
+                                   <#=property.Name #> = this.<#=property.Name #>,
+<#
+        }
+#>
+	                             };
+	}
+}
+<#
+        code.EndArea(); //End Area:  End Class
+        code.EndArea(); //End Area:  End Namespace
+    }
+
+// entity interfaces
+    foreach (var iface in context.EntityInterfaces)
+    {
+        if (!iface.IsValid())
+        {
+            //TODO: Add warnings
+            continue;
+        }
+        context.FileManager.StartNewFile(iface.Name + ".cs");
+#>
+<#=context.CodeStringGenerator.UsingDirectives(false) #>
+<#=context.ExtraUsages #>
+<#
+        BeginNamespace(context.Code);
+
+        if(!string.IsNullOrEmpty(iface.Comment))
+		{
+#>
+/// <summary>
+/// <#=iface.Comment #> 
+/// </summary>
+<#      }
+#>
+public interface <#=iface.CodeName#><#=GetBaseInterfaces(iface)#>
+{
+<#
+        foreach (var property in iface.Properties)
+        {
+		   if(!string.IsNullOrEmpty(property.Comment))
+		   {
+#>
+    /// <summary>
+    /// <#=property.Comment #> 
+    /// </summary>
+<#         }
+#>
+    <#=property.Type#> <#=property.Name#> { get;set; }
+<#
+        }
+#>
+}
+<#
+        EndNamespace(context.Code);
+    }
+
+//complex classes
+    WriteComplexClasses(context, context.EdmItemCollection);
+    if (context.HasEdmxProcedures)
+    {
+        WriteComplexClasses(context, context.EdmItemCollectionProcedures);
+    }
+
+
+    foreach (var enumType in context.TypeMapper.GetEnumItemsToGenerate(context.EdmItemCollection))
+{
+    context.FileManager.StartNewFile(context.Code.ToCamel(enumType.Name) + ".cs");
+    BeginNamespace(context.Code);
+#>
+<#=context.CodeStringGenerator.UsingDirectives(false, false) #>
+<#
+    if (context.TypeMapper.EnumIsFlags(enumType))
+    {
+#>
+[Flags]
+<#
+    }
+#>
+<#=context.CodeStringGenerator.EnumOpening(enumType) #>
+{
+<#
+    var foundOne = false;
+
+    foreach (MetadataItem member in context.TypeMapper.GetEnumMembers(enumType))
+    {
+        foundOne = true;
+#>
+    <#=context.Code.Escape(context.TypeMapper.GetEnumMemberName(member)) #> = <#=context.TypeMapper.GetEnumMemberValue(member) #>,
+<#
+    }
+
+    if (foundOne)
+    {
+        GenerationEnvironment.Remove(GenerationEnvironment.Length - 3, 1);
+    }
+#>
+}
+<#
+    EndNamespace(context.Code);
+}
+
+    context.FileManager.Process();
+#>
+<#+
+
+    private void WriteComplexClasses(EntitiesGenerationContext context, EdmItemCollection edmItemCollection)
+    {
+        foreach (var complex in context.TypeMapper.GetItemsToGenerate<ComplexType>(edmItemCollection))
+        {
+            context.FileManager.StartNewFile(context.Code.Escape(complex.Name) + ".cs");
+			var commentName = complex.Name;
+			var comment = context.GetComment(commentName, null);
+			if(complex.Name.EndsWith("_Result")&& string.IsNullOrEmpty(comment))
+			{
+			   commentName = commentName.Substring(0, commentName.Length - 7);
+			   comment = "Result for " + commentName + ". Comment: " + context.GetComment(commentName, null);
+			}
+            BeginNamespace(context.Code);
+#>
+<#=context.CodeStringGenerator.UsingDirectives(false, false) #>
+<#+
+           if(!string.IsNullOrEmpty(comment))
+		   {
+#>
+    /// <summary>
+    /// <#=comment #> 
+    /// </summary>
+<#+         }
+#>
+<#=Accessibility.ForType(complex) #> partial class <#=context.Code.Escape(complex) #>
+{
+<#+
+            var complexProperties = context.TypeMapper.GetComplexProperties(complex).ToList();
+            var propertiesWithDefaultValues = context.TypeMapper.GetPropertiesWithDefaultValues(complex).ToList();
+
+            if (propertiesWithDefaultValues.Any() || complexProperties.Any())
+            {
+#>
+    public <#=context.Code.Escape(complex) #>()
+    {
+<#+
+        foreach (var edmProperty in propertiesWithDefaultValues)
+        {
+#>
+        this.<#=context.Code.Escape(edmProperty) #> = <#=context.TypeMapper.CreateLiteral(edmProperty.DefaultValue) #>;
+<#+
+        }
+
+        foreach (var complexProperty in complexProperties)
+        {
+#>
+        this.<#=context.Code.Escape(complexProperty) #> = new <#=context.TypeMapper.GetTypeName(complexProperty.TypeUsage) #>();
+<#+
+        }
+#>
+    }
+
+<#+
+            }
+
+            var simpleProperties = context.TypeMapper.GetSimpleProperties(complex).ToList();
+            if (simpleProperties.Any())
+            {
+                foreach (var edmProperty in simpleProperties)
+                {
+				   var propComment = context.GetComment(commentName, edmProperty.Name);
+                   if(!string.IsNullOrEmpty(propComment))
+		           {
+#>
+    /// <summary>
+    /// <#=propComment #> 
+    /// </summary>
+<#+                }
+#>
+    <#=context.CodeStringGenerator.Property(edmProperty) #>
+<#+
+                }
+            }
+
+    if (complexProperties.Any())
+    {
+#>
+
+<#+
+        foreach (var edmProperty in complexProperties)
+        {
+		  var propComment = context.GetComment(commentName, edmProperty.Name);
+          if(!string.IsNullOrEmpty(propComment))
+		  {
+#>
+    /// <summary>
+    /// <#=propComment #> 
+    /// </summary>
+<#+                }
+#>
+    <#=context.CodeStringGenerator.Property(edmProperty) #>
+<#+
+        }
+    }
+#>
+}
+<#+
+            EndNamespace(context.Code);
+        }
+    }
+
+    private static string GetBaseTypeAndInterfaces(EntityInfo entity)
+    {
+        var sbuilder = new StringBuilder();
+        if (!entity.HasBaseType && entity.Interfaces.Count == 0)
+        {
+            return String.Empty;
+        }
+
+        sbuilder.Append(": ");
+        if (entity.HasBaseType)
+        {
+            sbuilder.Append(entity.BaseType);
+            if (entity.Interfaces.Count != 0)
+            {
+                sbuilder.Append(", ");
+            }
+        }
+        sbuilder.Append(string.Join(", ", entity.Interfaces.Select(iface => iface.CodeName)));
+        return sbuilder.ToString();
+    }
+
+    private static string GetBaseInterfaces(InterfaceTemplate iface)
+    {
+        if (iface.BaseInterfaces.Count == 0)
+        {
+            return string.Empty;
+        }
+
+        var sbuilder = new StringBuilder();
+        sbuilder.Append(": ");
+        sbuilder.Append(string.Join(", ", iface.BaseInterfaces.Select(template => template.Name)));
+        return sbuilder.ToString();
+    }
+
+    private string GenerateProperty(PropertyEntityInfo property)
+    {
+        //TODO: With backing field
+        //TODO: Attributes
+        return string.Format(
+                CultureInfo.InvariantCulture,
+                "{0}{1} {2} {3} {{ {4} {5} }}",
+                property.Accessibility,
+                property.IsVirtual ? " virtual" : string.Empty,
+                property.FullType,
+                property.Name,
+                property.HasGetter ? property.Getter.Accessibility + " get;" : string.Empty,
+                property.HasSetter ? property.Setter.Accessibility + " set;" : string.Empty);
+    }
+#>

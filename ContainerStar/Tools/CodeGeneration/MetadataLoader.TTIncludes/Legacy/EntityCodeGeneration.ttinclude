@@ -1,0 +1,95 @@
+﻿<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+<#+
+    public sealed class CodeBuilder
+    {
+	    private const int INDENT_TABS = 4;
+
+        private readonly StringBuilder _sbuilder = new StringBuilder();
+		private int _indent;
+		private string _indentString = string.Empty;
+
+        public CodeBuilder Append(string value)
+        {
+            _sbuilder.Append(HandleIndent(value));
+			return this;
+        }
+
+        public int Indent
+        {
+            get { return _indent; }
+            set
+            {
+                _indent = value;
+                _indentString = _indent == 0 ? String.Empty : new string(' ', _indent*INDENT_TABS);
+            }
+        }
+
+        public CodeBuilder AppendLine()
+        {
+            _sbuilder.AppendLine();
+			return this;
+        }
+        public CodeBuilder AppendLine(string value)
+        {
+            _sbuilder.AppendLine(HandleIndent(value));
+            return this;
+        }
+        public CodeBuilder AppendFormat(string value, params object[] args)
+        {
+            _sbuilder.Append(HandleIndent(string.Format(value,args)));
+            return this;
+        }
+
+        private static Regex regex = new Regex("(\\s*\\n|\\A)", RegexOptions.CultureInvariant | RegexOptions.Compiled);
+        private string HandleIndent(string value)
+        {
+            return regex.Replace(value, "$1" + _indentString).TrimEnd();
+        }
+
+        public string ToString(int startIndex, int length)
+        {
+            return _sbuilder.ToString(startIndex, length);
+        }
+		public override string ToString()
+        {
+            return _sbuilder.ToString();
+        }
+    }
+
+
+    public sealed class GenerationContext
+    {
+	    ///<summary>
+	    /// Properties generates with backing field
+	    /// </summary>
+        public bool PropertyWithBackingField { get; set; }
+		///<summary>
+	    /// All classes will be generated with partial modifier
+	    /// </summary>
+		public bool ForcePartialClass { get; set; }
+    }
+
+	/*
+	public string GetCode(GenerationContext context)
+        {
+            var sbuilder = new StringBuilder();
+            GenerateCode(sbuilder, context);
+            return sbuilder.ToString();
+        }
+
+        protected void GenerateAttributes(StringBuilder sbuilder, GenerationContext context)
+        {
+            foreach (var att in Attributes)
+            {
+                if (!string.IsNullOrWhiteSpace(att))
+                {
+                    sbuilder.AppendLine(att);
+                }
+            }
+        }
+
+        protected abstract void GenerateCode(StringBuilder sbuilder, GenerationContext context);
+
+	*/
+#>

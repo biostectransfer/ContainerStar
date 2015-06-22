@@ -1,0 +1,59 @@
+.popup-container {
+	display: none;
+	position: absolute;
+	z-index: 14000;
+	text-align: left;
+	color: #2e2e2e; 
+	box-sizing: content-box;
+}
+
+.popup {
+	border: 1px solid #c5c5c5;
+	background-color: #e9e9e9;
+}
+
+.popup.border-down {
+	border-radius: 4px 4px 0 0;
+}
+
+.popup.border-up {
+	border-radius: 0 0 4px 4px;
+}
+
+.popup ul {
+	padding: 2px;
+	list-style-type: none;
+	margin: 0px;
+}
+
+.popup ul li {
+	padding: 1px 5px 1px 5px;
+	line-height: 1.8em;
+	min-height: 1.8em;
+	border-radius: 3px;
+	cursor: default;
+	text-align: left;
+}
+
+.popup ul li input[type=checkbox] {
+	margin: 0;
+	margin-right: 3px;
+}
+
+.popup > div {
+	text-align: right;
+	padding: 3px;
+	padding-top: 5px;
+	white-space: nowrap;
+	overflow: hidden;
+	border-top: 1px solid #ccc;
+}
+
+.popup > div .k-button {
+	width: 48%;
+    max-width: 7em;
+}
+
+.ui-tooltip {
+	z-index: 20000;
+}

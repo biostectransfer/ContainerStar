@@ -1,0 +1,9 @@
+﻿<#
+    const string conn = @"Data Source=.;Initial Catalog=ContainerStar;Integrated Security=True;MultipleActiveResultSets=True";
+    const string contextName = "ContainerStar";
+	const string tableContext = "Configuration";
+	var tableGroup = "";
+	var tableSubGroup = "";
+	var extraUsages = new string[0];
+	string defaultNamespace = null;
+#>

@@ -1,0 +1,52 @@
+﻿<#@ import namespace="System.Text" #>
+<#@ import namespace="MetadataLoader.Contracts.Generation" #>
+<#@ include file="..\ContainerStar.GenerationContext.ttinclude"  once="true" #>
+<#
+    IWebGenerationContext context = generationContext;
+	
+    foreach (var model in context.WebModels)
+    {
+        var entityContent = model.Table.Content;
+
+		if(entityContent.GenerateFilter)
+		{
+			context.FileManager.StartNewFile("Filter" + entityContent.CodeName + ".de.js");
+			//resources de
+#>
+define(function () {
+	'use strict';
+
+	var resources = {
+
+		name: 'Name',
+	    searchTitle: 'erweiterte Suche',
+	    apply: 'Suchen',
+	    cancel: 'Abbruch'
+	};
+
+	return resources;
+});
+<#
+			context.FileManager.EndBlock();
+			context.FileManager.StartNewFile("Filter" + entityContent.CodeName + ".en.js");
+			//resources en
+#>
+define(function () {
+	'use strict';
+
+	var resources = {
+
+		name: 'Name',
+	    searchTitle: 'Advanced search',
+	    apply: 'Apply',
+        cancel: 'Cancel'
+	};
+
+	return resources;
+});
+<#
+			context.FileManager.EndBlock();
+		}
+    }
+    context.FileManager.Process();
+#>

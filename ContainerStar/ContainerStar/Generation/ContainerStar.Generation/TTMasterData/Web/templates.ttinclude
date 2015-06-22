@@ -1,0 +1,55 @@
+﻿<#@ import namespace="System.Text" #>
+<#@ import namespace="MetadataLoader.Contracts.Generation" #>
+<#@ include file="..\ContainerStar.GenerationContext.ttinclude"  once="true" #>
+<#
+    IWebGenerationContext context = generationContext;
+    foreach (var model in context.WebModels)
+    {
+        var entityContent = model.Table.Content;
+        context.FileManager.StartNewFile(entityContent.CodeNamePlural + ".html");
+		
+		// breadcrumb for main objects
+		if(!entityContent.IsRelated)
+		{
+#>
+<span class="breadcrumbs">
+<a href="#<#=masterDataName#>" data-localized="masterData"></a> / <label data-localized="pageTitle"></label>
+</span>
+
+<div class="filter"></div>
+<#
+		}
+#>
+<div class="grid"></div>
+<#
+    context.FileManager.EndBlock();
+	}
+
+	foreach (var model in context.WebModels)
+    {
+        var entityContent = model.Table.Content;
+		//Filter
+		if(entityContent.GenerateFilter)
+		{
+			context.FileManager.StartNewFile(string.Format("Filter{0}.html", model.Table.Content.CodeName));		
+#>
+<div class="simple">
+    <a class="toggle" href="javascript:void(0)" data-localized="searchTitle"></a>
+</div>
+<div class="advanced">
+    <form>
+        <div class="editor-field">
+            <label for="name" data-localized="name"></label>
+            <input id="name" name="name" type="text" class="k-textbox" style="width: 483px" />
+        </div>
+        <button class="k-primary k-button" type="submit" data-localized="apply"></button>
+        <button class="k-button" type="reset" data-localized="cancel"></button>
+    </form>
+</div>
+<#
+			context.FileManager.EndBlock();
+		}
+	}
+	
+    context.FileManager.Process();
+#>

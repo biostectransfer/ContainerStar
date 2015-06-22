@@ -1,0 +1,168 @@
+﻿<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Xml.Linq"#>
+<#@ assembly name="EnvDTE"#>
+<#@ import namespace="System.CodeDom.Compiler" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="System.Text" #>
+<#+
+
+
+    public class DynamicTextTransformation
+    {
+        private readonly object _instance;
+        private IDynamicHost _dynamicHost;
+
+        private readonly System.Reflection.MethodInfo _write;
+        private readonly System.Reflection.MethodInfo _writeLine;
+        private readonly System.Reflection.MethodInfo _pushIndent;
+        private readonly System.Reflection.MethodInfo _popIndent;
+        private readonly System.Reflection.PropertyInfo _generationEnvironment;
+        private readonly System.Reflection.PropertyInfo _errors;
+        private readonly System.Reflection.PropertyInfo _host;
+
+        public static DynamicTextTransformation Create(object instance)
+        {
+            if (instance == null)
+            {
+                throw new ArgumentNullException("instance");
+            }
+
+            var textTransformation = instance as DynamicTextTransformation;
+            if (textTransformation != null)
+            {
+                return textTransformation;
+            }
+
+            return new DynamicTextTransformation(instance);
+        }
+
+        private DynamicTextTransformation(object instance)
+        {
+            _instance = instance;
+            var type = _instance.GetType();
+            _write = type.GetMethod("Write", new[] {typeof (string)});
+            _writeLine = type.GetMethod("WriteLine", new[] {typeof (string)});
+            _pushIndent = type.GetMethod("PushIndent", new[] {typeof (string)});
+            _popIndent = type.GetMethod("PopIndent");
+            _generationEnvironment = type.GetProperty("GenerationEnvironment", BindingFlags.Instance | BindingFlags.NonPublic);
+            _host = type.GetProperty("Host");
+            _errors = type.GetProperty("Errors");
+        }
+
+        public StringBuilder GenerationEnvironment
+        {
+            get { return (StringBuilder) _generationEnvironment.GetValue(_instance, null); }
+        }
+        public CompilerErrorCollection Errors
+        {
+            get { return (CompilerErrorCollection) _errors.GetValue(_instance, null); }
+        }
+        public void Write(string text)
+        {
+            _write.Invoke(_instance, new object[] {text});
+        }
+        public void WriteLine(string text)
+        {
+            _writeLine.Invoke(_instance, new object[] {text});
+        }
+
+        public void PushIndent(string indent)
+        {
+            _pushIndent.Invoke(_instance, new object[] {indent});
+        }
+        public void PopIndent()
+        {
+            _popIndent.Invoke(_instance, new object[] {});
+        }
+
+        public IDynamicHost Host
+        {
+            get
+            {
+                if (_dynamicHost != null)
+                {
+                    return _dynamicHost;
+                }
+                return _dynamicHost = _host == null ? (IDynamicHost) new NullHost() : new DynamicHost(_host.GetValue(_instance, null));
+            }
+        }
+        public string VsNamespaceSuggestion()
+        {
+            var suggestion = Host.ResolveParameterValue("directiveId", "namespaceDirectiveProcessor", "namespaceHint");
+            return string.IsNullOrEmpty(suggestion) ? null : suggestion;
+        }
+    }
+
+    public interface IDynamicHost
+    {
+        string ResolveParameterValue(string id, string name, string otherName);
+        string ResolvePath(string path);
+        string TemplateFile { get; }
+        IServiceProvider AsIServiceProvider();
+    }
+
+    public class DynamicHost : IDynamicHost
+    {
+        private readonly object _instance;
+        private readonly System.Reflection.MethodInfo _resolveParameterValue;
+        private readonly System.Reflection.MethodInfo _resolvePath;
+        private readonly System.Reflection.PropertyInfo _templateFile;
+
+        public DynamicHost(object instance)
+        {
+            _instance = instance;
+            var type = _instance.GetType();
+            _resolveParameterValue = type.GetMethod("ResolveParameterValue", new[] {typeof (string), typeof (string), typeof (string)});
+            _resolvePath = type.GetMethod("ResolvePath", new[] {typeof (string)});
+            _templateFile = type.GetProperty("TemplateFile");
+        }
+
+        public string ResolveParameterValue(string id, string name, string otherName)
+        {
+            return (string) _resolveParameterValue.Invoke(_instance, new object[] {id, name, otherName});
+        }
+        public string ResolvePath(string path)
+        {
+            try
+            {
+                return (string) _resolvePath.Invoke(_instance, new object[] {path});
+            }
+            catch
+            {
+                return path;
+            }
+        }
+
+        public string TemplateFile
+        {
+            get { return (string) _templateFile.GetValue(_instance, null); }
+        }
+        public IServiceProvider AsIServiceProvider()
+        {
+            return _instance as IServiceProvider;
+        }
+    }
+
+    public class NullHost : IDynamicHost
+    {
+        public string ResolveParameterValue(string id, string name, string otherName)
+        {
+            return null;
+        }
+        public string ResolvePath(string path)
+        {
+            return path;
+        }
+        public string TemplateFile
+        {
+            get { return null; }
+        }
+        public IServiceProvider AsIServiceProvider()
+        {
+            return null;
+        }
+    }
+
+#>

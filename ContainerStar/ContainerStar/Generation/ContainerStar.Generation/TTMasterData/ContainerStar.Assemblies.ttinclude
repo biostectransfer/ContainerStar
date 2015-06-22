@@ -1,0 +1,2 @@
+﻿<#@ template language="C#" debug="false" hostspecific="true" linePragmas="false" #>
+<#@ assembly name="$(SolutionDir)ContainerStar\Generation\bin\ContainerStar.Generation.dll" #>

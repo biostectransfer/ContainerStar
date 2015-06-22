@@ -1,0 +1,9 @@
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.TTIncludes\bin\Debug\MetadataLoader.TTIncludes.dll
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.TTIncludes\bin\Debug\MetadataLoader.TTIncludes.pdb
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.TTIncludes\bin\Debug\EntityFramework.dll
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.TTIncludes\bin\Debug\EntityFramework.SqlServer.dll
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.TTIncludes\bin\Debug\EntityFramework.xml
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.TTIncludes\bin\Debug\EntityFramework.SqlServer.xml
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.TTIncludes\obj\Debug\MetadataLoader.TTIncludes.csprojResolveAssemblyReference.cache
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.TTIncludes\obj\Debug\MetadataLoader.TTIncludes.dll
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.TTIncludes\obj\Debug\MetadataLoader.TTIncludes.pdb

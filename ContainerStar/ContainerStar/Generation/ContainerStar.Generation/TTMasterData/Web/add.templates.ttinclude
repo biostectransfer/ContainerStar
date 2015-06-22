@@ -1,0 +1,177 @@
+﻿<#@ import namespace="System.Text" #>
+<#@ import namespace="MetadataLoader.Contracts.Generation" #>
+<#@ include file="..\ContainerStar.GenerationContext.ttinclude"  once="true" #>
+<#
+    IWebGenerationContext context = generationContext;
+    foreach (var model in context.WebModels)
+    {
+        var entityContent = model.Table.Content;
+        context.FileManager.StartNewFile("Add" + entityContent.CodeName + ".html");
+		//Model
+#>
+<% var title = typeof id !== 'undefined' ? '<label data-localized="edit"></label>' : '<label data-localized="add"></label>'; %>
+
+<span class="breadcrumbs"><a href="#<#=masterDataName#>" data-localized="masterData"></a> / 
+	<a href="#<#=entityContent.CodeNamePlural#>" data-localized="pageTitle"></a> / <%= title %></span>
+
+<form method="post" class="add-model">
+    <table style="width: 100%; vertical-align: top; padding: 0px; margin: 0px; white-space: nowrap;" cellpadding="0" cellspacing="0">
+<#
+		var rowCount = model.ModelProperties.Max(o => o.Column.Content.RowNumber);
+
+		if(rowCount <= 0)
+			rowCount = 1;
+
+        for (int rowNumber = 1; rowNumber <= rowCount; rowNumber++) 
+        {
+			var rowProperties = model.ModelProperties.Where(o => o.Column.Content.RowNumber == rowNumber).ToList();
+			if(rowCount == 1)
+			{
+				rowProperties.AddRange(model.ModelProperties.Where(o => o.Column.Content.RowNumber == 0).ToList());
+			}
+
+#>
+		<tr>
+<#
+			var columnCount = rowProperties.Max(o => o.Column.Content.ColumnNumber);
+
+			if(columnCount <= 0)
+				columnCount = 1;
+
+			for (int columnNumber = 1; columnNumber <= columnCount; columnNumber++) 
+			{
+				var columnProperties = rowProperties.Where(o => o.Column.Content.ColumnNumber == columnNumber).ToList();
+				if(columnCount == 1)
+				{
+					columnProperties.AddRange(rowProperties.Where(o => o.Column.Content.ColumnNumber == 0).ToList());
+				}
+
+				var maxColumnWidth = columnProperties.Max(o => o.Column.Content.AddViewColumnWidth);
+
+#>
+			<td style="padding-right: 25px; vertical-align: top; <#= maxColumnWidth > 0 ? "width: " + maxColumnWidth + "px;" : "" #>">
+<#
+				foreach(var property in columnProperties)
+				{
+					var propContent = property.Column.Content;
+
+					if(!propContent.ShowInAddView)
+						continue;
+
+					var type = GetPropertyType(context, property);
+#>
+				<div class="editor-label">
+					<label for="<#=property.Name#>" data-localized="<#=property.Name#>"></label>
+<#
+					if(property.Type.ShortName != "bool")
+					{		
+#>
+				</div>
+				<div class="editor-field">
+<#
+					}
+
+					var customProperty = "";
+					var customPropertyPostfix = "";
+					if(!String.IsNullOrEmpty(propContent.CustomView))
+					{
+						customProperty = String.Format(
+							"\n            <button class=\"k-primary k-button {0}\" style=\"width: auto;\" type=\"button\" data-localized=\"{0}\">Auswählen</button>" + 
+							"\n            <input type=\"hidden\" id=\"{1}\" name=\"{1}\" />",
+							propContent.CustomView, property.Name
+						);
+
+						type = "<input type=\"text\" class=\"k-textbox\" style=\"width: 190px\" disabled=\"disabled\"";
+						customPropertyPostfix = "_Name";
+					}
+#>
+					<#=type#> id="<#=property.Name + customPropertyPostfix #>" name="<#=property.Name + customPropertyPostfix #>" /><#= customProperty #>
+<#
+					if(propContent.IsBusinessKey)
+					{
+#>
+					<input type="hidden" id="duplicateModelName" name="duplicateModelName" />
+					<span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg" data-for="duplicateModelName" role="alert" style="display: none"></span>
+<#
+					}
+#>
+				</div> 
+<#
+				}
+#>
+			</td>
+<#
+			}
+#>
+			<td style="width: 100%;">&nbsp;</td>
+		</tr>
+<#
+		}
+#>
+	</table>
+	<div class="inline-block">        
+    </div>      
+
+    <br />
+    <br />
+
+    <div class="relations-container">
+    </div>
+
+    <br />
+
+    <div>
+        <button class="k-primary k-button save" data-localized="save"></button>
+        <button class="k-button remove" data-localized="delete"></button>
+        <button class="k-button cancel" data-localized="cancel"></button>
+    </div>
+</form>
+<#
+		context.FileManager.EndBlock();
+    }
+    context.FileManager.Process();
+#>
+<#+
+    private string GetPropertyType(IWebGenerationContext context, PropertyModelInfo property, bool forValidation = false)
+    {
+        var shortName = property.Type.ShortName;
+        if (string.IsNullOrEmpty(shortName))
+        {
+            shortName = property.Type.Name.ToLower();
+        }
+
+        switch (shortName)
+        {
+            case "bool":
+                return "<input type=\"checkbox\"";
+            case "byte":
+            case "short":
+            case "int":
+            case "long":
+            case "sbyte":
+            case "ushort":
+            case "uint":
+            case "ulong":
+            case "decimal":
+            case "float":
+            case "double":
+				if(!String.IsNullOrEmpty(property.Column.Content.ViewCollection))
+					return "<select style=\"width: 362px\"";
+				else
+					return "<input type=\"text\" data-role=\"numerictextbox\"";
+            case "datetime":
+                return "<input type=\"text\" data-role=\"datepicker\"";
+            default:
+				if (property.Property.Length.HasValue && property.Property.Length > 50)
+                {
+					return String.Format("<textarea type=\"text\" class=\"k-textbox\" rows=\"5\" style=\"width: {0}px\"",
+						property.Column.Content.AddViewColumnWidth > 0 ? property.Column.Content.AddViewColumnWidth : 362);
+                }
+                else
+				{
+					return String.Format("<input type=\"text\" class=\"k-textbox\" style=\"width: {0}px\"",
+						property.Column.Content.AddViewColumnWidth > 0 ? property.Column.Content.AddViewColumnWidth : 362);
+				}
+        }
+    }
+#>

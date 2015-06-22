@@ -1,0 +1,134 @@
+﻿<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Xml.Linq"#>
+<#@ import namespace="Microsoft.CSharp" #>
+<#@ import namespace="System.CodeDom" #>
+<#@ import namespace="System.CodeDom.Compiler" #>
+<#@ import namespace="System.Globalization" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#+
+    /// <summary>
+    ///   Responsible for helping to create source code that is
+    ///   correctly formated and functional
+    /// </summary>
+    public class CodeGenerationTools
+    {
+        /// <summary>
+        ///   Initializes a new CodeGenerationTools object with the TextTransformation (T4 generated class)
+        ///   that is currently running
+        /// </summary>
+        public CodeGenerationTools()
+        {
+            FullyQualifySystemTypes = false;
+            //CamelCaseFields = true;
+        }
+
+        
+
+        /// <summary>
+        ///   When true, all types that are not being generated
+        ///   are fully qualified to keep them from conflicting with
+        ///   types that are being generated. Useful when you have
+        ///   something like a type being generated named System.
+        ///   Default is false.
+        /// </summary>
+        public bool FullyQualifySystemTypes { get; set; }
+
+
+        /// <summary>
+        ///   If the value parameter is null or empty an empty string is returned,
+        ///   otherwise it retuns value with a single space concatenated on the end.
+        /// </summary>
+        public string SpaceAfter(string value)
+        {
+            return StringAfter(value, " ");
+        }
+
+        /// <summary>
+        ///   If the value parameter is null or empty an empty string is returned,
+        ///   otherwise it retuns value with a single space concatenated on the end.
+        /// </summary>
+        public string SpaceBefore(string value)
+        {
+            return StringBefore(" ", value);
+        }
+
+        /// <summary>
+        ///   If the value parameter is null or empty an empty string is returned,
+        ///   otherwise it retuns value with append concatenated on the end.
+        /// </summary>
+        public string StringAfter(string value, string append)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return string.Empty;
+            }
+
+            return value + append;
+        }
+
+        /// <summary>
+        ///   If the value parameter is null or empty an empty string is returned,
+        ///   otherwise it retuns value with prepend concatenated on the front.
+        /// </summary>
+        public string StringBefore(string prepend, string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return string.Empty;
+            }
+
+            return prepend + value;
+        }
+		
+        /// <summary>
+        ///   Retuns a literal representing the supplied value.
+        /// </summary>
+        public string CreateLiteral(object value)
+        {
+            if (value == null)
+            {
+                return string.Empty;
+            }
+
+            var type = value.GetType();
+            if (type.IsEnum)
+            {
+                return type.FullName + "." + value;
+            }
+            if (type == typeof (Guid))
+            {
+                return string.Format(CultureInfo.InvariantCulture, "new Guid(\"{0}\")",
+                    ((Guid) value).ToString("D", CultureInfo.InvariantCulture));
+            }
+            if (type == typeof (DateTime))
+            {
+                return string.Format(CultureInfo.InvariantCulture, "new DateTime({0}, DateTimeKind.Unspecified)",
+                    ((DateTime) value).Ticks);
+            }
+            if (type == typeof (byte[]))
+            {
+                var arrayInit = string.Join(", ", ((byte[]) value).Select(b => b.ToString(CultureInfo.InvariantCulture)).ToArray());
+                return string.Format(CultureInfo.InvariantCulture, "new Byte[] {{{0}}}", arrayInit);
+            }
+            if (type == typeof (DateTimeOffset))
+            {
+                var dto = (DateTimeOffset) value;
+                return string.Format(CultureInfo.InvariantCulture, "new DateTimeOffset({0}, new TimeSpan({1}))",
+                    dto.Ticks, dto.Offset.Ticks);
+            }
+            if (type == typeof (TimeSpan))
+            {
+                return string.Format(CultureInfo.InvariantCulture, "new TimeSpan({0})",
+                    ((TimeSpan) value).Ticks);
+            }
+
+            var expression = new CodePrimitiveExpression(value);
+            var writer = new StringWriter();
+            var code = new CSharpCodeProvider();
+            code.GenerateCodeFromExpression(expression, writer, new CodeGeneratorOptions());
+            return writer.ToString();
+        }
+#>

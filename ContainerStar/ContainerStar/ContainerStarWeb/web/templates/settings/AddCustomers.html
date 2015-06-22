@@ -1,0 +1,181 @@
+<% var title = typeof id !== 'undefined' ? '<label data-localized="edit"></label>' : '<label data-localized="add"></label>'; %>
+
+<span class="breadcrumbs"><a href="#Settings" data-localized="masterData"></a> / 
+	<a href="#Customers" data-localized="pageTitle"></a> / <%= title %></span>
+
+<form method="post" class="add-model">
+    <table style="width: 100%; vertical-align: top; padding: 0px; margin: 0px; white-space: nowrap;" cellpadding="0" cellspacing="0">
+		<tr>
+			<td style="padding-right: 25px; vertical-align: top; ">
+				<div class="editor-label">
+					<label for="number" data-localized="number"></label>
+				</div>
+				<div class="editor-field">
+					<input type="text" class="k-textbox" style="width: 362px" id="number" name="number" />
+				</div> 
+			</td>
+			<td style="padding-right: 25px; vertical-align: top; ">
+				<div class="editor-label">
+					<label for="zip" data-localized="zip"></label>
+				</div>
+				<div class="editor-field">
+					<input type="text" data-role="numerictextbox" id="zip" name="zip" />
+				</div> 
+			</td>
+			<td style="padding-right: 25px; vertical-align: top; ">
+				<div class="editor-label">
+					<label for="country" data-localized="country"></label>
+				</div>
+				<div class="editor-field">
+					<input type="text" class="k-textbox" style="width: 362px" id="country" name="country" />
+				</div> 
+			</td>
+			<td style="width: 100%;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="padding-right: 25px; vertical-align: top; ">
+				<div class="editor-label">
+					<label for="name" data-localized="name"></label>
+				</div>
+				<div class="editor-field">
+					<textarea type="text" class="k-textbox" rows="5" style="width: 362px" id="name" name="name" />
+				</div> 
+			</td>
+			<td style="padding-right: 25px; vertical-align: top; ">
+				<div class="editor-label">
+					<label for="street" data-localized="street"></label>
+				</div>
+				<div class="editor-field">
+					<textarea type="text" class="k-textbox" rows="5" style="width: 362px" id="street" name="street" />
+				</div> 
+			</td>
+			<td style="padding-right: 25px; vertical-align: top; ">
+				<div class="editor-label">
+					<label for="city" data-localized="city"></label>
+				</div>
+				<div class="editor-field">
+					<textarea type="text" class="k-textbox" rows="5" style="width: 362px" id="city" name="city" />
+				</div> 
+			</td>
+			<td style="width: 100%;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="padding-right: 25px; vertical-align: top; ">
+				<div class="editor-label">
+					<label for="phone" data-localized="phone"></label>
+				</div>
+				<div class="editor-field">
+					<input type="text" class="k-textbox" style="width: 362px" id="phone" name="phone" />
+				</div> 
+			</td>
+			<td style="padding-right: 25px; vertical-align: top; ">
+				<div class="editor-label">
+					<label for="fax" data-localized="fax"></label>
+				</div>
+				<div class="editor-field">
+					<input type="text" class="k-textbox" style="width: 362px" id="fax" name="fax" />
+				</div> 
+			</td>
+			<td style="padding-right: 25px; vertical-align: top; ">
+				<div class="editor-label">
+					<label for="mobile" data-localized="mobile"></label>
+				</div>
+				<div class="editor-field">
+					<input type="text" class="k-textbox" style="width: 362px" id="mobile" name="mobile" />
+				</div> 
+			</td>
+			<td style="width: 100%;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="padding-right: 25px; vertical-align: top; ">
+				<div class="editor-label">
+					<label for="iban" data-localized="iban"></label>
+				</div>
+				<div class="editor-field">
+					<input type="text" class="k-textbox" style="width: 362px" id="iban" name="iban" />
+				</div> 
+			</td>
+			<td style="padding-right: 25px; vertical-align: top; ">
+				<div class="editor-label">
+					<label for="bic" data-localized="bic"></label>
+				</div>
+				<div class="editor-field">
+					<input type="text" class="k-textbox" style="width: 362px" id="bic" name="bic" />
+				</div> 
+			</td>
+			<td style="padding-right: 25px; vertical-align: top; ">
+				<div class="editor-label">
+					<label for="ustId" data-localized="ustId"></label>
+				</div>
+				<div class="editor-field">
+					<input type="text" class="k-textbox" style="width: 362px" id="ustId" name="ustId" />
+				</div> 
+			</td>
+			<td style="width: 100%;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="padding-right: 25px; vertical-align: top; ">
+				<div class="editor-label">
+					<label for="withTaxes" data-localized="withTaxes"></label>
+					<input type="checkbox" id="withTaxes" name="withTaxes" />
+				</div> 
+			</td>
+			<td style="padding-right: 25px; vertical-align: top; ">
+				<div class="editor-label">
+					<label for="autoDebitEntry" data-localized="autoDebitEntry"></label>
+					<input type="checkbox" id="autoDebitEntry" name="autoDebitEntry" />
+				</div> 
+			</td>
+			<td style="padding-right: 25px; vertical-align: top; ">
+				<div class="editor-label">
+					<label for="autoBill" data-localized="autoBill"></label>
+					<input type="checkbox" id="autoBill" name="autoBill" />
+				</div> 
+			</td>
+			<td style="width: 100%;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="padding-right: 25px; vertical-align: top; ">
+				<div class="editor-label">
+					<label for="email" data-localized="email"></label>
+				</div>
+				<div class="editor-field">
+					<input type="text" class="k-textbox" style="width: 362px" id="email" name="email" />
+				</div> 
+			</td>
+			<td style="padding-right: 25px; vertical-align: top; ">
+				<div class="editor-label">
+					<label for="discount" data-localized="discount"></label>
+				</div>
+				<div class="editor-field">
+					<input type="text" data-role="numerictextbox" id="discount" name="discount" />
+				</div> 
+			</td>
+			<td style="padding-right: 25px; vertical-align: top; ">
+				<div class="editor-label">
+					<label for="comment" data-localized="comment"></label>
+				</div>
+				<div class="editor-field">
+					<textarea type="text" class="k-textbox" rows="5" style="width: 362px" id="comment" name="comment" />
+				</div> 
+			</td>
+			<td style="width: 100%;">&nbsp;</td>
+		</tr>
+	</table>
+	<div class="inline-block">        
+    </div>      
+
+    <br />
+    <br />
+
+    <div class="relations-container">
+    </div>
+
+    <br />
+
+    <div>
+        <button class="k-primary k-button save" data-localized="save"></button>
+        <button class="k-button remove" data-localized="delete"></button>
+        <button class="k-button cancel" data-localized="cancel"></button>
+    </div>
+</form>

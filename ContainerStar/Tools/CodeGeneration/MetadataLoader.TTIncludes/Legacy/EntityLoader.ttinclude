@@ -1,0 +1,147 @@
+﻿<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Globalization" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+<#@ import namespace="System.IO" #>
+<#+
+    /*
+Includes
+
+#@ include file="EF.Utility.CS.Modified.ttinclude" #
+#@ include file="CommonClasses.ttinclude"          #
+#@ include file="EntityClasses.ttinclude"          #
+#@ include file="GenerationContext.ttinclude"      #
+
+*/
+    public static class EntityLoader
+    {
+	    public static List<EntityInfo> GetEntities(EntitiesGenerationContext context)
+        {
+            var result = new List<EntityInfo>();
+            var typeMapper = context.TypeMapper;
+
+            if (!typeMapper.VerifyCaseInsensitiveTypeUniqueness(typeMapper.GetAllGlobalItems(context.EdmItemCollection), context.EdmxFile.FullName))
+            {
+                return result;
+            }
+			
+			var xmlMSL = context.MetadataLoader.CreateMslXmlDoc(context.EdmxFile.FullName);
+	        var mappings = new EdmMapping(xmlMSL, context.EdmItemCollection, context.StoreItemCollection);
+
+            foreach (EntityType entity in typeMapper.GetItemsToGenerate<EntityType>(context.EdmItemCollection))
+            {
+				string schemaName;
+                string tableName;
+                context.Code.GetFullTableName(GetEntitySet(context.EntityContainer, entity), out schemaName, out tableName);
+
+                var entityClass = new EntityInfo
+                {
+                    Entity = entity,
+                    Name = context.Code.Escape(entity),
+                    Accessibility = Accessibility.ForType(entity),
+                    IsAbstract = entity.Abstract,
+                    BaseType = typeMapper.GetTypeName(entity.BaseType),
+                    TableName = tableName,
+                    TableSchemaName = schemaName
+                };
+
+                entityClass.Comment = context.GetComment(entityClass);
+                result.Add(entityClass);
+                var keyMembers = context.GetKeyColumns(entityClass);
+
+				var propertyToColumnMappings = mappings.EntityMappings[entity].Item2;
+				
+				foreach (var edmProperty in typeMapper.GetSimpleProperties(entity))
+				{
+				    //Note: Get enum
+				    var type = context.GetEnum(entityClass, edmProperty.Name);
+				    var isEnum = !string.IsNullOrEmpty(type);
+				    if (!isEnum)
+				    {
+				        type = typeMapper.GetTypeName(edmProperty.TypeUsage.EdmType, false);
+				    }
+					var dflt = context.GetDefault(entityClass, edmProperty.Name);
+				    var isKey = keyMembers.Contains(edmProperty);
+
+				    var propertyInfo = new PropertyEntityInfo(entityClass)
+				    {
+				        EdmProperty = edmProperty,
+				        Name = context.Code.Escape(edmProperty),
+						ColumnName =  propertyToColumnMappings[edmProperty].Name,
+				        Accessibility = Accessibility.ForProperty(edmProperty),
+				        ModelType = PropertyModelType.Simple,
+				        Type = type,
+						IsEnum= isEnum,
+				        IsKey = isKey,
+				        DefaultValue = !string.IsNullOrEmpty(dflt)
+				                ? dflt
+				                : (typeMapper.HasDefaultValue(entity, edmProperty)
+				                        ? typeMapper.CreateLiteral(edmProperty.DefaultValue)
+				                        : null),
+				        IsRequired = !context.MetaTools.IsNullable(edmProperty),
+				        IsNullable = context.MetaTools.IsNullable(edmProperty) && type != "string" && type != "byte[]",
+				        Comment = context.GetComment(entityClass, edmProperty.Name)
+				    };
+
+                    propertyInfo.Getter.Accessibility = Accessibility.ForGetter(edmProperty);
+                    propertyInfo.Setter.Accessibility = Accessibility.ForSetter(edmProperty);
+
+					entityClass.Properties.Add(propertyInfo);
+                }
+
+				foreach (var edmProperty in typeMapper.GetComplexProperties(entity))
+				{
+				    var propertyInfo = new PropertyEntityInfo(entityClass)
+				    {
+					    EdmProperty = edmProperty,
+				        Name = context.Code.Escape(edmProperty),
+				        Accessibility = Accessibility.ForProperty(edmProperty),
+				        ModelType = PropertyModelType.Complex,
+				        Type = typeMapper.GetTypeName(edmProperty.TypeUsage.EdmType, false),
+				        DefaultValue = string.Format("new {0}()", typeMapper.GetTypeName(edmProperty.TypeUsage.EdmType, false)),
+				        IsRequired = !context.MetaTools.IsNullable(edmProperty),
+						Comment = context.GetComment(entityClass, edmProperty.Name)
+				    };
+                    propertyInfo.Getter.Accessibility = Accessibility.ForGetter(edmProperty);
+                    propertyInfo.Setter.Accessibility = Accessibility.ForSetter(edmProperty);
+
+					entityClass.Properties.Add(propertyInfo);
+                }
+
+				foreach (var edmProperty in typeMapper.GetNavigationProperties(entity))
+                {
+                    var endType = typeMapper.GetTypeName(edmProperty.ToEndMember.GetEntityType());
+
+                    var isCollection = edmProperty.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many;
+                    
+					var name = context.Code.Escape(edmProperty.Name);
+                    name = isCollection ? context.Pluralize(name) : name;
+                    name = context.HandleNavigationPropertyName(entityClass, name);    
+                    var propertyInfo = new PropertyEntityInfo(entityClass)
+                    {
+					    EdmProperty = edmProperty,
+                        Name = name,
+                        Accessibility = Accessibility.ForProperty(edmProperty),
+                        ModelType = isCollection ? PropertyModelType.NavigationCollection : PropertyModelType.NavigationSingle,
+                        Type = isCollection ? ("ICollection<" + endType + ">") : endType,
+						ItemType = isCollection ? endType : null,
+                        DefaultValue = isCollection ? string.Format("new HashSet<{0}>()", endType) : string.Format("new {0}()", endType),
+                        IsVirtual = true,
+						Comment = "Navigation property to object " + edmProperty.ToEndMember.Name + ". Comment: " + context.GetComment(edmProperty.ToEndMember.Name, null)
+                    };
+
+                    propertyInfo.Getter.Accessibility = Accessibility.ForGetter(edmProperty);
+                    propertyInfo.Setter.Accessibility = Accessibility.ForSetter(edmProperty);
+
+                    entityClass.Properties.Add(propertyInfo);
+                }
+            }
+            return result;
+        }
+
+        public static EntitySetBase GetEntitySet(EntityContainer container, EdmType entity)
+        {
+            return container.BaseEntitySets.FirstOrDefault(item => item.ElementType.Name.Equals(entity.Name));
+        }
+    }
+
+#>

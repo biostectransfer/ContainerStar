@@ -1,0 +1,11 @@
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.MSSQL\bin\Debug\MetadataLoader.MSSQL.dll
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.MSSQL\bin\Debug\MetadataLoader.MSSQL.pdb
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.MSSQL\bin\Debug\MetadataLoader.Contracts.dll
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.MSSQL\bin\Debug\MetadataLoader.dll
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.MSSQL\bin\Debug\MetadataLoader.MSSQL.Contracts.dll
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.MSSQL\bin\Debug\MetadataLoader.MSSQL.Contracts.pdb
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.MSSQL\bin\Debug\MetadataLoader.Contracts.pdb
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.MSSQL\bin\Debug\MetadataLoader.pdb
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.MSSQL\obj\Debug\MetadataLoader.MSSQL.csprojResolveAssemblyReference.cache
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.MSSQL\obj\Debug\MetadataLoader.MSSQL.dll
+G:\TUEV\MasterDataModule\MasterDataModule\Tools\CodeGeneration\MetadataLoader.MSSQL\obj\Debug\MetadataLoader.MSSQL.pdb

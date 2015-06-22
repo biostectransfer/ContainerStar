@@ -1,0 +1,54 @@
+﻿<#@ template language="C#" debug="false" hostspecific="true" linePragmas="false" #>
+<#@ import namespace="MasterDataModule.Generation" #>
+<#@ import namespace="MetadataLoader.Contracts.Database" #>
+<#@ import namespace="MetadataLoader.Contracts.Generation" #>
+<#@ import namespace="MetadataLoader.MSSQL.Contracts.Database" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ include file="..\GenerationContext.ttinclude"  once="true" #>
+
+
+<#
+    var generationContext = new ModelGenerationContext(this, conn, filesDir, tableGroupFilter, contentFilePrefix, extraUsages);
+#>
+<#+
+    public sealed class ModelGenerationContext : GenerationContext
+        , IEntitiesGenerationContext
+        , ITablesGenerationContext<TableContent, ColumnContent>
+    {
+        private readonly Lazy<List<MSSQLTable<TableContent, ColumnContent>>> _tables;
+        private readonly Lazy<List<EntityInfo>> _entities;
+
+
+        public ModelGenerationContext(object transform,
+            string conn,
+            string filesDir,
+            string tableGroupFilter,
+            string contentFilePrefix,
+			string[] extraUsages)
+            : base(transform,extraUsages)
+        {
+            var contentFiles = new[]
+            {
+                filesDir + contentFilePrefix + ".Stammdaten.xlsx"
+            }.Select(ResolveFilePath).Select(info => info.FullName).ToArray();
+
+            var tableManager = TablesManager.LoadFromDatabase(conn, tableGroupFilter);
+            _tables = new Lazy<List<MSSQLTable<TableContent, ColumnContent>>>(() => tableManager.Load(contentFiles));
+
+            var entitiesManager = EntitiesManager.Create();
+            _entities = new Lazy<List<EntityInfo>>(() => entitiesManager.Load(_tables.Value));
+        }
+
+        public IReadOnlyCollection<ITable<TableContent, ColumnContent>> Tables
+        {
+            get { return _tables.Value; }
+        }
+
+        public IReadOnlyCollection<EntityInfo> Entities
+        {
+            get { return _entities.Value; }
+        }
+    }
+
+#>

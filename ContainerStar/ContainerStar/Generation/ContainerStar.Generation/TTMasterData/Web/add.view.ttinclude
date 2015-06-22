@@ -1,0 +1,208 @@
+﻿<#@ import namespace="System.Text" #>
+<#@ import namespace="MetadataLoader.Contracts.Generation" #>
+<#@ include file="..\ContainerStar.GenerationContext.ttinclude"  once="true" #>
+<#
+    IWebGenerationContext context = generationContext;
+
+    foreach (var model in context.WebModels)
+    {
+        var entityContent = model.Table.Content;
+        context.FileManager.StartNewFile("Add" + entityContent.CodeName + ".js");
+		
+		//find custom properties		
+		var customDefines = "";
+		var customViews = "";
+		var tabView = "";
+
+		if(!entityContent.IsRelated)
+		{
+			customDefines = String.Format("'l!t!{0}/{1}Relationships'",
+				context.CurrentRelatedWebPath, entityContent.CodeName);
+			customViews = ", TabView";
+			tabView = "tabView: TabView,";
+
+			foreach (var property in model.ModelProperties)
+			{
+				var customView = property.Column.Content.CustomView;
+				if(!String.IsNullOrEmpty(customView))
+				{
+					customDefines += String.Format(",\n    'l!t!{0}/{1}'", context.CurrentRelatedWebPath, customView);
+					customViews += String.Format(", {0}View", customView);
+				}
+			}
+		}
+#>
+define([
+	'base/base-object-add-view',
+    <#= customDefines #>
+], function (BaseView <#= customViews #>) {
+    'use strict';
+
+    var view = BaseView.extend({
+
+        <#= tabView #>
+        tableName: '<#= entityContent.CodeName #>',
+        actionUrl: '#<#= entityContent.CodeNamePlural #>',
+
+		bindings: function () {
+
+            var self = this;
+            var result = {
+<#
+        foreach (var property in model.ModelProperties)
+        {
+			var bindigsPropertyType = GetBindigsPropertyType(context, property);
+
+			var customPropertyBinding = "";
+			var propContent = property.Column.Content;
+			if(!String.IsNullOrEmpty(propContent.CustomView))
+			{
+				customPropertyBinding = String.Format("\n			'#{0}_Name': '{1}',", 
+					property.Name, propContent.CustomDataBindingProperty);
+			}
+#>
+			'#<#=property.Name #>': <#=bindigsPropertyType#>,<#= customPropertyBinding #>
+<#
+		}
+#>
+			};
+
+            return result;
+		},
+
+        render: function () {
+
+            view.__super__.render.apply(this, arguments);
+
+			//TODO foreach model field
+<#
+		foreach (var property in model.ModelProperties)
+        {
+            var propContent = property.Column.Content;
+            var type = GetPropertyType(context, property);
+			if(String.IsNullOrEmpty(propContent.CustomView) && propContent.ShowInAddView)
+			{
+#>
+			this.disableInput(this, '<#= property.Name #>'<#= type #>);
+<#
+			}
+		}
+#>
+
+            return this;
+        }
+<#
+		if(!String.IsNullOrEmpty(customViews))
+		{
+#>
+		,events: {
+<#
+			foreach (var property in model.ModelProperties)
+			{
+				var propContent = property.Column.Content;
+				if(!String.IsNullOrEmpty(propContent.CustomView))
+				{
+#>
+			'click .<#= propContent.CustomView #>': function (e) {
+                e.preventDefault();
+
+                var self = this,
+                    view = new <#= propContent.CustomView #>View();
+
+                self.listenTo(view, 'select', function (item) {
+
+                    self.model.set('<#= property.Name #>', item.id);
+                    self.$el.find('#<#= property.Name #>').val(item.id);
+                    self.$el.find('#<#= property.Name #>_Name').val(item.get('<#= propContent.CustomViewBindingProperty #>'));
+                });
+
+                self.addView(view);
+                self.$el.append(view.render().$el);
+            },
+<#
+				}
+			}
+#>
+		}
+<#		
+		}
+#>
+    });
+
+    return view;
+});
+<#
+		context.FileManager.EndBlock();
+    }
+    context.FileManager.Process();
+#>
+<#+
+    private string GetPropertyType(IWebGenerationContext context, PropertyModelInfo property)
+    {
+        var shortName = property.Type.ShortName;
+        if (string.IsNullOrEmpty(shortName))
+        {
+            shortName = property.Type.Name.ToLower();
+        }
+
+        switch (shortName)
+        {
+            case "bool":
+                return "";
+            case "byte":
+            case "short":
+            case "int":
+            case "long":
+            case "sbyte":
+            case "ushort":
+            case "uint":
+            case "ulong":
+            case "decimal":
+            case "float":
+            case "double":
+				if(!String.IsNullOrEmpty(property.Column.Content.ViewCollection))
+					return ", 'select'";
+				else
+					return ", 'numeric'";
+            case "datetime":
+                return ", 'date'";
+            default:
+				return "";
+        }
+    }
+
+	private string GetBindigsPropertyType(IWebGenerationContext context, PropertyModelInfo property)
+    {
+        var shortName = property.Type.ShortName;
+        if (string.IsNullOrEmpty(shortName))
+        {
+            shortName = property.Type.Name.ToLower();
+        }
+
+        switch (shortName)
+        {
+            case "byte":
+            case "short":
+            case "int":
+            case "long":
+            case "sbyte":
+            case "ushort":
+            case "uint":
+            case "ulong":
+            case "decimal":
+            case "float":
+            case "double":
+				if(!String.IsNullOrEmpty(property.Column.Content.ViewCollection))
+				{
+					return "{ observe: '" + property.Name + "'," +
+						   "\n				selectOptions: { labelPath: 'name', valuePath: 'id'," + 
+						   "\n				collection: self.options." + property.Column.Content.ViewCollection +
+						   "\n				,defaultOption: {label: self.resources.pleaseSelect,value: null}},}";
+				}
+				else 
+					return "'" + property.Name + "'";
+            default:
+				return "'" + property.Name + "'";
+        }
+    }
+#>
