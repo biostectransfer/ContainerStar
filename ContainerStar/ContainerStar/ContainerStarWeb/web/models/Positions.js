@@ -26,6 +26,7 @@ define(function () {
 			,toDate: { type: "date", 
 			                        editable: Application.canTableItemBeEdit('Positions', 'toDate'), 
 				                    validation: { required: false, date: true } }		
+            ,description: { type: "string", editable: false }		
 		},
 		defaults: function () {
 			var dnf = new Date();

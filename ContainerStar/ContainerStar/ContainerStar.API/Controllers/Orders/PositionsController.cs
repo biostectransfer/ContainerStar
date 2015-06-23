@@ -24,7 +24,19 @@ namespace ContainerStar.API.Controllers
             model.orderId = entity.OrderId;
             model.isSellOrder = entity.IsSellOrder;
             model.containerId = entity.ContainerId;
+
+            if(entity.ContainerId.HasValue)
+            {
+                model.description = entity.Containers.ContainerTypes.Name;
+            }
+
             model.additionalCostId = entity.AdditionalCostId;
+
+            if (entity.AdditionalCostId.HasValue)
+            {
+                model.description = entity.AdditionalCosts.Name;
+            }
+            
             model.price = entity.Price;
             model.fromDate = entity.FromDate;
             model.toDate = entity.ToDate;

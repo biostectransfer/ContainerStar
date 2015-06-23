@@ -355,7 +355,9 @@
     <Content Include="web\resources\Orders\AddOrders.en.js" />
     <Content Include="web\resources\Errors\Forbidden.de.js" />
     <Content Include="web\resources\Errors\Forbidden.en.js" />
+    <Content Include="web\resources\Orders\AdditionalCostsSearch.de.js" />
     <Content Include="web\resources\Orders\ContainerSearch.de.js" />
+    <Content Include="web\resources\Orders\AdditionalCostsSearch.en.js" />
     <Content Include="web\resources\Orders\ContainerSearch.en.js" />
     <Content Include="web\resources\Orders\FilterOrders.de.js" />
     <Content Include="web\resources\Orders\FilterOrders.en.js" />
@@ -373,7 +375,9 @@
     <Content Include="web\resources\Orders\Orders.en.js" />
     <Content Include="web\resources\Orders\OrdersRelationships.de.js" />
     <Content Include="web\resources\Orders\OrdersRelationships.en.js" />
+    <Content Include="web\resources\Orders\SelectAdditionalCosts.de.js" />
     <Content Include="web\resources\Orders\SelectContainer.de.js" />
+    <Content Include="web\resources\Orders\SelectAdditionalCosts.en.js" />
     <Content Include="web\resources\Orders\SelectCustomer.de.js" />
     <Content Include="web\resources\Orders\SelectContainer.en.js" />
     <Content Include="web\resources\Orders\SelectCustomer.en.js" />
@@ -706,6 +710,7 @@
     <Content Include="web\templates\Orders\AddPositions.html" />
     <Content Include="web\templates\Orders\AddOrders.html" />
     <Content Include="web\templates\Errors\Forbidden.html" />
+    <Content Include="web\templates\Orders\AdditionalCostsSearch.html" />
     <Content Include="web\templates\Orders\ContainerSearch.html" />
     <Content Include="web\templates\Orders\FilterOrders.html" />
     <Content Include="web\templates\Home\Home.html" />
@@ -716,6 +721,7 @@
     <Content Include="web\templates\Orders\Positions.html" />
     <Content Include="web\templates\Orders\Orders.html" />
     <Content Include="web\templates\Orders\OrdersRelationships.html" />
+    <Content Include="web\templates\Orders\SelectAdditionalCosts.html" />
     <Content Include="web\templates\Orders\SelectContainer.html" />
     <Content Include="web\templates\Orders\SelectCustomer.html" />
     <Content Include="web\templates\Settings\AddAdditionalCosts.html">
@@ -886,6 +892,7 @@
       <DependentUpon>web.templates.tt</DependentUpon>
     </Content>
     <Content Include="web\application-start.js" />
+    <Content Include="web\views\Orders\AdditionalCostsSearch.js" />
     <Content Include="web\views\Orders\ContainerSearch.js" />
     <Content Include="web\views\Orders\Offers.js" />
     <Content Include="web\views\Orders\AddPositions.js" />
@@ -899,6 +906,7 @@
     <Content Include="web\views\Orders\Positions.js" />
     <Content Include="web\views\Orders\Orders.js" />
     <Content Include="web\views\Orders\OrdersRelationships.js" />
+    <Content Include="web\views\Orders\SelectAdditionalCosts.js" />
     <Content Include="web\views\Orders\SelectContainer.js" />
     <Content Include="web\views\Orders\SelectCustomer.js" />
     <Content Include="web\views\Settings\AddAdditionalCosts.js">

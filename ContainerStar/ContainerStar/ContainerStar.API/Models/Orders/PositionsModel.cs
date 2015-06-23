@@ -24,8 +24,11 @@ namespace ContainerStar.API.Models
         public int? containerId { get; set; }
 
         [DataMember]
-        public int? additionalCostId { get; set; }
+        public string description { get; set; }
 
+        [DataMember]
+        public int? additionalCostId { get; set; }
+        
         [Required]
         [DataMember]
         public double price { get; set; }

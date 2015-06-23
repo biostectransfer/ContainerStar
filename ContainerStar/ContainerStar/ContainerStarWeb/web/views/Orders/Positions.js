@@ -27,7 +27,7 @@ define([
         columns: function () {
 
             return [
-                 { field: 'containerId', title: this.resources.containerId },
+                 { field: 'description', title: this.resources.containerId },
                  { field: 'price', title: this.resources.price },
             ];
         },
@@ -61,8 +61,27 @@ define([
                     view = new SelectContainerView(self.options);
 
                 self.listenTo(view, 'selectContainer', function (item) {
+                    
+                    var model = new Backbone.Model();
+                    model.isNew = function () { return true; }
+                    model.url = Application.apiUrl + '/positions';
+                    model.set('orderId', self.model.id);
+                    model.set('containerId', item.id);
+                    model.set('price', item.get('price'));
 
-                    //self.model.set('containerId', item.id);
+                    model.save({}, {
+                        data: kendo.stringify(model),
+                        method: 'post',
+                        contentType: 'application/json',
+                        success: function (response) {
+                            self.grid.dataSource.read();
+                            self.grid.refresh();                            
+                        },
+                        error: function (model, response) {
+                            debugger;
+                            //TODO
+                        }
+                    });
                 });
 
                 self.addView(view);
@@ -76,7 +95,26 @@ define([
 
                 self.listenTo(view, 'selectAdditionalCosts', function (item) {
 
-                    
+                    var model = new Backbone.Model();
+                    model.isNew = function () { return true; }
+                    model.url = Application.apiUrl + '/positions';
+                    model.set('orderId', self.model.id);
+                    model.set('additionalCostId', item.id);
+                    model.set('price', item.get('price'));
+
+                    model.save({}, {
+                        data: kendo.stringify(model),
+                        method: 'post',
+                        contentType: 'application/json',
+                        success: function (response) {
+                            self.grid.dataSource.read();
+                            self.grid.refresh();
+                        },
+                        error: function (model, response) {
+                            debugger;
+                            //TODO
+                        }
+                    });                    
                 });
 
                 self.addView(view);
