@@ -1,7 +1,7 @@
 define([
 'base/base-object-grid-view',
-'collections/Settings/Customers',
-'l!t!Settings/FilterCustomers'
+'collections/Settings/Containers',
+'l!t!Settings/FilterContainers'
 ], function (BaseView, Collection, FilterView) {
     'use strict';
 
@@ -52,21 +52,24 @@ define([
 
 		columns: function () {
 			
-			return [
+		    return [
 				{ field: 'number', title: this.resources.number },
-				{ field: 'name', title: this.resources.name },
-				{ field: 'street', title: this.resources.street },
-				{ field: 'zip', title: this.resources.zip },
-				{ field: 'city', title: this.resources.city },
-				{ field: 'discount', title: this.resources.discount },
-			];
+				{ field: 'containerTypeId', title: this.resources.containerTypeId, collection: this.options.containerTypes, defaultText: this.resources.pleaseSelect },
+				{ field: 'length', title: this.resources.length },
+				{ field: 'width', title: this.resources.width },
+				{ field: 'height', title: this.resources.height },
+				{ field: 'color', title: this.resources.color },
+				{ field: 'price', title: this.resources.price },
+				{ field: 'isVirtual', title: this.resources.isVirtual, headerTitle: this.resources.isVirtual, checkbox: true },
+				{ field: 'sellPrice', title: this.resources.sellPrice },
+		    ];
 		},
 
 		events: {
 		    'dblclick .k-grid tbody tr': function (e) {
 		        saveFunction(e, this);
 		    },
-		    'click .select': function (e) {
+		    'click .selectContainer': function (e) {
 		        saveFunction(e, this);
 		    },
 		    'click .closeWindow': function (e) {
@@ -81,7 +84,7 @@ define([
 		    return [
 				{
 				    template: function () {
-				        return '<a class="k-button k-primary select" href="#">' +
+				        return '<a class="k-button k-primary selectContainer" href="#">' +
                             self.resources.select + '</a>'
 				    }
 				},

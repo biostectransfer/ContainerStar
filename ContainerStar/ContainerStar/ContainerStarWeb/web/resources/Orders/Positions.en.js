@@ -3,11 +3,8 @@ define(function () {
 
 	var resources = {
 
-		add: 'Add Order',
-	    edit: 'Edit Order',
-	    masterData: 'Settings',
-		driverLicenceMasterData: 'Driver licence masterdata',
-	    pageTitle: 'Order',
+		add: 'Add Position',
+	    edit: 'Edit Position',
 		pleaseSelect: 'Please select',
 		orderId: 'Order',
 		isSellOrder: 'is sell position',
@@ -16,6 +13,8 @@ define(function () {
 		price: 'Price',
 		fromDate: 'From date',
 		toDate: 'To date',
+		selectContainer: 'Container',
+		selectAdditionalCosts: 'additional costs',
 	};
 
 	return resources;

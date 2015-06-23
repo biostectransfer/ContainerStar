@@ -1,7 +1,7 @@
 ﻿define([
 	'base/base-window-view',
-    'l!t!Orders/CustomerSearch',
-], function (BaseView, CustomersView) {
+    'l!t!Orders/AdditionalCostsSearch',
+], function (BaseView, AdditionalCostsSearchView) {
     'use strict';
 
     var view = BaseView.extend({
@@ -14,7 +14,8 @@
 
             var options = {
                 success: function (model) {
-                    self.trigger('select', model);
+ 
+                    self.trigger('selectAdditionalCosts', model);
                     self.close();
                 },
                 closeWindow: function () {
@@ -22,8 +23,8 @@
                 }
             };
 
-            var customersView = new CustomersView(options);
-            self.showView(customersView, '.customers');
+            var additionalCostsSearchView = new AdditionalCostsSearchView(options);
+            self.showView(additionalCostsSearchView, '.additionalCosts');
 
             return this;
         },

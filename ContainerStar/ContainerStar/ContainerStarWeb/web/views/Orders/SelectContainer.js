@@ -1,7 +1,7 @@
 ﻿define([
 	'base/base-window-view',
-    'l!t!Orders/CustomerSearch',
-], function (BaseView, CustomersView) {
+    'l!t!Orders/ContainerSearch',
+], function (BaseView, ContainerSearchView) {
     'use strict';
 
     var view = BaseView.extend({
@@ -14,16 +14,18 @@
 
             var options = {
                 success: function (model) {
-                    self.trigger('select', model);
+
+                    self.trigger('selectContainer', model);
                     self.close();
                 },
                 closeWindow: function () {
                     self.close();
-                }
+                },
+                containerTypes: self.options.containerTypes
             };
 
-            var customersView = new CustomersView(options);
-            self.showView(customersView, '.customers');
+            var containerSearchView = new ContainerSearchView(options);
+            self.showView(containerSearchView, '.containers');
 
             return this;
         },

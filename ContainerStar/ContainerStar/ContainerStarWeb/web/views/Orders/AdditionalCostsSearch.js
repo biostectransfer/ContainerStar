@@ -1,7 +1,7 @@
 define([
 'base/base-object-grid-view',
-'collections/Settings/Customers',
-'l!t!Settings/FilterCustomers'
+'collections/Settings/AdditionalCosts',
+'l!t!Settings/FilterAdditionalCosts'
 ], function (BaseView, Collection, FilterView) {
     'use strict';
 
@@ -52,21 +52,21 @@ define([
 
 		columns: function () {
 			
-			return [
-				{ field: 'number', title: this.resources.number },
+		    return [
 				{ field: 'name', title: this.resources.name },
-				{ field: 'street', title: this.resources.street },
-				{ field: 'zip', title: this.resources.zip },
-				{ field: 'city', title: this.resources.city },
-				{ field: 'discount', title: this.resources.discount },
-			];
+				{ field: 'description', title: this.resources.description },
+				{ field: 'price', title: this.resources.price },
+				{ field: 'automatic', title: this.resources.automatic, headerTitle: this.resources.automatic, checkbox: true },
+				{ field: 'includeInFirstBill', title: this.resources.includeInFirstBill, headerTitle: this.resources.includeInFirstBill, checkbox: true },
+				{ field: 'proceedsAccount', title: this.resources.proceedsAccount },
+		    ];
 		},
 
 		events: {
 		    'dblclick .k-grid tbody tr': function (e) {
 		        saveFunction(e, this);
 		    },
-		    'click .select': function (e) {
+		    'click .selectAdditionalCosts': function (e) {
 		        saveFunction(e, this);
 		    },
 		    'click .closeWindow': function (e) {
@@ -81,7 +81,7 @@ define([
 		    return [
 				{
 				    template: function () {
-				        return '<a class="k-button k-primary select" href="#">' +
+				        return '<a class="k-button k-primary selectAdditionalCosts" href="#">' +
                             self.resources.select + '</a>'
 				    }
 				},

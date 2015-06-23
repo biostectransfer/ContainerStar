@@ -413,7 +413,7 @@ div.questions table tbody tr:hover {
 		color: #A9A9A9;
 	}
 
-span.customer-select-message {
+span.select-message {
 	margin-left: 3px;
 	vertical-align: middle;
 	display: none;

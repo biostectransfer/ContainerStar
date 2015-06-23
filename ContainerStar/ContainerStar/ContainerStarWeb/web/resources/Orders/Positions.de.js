@@ -5,8 +5,6 @@ define(function () {
 
 	    add: 'Position anlegen',
 	    edit: 'Positions editieren',
-	    masterData: 'Einstellungen',
-	    pageTitle: 'Position',
 		pleaseSelect: 'Bitte auswählen',
 		orderId: 'Auftrag',
 		isSellOrder: 'ist Verkauf Position',
@@ -14,7 +12,9 @@ define(function () {
 		additionalCostId: 'Nebenkosten',
 		price: 'Preis',
 		fromDate: 'Von Datum',
-		toDate: 'Bis Datum',	
+		toDate: 'Bis Datum',
+		selectContainer: 'Container vermieten',
+	    selectAdditionalCosts: 'Nebenkosten',
 	};
 
 	return resources;
