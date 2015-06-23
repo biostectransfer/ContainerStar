@@ -3,3 +3,8 @@ G:\TUEV\MasterDataModule\MasterDataModule\CoreBase\CoreBase\bin\x64\Debug\CoreBa
 G:\TUEV\MasterDataModule\MasterDataModule\CoreBase\CoreBase\obj\x64\Debug\CoreBase.csprojResolveAssemblyReference.cache
 G:\TUEV\MasterDataModule\MasterDataModule\CoreBase\CoreBase\obj\x64\Debug\CoreBase.dll
 G:\TUEV\MasterDataModule\MasterDataModule\CoreBase\CoreBase\obj\x64\Debug\CoreBase.pdb
+G:\ContainerStar\ContainerStar\CoreBase\CoreBase\bin\x64\Debug\CoreBase.dll
+G:\ContainerStar\ContainerStar\CoreBase\CoreBase\bin\x64\Debug\CoreBase.pdb
+G:\ContainerStar\ContainerStar\CoreBase\CoreBase\obj\x64\Debug\CoreBase.csprojResolveAssemblyReference.cache
+G:\ContainerStar\ContainerStar\CoreBase\CoreBase\obj\x64\Debug\CoreBase.dll
+G:\ContainerStar\ContainerStar\CoreBase\CoreBase\obj\x64\Debug\CoreBase.pdb

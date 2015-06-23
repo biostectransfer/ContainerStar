@@ -41,6 +41,16 @@
 		},
 
 		events: {
+		    'dblclick .k-grid tbody tr:not(k-detail-row) td:not(.k-hierarchy-cell,.k-detail-cell,.commands)': function (e) {
+
+		        var self = this,
+		            dataItem = self.grid.dataItem(e.currentTarget.parentElement);
+
+		        if (dataItem != undefined && dataItem.id != undefined &&
+                    dataItem.id != 0) {
+		            location.href = self.editUrl + '/' + dataItem.id;
+		        }
+		    },
 		    'click .generateBill': function (e) {
 		        e.preventDefault();
 		        var self = this,
@@ -69,7 +79,29 @@
 		                self.$el.append(view.render().$el);
 		            });
 		        }
-		    }
+		    },
+            'click .printRentOrder': function (e) {
+
+                e.preventDefault();
+                var self = this,
+                    grid = self.grid,
+					dataItem = grid.dataItem(grid.select());
+
+                if (dataItem != undefined) {
+
+                    location.href = Application.apiUrl + 'print/?printTypeId=0&id=' + dataItem.id;
+                }
+                else {
+                    require(['base/information-view'], function (View) {
+                        var view = new View({
+                            title: 'Angebot auswählen',
+                            message: 'Wählen Sie bitte ein Angebot aus!'
+                        });
+                        self.addView(view);
+                        self.$el.append(view.render().$el);
+                    });
+                }
+            }
 		},
 
 		toolbar: function () {
@@ -78,7 +110,9 @@
 		    [{
 		        template: function () {
 		            return '<a class="k-button k-button-icontext" href="' + self.editUrl +
-		            '/create" data-localized="' + self.createNewItemTitle + '"></a><a class="k-button k-button-icontext generateBill" href="#">Rechnung</a>';
+		            '/create" data-localized="' + self.createNewItemTitle + '"></a>' + 
+                    '<a class="k-button k-button-icontext printRentOrder" href="#" data-localized="printRentOrder"></a>' +
+                    '<a class="k-button k-button-icontext generateBill" href="#" data-localized="generateBill"></a>';
 		        }
 		    }];
 
