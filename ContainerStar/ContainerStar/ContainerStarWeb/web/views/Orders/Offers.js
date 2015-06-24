@@ -46,7 +46,7 @@ define([
         detailView: DetailView,
         filterView: FilterView,
         tableName: 'Orders',
-        editUrl: '#Orders',
+        editUrl: '#Offers',
         selectable: true,
 
         initialize: function () {

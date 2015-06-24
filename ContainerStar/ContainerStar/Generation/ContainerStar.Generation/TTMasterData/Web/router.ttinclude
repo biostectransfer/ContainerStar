@@ -34,9 +34,9 @@ define([
 			viewCollections += "}";
 		}
 #>
-				'<#=entityContent.CodeNamePlural#>': _.partial(BaseRouter.showView, baseRouter, 'l!t!<#=path #>/<#=entityContent.CodeNamePlural#>'<#= viewCollections #>),
-	            '<#=entityContent.CodeNamePlural#>/create': _.partial(BaseRouter.showViewWithModel, baseRouter, 'l!t!<#=path #>/Add<#=entityContent.CodeName#>', 'models/<#=path #>/<#=entityContent.CodeName#>'<#= viewCollections #>),
-	            '<#=entityContent.CodeNamePlural#>/:id': _.partial(BaseRouter.showViewWithModel, baseRouter, 'l!t!<#=path #>/Add<#=entityContent.CodeName#>', 'models/<#=path #>/<#=entityContent.CodeName#>'<#= viewCollections #>),
+				'<#=entityContent.CodeNamePlural#>': _.partial(BaseRouter.showView, baseRouter, 'l!t!<#=path #>/<#=entityContent.CodeNamePlural#>'<#= viewCollections #>, false),
+	            '<#=entityContent.CodeNamePlural#>/create': _.partial(BaseRouter.showViewWithModel, baseRouter, 'l!t!<#=path #>/Add<#=entityContent.CodeName#>', 'models/<#=path #>/<#=entityContent.CodeName#>'<#= viewCollections #>, false),
+	            '<#=entityContent.CodeNamePlural#>/:id': _.partial(BaseRouter.showViewWithModel, baseRouter, 'l!t!<#=path #>/Add<#=entityContent.CodeName#>', 'models/<#=path #>/<#=entityContent.CodeName#>'<#= viewCollections #>, false),
 <#
     }
 #>

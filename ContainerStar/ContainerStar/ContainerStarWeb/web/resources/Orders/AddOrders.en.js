@@ -3,10 +3,12 @@ define(function () {
 
 	var resources = {
 
-		add: 'Add Order',
-	    edit: 'Edit Order',
-	    masterData: 'Settings',
-	    pageTitle: 'Order',
+		addOrder: 'Add Order',
+		editOrder: 'Edit Order',
+		addOffer: 'Add Offer',
+		editOffer: 'Edit Offer',
+		pageOrderTitle: 'Order',
+		pageOfferTitle: 'Offer',
 		pleaseSelect: 'Please select',
 		customerId: 'Customer',	
 		communicationPartnerId: 'Communication partner',	

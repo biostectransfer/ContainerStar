@@ -54,8 +54,13 @@ define([
                 method: isNew ? 'post' : 'put',
                 contentType: 'application/json',
                 success: function (response) {
+                    
+                    deferred.resolve();
 
-                    location.href = "#Orders/" + response.id;
+                    if(response.get('isOffer'))
+                        location.href = "#Offers/" + response.id;
+                    else
+                        location.href = "#Orders/" + response.id;
                 },
                 error: function (model, response) {
                     self.validateResponse(response);
@@ -143,6 +148,8 @@ define([
             this.stickit();
 
             var self = this;
+
+            $('#isOffer').val(self.options.isOffer);
 
             self.listenTo(self.model, 'change:customerId', function () {
 

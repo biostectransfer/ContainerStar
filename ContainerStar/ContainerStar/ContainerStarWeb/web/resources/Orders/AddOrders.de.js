@@ -3,10 +3,12 @@ define(function () {
 
 	var resources = {
 
-		add: 'Auftrag anlegen',
-	    edit: 'Auftrag editieren',
-	    masterData: 'Einstellungen',
-	    pageTitle: 'Auftrag',
+	    addOrder: 'Auftrag anlegen',
+	    editOrder: 'Auftrag editieren',
+	    addOffer: 'Angebot anlegen',
+	    editOffer: 'Angebot editieren',
+	    pageOrderTitle: 'Auftrag',
+	    pageOfferTitle: 'Angebot',
 		pleaseSelect: 'Bitte auswählen',
 		customerId: 'Kunde',	
 		communicationPartnerId: 'Ansprechpartner',	

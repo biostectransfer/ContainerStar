@@ -24,13 +24,17 @@
         
 	    return d.promise();
 	},
-	createViewWithModel = function (baseRouter, viewPath, modelPath, collectionTypes, id) {
+	createViewWithModel = function (baseRouter, viewPath, modelPath, collectionTypes, id, options) {
 	    var d = $.Deferred();
 
 	    require([modelPath], function (Model) {
 	        var model = new Model();
 	        if (_.isUndefined(id) || _.isNull(id)) {
 	            createView(baseRouter, viewPath, collectionTypes, { model: model }).done(function (view) {
+	                if (options != null && options != undefined) {
+	                    _.extend(model.attributes, options);
+	                }
+
 	                d.resolve(view);
 	            });
 	        }
@@ -38,6 +42,10 @@
 	            model.set(model.idAttribute, id);
 	            model.fetch().done(function () {
 	                createView(baseRouter, viewPath, collectionTypes, { model: model }).done(function (view) {
+	                    if (options != null && options != undefined) {
+	                        _.extend(model.attributes, options);
+	                    }
+
 	                    d.resolve(view);
 	                });
 	            });
@@ -58,10 +66,10 @@
 	        showNotAuthenticated(baseRouter);
 	},
 
-	showViewWithModel = function (baseRouter, viewPath, modelPath, collectionTypes, id) {
+	showViewWithModel = function (baseRouter, viewPath, modelPath, collectionTypes, id, options) {
 	    var self = this;
 	    if (Application.user.get('isAuthenticated'))
-	        createViewWithModel(baseRouter, viewPath, modelPath, collectionTypes, id).done(function (view)
+	        createViewWithModel(baseRouter, viewPath, modelPath, collectionTypes, id, options).done(function (view)
 	        { baseRouter.trigger('router:view-created', view); });
 	    else
 	        showNotAuthenticated(baseRouter);
@@ -92,9 +100,9 @@
             return showView(baseRouter, viewPath, collectionTypes, options);
         },
 
-        showViewWithModel: function (baseRouter, viewPath, modelPath, collectionTypes, id) {
+        showViewWithModel: function (baseRouter, viewPath, modelPath, collectionTypes, options, id) {
 
-            return showViewWithModel(baseRouter, viewPath, modelPath, collectionTypes, id);
+            return showViewWithModel(baseRouter, viewPath, modelPath, collectionTypes, id, options);
         },
 
         showNotAuthenticated: function (baseRouter) {

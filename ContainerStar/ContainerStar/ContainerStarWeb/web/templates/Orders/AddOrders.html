@@ -1,6 +1,6 @@
-<% var title = typeof id !== 'undefined' ? '<label data-localized="edit"></label>' : '<label data-localized="add"></label>'; %>
+<% var title = typeof id !== 'undefined' ? '<label data-localized="' + (isOffer ? 'editOffer' : 'editOrder') + '"></label>' : '<label data-localized="' + (isOffer ? 'addOffer' : 'addOrder') + '"></label>'; %>
 
-<span class="breadcrumbs"><a href="#Orders" data-localized="pageTitle"></a> / <%= title %></span>
+<span class="breadcrumbs"><a href="#<%= isOffer ? 'Offers' : 'Orders' %>" data-localized="<%= isOffer ? 'pageOfferTitle' : 'pageOrderTitle' %>"></a> / <%= title %></span>
 
 <form method="post" class="add-model">
     <input type="hidden" id="isOffer" name="isOffer" />
