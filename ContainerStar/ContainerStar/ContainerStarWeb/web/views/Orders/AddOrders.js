@@ -129,6 +129,7 @@ define([
                 '#customerPhone': 'customerPhone',
                 '#customerFax': 'customerFax',
                 '#customerEmail': 'customerEmail',
+                '#createDate': 'createDate',
                 '.radioButtons': {
                     observe: 'id',
                     visible: function (val) {

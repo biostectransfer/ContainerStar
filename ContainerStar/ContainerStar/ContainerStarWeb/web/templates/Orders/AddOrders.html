@@ -155,7 +155,7 @@
             <td style="width: 100%;">&nbsp;</td>
         </tr>
         <tr>
-            <td style="padding-right: 25px; vertical-align: top; ">
+            <td style="padding-right: 25px; vertical-align: top;">
                 <div class="editor-label">
                     <label for="orderedFrom" data-localized="orderedFrom"></label>
                 </div>
@@ -163,15 +163,10 @@
                     <input type="text" class="k-textbox" style="width: 489px" id="orderedFrom" name="orderedFrom" />
                 </div>
             </td>
-            <td style="padding-right: 25px; vertical-align: top; ">
-                <div class="editor-label">
-                    <label for="orderNumber" data-localized="orderNumber"></label>
-                </div>
-                <div class="editor-field">
-                    <input type="text" class="k-textbox" style="width: 362px" id="orderNumber" name="orderNumber" />
-                </div>
+            <td style="padding-right: 25px; vertical-align: top;">
+                &nbsp;
             </td>
-            <td style="padding-right: 25px; vertical-align: top; ">
+            <td style="padding-right: 25px; vertical-align: top;">
                 <div class="editor-label">
                     <label for="orderDate" data-localized="orderDate"></label>
                 </div>
@@ -181,17 +176,39 @@
             </td>
             <td style="width: 100%;">&nbsp;</td>
         </tr>
-    </table>
-    <table style="width: 100%; vertical-align: top; padding: 0px; margin: 0px; white-space: nowrap;" cellpadding="0" cellspacing="0">
-        <tr>
+
+        <tr id="rowWithOrderNubmers">
+            <td style="padding-right: 25px; vertical-align: top;">
+                <div class="editor-label">
+                    <label for="orderNumber" data-localized="orderNumber"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" readonly="readonly" class="k-textbox" style="width: 489px;" id="orderNumber" name="orderNumber" />
+                </div>
+            </td>
             <td style="padding-right: 25px; vertical-align: top; ">
                 <div class="editor-label">
                     <label for="rentOrderNumber" data-localized="rentOrderNumber"></label>
                 </div>
                 <div class="editor-field">
-                    <input type="text" class="k-textbox" style="width: 180px" id="rentOrderNumber" name="rentOrderNumber" />
+                    <input type="text" readonly="readonly" class="k-textbox" style="width: 362px" id="rentOrderNumber" name="rentOrderNumber" />
                 </div>
             </td>
+
+            <td style="padding-right: 25px; vertical-align: top; ">
+                <div class="editor-label">
+                    <label for="createDate" data-localized="createDate"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" readonly="readonly" data-role="datepicker" id="createDate" name="createDate" />
+                </div>
+            </td>
+            <td style="width: 100%;">&nbsp;</td>
+        </tr>
+    </table>
+    <table style="width: 100%; vertical-align: top; padding: 0px; margin: 0px; white-space: nowrap;" cellpadding="0" cellspacing="0">
+        <tr>
+
             <td style="padding-right: 25px; vertical-align: top; ">
                 <div class="editor-label">
                     <label for="rentFromDate" data-localized="rentFromDate"></label>
@@ -200,7 +217,7 @@
                     <input type="text" data-role="datepicker" id="rentFromDate" name="rentFromDate" />
                 </div>
             </td>
-            <td style="padding-right: 25px; vertical-align: top; ">
+            <td style="padding-right: 25px; vertical-align: top;">
                 <div class="editor-label">
                     <label for="rentToDate" data-localized="rentToDate"></label>
                 </div>
@@ -208,7 +225,8 @@
                     <input type="text" data-role="datepicker" id="rentToDate" name="rentToDate" />
                 </div>
             </td>
-            <td style="width: 100%;">&nbsp;</td>
+
+            <td colspan="2" style="width: 100%;">&nbsp;</td>
         </tr>
         <tr>
             <td style="padding-right: 25px; vertical-align: top; ">

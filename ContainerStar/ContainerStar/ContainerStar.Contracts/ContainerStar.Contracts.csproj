@@ -127,6 +127,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Permissions.tt</DependentUpon>
     </Compile>
+    <Compile Include="Enums\UniqueNumberType.cs" />
     <Compile Include="Exceptions\DuplicateEntityException.cs">
       <DependentUpon>MasterDataPermissions.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -208,9 +209,11 @@
     <Compile Include="SaveActors\Base\ISaveActorManagerBase.cs" />
     <Compile Include="SaveActors\IContainerStarSaveActorManager.cs" />
     <Compile Include="SaveActors\IContainerStarSaveActor.cs" />
+    <Compile Include="Services\IUniqueNumberProvider.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Compile Include="Entities\Custom.Numbers.cs" />
     <None Include="Enums\PermissionsScript.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PermissionsScript.sql</LastGenOutput>

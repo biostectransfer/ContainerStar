@@ -36,7 +36,8 @@ define(function () {
 		customerNumber: 'Nummer',
 		newCustomerName: 'Name',
 		existingCustomer: 'existierender Kunde',
-	    newCustomer: 'neuer Kunde',
+		newCustomer: 'neuer Kunde',
+		createDate: 'Erstellungsdatum'
 	};
 
 	return resources;

@@ -1,36 +1,39 @@
 using ContainerStar.API.Models;
-using ContainerStar.API.Models.Settings;
 using ContainerStar.API.Security;
-using ContainerStar.Contracts;
-using ContainerStar.Contracts.Entities;
 using ContainerStar.Contracts.Enums;
 using ContainerStar.Contracts.Managers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Dynamic;
+using ContainerStar.Contracts.Services;
+using CoreBase;
 using System.Web.Http;
 
 namespace ContainerStar.API.Controllers
 {
-    [AuthorizeByPermissions(PermissionTypes = new[] { Permissions.Orders })]
+
     /// <summary>
     ///     Controller for offers
     /// </summary>
-    public partial class OffersController: ApiController
+    [AuthorizeByPermissions(PermissionTypes = new[] { Permissions.Orders })]
+    public partial class OffersController : ApiController
     {
-        protected IOrdersManager Manager { get; private set; }
-        
-        public OffersController(IOrdersManager manager)
+        private readonly IOrdersManager manager;
+        private readonly IUniqueNumberProvider numberProvider;
+
+        public OffersController(IOrdersManager manager, IUniqueNumberProvider numberProvider)
         {
-            Manager = manager;
+            this.manager = manager;
+            this.numberProvider = numberProvider;
         }
 
         public IHttpActionResult Put(OrdersModel model)
         {
-            var order = Manager.GetById(model.Id);
+            var order = manager.GetById(model.Id);
             order.IsOffer = false;
-            Manager.SaveChanges();
+            if (string.IsNullOrEmpty(order.OrderNumber))
+            {
+                order.OrderNumber = numberProvider.GetNextOrderNumber();
+                order.RentOrderNumber = numberProvider.GetNextRentOrderNumber(ConfigHelper.RentOrderPreffix);
+            }
+            manager.SaveChanges();
 
             return Ok(new { id = model.Id });
         }
