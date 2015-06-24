@@ -14,8 +14,8 @@
         self.addView(view);
         e.detailRow.find('.detailsContainer').append(view.render().$el);
 
-        var extendedView = '<a href="' + self.editUrl + '/' + e.data.id +
-        '" class="gotoObjectDetail"><label>' + self.editItemTitle() + '</label>' +
+        var extendedView = '<a href="#" onclick="event.preventDefault(); location.href=' + "'" + self.editUrl + '/' + e.data.id +
+        "'" + '" class="gotoObjectDetail"><label>' + self.editItemTitle() + '</label>' +
         '</a><div class="relations-container"></div>';
 
 
