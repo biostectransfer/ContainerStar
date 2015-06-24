@@ -10,6 +10,5 @@ G:\ContainerStar\ContainerStar\CoreBase\CoreBase\obj\x64\Debug\CoreBase.dll
 G:\ContainerStar\ContainerStar\CoreBase\CoreBase\obj\x64\Debug\CoreBase.pdb
 d:\ILYA\Other\ContainerStar\ContainerStar\CoreBase\CoreBase\bin\x64\Debug\CoreBase.dll
 d:\ILYA\Other\ContainerStar\ContainerStar\CoreBase\CoreBase\bin\x64\Debug\CoreBase.pdb
-d:\ILYA\Other\ContainerStar\ContainerStar\CoreBase\CoreBase\obj\x64\Debug\CoreBase.csprojResolveAssemblyReference.cache
 d:\ILYA\Other\ContainerStar\ContainerStar\CoreBase\CoreBase\obj\x64\Debug\CoreBase.dll
 d:\ILYA\Other\ContainerStar\ContainerStar\CoreBase\CoreBase\obj\x64\Debug\CoreBase.pdb
