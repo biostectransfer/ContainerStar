@@ -1,27 +1,35 @@
+using System;
 using ContainerStar.API.Models;
-using ContainerStar.API.Models.Settings;
 using ContainerStar.API.Security;
 using ContainerStar.Contracts;
 using ContainerStar.Contracts.Entities;
 using ContainerStar.Contracts.Enums;
 using ContainerStar.Contracts.Managers;
-using System;
+using ContainerStar.Contracts.Services;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Dynamic;
+using CoreBase;
 
 namespace ContainerStar.API.Controllers
 {
-    [AuthorizeByPermissions(PermissionTypes = new[] { Permissions.Orders })]
     /// <summary>
     ///     Controller for <see cref="Orders"/> entity
     /// </summary>
+    [AuthorizeByPermissions(PermissionTypes = new[] { Permissions.Orders })]
+    
     public partial class OrdersController: ClientApiController<OrdersModel, Orders, int, IOrdersManager>
     {
-        private ICustomersManager customerManager { get; set; }
-        public OrdersController(IOrdersManager manager, ICustomersManager customersManager): base(manager)
+        private readonly ICustomersManager customerManager;
+        private readonly IUniqueNumberProvider numberProvider;
+
+        public OrdersController(
+            IOrdersManager manager,
+            ICustomersManager customersManager,
+            IUniqueNumberProvider numberProvider)
+            : base(manager)
         {
             this.customerManager = customersManager;
+            this.numberProvider = numberProvider;
         }
 
         protected override void EntityToModel(Orders entity, OrdersModel model)
@@ -88,6 +96,16 @@ namespace ContainerStar.API.Controllers
             entity.Discount = model.discount;
             entity.BillTillDate = model.billTillDate;
             entity.IsOffer = model.isOffer;
+
+            if (!entity.IsOffer && string.IsNullOrEmpty(entity.OrderNumber))
+            {
+                entity.OrderNumber = numberProvider.GetNextOrderNumber();
+                entity.RentOrderNumber = numberProvider.GetNextRentOrderNumber(ConfigHelper.RentOrderPreffix);
+            }
+            if (entity.IsNew())
+            {
+                entity.CreateDate = DateTime.Now;
+            }
         }
 
         protected override string BuildWhereClause<T>(Filter filter)

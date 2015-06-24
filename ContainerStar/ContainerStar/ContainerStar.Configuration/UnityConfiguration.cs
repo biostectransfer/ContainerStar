@@ -1,6 +1,8 @@
 ﻿using System.Configuration;
 using ContainerStar.Contracts;
+using ContainerStar.Contracts.Services;
 using ContainerStar.Lib.Data;
+using ContainerStar.Lib.Services;
 using Microsoft.Practices.Unity;
 using ContainerStar.Contracts.SaveActors;
 using ContainerStar.Lib.Data.SaveActors;
@@ -31,6 +33,7 @@ namespace ContainerStar.Configuration
         private static void RegisterManagers(IUnityContainer container)
         {
             InitializeContainerStar(container);
+            container.RegisterType<IUniqueNumberProvider, UniqueNumberProvider>(new ContainerControlledLifetimeManager());
         }
     }
 }

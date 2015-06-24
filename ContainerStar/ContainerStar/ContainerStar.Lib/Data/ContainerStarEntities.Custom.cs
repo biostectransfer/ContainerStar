@@ -35,6 +35,7 @@ namespace ContainerStar.Lib.Data
 
         protected override void RegisterCustomMappings(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Configurations.Add(NumbersMapping.Instance);
         }
     }
 }

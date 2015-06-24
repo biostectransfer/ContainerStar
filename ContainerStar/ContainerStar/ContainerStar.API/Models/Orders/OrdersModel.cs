@@ -77,7 +77,7 @@ namespace ContainerStar.API.Models
         /// <summary>
         ///     Model property for <see cref="Orders.RentOrderNumber"/> entity
         /// </summary>
-        [Required]
+        
         [DataMember]
         public string rentOrderNumber{ get; set; }
         /// <summary>
