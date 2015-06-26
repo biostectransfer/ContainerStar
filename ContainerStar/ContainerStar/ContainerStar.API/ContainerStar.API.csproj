@@ -128,7 +128,7 @@
     <Compile Include="Controllers\ClientBaseController.cs" />
     <Compile Include="Controllers\ClientApiController.cs" />
     <Compile Include="Controllers\ClientBaseWithoutDeleteController.cs" />
-    <Compile Include="Controllers\ContainerSmartController.cs" />
+    <Compile Include="Controllers\Orders\ContainerSmartController.cs" />
     <Compile Include="Controllers\FilterExpressionCreator.cs" />
     <Compile Include="Controllers\Orders\PrintController.cs" />
     <Compile Include="Controllers\Orders\OffersController.cs" />

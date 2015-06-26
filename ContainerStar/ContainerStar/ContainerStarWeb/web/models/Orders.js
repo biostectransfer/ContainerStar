@@ -34,7 +34,10 @@ define(function () {
 				                    validation: { required: false, maxLength: 128 } }			
 			,orderNumber: { type: "string", 
 			                        editable: Application.canTableItemBeEdit('Orders', 'orderNumber'), 
-				                    validation: { required: false, maxLength: 50 } }			
+				                    validation: { required: false, maxLength: 50 } }
+            ,customerOrderNumber: { type: "string", 
+			                        editable: Application.canTableItemBeEdit('Orders', 'customerOrderNumber'), 
+				                    validation: { required: false, maxLength: 50 } }
 			,rentOrderNumber: { type: "string", 
 			                        editable: Application.canTableItemBeEdit('Orders', 'rentOrderNumber'), 
 				                    validation: { required: true, maxLength: 50 } }			
@@ -79,7 +82,10 @@ define(function () {
 				                    validation: { required: true, maxLength: 128 } }
             ,isOffer: { type: "boolean", 
 			                        editable: Application.canTableItemBeEdit('Orders', 'isOffer'), 
-				                    validation: { required: false } }	
+				                    validation: { required: false } }
+            ,autoProlongation: { type: "boolean", 
+                                    editable: Application.canTableItemBeEdit('Orders', 'autoProlongation'),
+                                    validation: { required: false } }
 		},
 		defaults: function () {
 			var dnf = new Date();

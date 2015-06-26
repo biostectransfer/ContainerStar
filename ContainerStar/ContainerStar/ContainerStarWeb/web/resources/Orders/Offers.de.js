@@ -10,7 +10,8 @@ define(function () {
 		customerId: 'Kunde',	
 		communicationPartnerId: 'Ansprechpartner',
 		offerToOrder: 'Auftrag erstellen',
-	    printRentOrder: 'MV drucken',
+		printRentOrder: 'MV drucken',
+		rentOrderNumber: 'MV-Nummer',
 	};
 
 	return resources;

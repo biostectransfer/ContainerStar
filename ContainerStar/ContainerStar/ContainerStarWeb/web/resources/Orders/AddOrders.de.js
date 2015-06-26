@@ -19,7 +19,8 @@ define(function () {
 		comment: 'Bemerkung',	
 		orderDate: 'Bestellt am',	
 		orderedFrom: 'Bestellt von',	
-		orderNumber: 'Bestellnummer',	
+		customerOrderNumber: 'Bestellnummer',	
+		orderNumber: 'Auftrag-Nummer',	
 		rentOrderNumber: 'MV-Nummer',	
 		rentFromDate: 'MV vom',	
 		rentToDate: 'MV bis',	
@@ -37,7 +38,8 @@ define(function () {
 		newCustomerName: 'Name',
 		existingCustomer: 'existierender Kunde',
 		newCustomer: 'neuer Kunde',
-		createDate: 'Erstellungsdatum'
+		createDate: 'Erstellungsdatum',
+		autoProlongation: 'Automat. Verlängerung',
 	};
 
 	return resources;

@@ -11,6 +11,7 @@ define(function () {
 		communicationPartnerId: 'Ansprechpartner',	
 		generateBill: 'Rechnung',
 		printRentOrder: 'MV drucken',
+        rentOrderNumber: 'MV-Nummer'
 	};
 
 	return resources;

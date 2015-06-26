@@ -73,6 +73,11 @@ namespace ContainerStar.API.Models
         ///     Model property for <see cref="Orders.OrderNumber"/> entity
         /// </summary>
         [DataMember]
+        public string customerOrderNumber { get; set; }
+        /// <summary>
+        ///     Model property for <see cref="Orders.OrderNumber"/> entity
+        /// </summary>
+        [DataMember]
         public string orderNumber{ get; set; }
         /// <summary>
         ///     Model property for <see cref="Orders.RentOrderNumber"/> entity
@@ -95,6 +100,11 @@ namespace ContainerStar.API.Models
         /// </summary>
         [DataMember]
         public bool autoBill{ get; set; }
+        /// <summary>
+        ///     Model property for <see cref="Orders.AutoBill"/> entity
+        /// </summary>
+        [DataMember]
+        public bool autoProlongation { get; set; }
         /// <summary>
         ///     Model property for <see cref="Orders.Discount"/> entity
         /// </summary>

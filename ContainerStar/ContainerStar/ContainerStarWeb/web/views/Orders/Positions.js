@@ -127,8 +127,8 @@ define([
 		        result =
 		    [{
 		        template: function () {
-		            return '<a class="k-button k-button-icontext selectContainer" href="#" data-localized="selectContainer"></a>' +
-		                   '<a class="k-button k-button-icontext selectAdditionalCosts" href="#" data-localized="selectAdditionalCosts"></a>';
+		            return '<a class="k-button k-button-icontext selectContainer" style="min-width: 180px;" href="#" data-localized="selectContainer"></a>' +
+		                   '<a class="k-button k-button-icontext selectAdditionalCosts"  style="min-width: 120px;"href="#" data-localized="selectAdditionalCosts"></a>';
 		        }
 		    }];
 

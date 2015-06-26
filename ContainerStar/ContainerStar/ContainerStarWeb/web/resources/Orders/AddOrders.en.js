@@ -19,6 +19,7 @@ define(function () {
 		comment: 'Comment',	
 		orderDate: 'OrderDate',	
 		orderedFrom: 'OrderedFrom',	
+		customerOrderNumber: 'OrderNumber',	
 		orderNumber: 'OrderNumber',	
 		rentOrderNumber: 'RentOrderNumber',	
 		rentFromDate: 'RentFromDate',	
@@ -37,7 +38,8 @@ define(function () {
 		newCustomerName: 'Name',
 		existingCustomer: 'existing customer',
 		newCustomer: 'new customer',
-		createDate: 'Create date'
+		createDate: 'Create date',
+		autoProlongation: 'auto prolongation',
 	};
 
 	return resources;
