@@ -56,15 +56,15 @@ namespace ContainerStar.API.Controllers
             {
                 foreach (var filter in compositeFilter.Filters)
                 {
-                    switch (filter.Field)
+                    switch (filter.Field.ToLower())
                     {
-                        case "FromDate":
+                        case "fromdate":
                             DateTime.TryParse(filter.Value, out fromDateTemp);
                             break;
-                        case "ToDate":
+                        case "todate":
                             DateTime.TryParse(filter.Value, out toDateTemp);
                             break;
-                        case "ContainerTypeId":
+                        case "containertypeid":
                             int.TryParse(filter.Value, out typeIdTemp);
                             break;
                         default:

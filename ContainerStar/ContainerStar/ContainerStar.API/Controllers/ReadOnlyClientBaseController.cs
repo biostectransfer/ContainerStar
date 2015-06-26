@@ -73,7 +73,16 @@ namespace ContainerStar.API.Controllers
 
             entities = Sort(entities, args.Sorting);
             entities = Filter(entities, args.Filtering);
+            if (entities == null)
+            {
+                var empty = new GridResult<TModel, TId>
+                {
+                    total = 0,
+                    data = new List<TModel>()
+                };
 
+                return Ok(empty);
+            }
             var total = entities.Count();
 
             entities = Page(entities, args.Paging);

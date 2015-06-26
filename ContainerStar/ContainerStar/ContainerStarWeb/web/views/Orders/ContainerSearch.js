@@ -1,7 +1,7 @@
 define([
 'base/base-object-grid-view',
-'collections/Settings/Containers',
-'l!t!Settings/FilterContainers'
+'collections/ContainersSmart',
+'l!t!Settings/FilterContainerSmart'
 ], function (BaseView, Collection, FilterView) {
     'use strict';
 

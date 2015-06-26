@@ -220,6 +220,7 @@
     <Content Include="web.libs\jquery.signalR-2.2.0.js" />
     <Content Include="web.libs\jquery.signalR-2.2.0.min.js" />
     <Content Include="web.libs\jszip.js" />
+    <Content Include="web\collections\ContainersSmart.js" />
     <Content Include="web\collections\Positions.js" />
     <Content Include="web\collections\Orders.js" />
     <Content Include="web\collections\Settings\AdditionalCosts.js">
@@ -269,6 +270,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>web.collections.tt</DependentUpon>
     </Content>
+    <Content Include="web\models\ContainerSmart.js" />
+    <Content Include="web\models\FilterContainerSmart.js" />
     <Content Include="web\models\FilterOrders.js" />
     <Content Include="web\models\login.js" />
     <Content Include="web\models\Positions.js" />
@@ -349,6 +352,8 @@
       <DependentUpon>web.models.tt</DependentUpon>
     </Content>
     <Content Include="web\models\view-collection.js" />
+    <Content Include="web\resources\Settings\FilterContainerSmart.de.js" />
+    <Content Include="web\resources\Settings\FilterContainerSmart.en.js" />
     <Content Include="web\resources\Orders\AddPositions.de.js" />
     <Content Include="web\resources\Orders\AddOrders.de.js" />
     <Content Include="web\resources\Orders\AddPositions.en.js" />
@@ -827,6 +832,7 @@
     <Content Include="web\templates\Settings\FilterRole.html">
       <DependentUpon>web.templates.tt</DependentUpon>
     </Content>
+    <Content Include="web\templates\Settings\FilterContainerSmart.html" />
     <Content Include="web\templates\Settings\FilterTaxes.html" />
     <Content Include="web\templates\Settings\FilterTransportProducts.html">
       <DependentUpon>web.templates.tt</DependentUpon>
@@ -894,6 +900,7 @@
     <Content Include="web\application-start.js" />
     <Content Include="web\views\Orders\AdditionalCostsSearch.js" />
     <Content Include="web\views\Orders\ContainerSearch.js" />
+    <Content Include="web\views\Settings\FilterContainerSmart.js" />
     <Content Include="web\views\Orders\Offers.js" />
     <Content Include="web\views\Orders\AddPositions.js" />
     <Content Include="web\views\Orders\AddOrders.js" />
