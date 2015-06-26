@@ -103,7 +103,8 @@ namespace ContainerStar.Lib.Managers
                 {
                     case PrintTypes.RentOrder:
                         result = ReplaceCommonFields(order, result);
-                        result = ReplaceResultFields(order, result);
+                        result = ReplaceRentPositions(order, result);
+                        result = ReplaceRentAdditionalCostPositions(order, result);
                         break;
                     default:
                         throw new NotImplementedException();
@@ -124,54 +125,27 @@ namespace ContainerStar.Lib.Managers
             xmlMainXMLDoc = xmlMainXMLDoc.Replace("#Street", order.Street);
             xmlMainXMLDoc = xmlMainXMLDoc.Replace("#ZIP", order.Zip.ToString());
             xmlMainXMLDoc = xmlMainXMLDoc.Replace("#City", order.City);
-            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#Today", ConvertToTimeString(DateTime.Now));            
+            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#Today", DateTime.Now.ToShortDateString());            
                         
             return xmlMainXMLDoc;
         }
 
-        private string ReplaceResultFields(Orders order, string xmlMainXMLDoc)
+        private string ReplaceRentPositions(Orders order, string xmlMainXMLDoc)
         {
             if (order.Positions != null && order.Positions.Count != 0)
             {
                 var positions = order.Positions.Where(o => !o.DeleteDate.HasValue && o.ContainerId.HasValue).ToList();
                 var minDate = positions.Min(o => o.FromDate);
-                var maxDate = positions.Min(o => o.ToDate);
+                var maxDate = positions.Max(o => o.ToDate);
 
-                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#FromDate", ConvertToTimeString(minDate));
-                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#ToDate", ConvertToTimeString(minDate));  
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#FromDate", minDate.ToShortDateString());
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#ToDate", maxDate.ToShortDateString());
 
-                var xmlDoc = XDocument.Parse(xmlMainXMLDoc);
-                var temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#ContainerDescription"));
-                var parentTableElement = GetParentElementByName(temp, "<w:tr ");
-                
-                if (parentTableElement != null)
-                {
-                    var prevTableElem = parentTableElement;
 
-                    foreach (var position in positions)
-                    {
-                        //var positionDescription = String.Format("<w:p>*\t 1 Stück {0}</w:p><w:p>Maße {1}x{2}x{3} mm</w:p><w:p>mit folgender Ausstattung / Einrichtung:</w:p>", 
-                        //    position.Containers.ContainerTypes.Name,
-                        //    position.Containers.Length,
-                        //    position.Containers.Width,
-                        //    position.Containers.Height);
+                xmlMainXMLDoc = ReplacePositionWithDescription(positions, xmlMainXMLDoc);
 
-                        var positionDescription = String.Format("*\t 1 Stück {0}",
-                            position.Containers.ContainerTypes.Name);
-
-                        
-                        var elem = XElement.Parse(parentTableElement.ToString());
-                        var parentTextElement = GetParentElementByName(elem, "<w:p ");
-                        //.
-                        //    Replace("#ContainerDescription", positionDescription)
-                        prevTableElem.AddAfterSelf(elem);
-                        prevTableElem = elem;
-                    }
-
-                    parentTableElement.Remove(); 
-
-                    xmlMainXMLDoc = xmlDoc.Root.ToString();
-                }
+                xmlMainXMLDoc = ReplaceShortPositionDescription(positions, xmlMainXMLDoc);
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#ContainerDescription", String.Empty);
             }
             else
             {
@@ -181,6 +155,128 @@ namespace ContainerStar.Lib.Managers
             }
 
             return xmlMainXMLDoc;
+        }
+
+        private string ReplaceRentAdditionalCostPositions(Orders order, string xmlMainXMLDoc)
+        {
+            if (order.Positions != null && order.Positions.Count != 0)
+            {
+                var positions = order.Positions.Where(o => !o.DeleteDate.HasValue && o.AdditionalCostId.HasValue).ToList();
+                var xmlDoc = XDocument.Parse(xmlMainXMLDoc);
+                var temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#AdditionalCostDescription"));
+                var parentTableElement = GetParentElementByName(temp, "<w:tr ");
+                var prevElement = parentTableElement;
+
+                if (parentTableElement != null)
+                {
+                    foreach (var position in positions)
+                    {
+                        var textElem = XElement.Parse(parentTableElement.ToString().
+                            Replace("#AdditionalCostDescription", position.AdditionalCosts.Description).
+                            Replace("#AdditionalCostPrice", Math.Round(position.Price, 2).ToString()));
+                        prevElement.AddAfterSelf(textElem);
+                        prevElement = textElem;
+                    }
+
+                    parentTableElement.Remove();
+                }
+
+                xmlMainXMLDoc = xmlDoc.Root.ToString();
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#AdditionalCostDescription", String.Empty);
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#AdditionalCostPrice", String.Empty);
+            }
+            else
+            {
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#AdditionalCostDescription", String.Empty);
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#AdditionalCostPrice", String.Empty);
+            }
+
+            return xmlMainXMLDoc;
+        }
+
+        private string ReplaceShortPositionDescription(List<Positions> positions, string xmlMainXMLDoc)
+        {
+            var xmlDoc = XDocument.Parse(xmlMainXMLDoc);
+            var temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#RentPositionDescription"));
+            var parentTableElement = GetParentElementByName(temp, "<w:tr ");
+            var prevElement = parentTableElement;
+
+            if (parentTableElement != null)
+            {
+                foreach (var position in positions)
+                {
+                    var textElem = XElement.Parse(parentTableElement.ToString().
+                        Replace("#RentPositionDescription", position.Containers.ContainerTypes.Name).
+                        Replace("#RentPrice", Math.Round(position.Price / (double)30, 2).ToString()));
+                    prevElement.AddAfterSelf(textElem);
+                    prevElement = textElem;
+                }
+
+                parentTableElement.Remove();
+            }
+
+            return xmlDoc.Root.ToString();
+        }
+        
+        private string ReplacePositionWithDescription(List<Positions> positions, string xmlMainXMLDoc)
+        {
+            var xmlDoc = XDocument.Parse(xmlMainXMLDoc);
+            var temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#ContainerDescription"));
+            var parentTableElement = GetParentElementByName(temp, "<w:tr ");
+
+            if (parentTableElement != null)
+            {
+                var prevTableElem = parentTableElement;
+
+                foreach (var position in positions)
+                {
+                    var rowElem = XElement.Parse(parentTableElement.ToString());
+                    prevTableElem.AddAfterSelf(rowElem);
+                    prevTableElem = rowElem;
+
+                    var temp2 = prevTableElem.Descendants().LastOrDefault(o => o.Value.Contains("#ContainerDescription"));
+                    var textElem = GetParentElementByName(temp2, "<w:p ");
+                    var prevTextElem = textElem;
+
+                    var elem = XElement.Parse(textElem.ToString().
+                        Replace("#ContainerDescription", String.Format("*\t 1 Stück {0}",
+                        position.Containers.ContainerTypes.Name)));
+
+                    prevTextElem.AddAfterSelf(elem);
+                    prevTextElem = elem;
+
+                    elem = XElement.Parse(textElem.ToString().
+                        Replace("#ContainerDescription", String.Format("Maße {0}x{1}x{2} mm",
+                        position.Containers.Length,
+                        position.Containers.Width,
+                        position.Containers.Height)));
+
+                    prevTextElem.AddAfterSelf(elem);
+                    prevTextElem = elem;
+
+                    elem = XElement.Parse(textElem.ToString().
+                        Replace("#ContainerDescription", "mit folgender Ausstattung / Einrichtung:"));
+
+                    prevTextElem.AddAfterSelf(elem);
+                    prevTextElem = elem;
+
+                    foreach (var equipment in position.Containers.ContainerEquipmentRsps)
+                    {
+                        elem = XElement.Parse(textElem.ToString().
+                            Replace("#ContainerDescription",
+                            String.Format("{0} x {1}", equipment.Amount, equipment.Equipments.Description)));
+
+                        prevTextElem.AddAfterSelf(elem);
+                        prevTextElem = elem;
+                    }
+
+                    textElem.Remove();
+                }
+
+                parentTableElement.Remove();
+            }
+
+            return xmlDoc.Root.ToString();
         }
 
         private static string ConvertToTimeString(DateTime date)
