@@ -11,6 +11,7 @@ define(function () {
 		communicationPartnerId: 'Communication partner',	
 		generateBill: 'Generate bill',
 		printRentOrder: 'Print rent order',
+		rentOrderNumber: 'Rent order number',
 	};
 
 	return resources;

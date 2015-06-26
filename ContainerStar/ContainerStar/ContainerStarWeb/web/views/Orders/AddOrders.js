@@ -21,6 +21,7 @@ define([
                 'comment',
                 'orderDate',
                 'orderedFrom',
+                'customerOrderNumber',
                 'orderNumber',
                 'rentOrderNumber',
                 'rentFromDate',
@@ -40,6 +41,7 @@ define([
                 'customerId',
                 'communicationPartnerId',
                 'customerSelectType',
+                'autoProlongation',
                 'isOffer');
         
         attributesToSave["customerNumber"] = $('#customerNumber').val();
@@ -55,12 +57,12 @@ define([
                 contentType: 'application/json',
                 success: function (response) {
                     
-                    deferred.resolve();
-
                     if(response.get('isOffer'))
                         location.href = "#Offers/" + response.id;
                     else
                         location.href = "#Orders/" + response.id;
+
+                    return deferred.resolve();
                 },
                 error: function (model, response) {
                     self.validateResponse(response);
@@ -115,6 +117,7 @@ define([
                 '#orderDate': 'orderDate',
                 '#orderedFrom': 'orderedFrom',
                 '#orderNumber': 'orderNumber',
+                '#customerOrderNumber': 'orderNumber',
                 '#rentOrderNumber': 'rentOrderNumber',
                 '#rentFromDate': 'rentFromDate',
                 '#rentToDate': 'rentToDate',
@@ -130,6 +133,7 @@ define([
                 '#customerFax': 'customerFax',
                 '#customerEmail': 'customerEmail',
                 '#createDate': 'createDate',
+                '#autoProlongation': 'autoProlongation',
                 '.radioButtons': {
                     observe: 'id',
                     visible: function (val) {
@@ -137,6 +141,12 @@ define([
                     }
                 },
                 '#isOffer': 'isOffer',
+                '.rowWithOrderNumbers': {
+                    observe: 'id',
+                    visible: function (val) {
+                        return val != undefined && val != "" && !self.model.get('isOffer');
+                    }
+                },
             };
             
             return result;
@@ -172,6 +182,7 @@ define([
                     $('#customerCity').val('0');
                     $('#customerZip').val('0');
                     $('#customerId').val('');
+                    $('#customerId_Name').val('');
                 }
                 else if(customerSelectType === "2")
                 {

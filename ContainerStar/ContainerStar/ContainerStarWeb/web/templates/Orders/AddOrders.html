@@ -5,6 +5,33 @@
 <form method="post" class="add-model">
     <input type="hidden" id="isOffer" name="isOffer" />
     <table style="width: 100%; vertical-align: top; padding: 0px; margin: 0px; white-space: nowrap;" cellpadding="0" cellspacing="0">
+        <tr class="rowWithOrderNumbers">
+            <td style="padding-right: 25px; vertical-align: top;">
+                <div class="editor-label">
+                    <label for="orderNumber" data-localized="orderNumber"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" readonly="readonly" class="k-textbox" style="width: 489px; background-color: lightgrey" id="orderNumber" name="orderNumber" />
+                </div>
+            </td>
+            <td style="padding-right: 25px; vertical-align: top; ">
+                <div class="editor-label">
+                    <label for="rentOrderNumber" data-localized="rentOrderNumber"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" readonly="readonly" class="k-textbox" style="width: 362px; background-color: lightgrey" id="rentOrderNumber" name="rentOrderNumber" />
+                </div>
+            </td>
+            <td style="padding-right: 25px; vertical-align: top; ">
+                <div class="editor-label">
+                    <label for="createDate" data-localized="createDate"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" readonly="readonly" style="background-color: lightgrey"  data-role="datepicker" id="createDate" name="createDate" />
+                </div>
+            </td>
+            <td style="width: 100%;">&nbsp;</td>
+        </tr>
         <tr class="radioButtons">
             <td style="padding-right: 25px; vertical-align: top; width: 280px;" colspan="2">
                 <input id="customerSelectType" name="customerSelectType" type="radio" value="1" checked="checked" /><label data-localized="existingCustomer"></label>
@@ -164,7 +191,12 @@
                 </div>
             </td>
             <td style="padding-right: 25px; vertical-align: top;">
-                &nbsp;
+                <div class="editor-label">
+                    <label for="customerOrderNumber" data-localized="customerOrderNumber"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" class="k-textbox" style="width: 362px;" id="customerOrderNumber" name="customerOrderNumber" />
+                </div>
             </td>
             <td style="padding-right: 25px; vertical-align: top;">
                 <div class="editor-label">
@@ -175,40 +207,10 @@
                 </div>
             </td>
             <td style="width: 100%;">&nbsp;</td>
-        </tr>
-
-        <tr id="rowWithOrderNubmers">
-            <td style="padding-right: 25px; vertical-align: top;">
-                <div class="editor-label">
-                    <label for="orderNumber" data-localized="orderNumber"></label>
-                </div>
-                <div class="editor-field">
-                    <input type="text" readonly="readonly" class="k-textbox" style="width: 489px;" id="orderNumber" name="orderNumber" />
-                </div>
-            </td>
-            <td style="padding-right: 25px; vertical-align: top; ">
-                <div class="editor-label">
-                    <label for="rentOrderNumber" data-localized="rentOrderNumber"></label>
-                </div>
-                <div class="editor-field">
-                    <input type="text" readonly="readonly" class="k-textbox" style="width: 362px" id="rentOrderNumber" name="rentOrderNumber" />
-                </div>
-            </td>
-
-            <td style="padding-right: 25px; vertical-align: top; ">
-                <div class="editor-label">
-                    <label for="createDate" data-localized="createDate"></label>
-                </div>
-                <div class="editor-field">
-                    <input type="text" readonly="readonly" data-role="datepicker" id="createDate" name="createDate" />
-                </div>
-            </td>
-            <td style="width: 100%;">&nbsp;</td>
-        </tr>
+        </tr>        
     </table>
     <table style="width: 100%; vertical-align: top; padding: 0px; margin: 0px; white-space: nowrap;" cellpadding="0" cellspacing="0">
-        <tr>
-
+        <!--<tr>
             <td style="padding-right: 25px; vertical-align: top; ">
                 <div class="editor-label">
                     <label for="rentFromDate" data-localized="rentFromDate"></label>
@@ -226,8 +228,8 @@
                 </div>
             </td>
 
-            <td colspan="2" style="width: 100%;">&nbsp;</td>
-        </tr>
+            <td colspan="3" style="width: 100%;">&nbsp;</td>
+        </tr>-->
         <tr>
             <td style="padding-right: 25px; vertical-align: top; ">
                 <div class="editor-label">
@@ -249,6 +251,12 @@
                 <div class="editor-label">
                     <br /><br />
                     <label for="autoBill" data-localized="autoBill"></label><input type="checkbox" id="autoBill" name="autoBill" />
+                </div>
+            </td>
+            <td style="padding-right: 25px; vertical-align: top; white-space: nowrap;">
+                <div class="editor-label">
+                    <br /><br />
+                    <label for="autoProlongation" data-localized="autoProlongation"></label><input type="checkbox" id="autoProlongation" name="autoProlongation" />
                 </div>
             </td>
             <td style="width: 100%;">&nbsp;</td>

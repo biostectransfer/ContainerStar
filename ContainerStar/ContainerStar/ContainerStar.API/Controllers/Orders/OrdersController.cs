@@ -53,6 +53,8 @@ namespace ContainerStar.API.Controllers
             model.createDate = ((ISystemFields)entity).CreateDate;
             model.changeDate = ((ISystemFields)entity).ChangeDate;
             model.isOffer = entity.IsOffer;
+            model.customerOrderNumber = entity.CustomerOrderNumber;
+            model.autoProlongation = entity.AutoProlongation;
 
             ExtraEntityToModel(entity, model);
         }
@@ -96,8 +98,10 @@ namespace ContainerStar.API.Controllers
             entity.Discount = model.discount;
             entity.BillTillDate = model.billTillDate;
             entity.IsOffer = model.isOffer;
+            entity.AutoProlongation = model.autoProlongation;
+            entity.CustomerOrderNumber = model.customerOrderNumber;
 
-            if (!entity.IsOffer && string.IsNullOrEmpty(entity.OrderNumber))
+            if (!entity.IsOffer && entity.IsNew())
             {
                 entity.OrderNumber = numberProvider.GetNextOrderNumber();
                 entity.RentOrderNumber = numberProvider.GetNextRentOrderNumber(ConfigHelper.RentOrderPreffix);
@@ -116,6 +120,7 @@ namespace ContainerStar.API.Controllers
 
                 clauses.AddRange(new[] { 
         				base.BuildWhereClause<T>(new Filter { Field = "Customers.Name", Operator = filter.Operator, Value = filter.Value }),
+        				base.BuildWhereClause<T>(new Filter { Field = "RentOrderNumber", Operator = filter.Operator, Value = filter.Value }),
         			});
 
                 return string.Join(" or ", clauses);

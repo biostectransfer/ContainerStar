@@ -102,6 +102,14 @@ namespace ContainerStar.Contracts.Entities
             /// Column name 'DeleteDate' for property <see cref="Orders.DeleteDate"/>
             /// </summary>
             public static readonly string DeleteDate = "DeleteDate";
+            /// <summary>
+            /// Column name 'CustomerOrderNumber' for property <see cref="Orders.CustomerOrderNumber"/>
+            /// </summary>
+            public static readonly string CustomerOrderNumber = "CustomerOrderNumber";
+            /// <summary>
+            /// Column name 'AutoProlongation' for property <see cref="Orders.AutoProlongation"/>
+            /// </summary>
+            public static readonly string AutoProlongation = "AutoProlongation";
           
         }
         #endregion
@@ -126,6 +134,8 @@ namespace ContainerStar.Contracts.Entities
         public DateTime CreateDate{ get; set; }
         public DateTime ChangeDate{ get; set; }
         public DateTime? DeleteDate{ get; set; }
+        public string CustomerOrderNumber{ get; set; }
+        public bool AutoProlongation{ get; set; }
         public virtual Customers Customers{ get; set; }
         public virtual CommunicationPartners CommunicationPartners{ get; set; }
         public virtual ICollection<Positions> Positions{ get; set; }
@@ -175,6 +185,8 @@ namespace ContainerStar.Contracts.Entities
                        CreateDate = CreateDate,
                        ChangeDate = ChangeDate,
                        DeleteDate = DeleteDate,
+                       CustomerOrderNumber = CustomerOrderNumber,
+                       AutoProlongation = AutoProlongation,
         	           };
         }
     }

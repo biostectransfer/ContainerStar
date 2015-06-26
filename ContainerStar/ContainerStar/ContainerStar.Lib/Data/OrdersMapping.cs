@@ -81,7 +81,6 @@ namespace ContainerStar.Lib.Data
 
             Property(t => t.RentOrderNumber)
                 .HasColumnName(Orders.Fields.RentOrderNumber)
-                .IsRequired()
                 .IsUnicode()
                 .HasMaxLength(50);
 
@@ -111,6 +110,15 @@ namespace ContainerStar.Lib.Data
 
             Property(t => t.DeleteDate)
                 .HasColumnName(Orders.Fields.DeleteDate);
+
+            Property(t => t.CustomerOrderNumber)
+                .HasColumnName(Orders.Fields.CustomerOrderNumber)
+                .IsUnicode()
+                .HasMaxLength(50);
+
+            Property(t => t.AutoProlongation)
+                .HasColumnName(Orders.Fields.AutoProlongation)
+                .IsRequired();
 
 
             //Relationships

@@ -35,6 +35,7 @@
 		columns: function () {
 			
 			return [
+				{ field: 'rentOrderNumber', title: this.resources.rentOrderNumber },
 				{ field: 'customerName', title: this.resources.customerId },
 				{ field: 'communicationPartnerTitle', title: this.resources.communicationPartnerId },
 			];

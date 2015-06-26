@@ -1,3 +1,5 @@
+USE ContainerStar;
+
 CREATE TABLE dbo.Numbers
 	(
 	Id int NOT NULL IDENTITY (1, 1),
