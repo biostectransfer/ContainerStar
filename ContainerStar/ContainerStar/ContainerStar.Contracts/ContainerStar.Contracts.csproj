@@ -145,6 +145,7 @@
     <Compile Include="Managers\IContainersManager.cs">
       <DependentUpon>IManagers.tt</DependentUpon>
     </Compile>
+    <Compile Include="Managers\IContainersManager.Custom.cs" />
     <Compile Include="Managers\IContainerTypeEquipmentRspManager.cs">
       <DependentUpon>IManagers.tt</DependentUpon>
     </Compile>
