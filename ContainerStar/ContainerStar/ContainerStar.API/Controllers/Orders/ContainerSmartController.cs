@@ -2,33 +2,79 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ContainerStar.API.Controllers.Settings;
+using ContainerStar.API.Models.Orders;
+using ContainerStar.Contracts;
 using ContainerStar.Contracts.Entities;
 using ContainerStar.Contracts.Managers;
 
 namespace ContainerStar.API.Controllers
 {
-    public class ContainerSmartController : ContainersController
+    public class ContainerSmartController : ClientApiController<ContainerSmartModel, Containers, int, IContainersManager>
     {
+        private DateTime fromDate;
+        private DateTime toDate;
+        
         public ContainerSmartController(IContainersManager manager) : base(manager)
         {
+        }
+
+        protected override void EntityToModel(Containers entity, ContainerSmartModel model)
+        {
+            model.number = entity.Number;
+            model.containerTypeId = entity.ContainerTypeId;
+            model.length = entity.Length;
+            model.width = entity.Width;
+            model.height = entity.Height;
+            model.color = entity.Color;
+            model.price = entity.Price;
+            model.proceedsAccount = entity.ProceedsAccount;
+            model.isVirtual = entity.IsVirtual;
+            model.manufactureDate = entity.ManufactureDate;
+            model.boughtFrom = entity.BoughtFrom;
+            model.boughtPrice = entity.BoughtPrice;
+            model.comment = entity.Comment;
+            model.sellPrice = entity.SellPrice;
+            model.createDate = ((ISystemFields)entity).CreateDate;
+            model.changeDate = ((ISystemFields)entity).ChangeDate;
+
+            //specific
+            model.fromDate = fromDate;
+            model.toDate = toDate;
+        }
+
+        protected override void ModelToEntity(ContainerSmartModel model, Containers entity, ActionTypes actionType)
+        {
+            entity.Number = model.number;
+            entity.ContainerTypeId = model.containerTypeId;
+            entity.Length = model.length;
+            entity.Width = model.width;
+            entity.Height = model.height;
+            entity.Color = model.color;
+            entity.Price = model.price;
+            entity.ProceedsAccount = model.proceedsAccount;
+            entity.IsVirtual = model.isVirtual;
+            entity.ManufactureDate = model.manufactureDate;
+            entity.BoughtFrom = model.boughtFrom;
+            entity.BoughtPrice = model.boughtPrice;
+            entity.Comment = model.comment;
+            entity.SellPrice = model.sellPrice;
         }
 
         protected override IQueryable<Containers> Filter(IQueryable<Containers> entities, Filtering filtering)
         {
             //Filter is performed by only 3 parameters : 1. container type, 2. available from, 3. available to
-            DateTime? fromDateTemp;
-            DateTime? toDateTemp;
+            DateTime fromDateTemp;
+            DateTime toDateTemp;
             int? typeId;
 
-            GetFilters(filtering, out fromDateTemp, out toDateTemp, out typeId);
+            GetFilters(filtering, out typeId);
 
-            if (!fromDateTemp.HasValue || !toDateTemp.HasValue)
+            if (fromDate == DateTime.MinValue || toDate == DateTime.MinValue)
             {
                 return null;
             }
 
-            var positions = Manager.GetActualPositions(fromDateTemp.Value, toDateTemp.Value);
+            var positions = Manager.GetActualPositions(fromDate, toDate);
             var ids = GetActualIds(positions);
 
             return Manager.GetFreeContainers(ids, typeId);
@@ -47,10 +93,10 @@ namespace ContainerStar.API.Controllers
             return result;
         }
 
-        private void GetFilters(Filtering filtering, out DateTime? fromDate, out DateTime? toDate, out int? typeId)
+        private void GetFilters(Filtering filtering, out int? typeId)
         {
-            var fromDateTemp = DateTime.MinValue;
-            var toDateTemp = DateTime.MinValue;
+            fromDate = DateTime.MinValue;
+            toDate = DateTime.MinValue;
             var typeIdTemp = -1;
             foreach (var compositeFilter in filtering.Filters)
             {
@@ -59,10 +105,10 @@ namespace ContainerStar.API.Controllers
                     switch (filter.Field.ToLower())
                     {
                         case "fromdate":
-                            DateTime.TryParse(filter.Value, out fromDateTemp);
+                            DateTime.TryParse(filter.Value, out fromDate);
                             break;
                         case "todate":
-                            DateTime.TryParse(filter.Value, out toDateTemp);
+                            DateTime.TryParse(filter.Value, out toDate);
                             break;
                         case "containertypeid":
                             int.TryParse(filter.Value, out typeIdTemp);
@@ -73,9 +119,9 @@ namespace ContainerStar.API.Controllers
                     }
                 }
             }
-            fromDate = (fromDateTemp == DateTime.MinValue) ? (DateTime?)null : fromDateTemp;
-            toDate = (toDateTemp == DateTime.MinValue) ? (DateTime?)null : toDateTemp;
             typeId = (typeIdTemp < 1) ? (int?)null : typeIdTemp;
         }
+
+        
     }
 }

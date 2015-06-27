@@ -11,12 +11,14 @@ define([
         var grid = self.grid,
             dataItem = grid.dataItem(grid.select()),
             model = dataItem ? self.collection.get(dataItem.id) : null;
-
-        if (model)
-            self.options.success(model);
-        else
-            self.$('.select-message').show();
-    },
+            
+            if (model) {
+                model.fromDate = dataItem.fromDate;
+                model.toDate = dataItem.toDate;
+                self.options.success(model);
+            } else
+                self.$('.select-message').show();
+        },
 
 
     view = BaseView.extend({

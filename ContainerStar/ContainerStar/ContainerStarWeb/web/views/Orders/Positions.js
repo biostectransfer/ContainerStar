@@ -29,6 +29,8 @@ define([
             return [
                  { field: 'description', title: this.resources.containerId },
                  { field: 'price', title: this.resources.price },
+                 { field: 'fromDate', title: this.resources.fromDate, editable: false, format: '{0:d}' },
+                 { field: 'toDate', title: this.resources.toDate, editable: false, format: '{0:d}' }
             ];
         },
 
@@ -68,6 +70,8 @@ define([
                     model.set('orderId', self.model.id);
                     model.set('containerId', item.id);
                     model.set('price', item.get('price'));
+                    model.set('fromDate', item.get('fromDate'));
+                    model.set('toDate', item.get('toDate'));
 
                     model.save({}, {
                         data: kendo.stringify(model),
