@@ -70,9 +70,9 @@ namespace ContainerStar.API.Controllers
         public virtual IHttpActionResult Get([FromUri] GridArgs args)
         {
             var entities = GetEntities();
-
-            entities = Sort(entities, args.Sorting);
             entities = Filter(entities, args.Filtering);
+            entities = Sort(entities, args.Sorting);
+            
             if (entities == null)
             {
                 var empty = new GridResult<TModel, TId>
@@ -121,6 +121,10 @@ namespace ContainerStar.API.Controllers
 
         protected virtual IQueryable<TEntity> Sort(IQueryable<TEntity> entities, Sorting sorting)
         {
+            if (entities == null)
+            {
+                return entities;
+            }
             var result = entities;
 
             if (!String.IsNullOrEmpty(sorting.Field))
