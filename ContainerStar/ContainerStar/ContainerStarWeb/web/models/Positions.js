@@ -19,7 +19,10 @@ define(function () {
 				                    validation: { required: false } }			
 			,price: { type: "number", 
 			                        editable: Application.canTableItemBeEdit('Positions', 'price'), 
-				                    validation: { required: true } }				
+				                    validation: { required: true } }
+            ,amount: { type: "number", 
+			                        editable: Application.canTableItemBeEdit('Positions', 'amount'), 
+				                    validation: { required: true } }
 			,fromDate: { type: "date", 
 			                        editable: false, 
 				                    validation: { required: false, date: true } }						

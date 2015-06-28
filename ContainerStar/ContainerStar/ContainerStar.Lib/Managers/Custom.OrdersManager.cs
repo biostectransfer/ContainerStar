@@ -173,7 +173,7 @@ namespace ContainerStar.Lib.Managers
                     {
                         var textElem = XElement.Parse(parentTableElement.ToString().
                             Replace("#AdditionalCostDescription", position.AdditionalCosts.Description).
-                            Replace("#AdditionalCostPrice", Math.Round(position.Price, 2).ToString()));
+                            Replace("#AdditionalCostPrice", Math.Round(position.Price * position.Amount, 2).ToString()));
                         prevElement.AddAfterSelf(textElem);
                         prevElement = textElem;
                     }

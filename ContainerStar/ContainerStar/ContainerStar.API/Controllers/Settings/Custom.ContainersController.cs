@@ -3,6 +3,7 @@ using ContainerStar.Contracts.Entities;
 using System.Web.Http;
 using CoreBase;
 using System.Collections.Generic;
+using ContainerStar.Contracts.Managers;
 
 namespace ContainerStar.API.Controllers.Settings
 {
@@ -24,6 +25,25 @@ namespace ContainerStar.API.Controllers.Settings
             }
 
             return base.BuildWhereClause<T>(filter);
+        }
+
+        protected void ExtraModelToEntity(Containers entity, ContainersModel model, ActionTypes actionType)
+        {
+            if (actionType == ActionTypes.Add)
+            {
+                entity.ContainerEquipmentRsps = new List<ContainerEquipmentRsp>();
+                var containerTypeManager = GlobalConfiguration.Configuration.DependencyResolver.GetService<IContainerTypesManager>();
+                var containerType = containerTypeManager.GetById(model.containerTypeId);
+                foreach (var equipment in containerType.ContainerTypeEquipmentRsps)
+                {
+                    entity.ContainerEquipmentRsps.Add(new ContainerEquipmentRsp()
+                    {
+                        Amount = equipment.Amount,
+                        Containers = entity,
+                        EquipmentId = equipment.EquipmentId
+                    });
+                }
+            }
         }
     }
 }

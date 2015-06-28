@@ -15,6 +15,7 @@ define(function () {
 		toDate: 'To date',
 		selectContainer: 'Container',
 		selectAdditionalCosts: 'additional costs',
+		amount: 'Amount'
 	};
 
 	return resources;

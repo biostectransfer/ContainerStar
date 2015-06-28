@@ -29,6 +29,7 @@ define([
             return [
                  { field: 'description', title: this.resources.containerId },
                  { field: 'price', title: this.resources.price },
+                 { field: 'amount', title: this.resources.amount },
                  { field: 'fromDate', title: this.resources.fromDate, format: '{0:d}' },
                  { field: 'toDate', title: this.resources.toDate, format: '{0:d}' }
             ];
@@ -105,6 +106,7 @@ define([
                     model.set('orderId', self.model.id);
                     model.set('additionalCostId', item.id);
                     model.set('price', item.get('price'));
+                    model.set('amount', 1);
 
                     model.save({}, {
                         data: kendo.stringify(model),

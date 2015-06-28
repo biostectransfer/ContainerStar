@@ -53,6 +53,8 @@ namespace ContainerStar.API.Controllers.Settings
             entity.BoughtPrice = model.boughtPrice;
             entity.Comment = model.comment;
             entity.SellPrice = model.sellPrice;
+
+            ExtraModelToEntity(entity, model, actionType);
         }
     }
 }

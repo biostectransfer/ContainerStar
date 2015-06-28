@@ -28,6 +28,8 @@ namespace ContainerStar.API.Controllers
             if(entity.ContainerId.HasValue)
             {
                 model.description = entity.Containers.ContainerTypes.Name;
+                model.fromDate = entity.FromDate;
+                model.toDate = entity.ToDate;
             }
 
             model.additionalCostId = entity.AdditionalCostId;
@@ -36,10 +38,9 @@ namespace ContainerStar.API.Controllers
             {
                 model.description = entity.AdditionalCosts.Name;
             }
-            
+
+            model.amount = entity.Amount;
             model.price = entity.Price;
-            model.fromDate = entity.FromDate;
-            model.toDate = entity.ToDate;
             model.createDate = ((ISystemFields)entity).CreateDate;
             model.changeDate = ((ISystemFields)entity).ChangeDate;
 
@@ -51,8 +52,13 @@ namespace ContainerStar.API.Controllers
             entity.ContainerId = model.containerId;
             entity.AdditionalCostId = model.additionalCostId;
             entity.Price = model.price;
-            entity.FromDate = model.fromDate;
-            entity.ToDate = model.toDate;
+            entity.FromDate = model.fromDate.HasValue ? model.fromDate.Value.Date : DateTime.Now.Date;
+            entity.ToDate = model.toDate.HasValue ? model.toDate.Value.Date : DateTime.Now.Date;
+
+            if (model.containerId.HasValue)
+                entity.Amount = 1;
+            else
+                entity.Amount = model.amount;
         }
     }
 }

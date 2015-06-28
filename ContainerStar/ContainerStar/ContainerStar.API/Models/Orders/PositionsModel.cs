@@ -35,10 +35,12 @@ namespace ContainerStar.API.Models
 
         [Required]
         [DataMember]
-        public DateTime fromDate { get; set; }
+        public int amount { get; set; }
 
-        [Required]
         [DataMember]
-        public DateTime toDate { get; set; }
+        public DateTime? fromDate { get; set; }
+
+        [DataMember]
+        public DateTime? toDate { get; set; }
     }
 }

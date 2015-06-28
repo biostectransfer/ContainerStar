@@ -62,6 +62,10 @@ namespace ContainerStar.Contracts.Entities
             /// Column name 'DeleteDate' for property <see cref="Positions.DeleteDate"/>
             /// </summary>
             public static readonly string DeleteDate = "DeleteDate";
+            /// <summary>
+            /// Column name 'Amount' for property <see cref="Positions.Amount"/>
+            /// </summary>
+            public static readonly string Amount = "Amount";
           
         }
         #endregion
@@ -76,6 +80,7 @@ namespace ContainerStar.Contracts.Entities
         public DateTime CreateDate{ get; set; }
         public DateTime ChangeDate{ get; set; }
         public DateTime? DeleteDate{ get; set; }
+        public int Amount{ get; set; }
         public virtual Orders Orders{ get; set; }
         public virtual Containers Containers{ get; set; }
         public virtual AdditionalCosts AdditionalCosts{ get; set; }
@@ -129,6 +134,7 @@ namespace ContainerStar.Contracts.Entities
                        CreateDate = CreateDate,
                        ChangeDate = ChangeDate,
                        DeleteDate = DeleteDate,
+                       Amount = Amount,
         	           };
         }
     }

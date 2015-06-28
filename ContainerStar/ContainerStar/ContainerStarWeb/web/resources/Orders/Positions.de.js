@@ -14,7 +14,8 @@ define(function () {
 		fromDate: 'Von Datum',
 		toDate: 'Bis Datum',
 		selectContainer: 'Container vermieten',
-	    selectAdditionalCosts: 'Nebenkosten',
+		selectAdditionalCosts: 'Nebenkosten',
+        amount: 'Menge'
 	};
 
 	return resources;
