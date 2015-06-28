@@ -18,7 +18,7 @@ namespace ContainerStar.Lib.Managers
                     (r.FromDate <= dateFrom && r.ToDate >= dateTo)).ToList(); //period is a part of an existing one
         }
 
-        public IQueryable<Containers> GetFreeContainers(IEnumerable<int> usedIds, int? typeId)
+        public IQueryable<Containers> GetFreeContainers(IEnumerable<int> usedIds, int? typeId, string name, List<int> equipmentIds)
         {
             return DataContext.GetSet<Containers>()
                 .Where(r => !usedIds.Contains(r.Id))

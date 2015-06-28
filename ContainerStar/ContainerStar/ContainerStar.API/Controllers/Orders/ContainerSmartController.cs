@@ -66,8 +66,10 @@ namespace ContainerStar.API.Controllers
             DateTime fromDateTemp;
             DateTime toDateTemp;
             int? typeId;
+            string name;
+            List<int> equpmentIds;
 
-            GetFilters(filtering, out typeId);
+            GetFilters(filtering, out typeId, out name, out equpmentIds);
 
             if (fromDate == DateTime.MinValue || toDate == DateTime.MinValue)
             {
@@ -77,7 +79,7 @@ namespace ContainerStar.API.Controllers
             var positions = Manager.GetActualPositions(fromDate, toDate);
             var ids = GetActualIds(positions);
 
-            return Manager.GetFreeContainers(ids, typeId);
+            return Manager.GetFreeContainers(ids, typeId, name, equpmentIds);
         }
 
         private IEnumerable<int> GetActualIds(IEnumerable<Positions> positions)
@@ -93,11 +95,14 @@ namespace ContainerStar.API.Controllers
             return result;
         }
 
-        private void GetFilters(Filtering filtering, out int? typeId)
+        private void GetFilters(Filtering filtering, out int? typeId, out string name, out List<int> equipmentIds)
         {
             fromDate = DateTime.MinValue;
             toDate = DateTime.MinValue;
             var typeIdTemp = -1;
+            name = String.Empty;
+            equipmentIds = new List<int>();
+
             foreach (var compositeFilter in filtering.Filters)
             {
                 foreach (var filter in compositeFilter.Filters)
@@ -113,6 +118,23 @@ namespace ContainerStar.API.Controllers
                         case "containertypeid":
                             int.TryParse(filter.Value, out typeIdTemp);
                             break;
+                        case "name":
+                            name = filter.Value;
+                            break;
+                        case "equipments":
+                            if (!String.IsNullOrEmpty(filter.Value))
+                            {
+                                var parts = filter.Value.Split(',');
+                                foreach (var part in parts)
+                                {
+                                    int temp;
+                                    if (Int32.TryParse(part, out temp))
+                                    {
+                                        equipmentIds.Add(temp);
+                                    }
+                                }
+                            }
+                            break;
                         default:
                             break;
 
@@ -120,8 +142,6 @@ namespace ContainerStar.API.Controllers
                 }
             }
             typeId = (typeIdTemp < 1) ? (int?)null : typeIdTemp;
-        }
-
-        
+        }        
     }
 }

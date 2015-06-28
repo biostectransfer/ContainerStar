@@ -29,7 +29,7 @@
         },
 
         open: function (e) {
-            this.kendoWindow.wrapper.css({ top: 100 });
+            //this.kendoWindow.wrapper.css({ top: 100 });
         }
     });
 

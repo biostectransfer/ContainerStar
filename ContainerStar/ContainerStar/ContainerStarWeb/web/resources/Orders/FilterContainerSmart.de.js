@@ -7,7 +7,10 @@
 		apply: 'Suchen',
 		cancel: 'Abbruch',
 		searchTitle: 'Suchkriterien',
-        containerTypeId: 'Ausführung'
+		containerTypeId: 'Ausführung',
+		pleaseSelect: 'Bitte auswählen',
+		name: 'Text',
+	    equipments: 'Ausstattungen'
 	};
 
 	return resource;

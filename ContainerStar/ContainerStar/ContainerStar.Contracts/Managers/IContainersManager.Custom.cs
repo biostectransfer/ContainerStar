@@ -10,6 +10,6 @@ namespace ContainerStar.Contracts.Managers
     {
         List<Positions> GetActualPositions(DateTime dateFrom, DateTime dateTo);
 
-        IQueryable<Containers> GetFreeContainers(IEnumerable<int> usedIds, int? typeId);
+        IQueryable<Containers> GetFreeContainers(IEnumerable<int> usedIds, int? typeId, string name, List<int> equipmentIds);
     }
 }

@@ -43,14 +43,16 @@ define([
 	    render: function () {
 
 	        var self = this;
-	        view.__super__.render.apply(self, arguments);
 
+	        view.__super__.render.apply(self, arguments);            
+            
 	        require(['l!t!Orders/FilterContainerSmart'], function (View) {
 
 	            self.showView(new View(
                         {
                             grid: self.grid,
                             containerTypes: self.options.containerTypes,
+                            equipments: self.options.equipments,
                             isSellOrder: self.options.isSellOrder
                         }
                     ),

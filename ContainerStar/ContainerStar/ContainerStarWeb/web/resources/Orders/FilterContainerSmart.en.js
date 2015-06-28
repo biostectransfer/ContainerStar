@@ -7,7 +7,10 @@
 	    apply: 'Select',
 	    cancel: 'Cancel',
 	    searchTitle: 'Search parameters',
-	    containerTypeId: 'Container type'
+	    containerTypeId: 'Container type',
+	    pleaseSelect: 'Please select',
+	    name: 'Text',
+	    equipments: 'Equipments'
 	};
 
 	return resource;

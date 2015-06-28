@@ -1,16 +1,26 @@
 ﻿define([
 	'base/base-window-view',
-    'l!t!Orders/ContainerSearch',
+    'l!t!Orders/ContainerSearch'
 ], function (BaseView, ContainerSearchView) {
     'use strict';
 
     var view = BaseView.extend({
         width: '1060px',
-        title: function () { return this.resources.title; },
+        title: function () { return this.resources.title; },        
+
+        initialize: function () {
+
+            view.__super__.initialize.apply(this, arguments);
+        },
+
         render: function () {
-            var self = this;
+
 
             view.__super__.render.apply(this, arguments);
+
+            this.stickit();
+
+            var self = this;
 
             var options = {
                 success: function (model) {
@@ -22,8 +32,10 @@
                     self.close();
                 },
                 containerTypes: self.options.containerTypes,
+                equipments: self.options.equipments,
                 isSellOrder: self.options.isSellOrder
             };
+            
 
             var containerSearchView = new ContainerSearchView(options);
             self.showView(containerSearchView, '.containers');
@@ -32,9 +44,9 @@
         },
 
         open: function (e) {
-            this.kendoWindow.wrapper.css({ top: 100 });
+            //this.kendoWindow.wrapper.css({ top: 100 });
         }
     });
-
+    
     return view;
 });

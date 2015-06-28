@@ -12,8 +12,11 @@
 
             var result = [],
                 fromDate = this.model.get('fromDate'),
-                toDate = this.model.get('toDate');
-
+                toDate = this.model.get('toDate'),
+                containerTypeId = this.model.get('containerTypeId'),
+                name = this.model.get('name'),
+                equipments = this.model.get('equipments');
+            debugger;
             result.push({
                 field: 'fromDate',
                 operator: 'lte',
@@ -27,21 +30,32 @@
             });
 
             result.push({
+                field: 'containerTypeId',
+                operator: 'eq',
+                value: containerTypeId
+            });
+
+            result.push({
                 field: 'name',
                 operator: 'eq',
                 value: this.model.get('name')
             });
 
+            result.push({
+                field: 'equipments',
+                operator: 'contains',
+                value: equipments ? equipments.join(',') : null
+            });
+
             return result;
         },
 
-        render: function () {
+        bindings: function () {
 
             var self = this;
+  
+            var result = {
 
-            view.__super__.renderWithoutBindings.apply(self, arguments);
-
-            var bindings = {
                 '#fromDate': 'fromDate',
                 '#toDate': 'toDate',
                 '#name': 'name',
@@ -49,21 +63,29 @@
                     observe: 'containerTypeId',
                     selectOptions: {
                         labelPath: 'name', valuePath: 'id',
-                        collection: function()
-                        {
-                            return this.options.containerTypes.
-                                   map(function (item) {
-                                       debugger;
-                                       var a = item.toJSON();
-                                       return { id: item.get('id'), value: item.get('value') };
-                                   });
-                        }
+                        collection: self.options.containerTypes,
+                        defaultOption: { label: self.resources.pleaseSelect, value: null }
                     },
                 },
+                '#equipments': {
+                    observe: 'equipments',
+                    selectOptions: {
+                        labelPath: 'name', valuePath: 'id',
+                        collection: self.options.equipments
+                    },
+                }
             };
 
-            self.stickit(self.model, bindings);
+            return result;
+        },
 
+
+        render: function () {
+
+            var self = this;
+
+            view.__super__.renderWithoutBindings.apply(self, arguments);
+            
             return self;
         }
     });
