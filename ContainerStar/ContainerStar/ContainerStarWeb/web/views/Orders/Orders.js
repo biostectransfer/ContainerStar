@@ -95,8 +95,8 @@
                 else {
                     require(['base/information-view'], function (View) {
                         var view = new View({
-                            title: 'Angebot auswählen',
-                            message: 'Wählen Sie bitte ein Angebot aus!'
+                            title: 'Auftrag auswählen',
+                            message: 'Wählen Sie bitte ein Auftrag aus!'
                         });
                         self.addView(view);
                         self.$el.append(view.render().$el);

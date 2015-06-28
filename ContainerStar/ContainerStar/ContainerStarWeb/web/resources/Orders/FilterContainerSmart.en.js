@@ -2,11 +2,12 @@
 	'use strict';
 
 	var resource = {
-	    fromDate: 'Von:',
-	    toDate: 'Bis:',
-	    apply: 'Auswahlen',
-	    cancel: 'Abbruch',
-	    searchTitle: 'Verfugbar Containers'
+	    fromDate: 'From date:',
+	    toDate: 'To date:',
+	    apply: 'Select',
+	    cancel: 'Cancel',
+	    searchTitle: 'Search parameters',
+	    containerTypeId: 'Container type'
 	};
 
 	return resource;

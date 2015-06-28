@@ -91,8 +91,10 @@
 		    var self = this;
 		    view.__super__.render.apply(self, arguments);
 
-		    self.showView(new self.filterView({ grid: self.grid }),
-                self.filterSelector);
+		    if (self.filterView != undefined) {
+		        self.showView(new self.filterView({ grid: self.grid }),
+                    self.filterSelector);
+		    }
 
 		    if (self.addNewModelInline) {
 		        if (self.showDeleteButton)

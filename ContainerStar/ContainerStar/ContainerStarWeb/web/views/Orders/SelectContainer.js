@@ -21,7 +21,8 @@
                 closeWindow: function () {
                     self.close();
                 },
-                containerTypes: self.options.containerTypes
+                containerTypes: self.options.containerTypes,
+                isSellOrder: self.options.isSellOrder
             };
 
             var containerSearchView = new ContainerSearchView(options);

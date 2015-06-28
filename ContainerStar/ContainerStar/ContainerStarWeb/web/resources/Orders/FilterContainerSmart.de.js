@@ -4,9 +4,10 @@
 	var resource = {
 		fromDate: 'Von:',
 		toDate: 'Bis:',
-		apply: 'Auswahlen',
+		apply: 'Suchen',
 		cancel: 'Abbruch',
-	    searchTitle: 'Verfugbar Containers'
+		searchTitle: 'Suchkriterien',
+        containerTypeId: 'Ausführung'
 	};
 
 	return resource;

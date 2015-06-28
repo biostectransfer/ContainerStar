@@ -32,7 +32,7 @@
                 'Orders': _.partial(BaseRouter.showView, this, 'l!t!Orders/Orders', { ContainerTypes: true, }, { isOffer: false }),
                 'Orders/create': _.partial(BaseRouter.showViewWithModel, this, 'l!t!Orders/AddOrders', 'models/Orders', { CommunicationPartners: true }, { isOffer: false }),
                 'Orders/:id': _.partial(BaseRouter.showViewWithModel, this, 'l!t!Orders/AddOrders', 'models/Orders', { CommunicationPartners: true }, { isOffer: false }),
-                'Positions': _.partial(BaseRouter.showView, this, 'l!t!Orders/Positions', false),
+                'Positions': _.partial(BaseRouter.showView, this, 'l!t!Orders/Positions', { ContainerTypes: true, }, { isSellOrder: true }),
                 'Positions/create': _.partial(BaseRouter.showViewWithModel, this, 'l!t!Orders/AddPositions', 'models/Positions', false),
                 'Positions/:id': _.partial(BaseRouter.showViewWithModel, this, 'l!t!Orders/AddPositions', 'models/Positions', false),
             };

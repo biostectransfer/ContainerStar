@@ -38,13 +38,28 @@
         render: function () {
 
             var self = this;
-            view.__super__.renderWithoutBindings.apply(self, arguments);
 
+            view.__super__.renderWithoutBindings.apply(self, arguments);
 
             var bindings = {
                 '#fromDate': 'fromDate',
                 '#toDate': 'toDate',
                 '#name': 'name',
+                '#containerTypeId': {
+                    observe: 'containerTypeId',
+                    selectOptions: {
+                        labelPath: 'name', valuePath: 'id',
+                        collection: function()
+                        {
+                            return this.options.containerTypes.
+                                   map(function (item) {
+                                       debugger;
+                                       var a = item.toJSON();
+                                       return { id: item.get('id'), value: item.get('value') };
+                                   });
+                        }
+                    },
+                },
             };
 
             self.stickit(self.model, bindings);

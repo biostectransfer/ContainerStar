@@ -1,8 +1,7 @@
 define([
 'base/base-object-grid-view',
-'collections/ContainersSmart',
-'l!t!Orders/FilterContainerSmart'
-], function (BaseView, Collection, FilterView) {
+'collections/ContainersSmart'
+], function (BaseView, Collection) {
     'use strict';
 
     var saveFunction = function (e, self) {
@@ -24,7 +23,7 @@ define([
     view = BaseView.extend({
 
 	    collectionType: Collection,
-	    filterView: FilterView,
+	    //filterView: FilterView,
 	    filterSelector: '.filter',
 
 	    showDeleteButton: false,
@@ -46,8 +45,17 @@ define([
 	        var self = this;
 	        view.__super__.render.apply(self, arguments);
 
-	        self.showView(new self.filterView({ grid: self.grid }),
-                self.filterSelector);
+	        require(['l!t!Orders/FilterContainerSmart'], function (View) {
+
+	            self.showView(new View(
+                        {
+                            grid: self.grid,
+                            containerTypes: self.options.containerTypes,
+                            isSellOrder: self.options.isSellOrder
+                        }
+                    ),
+	                self.filterSelector);
+	        });
 
 	        return self;
 	    },

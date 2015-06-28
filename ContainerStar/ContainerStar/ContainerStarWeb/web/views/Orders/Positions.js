@@ -1,4 +1,4 @@
-define([
+﻿define([
     'base/related-object-grid-view',
     'collections/Positions',
     'l!t!Orders/AddPositions',
@@ -7,7 +7,32 @@ define([
 ], function (BaseView, Collection, AddNewModelView, SelectContainerView, SelectAdditionalCostsView) {
     'use strict';
 
-    var view = BaseView.extend({
+    var amountEditor = function (container, options) {
+        if (options.model.get('containerId') == null) {
+            //$('<input data-role="numerictextbox" required data-text-field="' + options.field + '" data-value-field="' + options.field + '" data-bind="value:' + options.field + '"/>')
+            //    .appendTo(container);
+
+            $('<span class="k-widget k-numerictextbox">' +  
+                '<span class="k-numeric-wrap k-state-default">' +
+                    '<input tabindex="0" class="k-formatted-value k-input" aria-disabled="false" aria-readonly="false" style="display: inline-block;" type="text">' + 
+                    '<input class="k-input" role="spinbutton" aria-disabled="false" aria-readonly="false" aria-valuenow="-1" style="display: none;" required="required" type="text" data-role="numerictextbox" data-bind="value:amount" data-value-field="amount" data-text-field="amount">' + 
+                    '<span class="k-select"><span class="k-link" style="-ms-touch-action: double-tap-zoom pinch-zoom;" unselectable="on">' + 
+                        '<span title="Wert erhöhen" class="k-icon k-i-arrow-n" unselectable="on">Wert erhöhen</span>' + 
+                    '</span>' +
+                    '<div class="k-widget k-tooltip k-tooltip-validation k-invalid-msg" role="alert" style="margin: 0.5em; display: none;" data-for="_amount_"><span class="k-icon k-warning"> </span>Das Feld muss befüllt werden<div class="k-callout k-callout-n"></div></div>'+
+                    '<span class="k-link" style="-ms-touch-action: double-tap-zoom pinch-zoom;" unselectable="on">' + 
+                        '<span title="Wert verkleinern" class="k-icon k-i-arrow-s" unselectable="on">Wert verkleinern</span>' + 
+                    '</span>' + 
+                '</span>' + 
+            '</span></span>'+
+            '<div class="k-widget k-tooltip k-tooltip-validation k-invalid-msg" style="margin: 0.5em; display: none;" data-for="' +
+                options.field + '" role="alert"><span class="k-icon k-warning"> </span>Das Feld muss befüllt werden<div class="k-callout k-callout-n"></div></div>').appendTo(container);
+            //$('<div class="k-widget k-tooltip k-tooltip-validation k-invalid-msg" style="margin: 0.5em; display: none;" data-for="' +
+            //    options.field + '" role="alert"><span class="k-icon k-warning"> </span>Das Feld muss befüllt werden<div class="k-callout k-callout-n"></div></div>').appendTo(container);
+        }
+    },
+
+    view = BaseView.extend({
 
         addNewModelView: AddNewModelView,
         collectionType: Collection,
@@ -25,11 +50,14 @@ define([
         },
 
         columns: function () {
-
             return [
                  { field: 'description', title: this.resources.containerId },
                  { field: 'price', title: this.resources.price },
-                 { field: 'amount', title: this.resources.amount },
+                 {
+                     field: 'amount',
+                     editor: amountEditor, template: "#=amount#",
+                     title: this.resources.amount
+                 },
                  { field: 'fromDate', title: this.resources.fromDate, format: '{0:d}' },
                  { field: 'toDate', title: this.resources.toDate, format: '{0:d}' }
             ];

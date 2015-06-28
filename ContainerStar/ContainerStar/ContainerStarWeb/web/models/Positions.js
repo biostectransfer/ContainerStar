@@ -21,7 +21,7 @@ define(function () {
 			                        editable: Application.canTableItemBeEdit('Positions', 'price'), 
 				                    validation: { required: true } }
             ,amount: { type: "number", 
-			                        editable: Application.canTableItemBeEdit('Positions', 'amount'), 
+			                        //editable: Application.canTableItemBeEdit('Positions', 'amount'), 
 				                    validation: { required: true } }
 			,fromDate: { type: "date", 
 			                        editable: false, 
