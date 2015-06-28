@@ -352,8 +352,8 @@
       <DependentUpon>web.models.tt</DependentUpon>
     </Content>
     <Content Include="web\models\view-collection.js" />
-    <Content Include="web\resources\Settings\FilterContainerSmart.de.js" />
-    <Content Include="web\resources\Settings\FilterContainerSmart.en.js" />
+    <Content Include="web\resources\Orders\FilterContainerSmart.de.js" />
+    <Content Include="web\resources\Orders\FilterContainerSmart.en.js" />
     <Content Include="web\resources\Orders\AddPositions.de.js" />
     <Content Include="web\resources\Orders\AddOrders.de.js" />
     <Content Include="web\resources\Orders\AddPositions.en.js" />
@@ -832,7 +832,7 @@
     <Content Include="web\templates\Settings\FilterRole.html">
       <DependentUpon>web.templates.tt</DependentUpon>
     </Content>
-    <Content Include="web\templates\Settings\FilterContainerSmart.html" />
+    <Content Include="web\templates\Orders\FilterContainerSmart.html" />
     <Content Include="web\templates\Settings\FilterTaxes.html" />
     <Content Include="web\templates\Settings\FilterTransportProducts.html">
       <DependentUpon>web.templates.tt</DependentUpon>
@@ -900,7 +900,7 @@
     <Content Include="web\application-start.js" />
     <Content Include="web\views\Orders\AdditionalCostsSearch.js" />
     <Content Include="web\views\Orders\ContainerSearch.js" />
-    <Content Include="web\views\Settings\FilterContainerSmart.js" />
+    <Content Include="web\views\Orders\FilterContainerSmart.js" />
     <Content Include="web\views\Orders\Offers.js" />
     <Content Include="web\views\Orders\AddPositions.js" />
     <Content Include="web\views\Orders\AddOrders.js" />

@@ -29,8 +29,8 @@ define([
             return [
                  { field: 'description', title: this.resources.containerId },
                  { field: 'price', title: this.resources.price },
-                 { field: 'fromDate', title: this.resources.fromDate, editable: false, format: '{0:d}' },
-                 { field: 'toDate', title: this.resources.toDate, editable: false, format: '{0:d}' }
+                 { field: 'fromDate', title: this.resources.fromDate, format: '{0:d}' },
+                 { field: 'toDate', title: this.resources.toDate, format: '{0:d}' }
             ];
         },
 

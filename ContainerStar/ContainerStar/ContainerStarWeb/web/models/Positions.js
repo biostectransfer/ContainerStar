@@ -21,10 +21,10 @@ define(function () {
 			                        editable: Application.canTableItemBeEdit('Positions', 'price'), 
 				                    validation: { required: true } }				
 			,fromDate: { type: "date", 
-			                        editable: Application.canTableItemBeEdit('Positions', 'fromDate'), 
+			                        editable: false, 
 				                    validation: { required: false, date: true } }						
 			,toDate: { type: "date", 
-			                        editable: Application.canTableItemBeEdit('Positions', 'toDate'), 
+			                        editable: false, 
 				                    validation: { required: false, date: true } }		
             ,description: { type: "string", editable: false }		
 		},
