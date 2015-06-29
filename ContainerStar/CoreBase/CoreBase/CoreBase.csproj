@@ -84,7 +84,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigHelper.cs" />
     <Compile Include="Entities\EntityCastRemoverVisitors.cs" />
     <Compile Include="Entities\EntityPropertiesHelper.cs" />
     <Compile Include="Json\JsonOptionalValue.cs" />

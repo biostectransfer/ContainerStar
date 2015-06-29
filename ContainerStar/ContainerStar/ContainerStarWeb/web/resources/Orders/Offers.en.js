@@ -12,6 +12,7 @@ define(function () {
 		offerToOrder: 'Create order',
 		printRentOrder: 'Print rent order',
 		rentOrderNumber: 'Rent order number',
+		printOffer: 'Print offer',
 	};
 
 	return resources;

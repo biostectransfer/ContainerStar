@@ -1309,6 +1309,7 @@
     <Content Include="css\kendo\images\kendoui.woff" />
     <Content Include="web.components\mixins\resources\kendo-validator-form.de.js" />
     <Content Include="web.components\base\resources\base-edit-model-view.de.js" />
+    <Content Include="App_Data\OfferFile.docx" />
     <None Include="Properties\PublishProfiles\ContainerStar.pubxml" />
     <None Include="Properties\PublishProfiles\MasterData.pubxml" />
     <None Include="Properties\PublishProfiles\RTNU.deploy.pubxml" />
@@ -1376,9 +1377,7 @@
       <LastGenOutput>web.menu.resources.txt</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>

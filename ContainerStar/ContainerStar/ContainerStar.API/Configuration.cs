@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Configuration;
+using System.Text;
 namespace ContainerStar.API
 {
     public static class Configuration
@@ -7,8 +8,21 @@ namespace ContainerStar.API
         {
             get
             {
-                return System.Configuration.ConfigurationManager.AppSettings["RentOrderFileName"];
+                return ConfigurationManager.AppSettings["RentOrderFileName"];
             }
+        }
+
+        public static string OfferFileName
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["OfferFileName"];
+            }
+        }
+
+        public static string RentOrderPreffix
+        {
+            get { return ConfigurationManager.AppSettings["RentOrderNumberPreffix"]; }
         }
 
         public static string CombineUrl(params string[] parts)

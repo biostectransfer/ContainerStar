@@ -1,15 +1,8 @@
-using ContainerStar.API.Models;
-using ContainerStar.API.Models.Settings;
 using ContainerStar.API.Security;
-using ContainerStar.Contracts;
-using ContainerStar.Contracts.Entities;
 using ContainerStar.Contracts.Enums;
 using ContainerStar.Contracts.Managers;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Linq.Dynamic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -18,10 +11,11 @@ using System.Web.Http;
 
 namespace ContainerStar.API.Controllers
 {
-    [AuthorizeByPermissions(PermissionTypes = new[] { Permissions.Orders })]
+    
     /// <summary>
     ///     Controller for printing
     /// </summary>
+    [AuthorizeByPermissions(PermissionTypes = new[] { Permissions.Orders })]
     public partial class PrintController: ApiController
     {
         public PrintController(IOrdersManager manager) :
@@ -46,7 +40,11 @@ namespace ContainerStar.API.Controllers
             switch (report)
             {
                 case PrintTypes.RentOrder:
-                    path = Path.Combine(dataDirectory, ContainerStar.API.Configuration.RentOrderFileName);
+                    path = Path.Combine(dataDirectory, API.Configuration.RentOrderFileName);
+                    stream = Manager.PrepareRentOrderPrintData(id, path);
+                    break;
+                case PrintTypes.Offer:
+                    path = Path.Combine(dataDirectory, API.Configuration.OfferFileName);
                     stream = Manager.PrepareRentOrderPrintData(id, path);
                     break;
                 default:
