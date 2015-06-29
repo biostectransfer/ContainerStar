@@ -20,10 +20,21 @@ namespace ContainerStar.Lib.Managers
 
         public IQueryable<Containers> GetFreeContainers(IEnumerable<int> usedIds, int? typeId, string name, List<int> equipmentIds)
         {
-            return DataContext.GetSet<Containers>()
-                .Where(r => !usedIds.Contains(r.Id))
-                .Where(r => (!typeId.HasValue || r.ContainerTypeId == typeId.Value));
-        }
-        
+            if (equipmentIds == null || equipmentIds.Count == 0)
+            {
+                return DataContext.GetSet<Containers>()
+                    .Where(r => !usedIds.Contains(r.Id))
+                    .Where(r => (!typeId.HasValue || r.ContainerTypeId == typeId.Value))
+                    .Where(r => (String.IsNullOrEmpty(name) || r.Number.ToLower().Contains(name.ToLower())));
+            }
+            else
+            {
+                return DataContext.GetSet<Containers>()
+                    .Where(r => !usedIds.Contains(r.Id))
+                    .Where(r => (!typeId.HasValue || r.ContainerTypeId == typeId.Value))
+                    .Where(r => (String.IsNullOrEmpty(name) || r.Number.ToLower().Contains(name.ToLower()))).ToList()
+                    .Where(r => equipmentIds.All(o => r.ContainerEquipmentRsps.Select(t => t.EquipmentId).Contains(o))).AsQueryable();
+            }
+        }        
     }
 }

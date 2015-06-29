@@ -138,18 +138,25 @@ div.editor-label {
 	padding: 3px 0;
 }
 
-div.editor-field input[type=text],
-div.editor-field input[type=date],
-div.editor-field input[type=email],
-div.editor-field .k-multiselect,
-div.editor-field .k-combobox,
-div.editor-field .k-dropdown {
-	/*width: 300px;*/
-}
 
 div.editor-field textarea {
 	/*width: 600px;
 	height: 100px;*/
+}
+
+div.editor-field #equipments > .k-dropdown,
+div.editor-field #identificationDocument > .k-dropdown {
+	width: 600px;
+}
+
+div.editor-field > input[type=text],
+div.editor-field > input[type=password],
+div.editor-field > input[type=date],
+div.editor-field > input[type=email],
+div.editor-field > .k-multiselect,
+div.editor-field > .k-combobox,
+div.editor-field > .k-dropdown {
+   width: 518px;
 }
 
 div.inline-block {
@@ -252,13 +259,13 @@ td.multi {
 	width: 300px;
 }
 
-	td.multi > span {
-		white-space: nowrap;
-		text-overflow: ellipsis;
-		overflow: hidden;
-		display: inline-block;
-		max-width: 300px;
-	}
+td.multi > span {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	display: inline-block;
+	max-width: 300px;
+}
 
 .k-grid .k-tooltip-validation .k-callout-n {
 	left: auto;
@@ -419,38 +426,6 @@ span.select-message {
 	display: none;
 }
 
-
-div.editor-field #job,
-div.editor-field #position,
-div.editor-field #jobAddress,
-div.editor-field #identificationDocument {
-	width: 600px;
-}
-
-div.editor-field #phone,
-div.editor-field #tin {
-	width: 295px;
-}
-
-div.editor-field #education {
-	width: 905px;
-}
-
-div.editor-field #certificateSeries {
-	width: 50px;
-}
-
-div.editor-field #certificateNumber {
-	width: 245px;
-}
-
-div.editor-field .request-validation-area,
-div.editor-field .certificate-validation-area,
-div.editor-field .validation-area,
-div.editor-field .industrial-safety-area {
-	width: 600px;
-}
-
 .k-window .k-dropzone {
 	padding-left: 0.7em;
 }
@@ -481,10 +456,6 @@ div.editor-field .industrial-safety-area {
 	cursor: pointer;
 }
 
-.k-grid-edit-row > td[data-container-for=industrialSafetyArea] > .k-widget {
-	width: 575px;
-}
-
 .filter .simple {
 	text-align: right;
 	padding: 0.58em;
@@ -508,25 +479,6 @@ div.editor-field .industrial-safety-area {
 .breadcrumbs {
 	padding-bottom: 10px;
 	display: inline-block;
-}
-
-/*td.examination-validation-area {
-	width: 540px;
-}
-
-	td.examination-validation-area > span {
-		max-width: 540px;
-	}*/
-
-
-.k-grid td.examination-validation-area .k-combobox.selectBox .k-input {
-	margin-left: -0.35em;
-	padding-top: 0.177em;
-}
-
-.k-grid td.examination-comission .k-dropdown .k-input {
-	white-space: normal;
-    word-break: break-all;
 }
 
 

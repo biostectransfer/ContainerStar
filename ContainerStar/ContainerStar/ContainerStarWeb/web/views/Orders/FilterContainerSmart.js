@@ -16,7 +16,7 @@
                 containerTypeId = this.model.get('containerTypeId'),
                 name = this.model.get('name'),
                 equipments = this.model.get('equipments');
-            debugger;
+            
             result.push({
                 field: 'fromDate',
                 operator: 'lte',

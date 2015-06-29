@@ -198,7 +198,7 @@
 
             self.$select.find('option').each(function (index, elem) {
                 var selected = _.contains(values, $(elem).val());
-                $(elem).attr('selected', selected);
+                $(elem).prop('selected', selected);
 
                 if (selected)
                     text.push($(elem).text());
