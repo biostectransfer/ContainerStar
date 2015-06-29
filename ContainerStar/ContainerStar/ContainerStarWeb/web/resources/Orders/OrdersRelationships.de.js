@@ -5,7 +5,7 @@ define(function () {
 	    title: 'Zuordnungen',
 	    dataLoading: 'Daten werden geladen. Bitte warten...',
 	    rentPositions: 'Vermietung',
-        sellPositions: 'Verkauf'
+        salePositions: 'Verkauf'
 	};
 
 	return resources;

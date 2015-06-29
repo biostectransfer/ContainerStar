@@ -34,6 +34,9 @@
 
     view = BaseView.extend({
 
+        isSellOrder: null,
+        selectContainerView: SelectContainerView,
+        selectAdditionalCostsView: SelectAdditionalCostsView,
         addNewModelView: AddNewModelView,
         collectionType: Collection,
         gridSelector: '.grid',
@@ -44,7 +47,12 @@
         initialize: function () {
             view.__super__.initialize.apply(this, arguments);
 
-            this.defaultFiltering = { field: 'orderId', operator: 'eq', value: this.model.id };
+            var self = this;
+
+            this.defaultFiltering = [
+                { field: 'orderId', operator: 'eq', value: this.model.id },
+                { field: 'isSellOrder', operator: 'eq', value: self.isSellOrder }
+            ];
 
             this.collection = new Collection();
         },
@@ -101,7 +109,8 @@
                     model.set('price', item.get('price'));
                     model.set('fromDate', item.get('fromDate'));
                     model.set('toDate', item.get('toDate'));
-
+                    model.set('isSellOrder', self.isSellOrder);
+ 
                     model.save({}, {
                         data: kendo.stringify(model),
                         method: 'post',
@@ -135,6 +144,7 @@
                     model.set('additionalCostId', item.id);
                     model.set('price', item.get('price'));
                     model.set('amount', 1);
+                    model.set('isSellOrder', self.isSellOrder);
 
                     model.save({}, {
                         data: kendo.stringify(model),
@@ -161,7 +171,8 @@
 		        result =
 		    [{
 		        template: function () {
-		            return '<a class="k-button k-button-icontext selectContainer" style="min-width: 180px;" href="#" data-localized="selectContainer"></a>' +
+		            return '<a class="k-button k-button-icontext selectContainer" style="min-width: 180px;" href="#" data-localized="' + 
+                        (self.isSellOrder ? 'saleContainer' : 'rentContainer') + '"></a>' +
 		                   '<a class="k-button k-button-icontext selectAdditionalCosts"  style="min-width: 120px;"href="#" data-localized="selectAdditionalCosts"></a>';
 		        }
 		    }];

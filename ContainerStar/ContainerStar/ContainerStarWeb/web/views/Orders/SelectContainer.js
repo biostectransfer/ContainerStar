@@ -33,7 +33,6 @@
                 },
                 containerTypes: self.options.containerTypes,
                 equipments: self.options.equipments,
-                isSellOrder: self.options.isSellOrder
             };
             
 

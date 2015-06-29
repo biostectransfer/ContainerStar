@@ -5,7 +5,7 @@ define(function () {
 	     title: 'Relationships',
 	     dataLoading: 'Data is loading. Please wait...',
 	     rentPositions: 'Rent',
-	     sellPositions: 'Sell'
+	     salePositions: 'Sell'
 	};
 
 	return resources;

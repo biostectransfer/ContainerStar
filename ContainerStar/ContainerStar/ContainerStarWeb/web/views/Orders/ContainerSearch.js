@@ -52,8 +52,7 @@ define([
                         {
                             grid: self.grid,
                             containerTypes: self.options.containerTypes,
-                            equipments: self.options.equipments,
-                            isSellOrder: self.options.isSellOrder
+                            equipments: self.options.equipments
                         }
                     ),
 	                self.filterSelector);

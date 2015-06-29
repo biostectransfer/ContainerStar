@@ -374,8 +374,10 @@
     <Content Include="web\resources\master.en.js" />
     <Content Include="web\resources\Orders\Offers.de.js" />
     <Content Include="web\resources\Orders\Offers.en.js" />
+    <Content Include="web\resources\Orders\RentPositions.de.js" />
     <Content Include="web\resources\Orders\Positions.de.js" />
     <Content Include="web\resources\Orders\Orders.de.js" />
+    <Content Include="web\resources\Orders\RentPositions.en.js" />
     <Content Include="web\resources\Orders\Positions.en.js" />
     <Content Include="web\resources\Orders\Orders.en.js" />
     <Content Include="web\resources\Orders\OrdersRelationships.de.js" />
@@ -723,6 +725,8 @@
     <Content Include="web\templates\master-footer.html" />
     <Content Include="web\templates\master.html" />
     <Content Include="web\templates\Orders\Offers.html" />
+    <Content Include="web\templates\Orders\SaleRentPositions.html" />
+    <Content Include="web\templates\Orders\RentPositions.html" />
     <Content Include="web\templates\Orders\Positions.html" />
     <Content Include="web\templates\Orders\Orders.html" />
     <Content Include="web\templates\Orders\OrdersRelationships.html" />
@@ -910,6 +914,7 @@
     <Content Include="web\views\Home\Login.js" />
     <Content Include="web\master-footer.js" />
     <Content Include="web\master.js" />
+    <Content Include="web\views\Orders\RentPositions.js" />
     <Content Include="web\views\Orders\Positions.js" />
     <Content Include="web\views\Orders\Orders.js" />
     <Content Include="web\views\Orders\OrdersRelationships.js" />

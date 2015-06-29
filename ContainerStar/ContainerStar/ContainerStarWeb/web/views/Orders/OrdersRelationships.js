@@ -9,7 +9,8 @@ define([
         tabs: function () {
             
             var result = [
-                { view: 'l!t!Orders/Positions', selector: '.rentPositions' },
+                { view: 'l!t!Orders/RentPositions', selector: '.rentPositions' },
+                { view: 'l!t!Orders/SalePositions', selector: '.salePositions' },
 				                
             ];
             
