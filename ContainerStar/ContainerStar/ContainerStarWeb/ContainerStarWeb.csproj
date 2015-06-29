@@ -382,6 +382,8 @@
     <Content Include="web\resources\Orders\Orders.en.js" />
     <Content Include="web\resources\Orders\OrdersRelationships.de.js" />
     <Content Include="web\resources\Orders\OrdersRelationships.en.js" />
+    <Content Include="web\resources\Orders\SalePositions.de.js" />
+    <Content Include="web\resources\Orders\SalePositions.en.js" />
     <Content Include="web\resources\Orders\SelectAdditionalCosts.de.js" />
     <Content Include="web\resources\Orders\SelectContainer.de.js" />
     <Content Include="web\resources\Orders\SelectAdditionalCosts.en.js" />
@@ -725,6 +727,7 @@
     <Content Include="web\templates\master-footer.html" />
     <Content Include="web\templates\master.html" />
     <Content Include="web\templates\Orders\Offers.html" />
+    <Content Include="web\templates\Orders\SalePositions.html" />
     <Content Include="web\templates\Orders\SaleRentPositions.html" />
     <Content Include="web\templates\Orders\RentPositions.html" />
     <Content Include="web\templates\Orders\Positions.html" />
@@ -918,6 +921,7 @@
     <Content Include="web\views\Orders\Positions.js" />
     <Content Include="web\views\Orders\Orders.js" />
     <Content Include="web\views\Orders\OrdersRelationships.js" />
+    <Content Include="web\views\Orders\SalePositions.js" />
     <Content Include="web\views\Orders\SelectAdditionalCosts.js" />
     <Content Include="web\views\Orders\SelectContainer.js" />
     <Content Include="web\views\Orders\SelectCustomer.js" />

@@ -64,15 +64,15 @@ define([
 		columns: function () {
 			
 		    return [
-				{ field: 'number', title: this.resources.number },
+				{ field: 'number', title: this.resources.number, filterable: false },
 				{ field: 'containerTypeId', title: this.resources.containerTypeId, collection: this.options.containerTypes, defaultText: this.resources.pleaseSelect },
-				{ field: 'length', title: this.resources.length },
-				{ field: 'width', title: this.resources.width },
-				{ field: 'height', title: this.resources.height },
-				{ field: 'color', title: this.resources.color },
-				{ field: 'price', title: this.resources.price },
-				{ field: 'isVirtual', title: this.resources.isVirtual, headerTitle: this.resources.isVirtual, checkbox: true },
-				{ field: 'sellPrice', title: this.resources.sellPrice },
+				{ field: 'length', title: this.resources.length, filterable: false },
+				{ field: 'width', title: this.resources.width, filterable: false },
+				{ field: 'height', title: this.resources.height, filterable: false },
+				{ field: 'color', title: this.resources.color, filterable: false },
+				{ field: 'price', title: this.resources.price, filterable: false },
+				{ field: 'isVirtual', title: this.resources.isVirtual, headerTitle: this.resources.isVirtual, checkbox: true, filterable: false },
+				{ field: 'sellPrice', title: this.resources.sellPrice, filterable: false },
 		    ];
 		},
 

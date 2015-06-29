@@ -15,7 +15,7 @@
 			dataSource = self.options.grid.dataSource,
 			expression = dataSource.filter() || { filters: [], logic: 'and' };
 
-		if (self.validate()) {
+		if (self.validateFunc(self)) {
 			var sourceFilters = self.getFilters();			
 
 			_.each(sourceFilters, function (sourceFilter) {
@@ -46,7 +46,12 @@
     },
 
     view = BaseView.extend({
-		filter: null,
+        filter: null,
+
+        validateFunc: function(self)
+        {
+            return self.validate();
+        },
 
     	getFilters: function() {
     		

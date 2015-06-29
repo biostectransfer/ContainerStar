@@ -1,4 +1,4 @@
-<div class="simple">
+﻿<div class="simple">
     <a class="toggle" href="javascript:void(0)" data-localized="searchTitle"></a>
 </div>
 <div class="advanced" style="display: block;">
@@ -9,6 +9,11 @@
                 <input type="text" id="fromDate" name="fromDate" data-role="datepicker" required="required" />
                 <div style="float: none;">
                     <span class="k-invalid-msg" data-for="fromDate"></span>
+                </div>
+                <div class="dateValidator" style="float: none; display: none;">
+                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg" role="alert">
+                        <span class="k-icon k-warning"> </span> Von Datum muss größer<br /> als Bis Datum sein
+                    </span>
                 </div>
             </div>
             <div class="editor-field" style="float: left; padding-left: 15px;">

@@ -27,7 +27,7 @@ namespace ContainerStar.API.Controllers
 
             if(entity.ContainerId.HasValue)
             {
-                model.description = entity.Containers.ContainerTypes.Name;
+                model.description = String.Format("{0} {1}", entity.Containers.Number, entity.Containers.ContainerTypes.Name);
                 model.fromDate = entity.FromDate;
                 model.toDate = entity.ToDate;
             }

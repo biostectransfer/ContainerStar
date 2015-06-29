@@ -59,7 +59,7 @@
 
         columns: function () {
             return [
-                 { field: 'description', title: this.resources.containerId },
+                 { field: 'description', title: this.resources.containerId, filterable: false, sortable: false },
                  { field: 'price', title: this.resources.price },
                  {
                      field: 'amount',

@@ -8,6 +8,28 @@
 
         filter: Filter,
 
+        validateFunc: function(self)
+        {
+            var result = false,
+                fromDate = self.model.get('fromDate'),
+                toDate = self.model.get('toDate'),
+                dateValidator = self.$el.find('.dateValidator');
+            
+            if (self.validate())
+            {
+                if (fromDate && toDate) {
+                    if (fromDate > toDate) {
+                        dateValidator.show();
+                    }
+                    else {
+                        dateValidator.hide();
+                        result = true;
+                    }
+                }
+            }
+            return result;
+        },
+
         getFilters: function () {
 
             var result = [],
