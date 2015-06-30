@@ -12,6 +12,7 @@ define(function () {
 		offerToOrder: 'Auftrag erstellen',
 		printRentOrder: 'MV drucken',
 		rentOrderNumber: 'MV-Nummer',
+		printOffer: 'Angebot drucken',
 	};
 
 	return resources;

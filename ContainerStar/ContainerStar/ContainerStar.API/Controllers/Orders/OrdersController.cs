@@ -104,7 +104,7 @@ namespace ContainerStar.API.Controllers
             if (!entity.IsOffer && entity.IsNew())
             {
                 entity.OrderNumber = numberProvider.GetNextOrderNumber();
-                entity.RentOrderNumber = numberProvider.GetNextRentOrderNumber(ConfigHelper.RentOrderPreffix);
+                entity.RentOrderNumber = numberProvider.GetNextRentOrderNumber(API.Configuration.RentOrderPreffix);
             }
             if (entity.IsNew())
             {

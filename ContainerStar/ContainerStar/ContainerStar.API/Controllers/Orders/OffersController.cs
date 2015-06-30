@@ -31,7 +31,7 @@ namespace ContainerStar.API.Controllers
             if (string.IsNullOrEmpty(order.OrderNumber))
             {
                 order.OrderNumber = numberProvider.GetNextOrderNumber();
-                order.RentOrderNumber = numberProvider.GetNextRentOrderNumber(ConfigHelper.RentOrderPreffix);
+                order.RentOrderNumber = numberProvider.GetNextRentOrderNumber(API.Configuration.RentOrderPreffix);
             }
             manager.SaveChanges();
 

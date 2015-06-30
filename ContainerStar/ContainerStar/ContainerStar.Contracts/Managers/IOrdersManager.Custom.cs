@@ -8,5 +8,7 @@ namespace ContainerStar.Contracts.Managers
     public partial interface IOrdersManager
     {
         Stream PrepareRentOrderPrintData(int id, string path);
+
+        Stream PrepareOfferPrintData(int id, string path);
     }
 }

@@ -5,5 +5,6 @@
         RentOrder = 0,
         BillOrder = 1,
         ReminderMail = 2,
-    }
+        Offer = 3
+        }
 }

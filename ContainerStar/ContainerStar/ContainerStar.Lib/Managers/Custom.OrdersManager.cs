@@ -1,13 +1,10 @@
 ﻿using ContainerStar.Contracts.Entities;
 using ContainerStar.Contracts.Enums;
-using CoreBase.Localization;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Packaging;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 
@@ -16,8 +13,18 @@ namespace ContainerStar.Lib.Managers
     public partial class OrdersManager
     {
         #region Prepare Print
-        
+
         public Stream PrepareRentOrderPrintData(int id, string path)
+        {
+            return PrepareCommonOrderPrintData(id, path, PrintTypes.RentOrder);
+        }
+
+        public Stream PrepareOfferPrintData(int id, string path)
+        {
+            return PrepareCommonOrderPrintData(id, path, PrintTypes.Offer);
+        }
+
+        private Stream PrepareCommonOrderPrintData(int id, string path, PrintTypes type)
         {
             var result = new MemoryStream();
             try
@@ -29,7 +36,7 @@ namespace ContainerStar.Lib.Managers
                 GetXmlDoc(path, result, out pkg, out part, out xmlReader, out xmlMainXMLDoc);
 
                 //replace fields
-                var templateBody = ReplaceFields(id, PrintTypes.RentOrder, xmlMainXMLDoc);
+                var templateBody = ReplaceFields(id, type, xmlMainXMLDoc);
 
                 xmlMainXMLDoc = SaveDoc(result, pkg, part, xmlReader, xmlMainXMLDoc, templateBody);
             }
