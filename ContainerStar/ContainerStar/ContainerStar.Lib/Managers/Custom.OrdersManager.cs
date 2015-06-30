@@ -113,6 +113,9 @@ namespace ContainerStar.Lib.Managers
                         result = ReplaceRentPositions(order, result);
                         result = ReplaceRentAdditionalCostPositions(order, result);
                         break;
+                    case PrintTypes.Offer:
+                      
+                        break;
                     default:
                         throw new NotImplementedException();
                 }
