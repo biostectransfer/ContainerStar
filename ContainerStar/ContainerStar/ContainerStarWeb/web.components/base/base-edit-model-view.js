@@ -43,7 +43,24 @@
     cancel = function (e) {
         e.preventDefault();
 
-        this.cancel();
+        var self = this;
+        if (self.changed) {
+            require(['base/confirmation-view'], function (Confirmation) {
+                var confirmation = new Confirmation({
+                    title: 'Warnung',
+                    message: 'Es sind nicht gespeicherte Änderungen vorhanden. Möchten Sie die Seite trotzdem verlassen?'
+                });
+                self.listenToOnce(confirmation, 'continue', function () {
+                    self.cancel();
+                });
+
+                self.addView(confirmation);
+                self.$el.append(confirmation.render().$el);
+            });
+        }
+        else {
+            self.cancel();
+        }
     },
 
     showConcurrencyError = function showConcurrencyMessage(self) {
@@ -69,9 +86,17 @@
 
         cancelAction: null,
 		bindings: null,		
+		changed: false,
 
 		render: function () {
+            
 			view.__super__.render.apply(this, arguments);
+            
+			var self = this;
+			self.listenTo(self.model, 'change', function () {
+			    self.changed = true;
+			});
+
 
 			this.$el.on('click.base-edit-model-view', '.save', _.bind(addModel, this));
 			this.$el.on('click.base-edit-model-view', '.remove', _.bind(deleteModel, this));
@@ -99,6 +124,7 @@
 			self.model.save({}, {
 			    success: function () {
 
+			        self.changed = false;
 					self.trigger('base-edit-model-view:save', self.model);
 				},
 			    error: function (model, response) {
