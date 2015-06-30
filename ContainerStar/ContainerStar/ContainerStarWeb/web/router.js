@@ -35,6 +35,12 @@
                 //'Positions': _.partial(BaseRouter.showView, this, 'l!t!Orders/Positions', { ContainerTypes: true }, { isSellOrder: true }),
                 //'Positions/create': _.partial(BaseRouter.showViewWithModel, this, 'l!t!Orders/AddPositions', 'models/Positions', false),
                 //'Positions/:id': _.partial(BaseRouter.showViewWithModel, this, 'l!t!Orders/AddPositions', 'models/Positions', false),
+                'Invoices': _.partial(BaseRouter.showView, this, 'l!t!Invoices/Invoices', false, false),
+                'Invoices/create': _.partial(BaseRouter.showViewWithModel, this, 'l!t!Invoices/AddInvoices', 'models/Invoices/Invoices', false, false),
+                'Invoices/:id': _.partial(BaseRouter.showViewWithModel, this, 'l!t!Invoices/AddInvoices', 'models/Invoices/Invoices', false, false),
+                'InvoicePositions': _.partial(BaseRouter.showView, this, 'l!t!Invoices/InvoicePositions', false, false),
+                'InvoicePositions/create': _.partial(BaseRouter.showViewWithModel, this, 'l!t!Invoices/AddInvoicePositions', 'models/Invoices/InvoicePositions', false, false),
+                'InvoicePositions/:id': _.partial(BaseRouter.showViewWithModel, this, 'l!t!Invoices/AddInvoicePositions', 'models/Invoices/InvoicePositions', false, false),
             };
 		    
 		    var result = $.extend({}, commonRoutes, MasterDataRouter.getAllMasterDataRoutes(this));

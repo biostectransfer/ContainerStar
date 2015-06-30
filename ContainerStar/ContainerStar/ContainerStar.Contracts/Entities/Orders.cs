@@ -139,6 +139,7 @@ namespace ContainerStar.Contracts.Entities
         public virtual Customers Customers{ get; set; }
         public virtual CommunicationPartners CommunicationPartners{ get; set; }
         public virtual ICollection<Positions> Positions{ get; set; }
+        public virtual ICollection<Invoices> Invoices{ get; set; }
         public bool HasCustomers
         {
             get { return !ReferenceEquals(Customers, null); }

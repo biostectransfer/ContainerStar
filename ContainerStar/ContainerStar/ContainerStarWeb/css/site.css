@@ -498,3 +498,7 @@ a.gotoObjectDetail label {
 
     cursor: pointer;
 }
+
+div.invoices table thead tr:first-child th {
+    text-align: center;
+}

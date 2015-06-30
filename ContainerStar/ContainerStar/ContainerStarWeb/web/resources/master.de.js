@@ -7,7 +7,8 @@
 		home: 'Hauptmaske',
 		Settings: 'Einstellungen',
 		Orders: 'Aufträge',
-	    Offers: 'Angebote',
+		Offers: 'Angebote',
+	    Invoices: 'Rechnungen'
 	};
 
 	return resource;

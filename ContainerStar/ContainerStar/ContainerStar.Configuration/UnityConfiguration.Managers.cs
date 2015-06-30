@@ -17,6 +17,8 @@ namespace ContainerStar.Configuration
         {
             container.RegisterType<IOrdersManager, OrdersManager>(new PerRequestLifetimeManager());
             container.RegisterType<IPositionsManager, PositionsManager>(new PerRequestLifetimeManager());
+            container.RegisterType<IInvoicesManager, InvoicesManager>(new PerRequestLifetimeManager());
+            container.RegisterType<IInvoicePositionsManager, InvoicePositionsManager>(new PerRequestLifetimeManager());
             container.RegisterType<IPermissionManager, PermissionManager>(new PerRequestLifetimeManager());
             container.RegisterType<IRoleManager, RoleManager>(new PerRequestLifetimeManager());
             container.RegisterType<IRolePermissionRspManager, RolePermissionRspManager>(new PerRequestLifetimeManager());

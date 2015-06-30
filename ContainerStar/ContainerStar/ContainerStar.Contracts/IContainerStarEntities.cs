@@ -24,6 +24,14 @@ namespace ContainerStar.Contracts
         /// </summary>
         IQueryable<Positions> Positions{get;}
         /// <summary>
+        ///     Set of <see cref="Invoices"/> entities from table dbo.Invoices
+        /// </summary>
+        IQueryable<Invoices> Invoices{get;}
+        /// <summary>
+        ///     Set of <see cref="InvoicePositions"/> entities from table dbo.InvoicePositions
+        /// </summary>
+        IQueryable<InvoicePositions> InvoicePositions{get;}
+        /// <summary>
         ///     Set of <see cref="Permission"/> entities from table dbo.Permission
         /// </summary>
         IQueryable<Permission> Permission{get;}

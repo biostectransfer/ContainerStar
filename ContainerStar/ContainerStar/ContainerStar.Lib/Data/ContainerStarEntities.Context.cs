@@ -23,6 +23,8 @@ namespace ContainerStar.Lib.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.Configurations.Add(OrdersMapping.Instance);
             modelBuilder.Configurations.Add(PositionsMapping.Instance);
+            modelBuilder.Configurations.Add(InvoicesMapping.Instance);
+            modelBuilder.Configurations.Add(InvoicePositionsMapping.Instance);
             modelBuilder.Configurations.Add(PermissionMapping.Instance);
             modelBuilder.Configurations.Add(RoleMapping.Instance);
             modelBuilder.Configurations.Add(RolePermissionRspMapping.Instance);
@@ -47,6 +49,14 @@ namespace ContainerStar.Lib.Data
         ///     Set of <see cref="Positions"/> entities from table dbo.Positions
         /// </summary>
         public IQueryable<Positions> Positions{ get; set; }
+        /// <summary>
+        ///     Set of <see cref="Invoices"/> entities from table dbo.Invoices
+        /// </summary>
+        public IQueryable<Invoices> Invoices{ get; set; }
+        /// <summary>
+        ///     Set of <see cref="InvoicePositions"/> entities from table dbo.InvoicePositions
+        /// </summary>
+        public IQueryable<InvoicePositions> InvoicePositions{ get; set; }
         /// <summary>
         ///     Set of <see cref="Permission"/> entities from table dbo.Permission
         /// </summary>

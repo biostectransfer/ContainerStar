@@ -21,6 +21,20 @@
 		WHERE ID = 11
 	END
 	
+	IF NOT EXISTS (SELECT ID FROM [ContainerStar].[dbo].[PERMISSION] WHERE ID = 12 )
+	BEGIN
+		INSERT INTO [ContainerStar].[dbo].[PERMISSION] ([Id], [Name], [Description], [CreateDate], [ChangeDate], [DeleteDate])
+		VALUES(12, 'Invoices', 'Rechnung' ,GETDATE() ,GETDATE() ,NULL);
+		INSERT INTO [ContainerStar].dbo.ROLE_PERMISSION_RSP(RoleId ,PermissionId ,CreateDate ,ChangeDate) 
+		VALUES (1 ,12 ,getdate() ,getdate());
+	END
+	ELSE
+	BEGIN
+		UPDATE [ContainerStar].[dbo].[PERMISSION]
+		SET [DESCRIPTION] = 'Rechnung'
+		WHERE ID = 12
+	END
+	
 	IF NOT EXISTS (SELECT ID FROM [ContainerStar].[dbo].[PERMISSION] WHERE ID = 1 )
 	BEGIN
 		INSERT INTO [ContainerStar].[dbo].[PERMISSION] ([Id], [Name], [Description], [CreateDate], [ChangeDate], [DeleteDate])

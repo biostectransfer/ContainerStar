@@ -15,6 +15,10 @@ namespace ContainerStar.Contracts.Enums
     		///</summary>
     		public const int Orders = 11;
     		///<summary>
+    		/// Grant for edit Invoices table
+    		///</summary>
+    		public const int Invoices = 12;
+    		///<summary>
     		/// Grant for edit Permission table
     		///</summary>
     		public const int Permission = 1;

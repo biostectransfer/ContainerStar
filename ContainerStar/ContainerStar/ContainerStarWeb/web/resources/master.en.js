@@ -8,6 +8,7 @@
 		Settings: 'Settings',
 		Orders: 'Orders',
 		Offers: 'Offers',
+		Invoices: 'Invoices'
 	};
 
 	return resource;

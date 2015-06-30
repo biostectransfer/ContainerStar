@@ -1,10 +1,9 @@
 using ContainerStar.Contracts;
 using System;
-using System.Collections.Generic;
 
 namespace ContainerStar.Contracts.Entities
 {
-    public partial class Positions: IHasId<int>
+    public partial class InvoicePositions: IHasId<int>
         ,IIntervalFields
         ,IRemovable
         ,ISystemFields
@@ -12,7 +11,7 @@ namespace ContainerStar.Contracts.Entities
         /// <summary>
         /// Table name
         /// </summary>
-        public static readonly string EntityTableName = "dbo.Positions";
+        public static readonly string EntityTableName = "dbo.InvoicePositions";
         #region Fields
         /// <summary>
         /// Columns names
@@ -20,83 +19,62 @@ namespace ContainerStar.Contracts.Entities
         public static class Fields
         {
             /// <summary>
-            /// Column name 'Id' for property <see cref="Positions.Id"/>
+            /// Column name 'Id' for property <see cref="InvoicePositions.Id"/>
             /// </summary>
             public static readonly string Id = "Id";
             /// <summary>
-            /// Column name 'OrderId' for property <see cref="Positions.OrderId"/>
+            /// Column name 'InvoiceId' for property <see cref="InvoicePositions.InvoiceId"/>
             /// </summary>
-            public static readonly string OrderId = "OrderId";
+            public static readonly string InvoiceId = "InvoiceId";
             /// <summary>
-            /// Column name 'IsSellOrder' for property <see cref="Positions.IsSellOrder"/>
+            /// Column name 'PositionId' for property <see cref="InvoicePositions.PositionId"/>
             /// </summary>
-            public static readonly string IsSellOrder = "IsSellOrder";
+            public static readonly string PositionId = "PositionId";
             /// <summary>
-            /// Column name 'ContainerId' for property <see cref="Positions.ContainerId"/>
-            /// </summary>
-            public static readonly string ContainerId = "ContainerId";
-            /// <summary>
-            /// Column name 'AdditionalCostId' for property <see cref="Positions.AdditionalCostId"/>
-            /// </summary>
-            public static readonly string AdditionalCostId = "AdditionalCostId";
-            /// <summary>
-            /// Column name 'Price' for property <see cref="Positions.Price"/>
+            /// Column name 'Price' for property <see cref="InvoicePositions.Price"/>
             /// </summary>
             public static readonly string Price = "Price";
             /// <summary>
-            /// Column name 'FromDate' for property <see cref="Positions.FromDate"/>
+            /// Column name 'FromDate' for property <see cref="InvoicePositions.FromDate"/>
             /// </summary>
             public static readonly string FromDate = "FromDate";
             /// <summary>
-            /// Column name 'ToDate' for property <see cref="Positions.ToDate"/>
+            /// Column name 'ToDate' for property <see cref="InvoicePositions.ToDate"/>
             /// </summary>
             public static readonly string ToDate = "ToDate";
             /// <summary>
-            /// Column name 'CreateDate' for property <see cref="Positions.CreateDate"/>
+            /// Column name 'CreateDate' for property <see cref="InvoicePositions.CreateDate"/>
             /// </summary>
             public static readonly string CreateDate = "CreateDate";
             /// <summary>
-            /// Column name 'ChangeDate' for property <see cref="Positions.ChangeDate"/>
+            /// Column name 'ChangeDate' for property <see cref="InvoicePositions.ChangeDate"/>
             /// </summary>
             public static readonly string ChangeDate = "ChangeDate";
             /// <summary>
-            /// Column name 'DeleteDate' for property <see cref="Positions.DeleteDate"/>
+            /// Column name 'DeleteDate' for property <see cref="InvoicePositions.DeleteDate"/>
             /// </summary>
             public static readonly string DeleteDate = "DeleteDate";
-            /// <summary>
-            /// Column name 'Amount' for property <see cref="Positions.Amount"/>
-            /// </summary>
-            public static readonly string Amount = "Amount";
           
         }
         #endregion
         public int Id{ get; set; }
-        public int OrderId{ get; set; }
-        public bool IsSellOrder{ get; set; }
-        public int? ContainerId{ get; set; }
-        public int? AdditionalCostId{ get; set; }
+        public int InvoiceId{ get; set; }
+        public int PositionId{ get; set; }
         public double Price{ get; set; }
         public DateTime FromDate{ get; set; }
         public DateTime ToDate{ get; set; }
         public DateTime CreateDate{ get; set; }
         public DateTime ChangeDate{ get; set; }
         public DateTime? DeleteDate{ get; set; }
-        public int Amount{ get; set; }
-        public virtual Orders Orders{ get; set; }
-        public virtual Containers Containers{ get; set; }
-        public virtual AdditionalCosts AdditionalCosts{ get; set; }
-        public virtual ICollection<InvoicePositions> InvoicePositions{ get; set; }
-        public bool HasOrders
+        public virtual Invoices Invoices{ get; set; }
+        public virtual Positions Positions{ get; set; }
+        public bool HasInvoices
         {
-            get { return !ReferenceEquals(Orders, null); }
+            get { return !ReferenceEquals(Invoices, null); }
         }
-        public bool HasContainers
+        public bool HasPositions
         {
-            get { return !ReferenceEquals(Containers, null); }
-        }
-        public bool HasAdditionalCosts
-        {
-            get { return !ReferenceEquals(AdditionalCosts, null); }
+            get { return !ReferenceEquals(Positions, null); }
         }
         DateTime? IIntervalFields.FromDate
         {
@@ -123,20 +101,17 @@ namespace ContainerStar.Contracts.Entities
         /// <summary>
         /// Shallow copy of object. Exclude navigation properties and PK properties
         /// </summary>
-        public Positions ShallowCopy()
+        public InvoicePositions ShallowCopy()
         {
-            return new Positions {
-                       OrderId = OrderId,
-                       IsSellOrder = IsSellOrder,
-                       ContainerId = ContainerId,
-                       AdditionalCostId = AdditionalCostId,
+            return new InvoicePositions {
+                       InvoiceId = InvoiceId,
+                       PositionId = PositionId,
                        Price = Price,
                        FromDate = FromDate,
                        ToDate = ToDate,
                        CreateDate = CreateDate,
                        ChangeDate = ChangeDate,
                        DeleteDate = DeleteDate,
-                       Amount = Amount,
         	           };
         }
     }
