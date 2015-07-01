@@ -49,7 +49,7 @@
         tableName: 'Invoices',
         editUrl: '#Invoices',
 
-        selectable: true,
+        selectable: "multiple",
         showEditLinkButton: false,
 
         editItemTitle: function () {
@@ -79,22 +79,40 @@
 		events: {
 
 		    'click .pay': function (e) {
+
 		        e.preventDefault();
 		        var self = this,
                     grid = self.grid,
-					dataItem = grid.dataItem(grid.select());
+					items = grid.select();
+                
+		        if (items != undefined && items.length == 1) {
 
-		        if (dataItem != undefined) {
-		            require(['base/confirmation-view'], function (View) {
+		            var dataItem = grid.dataItem(items[0]);
+		            if (dataItem.payDate) {
+		                require(['base/information-view'], function (View) {
 
-		                var view = new View({
-		                    title: 'Rechnung bezahlen',
-		                    message: 'Möchten Sie ausgewählte Rechnung bezahlen?'
+		                    var view = new View({
+		                        title: 'Rechnung bezahlen',
+		                        message: 'Ausgewählte Rechnung ist bereits bezahlt!'
+		                    });
+
+		                    self.addView(view);
+		                    self.$el.append(view.render().$el);
 		                });
-		                self.listenTo(view, 'continue', _.bind(payBill, self, dataItem));
-		                self.addView(view);
-		                self.$el.append(view.render().$el);
-		            });
+		            }
+		            else {
+		                require(['base/confirmation-view'], function (View) {
+                            
+		                    var view = new View({
+		                        title: 'Rechnung bezahlen',
+		                        message: 'Möchten Sie ausgewählte Rechnung bezahlen?'
+		                    });
+                            
+		                    self.listenTo(view, 'continue', _.bind(payBill, self, dataItem));
+		                    self.addView(view);
+		                    self.$el.append(view.render().$el);
+		                });
+		            }
 		        }
 		        else {
 		            require(['base/information-view'], function (View) {

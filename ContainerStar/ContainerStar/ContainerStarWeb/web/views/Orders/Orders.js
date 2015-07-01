@@ -9,7 +9,7 @@
     var generateBill = function (dataItem) {
 	    var self = this;
 	    
-	    location.href = Application.apiUrl + 'print/?printTypeId=1&id=' + dataItem.id;
+	    location.href = '#AddInvoice/4';// + dataItem.id;
 	},
     
     view = BaseView.extend({
