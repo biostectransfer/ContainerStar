@@ -359,8 +359,6 @@
       <DependentUpon>web.models.tt</DependentUpon>
     </Content>
     <Content Include="web\models\view-collection.js" />
-    <Content Include="web\resources\Invoices\AddInvoicePositions.de.js" />
-    <Content Include="web\resources\Invoices\AddInvoicePositions.en.js" />
     <Content Include="web\resources\Invoices\AddInvoices.de.js" />
     <Content Include="web\resources\Invoices\AddInvoices.en.js" />
     <Content Include="web\resources\Invoices\FilterInvoices.de.js" />
@@ -371,6 +369,8 @@
     <Content Include="web\resources\Invoices\Invoices.en.js" />
     <Content Include="web\resources\Invoices\InvoicesRelationships.de.js" />
     <Content Include="web\resources\Invoices\InvoicesRelationships.en.js" />
+    <Content Include="web\resources\Invoices\AddInvoicePositions.de.js" />
+    <Content Include="web\resources\Invoices\AddInvoicePositions.en.js" />
     <Content Include="web\resources\Orders\FilterContainerSmart.de.js" />
     <Content Include="web\resources\Orders\FilterContainerSmart.en.js" />
     <Content Include="web\resources\Orders\AddPositions.de.js" />
@@ -735,12 +735,12 @@
       <DependentUpon>web.router.template.tt</DependentUpon>
     </Content>
     <Content Include="web\router.js" />
-    <Content Include="web\templates\Invoices\AddInvoicePositions.html" />
     <Content Include="web\templates\Invoices\AddInvoices.html" />
     <Content Include="web\templates\Invoices\FilterInvoices.html" />
     <Content Include="web\templates\Invoices\InvoicePositions.html" />
     <Content Include="web\templates\Invoices\Invoices.html" />
     <Content Include="web\templates\Invoices\InvoicesRelationships.html" />
+    <Content Include="web\templates\Invoices\AddInvoicePositions.html" />
     <Content Include="web\templates\Orders\AddPositions.html" />
     <Content Include="web\templates\Orders\AddOrders.html" />
     <Content Include="web\templates\Errors\Forbidden.html" />
@@ -930,12 +930,12 @@
       <DependentUpon>web.templates.tt</DependentUpon>
     </Content>
     <Content Include="web\application-start.js" />
-    <Content Include="web\views\Invoices\AddInvoicePositions.js" />
     <Content Include="web\views\Invoices\AddInvoices.js" />
     <Content Include="web\views\Invoices\FilterInvoices.js" />
     <Content Include="web\views\Invoices\InvoicePositions.js" />
     <Content Include="web\views\Invoices\Invoices.js" />
     <Content Include="web\views\Invoices\InvoicesRelationships.js" />
+    <Content Include="web\views\Invoices\AddInvoicePositions.js" />
     <Content Include="web\views\Orders\AdditionalCostsSearch.js" />
     <Content Include="web\views\Orders\ContainerSearch.js" />
     <Content Include="web\views\Orders\FilterContainerSmart.js" />

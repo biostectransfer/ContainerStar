@@ -8,8 +8,28 @@
     
     var generateBill = function (dataItem) {
 	    var self = this;
-	    
-	    location.href = '#AddInvoice/'+ dataItem.id;
+
+	    var model = new Backbone.Model();
+	    model.url = Application.apiUrl + 'addInvoices';
+	    model.set('orderId', dataItem.id);
+	    model.save({}, {
+	        success: function (model, response) {
+
+	            debugger;
+	            location.href = '#Invoices/' + model.id;
+	        },
+	        error: function (model, response) {
+
+	            require(['base/information-view'], function (View) {
+	                var view = new View({
+	                    title: 'Rechnung erstellen',
+	                    message: 'Für den ausgewählten Auftrag konnte die Rechnung nicht erstellt werden.'
+	                });
+	                self.addView(view);
+	                self.$el.append(view.render().$el);
+	            });
+	        }
+	    });
 	},
     
     view = BaseView.extend({

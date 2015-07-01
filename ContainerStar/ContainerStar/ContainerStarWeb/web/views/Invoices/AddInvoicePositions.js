@@ -1,6 +1,6 @@
 ﻿define([
     'base/related-object-grid-view',
-    'collections/Positions'
+    'collections/Invoices/InvoicePositions'
 ], function (BaseView, Collection) {
     'use strict';
 
@@ -17,7 +17,7 @@
             var self = this;
 
             this.defaultFiltering = [
-                { field: 'orderId', operator: 'eq', value: this.model.get('orderId') },
+                { field: 'invoiceId', operator: 'eq', value: this.model.id },
             ];
 
             this.collection = new Collection();
