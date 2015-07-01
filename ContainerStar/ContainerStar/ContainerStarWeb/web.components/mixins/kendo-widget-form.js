@@ -49,7 +49,8 @@ function () {
                     format: "#",
                     decimals: 0,
                     min: 0,
-                    max: 9999999
+                    max: 9999999,
+                    spinners: false
                 }).data('kendoNumericTextBox'));
             });
 
@@ -57,10 +58,11 @@ function () {
             self.$('input[data-role=floattextbox]').each(function (index, elem) {
                 widgets.push(self.$(elem).kendoNumericTextBox({
                     culture: "de-DE",
-                    format: "n",
+                    format: "#.00",
                     decimals: 2,
                     min: 0,
-                    max: 9999999
+                    max: 9999999,
+                    spinners: false
                 }).data('kendoNumericTextBox'));
             });
         },
