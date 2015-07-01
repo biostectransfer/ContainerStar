@@ -15,7 +15,10 @@ define(function () {
 		discount: 'Discount',
 		taxValue: 'Tax value',
 		manualPrice: 'Manual price',
-		totalPrice: 'Total price'
+		totalPrice: 'Total price',
+	    summaryPrice: 'Summary price',
+	    totalPriceWithoutDiscountWithoutTax: 'Total price without discount and without tax',
+	    totalPriceWithoutTax: 'Total price without tax',
 	};
 
 	return resources;

@@ -49,6 +49,9 @@ define([
                 '#taxValue': 'taxValue',
                 '#manualPrice': 'manualPrice',
                 '#totalPrice': 'totalPrice',
+                '#summaryPrice': 'summaryPrice',
+                '#totalPriceWithoutTax': 'totalPriceWithoutTax',
+                '#totalPriceWithoutDiscountWithoutTax': 'totalPriceWithoutDiscountWithoutTax',
 			};
 
             return result;
@@ -98,9 +101,11 @@ define([
 
                 var self = this;
                 save.call(self).done(function () {
-                    //debugger;
-                    self.$el.find('#totalPrice').val(self.model.get('totalPrice'));
-                    self.$el.find('#totalPrice').focus();
+
+                    self.$el.find('#totalPrice').data("kendoNumericTextBox").value(self.model.get('totalPrice'));
+                    self.$el.find('#summaryPrice').data("kendoNumericTextBox").value(self.model.get('summaryPrice'));
+                    self.$el.find('#totalPriceWithoutTax').data("kendoNumericTextBox").value(self.model.get('totalPriceWithoutTax'));
+                    self.$el.find('#totalPriceWithoutDiscountWithoutTax').data("kendoNumericTextBox").value(self.model.get('totalPriceWithoutDiscountWithoutTax'));
                 });
             },
         }

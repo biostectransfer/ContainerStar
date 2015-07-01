@@ -110,11 +110,16 @@ namespace ContainerStar.Lib.Managers
                 {
                     case PrintTypes.RentOrder:
                         result = ReplaceCommonFields(order, result);
+                        result = ReplaceBaseOrderFields(order, result);
                         result = ReplaceRentPositions(order, result);
                         result = ReplaceRentAdditionalCostPositions(order, result);
                         break;
                     case PrintTypes.Offer:
-                      
+                        result = ReplaceCommonFields(order, result);
+                        result = ReplaceBaseOfferFields(order, result);
+                        result = ReplaceBaseOrderFields(order, result);
+                        result = ReplaceRentPositions(order, result);
+                        result = ReplaceRentAdditionalCostPositions(order, result);
                         break;
                     default:
                         throw new NotImplementedException();
@@ -126,19 +131,59 @@ namespace ContainerStar.Lib.Managers
 
         private string ReplaceCommonFields(Orders order, string xmlMainXMLDoc)
         {
-            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#RentOrderNumber", order.RentOrderNumber);
             xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CustomerName", order.CustomerName);
             xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CustomerStreet", order.Customers.Street);
             xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CustomerZip", order.Customers.Zip.ToString());
             xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CustomerCity", order.Customers.City);
+            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#Today", DateTime.Now.ToShortDateString());
+
+            return xmlMainXMLDoc;
+        }
+
+        private string ReplaceBaseOrderFields(Orders order, string xmlMainXMLDoc)
+        {
+            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#RentOrderNumber", order.RentOrderNumber);
             xmlMainXMLDoc = xmlMainXMLDoc.Replace("#DeliveryPlace", order.DeliveryPlace);
             xmlMainXMLDoc = xmlMainXMLDoc.Replace("#Street", order.Street);
             xmlMainXMLDoc = xmlMainXMLDoc.Replace("#ZIP", order.Zip.ToString());
             xmlMainXMLDoc = xmlMainXMLDoc.Replace("#City", order.City);
-            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#Today", DateTime.Now.ToShortDateString());            
-                        
+
             return xmlMainXMLDoc;
         }
+
+        private string ReplaceBaseOfferFields(Orders order, string xmlMainXMLDoc)
+        {
+            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CustomerPhone", order.Customers.Phone);
+            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CustomerFax", order.Customers.Fax);
+            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CustomerNumber", order.Customers.Number);
+
+            if (order.CommunicationPartners != null)
+            {
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CommunicationPartnerName",
+                    String.Format("{0} {1}", order.CommunicationPartners.FirstName, order.CommunicationPartners.Name));
+            }
+            else
+            {
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CommunicationPartnerName", String.Empty);
+            }
+
+            if (order.Positions != null && order.Positions.Count != 0)
+            {
+                var positions = order.Positions.Where(o => !o.DeleteDate.HasValue && o.ContainerId.HasValue).ToList();
+                var minDate = positions.Min(o => o.FromDate);
+                var maxDate = positions.Max(o => o.ToDate);
+                var duration = maxDate - minDate;
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#RentDuration", String.Format("{0} Tage", duration.Days));
+            }
+            else
+            {
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#RentDuration", String.Empty);
+            }
+
+            return xmlMainXMLDoc;
+        }
+
+
 
         private string ReplaceRentPositions(Orders order, string xmlMainXMLDoc)
         {
@@ -161,7 +206,7 @@ namespace ContainerStar.Lib.Managers
             {
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#ContainerDescription", String.Empty);
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#FromDate", String.Empty);
-                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#ToDate", String.Empty);  
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#ToDate", String.Empty);
             }
 
             return xmlMainXMLDoc;
@@ -227,7 +272,7 @@ namespace ContainerStar.Lib.Managers
 
             return xmlDoc.Root.ToString();
         }
-        
+
         private string ReplacePositionWithDescription(List<Positions> positions, string xmlMainXMLDoc)
         {
             var xmlDoc = XDocument.Parse(xmlMainXMLDoc);
@@ -288,6 +333,7 @@ namespace ContainerStar.Lib.Managers
 
             return xmlDoc.Root.ToString();
         }
+
 
         private static string ConvertToTimeString(DateTime date)
         {

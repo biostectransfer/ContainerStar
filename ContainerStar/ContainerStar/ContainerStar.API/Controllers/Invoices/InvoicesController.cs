@@ -33,15 +33,56 @@ namespace ContainerStar.API.Controllers.Invoices
             model.discount = entity.Discount;
             model.taxValue = entity.TaxValue;
             model.manualPrice = entity.ManualPrice;
+
+            CalculatePrices(entity, model);
+        }
+
+        private void CalculatePrices(ContainerStar.Contracts.Entities.Invoices entity, InvoicesModel model)
+        {
+            model.totalPriceWithoutDiscountWithoutTax = 0;
+            model.totalPriceWithoutTax = 0;
             model.totalPrice = 0;
 
-            foreach (var position in entity.InvoicePositions.Where(o => !o.DeleteDate.HasValue).ToList())
+            var allPositions = entity.InvoicePositions.Where(o => !o.DeleteDate.HasValue).ToList();
+            //container prices
+            foreach (var position in allPositions.Where(o => o.Positions.ContainerId.HasValue))
             {
-                model.totalPrice += position.Price * position.Positions.Amount;
+                model.totalPriceWithoutDiscountWithoutTax += position.Price * position.Positions.Amount;
             }
 
-            var discount = (model.totalPrice / (double)100) * entity.Discount;
-            model.totalPrice -= discount;
+            //discount only for containers
+            var discount = (model.totalPriceWithoutDiscountWithoutTax / (double)100) * entity.Discount;
+
+            //additional cost prices
+            foreach (var position in allPositions.Where(o => o.Positions.AdditionalCostId.HasValue))
+            {
+                model.totalPriceWithoutDiscountWithoutTax += position.Price * position.Positions.Amount;
+            }
+
+            //discount
+            model.totalPriceWithoutTax = model.totalPriceWithoutDiscountWithoutTax - discount;
+
+            var taxValue = (model.totalPriceWithoutTax / (double)100) * entity.TaxValue;
+            if (entity.WithTaxes)
+            {
+                //with taxes
+                model.totalPrice = model.totalPriceWithoutTax + taxValue;
+            }
+            else
+            {
+                //without taxes
+                model.totalPrice = model.totalPriceWithoutTax;
+            }
+
+            //override total price with manual price
+            if (model.manualPrice.HasValue)
+            {
+                model.summaryPrice = model.manualPrice.Value;
+            }
+            else
+            {
+                model.summaryPrice = model.totalPrice;
+            }
         }
 
         protected override void ModelToEntity(InvoicesModel model, ContainerStar.Contracts.Entities.Invoices entity, ActionTypes actionType)

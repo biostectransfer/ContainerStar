@@ -15,7 +15,10 @@ define(function () {
 		discount: 'Rabatt in %',
 		taxValue: 'MwSt.',
 		manualPrice: 'Manueller Preis',
-	    totalPrice: 'Gesamt Preis'
+		summaryPrice: 'Gesamt Preis',
+		totalPriceWithoutDiscountWithoutTax: 'Netto Preis ohne MwSt. und ohne Rabatt',
+		totalPriceWithoutTax: 'Netto Preis ohne MwSt. mit Rabatt',
+	    totalPrice: 'Brutto Preis'
 	};
 
 	return resources;

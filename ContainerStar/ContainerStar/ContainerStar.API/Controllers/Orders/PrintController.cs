@@ -45,7 +45,7 @@ namespace ContainerStar.API.Controllers
                     break;
                 case PrintTypes.Offer:
                     path = Path.Combine(dataDirectory, API.Configuration.OfferFileName);
-                    stream = Manager.PrepareRentOrderPrintData(id, path);
+                    stream = Manager.PrepareOfferPrintData(id, path);
                     break;
                 default:
                     throw new NotImplementedException();

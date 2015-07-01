@@ -47,6 +47,15 @@ namespace ContainerStar.API.Models.Invoices
         public double? manualPrice { get; set; }
 
         [DataMember]
+        public double totalPriceWithoutDiscountWithoutTax { get; set; }
+
+        [DataMember]
+        public double totalPriceWithoutTax { get; set; }
+
+        [DataMember]
         public double totalPrice { get; set; }
+        
+        [DataMember]
+        public double summaryPrice { get; set; }
     }
 }
