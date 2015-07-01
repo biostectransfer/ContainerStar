@@ -4,7 +4,31 @@ define([
 ], function (BaseView , TabView) {
     'use strict';
 
-    var view = BaseView.extend({
+    var save = function () {
+
+        var self = this,
+            deferred = new $.Deferred();
+            
+
+        if (self.validate()) {
+            self.model.save({}, {
+                data: kendo.stringify(self.model),
+                method: 'put',
+                contentType: 'application/json',
+                success: function (response) {
+                    
+                    return deferred.resolve();
+                },
+                error: function (model, response) {
+                    self.validateResponse(response);
+                }
+            });
+        }
+
+        return deferred.promise();
+    },
+
+    view = BaseView.extend({
 
         tabView: TabView,
         tableName: 'Invoices',
@@ -20,6 +44,11 @@ define([
                 '#customerAddress': 'customerAddress',
                 '#invoiceNumber': 'invoiceNumber',
                 '#createDate': 'createDate',
+                '#withTaxes': 'withTaxes',
+                '#discount': 'discount',
+                '#taxValue': 'taxValue',
+                '#manualPrice': 'manualPrice',
+                '#totalPrice': 'totalPrice',
 			};
 
             return result;
@@ -41,9 +70,40 @@ define([
 
             return this;
         },
+        
+        save: function(){
+
+        },
 
         events: {
-		}
+            'click .SelectCustomer': function (e) {
+                e.preventDefault();
+
+                var self = this,
+                    view = new SelectCustomerView();
+
+                self.listenTo(view, 'select', function (item) {
+
+                    self.model.set('customerId', item.id);
+                    self.$el.find('#customerId').val(item.id);
+                    self.$el.find('#customerId_Name').val(item.get('name'));
+                });
+
+                self.addView(view);
+                self.$el.append(view.render().$el);
+            },
+            'click .save': function (e) {
+
+                e.preventDefault();
+
+                var self = this;
+                save.call(self).done(function () {
+                    //debugger;
+                    self.$el.find('#totalPrice').val(self.model.get('totalPrice'));
+                    self.$el.find('#totalPrice').focus();
+                });
+            },
+        }
     });
 
     return view;

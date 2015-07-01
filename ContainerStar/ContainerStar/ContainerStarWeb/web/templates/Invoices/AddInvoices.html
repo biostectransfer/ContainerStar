@@ -52,7 +52,49 @@
             <td style="width: 100%;">&nbsp;</td>
         </tr>
     </table>
-
+    <table style="width: 100%; vertical-align: top; padding: 0px; margin: 0px; white-space: nowrap;" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="padding-right: 25px; vertical-align: top; white-space: nowrap;">
+                <div class="editor-label">
+                    <br /><br />
+                    <label for="withTaxes" data-localized="withTaxes"></label><input type="checkbox" id="withTaxes" name="withTaxes" />
+                </div>
+            </td>
+            <td style="padding-right: 25px; vertical-align: top; white-space: nowrap;">
+                <div class="editor-label">
+                    <label for="taxValue" data-localized="taxValue"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" data-role="numerictextbox" id="taxValue" name="taxValue" readonly="readonly" style="background-color: lightgrey;" />
+                </div>
+            </td>
+            <td style="padding-right: 25px; vertical-align: top; white-space: nowrap;">
+                <div class="editor-label">
+                    <label for="discount" data-localized="discount"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" data-role="floattextbox" id="discount" name="discount" />
+                </div>
+            </td>
+            <td style="padding-right: 60px; vertical-align: top; white-space: nowrap;">
+                <div class="editor-label">
+                    <label for="manualPrice" data-localized="manualPrice"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" data-role="floattextbox" id="manualPrice" name="manualPrice" />
+                </div>
+            </td>
+            <td style="padding-right: 25px; vertical-align: top; white-space: nowrap;">
+                <div class="editor-label">
+                    <label for="totalPrice" data-localized="totalPrice"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" data-role="floattextbox" id="totalPrice" name="totalPrice" readonly="readonly" style="background-color: lightgrey;" />
+                </div>
+            </td>
+            <td style="width: 100%;">&nbsp;</td>
+        </tr>
+    </table>
     <br />
 
     <div class="invoicePositionsGrid">

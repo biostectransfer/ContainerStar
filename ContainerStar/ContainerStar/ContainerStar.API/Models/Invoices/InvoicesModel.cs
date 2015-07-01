@@ -19,7 +19,6 @@ namespace ContainerStar.API.Models.Invoices
         [DataMember]
         public string invoiceNumber{ get; set; }
 
-        [Required]
         [DataMember]
         public DateTime? payDate{ get; set; }
 
@@ -35,5 +34,19 @@ namespace ContainerStar.API.Models.Invoices
         [DataMember]
         public string communicationPartnerName { get; set; }
 
+        [DataMember]
+        public bool withTaxes { get; set; }
+
+        [DataMember]
+        public double discount { get; set; }
+
+        [DataMember]
+        public double taxValue { get; set; }
+
+        [DataMember]
+        public double? manualPrice { get; set; }
+
+        [DataMember]
+        public double totalPrice { get; set; }
     }
 }

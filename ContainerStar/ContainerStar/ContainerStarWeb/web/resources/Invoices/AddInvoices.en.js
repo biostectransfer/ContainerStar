@@ -10,7 +10,12 @@ define(function () {
 		createDate: 'Pay date',
 		rentOrderNumber: 'Rent order number',
 		customerName: 'Customer',
-	    customerAddress: 'Address'
+		customerAddress: 'Address',
+		withTaxes: 'With taxes',
+		discount: 'Discount',
+		taxValue: 'Tax value',
+		manualPrice: 'Manual price',
+		totalPrice: 'Total price'
 	};
 
 	return resources;

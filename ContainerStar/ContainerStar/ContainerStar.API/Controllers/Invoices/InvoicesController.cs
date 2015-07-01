@@ -29,11 +29,28 @@ namespace ContainerStar.API.Controllers.Invoices
             model.customerAddress = String.Format("{0}, {1} {2}", entity.Orders.Customers.Street, entity.Orders.Customers.Zip, entity.Orders.Customers.City);
             model.rentOrderNumber = entity.Orders.RentOrderNumber;
             model.communicationPartnerName = entity.Orders.CommunicationPartnerTitle;
+            model.withTaxes = entity.WithTaxes;
+            model.discount = entity.Discount;
+            model.taxValue = entity.TaxValue;
+            model.manualPrice = entity.ManualPrice;
+            model.totalPrice = 0;
+
+            foreach (var position in entity.InvoicePositions.Where(o => !o.DeleteDate.HasValue).ToList())
+            {
+                model.totalPrice += position.Price * position.Positions.Amount;
+            }
+
+            var discount = (model.totalPrice / (double)100) * entity.Discount;
+            model.totalPrice -= discount;
         }
+
         protected override void ModelToEntity(InvoicesModel model, ContainerStar.Contracts.Entities.Invoices entity, ActionTypes actionType)
         {
             entity.CreateDate = model.createDate;
             entity.ChangeDate = model.createDate;
+            entity.WithTaxes = model.withTaxes;
+            entity.Discount = model.discount;
+            entity.ManualPrice = model.manualPrice;
         }
 
         protected override string BuildWhereClause<T>(Filter filter)

@@ -20,6 +20,22 @@ define(function () {
             ,communicationPartnerName: { type: "string", 
 			                        editable: false, 
 				                    validation: { required: false } }	
+            ,withTaxes: { type: "boolean", 
+			                        editable: true, 
+				                    validation: { required: false } }			
+			,discount: { type: "number", 
+			                        editable: true, 
+				                    validation: { required: true } }
+            ,taxValue: { type: "number", 
+			                        editable: false, 
+			                        validation: { required: false } }
+            ,manualPrice: { type: "number", 
+			                        editable: true, 
+				                    validation: { required: false } }
+            
+            ,totalPrice: { type: "number", 
+			                        editable: false, 
+				                    validation: { required: false } }
 		}
 	});
 	return model;

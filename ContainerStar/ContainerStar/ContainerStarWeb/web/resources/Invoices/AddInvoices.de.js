@@ -10,7 +10,12 @@ define(function () {
 		createDate: 'Bezahlt am',
 		rentOrderNumber: 'MV-Nummer',
 		customerName: 'Kunde',
-	    customerAddress: 'Adresse'
+		customerAddress: 'Adresse',
+		withTaxes: 'Rechnung mit MwSt.',
+		discount: 'Rabatt in %',
+		taxValue: 'MwSt.',
+		manualPrice: 'Manueller Preis',
+	    totalPrice: 'Gesamt Preis'
 	};
 
 	return resources;
