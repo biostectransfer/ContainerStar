@@ -3,10 +3,8 @@ define(function () {
 
 	var resources = {
 
-		add: 'Rechnung anlegen',
-	    edit: 'Rechnung editieren',
-	    masterData: 'Einstellungen',
-	    pageTitle: 'Rechnung',
+		add: 'Rechnung erstellen',
+	    pageTitle: 'Rechnungen',
 		pleaseSelect: 'Bitte auswählen',
 		invoiceNumber: 'Rechnung-Nummer',	
 		payDate: 'Bezahlt am',	

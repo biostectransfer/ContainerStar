@@ -33,7 +33,9 @@
                 'Orders/create': _.partial(BaseRouter.showViewWithModel, this, 'l!t!Orders/AddOrders', 'models/Orders', { ContainerTypes: true, CommunicationPartners: true, Equipments: true }, { isOffer: false }),
                 'Orders/:id': _.partial(BaseRouter.showViewWithModel, this, 'l!t!Orders/AddOrders', 'models/Orders', { ContainerTypes: true, CommunicationPartners: true, Equipments: true }, { isOffer: false }),
                 'Invoices': _.partial(BaseRouter.showView, this, 'l!t!Invoices/Invoices', false, false),
-                'AddInvoice/:id': _.partial(BaseRouter.showViewWithModel, this, 'l!t!Invoices/AddInvoices', 'models/Invoices/Invoices', false, false),
+                'AddInvoice/:orderId': function (orderId) {
+                    BaseRouter.showViewWithModel(this, 'l!t!Invoices/AddInvoices', 'models/Invoices/Invoices', false, { orderId: orderId });
+                },
             };
 		    
 		    var result = $.extend({}, commonRoutes, MasterDataRouter.getAllMasterDataRoutes(this));

@@ -3,12 +3,19 @@ define(function () {
 
 	var resources = {
 
-		add: 'Rechnungposition anlegen',
-	    edit: 'Rechnungposition editieren',
-	    masterData: 'Einstellungen',
-	    pageTitle: 'Rechnungposition',
-		pleaseSelect: 'Bitte auswählen',
-		price: 'Preis',	
+	    orderId: 'Auftrag',
+	    isSellOrder: 'ist Verkauf Position',
+	    containerId: 'Container',
+	    additionalCostId: 'Nebenkosten',
+	    description: 'Beschreibung',
+	    price: 'Preis',
+	    fromDate: 'Von Datum',
+	    toDate: 'Bis Datum',
+	    rentContainer: 'Container vermieten',
+	    saleContainer: 'Container verkaufen',
+	    selectAdditionalCosts: 'Nebenkosten',
+	    amount: 'Menge'
+
 	};
 
 	return resources;

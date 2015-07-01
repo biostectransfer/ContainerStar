@@ -1,6 +1,6 @@
 define([
 	'base/base-object-add-view',
-    'l!t!Invoices/InvoicesRelationships'
+    'l!t!Invoices/AddInvoicePositions'
 ], function (BaseView , TabView) {
     'use strict';
 
@@ -14,8 +14,9 @@ define([
 
             var self = this;
             var result = {
-			'#invoiceNumber': 'invoiceNumber',
-			'#payDate': 'payDate',
+                '#orderId': 'orderId',
+			    '#invoiceNumber': 'invoiceNumber',
+			    '#payDate': 'payDate',
 			};
 
             return result;
@@ -25,11 +26,20 @@ define([
 
             view.__super__.render.apply(this, arguments);
 
-			//TODO foreach model field
+            var self = this,
+                            model = new Backbone.Model({}),
+                            options = _.extend({}, {
+                                model: model,
+                            }),
+                        options = _.extend(options, self.options),
+                        detView = new self.tabView(options);
+
+            self.showView(detView, '.invoicePositionsGrid');
 
             return this;
-        }
-		,events: {
+        },
+
+        events: {
 		}
     });
 

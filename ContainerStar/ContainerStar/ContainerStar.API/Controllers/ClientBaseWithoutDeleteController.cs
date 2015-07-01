@@ -124,7 +124,7 @@ namespace ContainerStar.API.Controllers
             return Ok(model);
         }
 
-        private void SetDuplicateErrorsToModelState(ModelStateDictionary modelState, DuplicateEntityException exception)
+        protected void SetDuplicateErrorsToModelState(ModelStateDictionary modelState, DuplicateEntityException exception)
         {
             foreach (var businessKey in exception.BusinessKeys)
             {
@@ -132,12 +132,12 @@ namespace ContainerStar.API.Controllers
             }
         }
 
-        private void SetChangeDate(ISystemFields entity)
+        protected void SetChangeDate(ISystemFields entity)
         {
             entity.ChangeDate = DateTime.Now;
         }
 
-        private bool HasConcurrency(ISystemFields entity, ISystemModelFields model)
+        protected bool HasConcurrency(ISystemFields entity, ISystemModelFields model)
         {
             if (entity == null || 
                 model == null ||

@@ -1,32 +1,44 @@
-define([
-	'base/base-object-add-view',
-    
-], function (BaseView ) {
+﻿define([
+    'base/related-object-grid-view',
+    'collections/Positions'
+], function (BaseView, Collection) {
     'use strict';
 
     var view = BaseView.extend({
 
-        
-        tableName: 'InvoicePositions',
-        actionUrl: '#InvoicePositions',
+        collectionType: Collection,
+        gridSelector: '.grid',
+        tableName: 'Positions',
+        showAddButton: false,      
 
-		bindings: function () {
+        initialize: function () {
+            view.__super__.initialize.apply(this, arguments);
 
             var self = this;
-            var result = {
-			'#price': 'price',
-			};
 
-            return result;
-		},
+            this.defaultFiltering = [
+                { field: 'orderId', operator: 'eq', value: this.model.get('orderId') },
+            ];
+
+            this.collection = new Collection();
+        },
+
+        columns: function () {
+            return [
+                 { field: 'description', title: this.resources.description, filterable: false, sortable: false },
+                 { field: 'price', title: this.resources.price },
+                 { field: 'amount', title: this.resources.amount },
+                 { field: 'fromDate', title: this.resources.fromDate, format: '{0:d}' },
+                 { field: 'toDate', title: this.resources.toDate, format: '{0:d}' }
+            ];
+        },
 
         render: function () {
+            var self = this;
 
-            view.__super__.render.apply(this, arguments);
+            view.__super__.render.apply(self, arguments);
 
-			//TODO foreach model field
-
-            return this;
+            return self;
         }
     });
 

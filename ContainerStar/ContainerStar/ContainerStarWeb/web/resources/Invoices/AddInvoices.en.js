@@ -4,9 +4,7 @@ define(function () {
 	var resources = {
 
 		add: 'Add Invoice',
-	    edit: 'Edit Invoice',
-	    masterData: 'Settings',
-	    pageTitle: 'Invoice',
+	    pageTitle: 'Invoices',
 		pleaseSelect: 'Please select',
 		invoiceNumber: 'Invoicenumber',	
 		payDate: 'Pay date',	
