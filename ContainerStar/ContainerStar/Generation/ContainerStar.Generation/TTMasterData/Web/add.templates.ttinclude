@@ -152,13 +152,17 @@
             case "ushort":
             case "uint":
             case "ulong":
+				if(!String.IsNullOrEmpty(property.Column.Content.ViewCollection))
+					return "<select style=\"width: 362px\"";
+				else
+					return "<input type=\"text\" data-role=\"numerictextbox\"";
             case "decimal":
             case "float":
             case "double":
 				if(!String.IsNullOrEmpty(property.Column.Content.ViewCollection))
 					return "<select style=\"width: 362px\"";
 				else
-					return "<input type=\"text\" data-role=\"numerictextbox\"";
+					return "<input type=\"text\" data-role=\"floattextbox\"";
             case "datetime":
                 return "<input type=\"text\" data-role=\"datepicker\"";
             default:
