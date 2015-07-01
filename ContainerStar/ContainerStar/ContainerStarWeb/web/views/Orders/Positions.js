@@ -30,6 +30,10 @@
             //$('<div class="k-widget k-tooltip k-tooltip-validation k-invalid-msg" style="margin: 0.5em; display: none;" data-for="' +
             //    options.field + '" role="alert"><span class="k-icon k-warning"> </span>Das Feld muss befüllt werden<div class="k-callout k-callout-n"></div></div>').appendTo(container);
         }
+        else
+        {
+            $('<span>1</span>').appendTo(container);
+        }
     },
 
     view = BaseView.extend({

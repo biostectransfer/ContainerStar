@@ -7,7 +7,10 @@ define(function () {
 	    pageTitle: 'Rechnungen',
 		pleaseSelect: 'Bitte auswählen',
 		invoiceNumber: 'Rechnung-Nummer',	
-		payDate: 'Bezahlt am',	
+		createDate: 'Bezahlt am',
+		rentOrderNumber: 'MV-Nummer',
+		customerName: 'Kunde',
+	    customerAddress: 'Adresse'
 	};
 
 	return resources;

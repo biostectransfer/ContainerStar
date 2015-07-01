@@ -26,12 +26,14 @@ namespace ContainerStar.API.Controllers.Invoices
             model.createDate = ((ISystemFields)entity).CreateDate;
             model.changeDate = ((ISystemFields)entity).ChangeDate;
             model.customerName = entity.Orders.CustomerName;
+            model.customerAddress = String.Format("{0}, {1} {2}", entity.Orders.Customers.Street, entity.Orders.Customers.Zip, entity.Orders.Customers.City);
+            model.rentOrderNumber = entity.Orders.RentOrderNumber;
             model.communicationPartnerName = entity.Orders.CommunicationPartnerTitle;
         }
         protected override void ModelToEntity(InvoicesModel model, ContainerStar.Contracts.Entities.Invoices entity, ActionTypes actionType)
         {
-            entity.InvoiceNumber = model.invoiceNumber;
-            entity.PayDate = model.payDate;
+            entity.CreateDate = model.createDate;
+            entity.ChangeDate = model.createDate;
         }
 
         protected override string BuildWhereClause<T>(Filter filter)

@@ -1,11 +1,11 @@
 define([
 	'base/base-collection',
-	'models/Invoices/AddInvoice'
+	'models/Invoices/AddInvoicePositions'
 ], function (BaseCollection, Model) {
 	'use strict';
 
 	var collection = BaseCollection.extend({
-	    url: 'api/AddInvoice',
+	    url: 'api/InvoicePositions',
 		model: Model
 	});
 

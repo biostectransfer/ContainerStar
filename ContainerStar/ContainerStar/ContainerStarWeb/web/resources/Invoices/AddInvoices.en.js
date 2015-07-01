@@ -7,7 +7,10 @@ define(function () {
 	    pageTitle: 'Invoices',
 		pleaseSelect: 'Please select',
 		invoiceNumber: 'Invoicenumber',	
-		payDate: 'Pay date',	
+		createDate: 'Pay date',
+		rentOrderNumber: 'Rent order number',
+		customerName: 'Customer',
+	    customerAddress: 'Address'
 	};
 
 	return resources;

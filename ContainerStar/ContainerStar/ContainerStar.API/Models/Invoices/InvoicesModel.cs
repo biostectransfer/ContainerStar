@@ -27,6 +27,12 @@ namespace ContainerStar.API.Models.Invoices
         public string customerName { get; set; }
 
         [DataMember]
+        public string customerAddress { get; set; }
+        
+        [DataMember]
+        public string rentOrderNumber { get; set; }
+
+        [DataMember]
         public string communicationPartnerName { get; set; }
 
     }

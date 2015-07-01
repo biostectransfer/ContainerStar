@@ -221,8 +221,8 @@
     <Content Include="web.libs\jquery.signalR-2.2.0.min.js" />
     <Content Include="web.libs\jszip.js" />
     <Content Include="web\collections\ContainersSmart.js" />
+    <Content Include="web\collections\Invoices\AddInvoicePositions.js" />
     <Content Include="web\collections\Invoices\InvoicePositions.js" />
-    <Content Include="web\collections\Invoices\AddInvoice.js" />
     <Content Include="web\collections\Invoices\Invoices.js" />
     <Content Include="web\collections\Positions.js" />
     <Content Include="web\collections\Orders.js" />
@@ -277,8 +277,8 @@
     <Content Include="web\models\FilterContainerSmart.js" />
     <Content Include="web\models\FilterOrders.js" />
     <Content Include="web\models\Invoices\FilterInvoices.js" />
+    <Content Include="web\models\Invoices\AddInvoicePositions.js" />
     <Content Include="web\models\Invoices\InvoicePositions.js" />
-    <Content Include="web\models\Invoices\AddInvoice.js" />
     <Content Include="web\models\Invoices\Invoices.js" />
     <Content Include="web\models\login.js" />
     <Content Include="web\models\Positions.js" />

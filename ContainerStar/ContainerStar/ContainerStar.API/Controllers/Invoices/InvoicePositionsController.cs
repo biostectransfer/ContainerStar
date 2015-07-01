@@ -28,16 +28,26 @@ namespace ContainerStar.API.Controllers.Invoices
                 model.description = String.Format("{0} {1}", entity.Positions.Containers.Number, entity.Positions.Containers.ContainerTypes.Name);
                 model.fromDate = entity.FromDate;
                 model.toDate = entity.ToDate;
+                model.amount = 1;
+                model.isCointainerPosition = true;
             }
 
             if (entity.Positions.AdditionalCostId.HasValue)
             {
                 model.description = entity.Positions.AdditionalCosts.Name;
+                model.amount = entity.Positions.Amount;
+                model.isCointainerPosition = false;
             }
         }
         protected override void ModelToEntity(InvoicePositionsModel model, InvoicePositions entity, ActionTypes actionType)
         {
             entity.Price = model.price;
+
+            if(model.fromDate.HasValue)
+                entity.FromDate = model.fromDate.Value;
+
+            if (model.toDate.HasValue)
+                entity.ToDate = model.toDate.Value;
         }
     }
 }

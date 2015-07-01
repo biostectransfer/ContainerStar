@@ -20,9 +20,15 @@ namespace ContainerStar.API.Models.Invoices
         public string description { get; set; }
 
         [DataMember]
+        public int amount { get; set; }
+
+        [DataMember]
         public DateTime? fromDate { get; set; }
 
         [DataMember]
         public DateTime? toDate { get; set; }
+
+        [DataMember]
+        public bool isCointainerPosition { get; set; }
     }
 }

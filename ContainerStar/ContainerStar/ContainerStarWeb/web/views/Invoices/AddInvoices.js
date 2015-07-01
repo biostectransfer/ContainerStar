@@ -15,8 +15,11 @@ define([
             var self = this;
             var result = {
                 '#orderId': 'orderId',
-			    '#invoiceNumber': 'invoiceNumber',
-			    '#payDate': 'payDate',
+                '#rentOrderNumber': 'rentOrderNumber',
+                '#customerName': 'customerName',
+                '#customerAddress': 'customerAddress',
+                '#invoiceNumber': 'invoiceNumber',
+                '#createDate': 'createDate',
 			};
 
             return result;

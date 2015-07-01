@@ -3,12 +3,57 @@
 <form method="post" class="add-model">
     <input type="hidden" id="orderId" name="orderId" />
     <table style="width: 100%; vertical-align: top; padding: 0px; margin: 0px; white-space: nowrap;" cellpadding="0" cellspacing="0">
-		<tr>
-			<td style="padding-right: 25px; vertical-align: top; ">
-			</td>
-			<td style="width: 100%;">&nbsp;</td>
-		</tr>
-	</table>
+        <tr>
+            <td style="padding-right: 25px; vertical-align: top;">
+                <div class="editor-label">
+                    <label for="invoiceNumber" data-localized="invoiceNumber"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" readonly="readonly" class="k-textbox" style="width: 180px; background-color: lightgrey" id="invoiceNumber" name="invoiceNumber" />
+                </div>
+            </td>
+            <td style="padding-right: 25px; vertical-align: top; ">
+                <div class="editor-label">
+                    <label for="rentOrderNumber" data-localized="rentOrderNumber"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" readonly="readonly" class="k-textbox" style="width: 180px; background-color: lightgrey" id="rentOrderNumber" name="rentOrderNumber" />
+                </div>
+            </td>
+            <td style="padding-right: 25px; vertical-align: top; ">
+                <div class="editor-label">
+                    <label for="createDate" data-localized="createDate"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" readonly="readonly" style="background-color: lightgrey" data-role="datepicker" id="createDate" name="createDate" />
+                </div>
+            </td>
+            <td style="width: 100%;">&nbsp;</td>
+        </tr>
+    </table>
+    <table style="width: 100%; vertical-align: top; padding: 0px; margin: 0px; white-space: nowrap;" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="padding-right: 25px; vertical-align: top; ">
+                <div class="editor-label">
+                    <label for="customerName" data-localized="customerName"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" readonly="readonly" class="k-textbox" style="background-color: lightgrey; width: 591px" id="customerName" name="customerName" value="0" />
+                </div>
+            </td>
+            <td style="padding-right: 25px; vertical-align: top; width: 100%;">
+                <div class="editor-label">
+                    <label for="customerAddress" data-localized="customerAddress"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" readonly="readonly" class="k-textbox" style="background-color: lightgrey; width: 100%" id="customerAddress" name="customerAddress" value="0" />
+                </div>
+            </td>
+            <td style="width: 100%;">&nbsp;</td>
+        </tr>
+    </table>
+
+    <br />
 
     <div class="invoicePositionsGrid">
     </div>
