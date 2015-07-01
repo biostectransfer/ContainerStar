@@ -5,10 +5,12 @@ define(function () {
 
 		add: 'Rechnungposition anlegen',
 	    edit: 'Rechnungposition editieren',
-	    masterData: 'Einstellungen',
 	    pageTitle: 'Rechnungposition',
 		pleaseSelect: 'Bitte auswählen',
-		price: 'Preis',	
+		price: 'Preis',
+		description: 'Beschreibung',
+		fromDate: 'Von Datum',
+		toDate: 'Bis Datum',
 	};
 
 	return resources;

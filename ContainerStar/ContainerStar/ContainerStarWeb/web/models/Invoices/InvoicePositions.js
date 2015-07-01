@@ -6,8 +6,15 @@ define(function () {
 		fields: {
 			id: { type: "number", editable: false }
 			,price: { type: "number", 
-			                        editable: Application.canTableItemBeEdit('InvoicePositions', 'price'), 
-				                    validation: { required: true } }			
+			                        editable: false, 
+			                        validation: { required: true }}
+            ,fromDate: { type: "date", 
+			                        editable: false, 
+				                    validation: { required: false, date: true } }						
+			,toDate: { type: "date", 
+			                        editable: false, 
+				                    validation: { required: false, date: true } }		
+            ,description: { type: "string", editable: false }
 		},
 		defaults: function () {
 			var dnf = new Date();

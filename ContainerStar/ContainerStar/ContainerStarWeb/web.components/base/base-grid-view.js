@@ -425,7 +425,7 @@
 	                self.change(e);
 	            },	            
 	            detailTemplate: !self.detailView ? null :
-                    '<div class="extendedDetailsContainer"></div><div class="detailsContainer"></div>', 
+                    '<div class="extendedDetailsContainer"></div><div class="detailsContainer"></div>',
 	            detailInit: !self.detailView ? null : function (e) {
 
 	                if (self.initDetailView) {

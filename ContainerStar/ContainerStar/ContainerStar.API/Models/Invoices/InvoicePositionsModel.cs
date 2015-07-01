@@ -12,13 +12,17 @@ namespace ContainerStar.API.Models.Invoices
     [DataContract]
     public partial class InvoicePositionsModel: BaseModel
     {
-
-        /// <summary>
-        ///     Model property for <see cref="InvoicePositions.Price"/> entity
-        /// </summary>
         [Required]
         [DataMember]
         public double price{ get; set; }
 
+        [DataMember]
+        public string description { get; set; }
+
+        [DataMember]
+        public DateTime? fromDate { get; set; }
+
+        [DataMember]
+        public DateTime? toDate { get; set; }
     }
 }

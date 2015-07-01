@@ -18,6 +18,10 @@
         "'" + '" class="gotoObjectDetail"><label>' + self.editItemTitle() + '</label>' +
         '</a><div class="relations-container"></div>';
 
+        if (!self.showEditLinkButton)
+        {            
+            extendedView = '<div class="relations-container"></div>';
+        }
 
         e.detailRow.find('.extendedDetailsContainer').append(extendedView);
 
@@ -39,6 +43,7 @@
 	    gridSelector: '.grid',
 	    filterSelector: '.filter',
 	    addNewModelInline: false,
+	    showEditLinkButton: true,
 
 	    initDetailView: initDetailView,
         

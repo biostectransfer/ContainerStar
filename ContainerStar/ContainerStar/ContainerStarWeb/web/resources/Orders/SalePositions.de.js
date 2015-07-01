@@ -10,6 +10,7 @@ define(function () {
 		isSellOrder: 'ist Verkauf Position',
 		containerId: 'Container',
 		additionalCostId: 'Nebenkosten',
+		description: 'Beschreibung',
 		price: 'Preis',
 		fromDate: 'Von Datum',
 		toDate: 'Bis Datum',

@@ -13,7 +13,10 @@ define(function () {
 	    communicationPartnerName: 'Ansprechpartner',
 	    customerName: 'Organisation',
 	    invoice: 'Rechnung',
-	    customer: 'Kunde'
+	    customer: 'Kunde',
+	    printBill: 'Rechnung drucken',
+	    printRemaining: 'Mahnung drucken',
+	    pay: 'Bezahlen',
 	};
 
 	return resources;

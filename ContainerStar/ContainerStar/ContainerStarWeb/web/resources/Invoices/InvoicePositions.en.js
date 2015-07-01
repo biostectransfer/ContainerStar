@@ -9,7 +9,10 @@ define(function () {
 		driverLicenceMasterData: 'Driver licence masterdata',
 	    pageTitle: 'Invoice position',
 		pleaseSelect: 'Please select',
-		price: 'Price',	
+		price: 'Price',
+		description: 'Description',
+		fromDate: 'From date',
+		toDate: 'To date',
 	};
 
 	return resources;

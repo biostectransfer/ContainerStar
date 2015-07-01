@@ -3,7 +3,7 @@ define(function () {
 
 	var resources = {
 
-		name: 'Name',
+		name: 'Search text',
 	    fromDate: 'From Date',
 	    toDate: 'To Date',
 	    searchTitle: 'Advanced search',

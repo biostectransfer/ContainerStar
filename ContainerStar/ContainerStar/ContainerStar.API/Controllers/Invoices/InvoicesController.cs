@@ -6,6 +6,8 @@ using ContainerStar.Contracts.Entities;
 using ContainerStar.Contracts.Enums;
 using ContainerStar.Contracts.Managers;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ContainerStar.API.Controllers.Invoices
 {
@@ -15,7 +17,6 @@ namespace ContainerStar.API.Controllers.Invoices
     /// </summary>
     public partial class InvoicesController: ClientApiController<InvoicesModel, ContainerStar.Contracts.Entities.Invoices, int, IInvoicesManager>
     {
-
         public InvoicesController(IInvoicesManager manager): base(manager){}
 
         protected override void EntityToModel(ContainerStar.Contracts.Entities.Invoices entity, InvoicesModel model)
@@ -31,6 +32,44 @@ namespace ContainerStar.API.Controllers.Invoices
         {
             entity.InvoiceNumber = model.invoiceNumber;
             entity.PayDate = model.payDate;
+        }
+
+        protected override string BuildWhereClause<T>(Filter filter)
+        {
+            if (filter.Field == "name")
+            {
+                var clauses = new List<string>();
+                
+                return String.Format(
+                    "Orders.Customers.Name.Contains(\"{0}\") or " +
+                    "InvoiceNumber.Contains(\"{0}\") or " +
+                    "Orders.CommunicationPartners.Name.Contains(\"{0}\") or " +
+                    "Orders.CommunicationPartners.FirstName.Contains(\"{0}\")", filter.Value);
+            }
+
+            return base.BuildWhereClause<T>(filter);
+        }
+
+        protected override IQueryable<ContainerStar.Contracts.Entities.Invoices> Sort(IQueryable<ContainerStar.Contracts.Entities.Invoices> entities, Sorting sorting)
+        {
+            if (sorting.Field == "customerName")
+            {
+                if (sorting.Direction == "desc")
+                    return entities.OrderByDescending(o => o.Orders.Customers.Name);
+                else
+                    return entities.OrderBy(o => o.Orders.Customers.Name);
+            }
+            else if (sorting.Field == "communicationPartnerName")
+            {
+                if (sorting.Direction == "desc")
+                    return entities.OrderByDescending(o => o.Orders.CommunicationPartners.Name).
+                        ThenByDescending(o => o.Orders.CommunicationPartners.FirstName);
+                else
+                    return entities.OrderBy(o => o.Orders.CommunicationPartners.Name).
+                        ThenBy(o => o.Orders.CommunicationPartners.FirstName);
+            }
+
+            return base.Sort(entities, sorting);
         }
     }
 }

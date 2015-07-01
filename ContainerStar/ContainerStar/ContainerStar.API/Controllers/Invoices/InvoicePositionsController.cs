@@ -22,6 +22,18 @@ namespace ContainerStar.API.Controllers.Invoices
             model.price = entity.Price;
             model.createDate = ((ISystemFields)entity).CreateDate;
             model.changeDate = ((ISystemFields)entity).ChangeDate;
+
+            if (entity.Positions.ContainerId.HasValue)
+            {
+                model.description = String.Format("{0} {1}", entity.Positions.Containers.Number, entity.Positions.Containers.ContainerTypes.Name);
+                model.fromDate = entity.FromDate;
+                model.toDate = entity.ToDate;
+            }
+
+            if (entity.Positions.AdditionalCostId.HasValue)
+            {
+                model.description = entity.Positions.AdditionalCosts.Name;
+            }
         }
         protected override void ModelToEntity(InvoicePositionsModel model, InvoicePositions entity, ActionTypes actionType)
         {
