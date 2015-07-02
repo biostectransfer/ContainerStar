@@ -5,6 +5,7 @@ using ContainerStar.Contracts;
 using ContainerStar.Contracts.Entities;
 using ContainerStar.Contracts.Enums;
 using ContainerStar.Contracts.Managers;
+using ContainerStar.Lib.Managers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,66 +40,18 @@ namespace ContainerStar.API.Controllers.Invoices
 
         private void CalculatePrices(ContainerStar.Contracts.Entities.Invoices entity, InvoicesModel model)
         {
-            model.totalPriceWithoutDiscountWithoutTax = 0;
-            model.totalPriceWithoutTax = 0;
-            model.totalPrice = 0;
+            double totalPriceWithoutDiscountWithoutTax = 0;
+            double totalPriceWithoutTax = 0;
+            double totalPrice = 0;
+            double summaryPrice = 0;
 
-            var allPositions = entity.InvoicePositions.Where(o => !o.DeleteDate.HasValue).ToList();
-            //container prices
-            foreach (var position in allPositions.Where(o => o.Positions.ContainerId.HasValue))
-            {
-                if (position.Positions.IsSellOrder)
-                {
-                    model.totalPriceWithoutDiscountWithoutTax += position.Price * (double)position.Positions.Amount;
-                }
-                else
-                {
-                    var duration = (position.ToDate - position.FromDate).Days + 1;
+            CalculationHelper.CalculateInvoicePrices(entity, out totalPriceWithoutDiscountWithoutTax, out totalPriceWithoutTax,
+                out totalPrice, out summaryPrice);
 
-                    if(duration < 1)
-                    {
-                        duration = 1;
-                    }
-
-                    var dayPrice = position.Price / (double)30;
-
-                    model.totalPriceWithoutDiscountWithoutTax += (double)position.Positions.Amount * (double)duration * dayPrice;
-                }
-            }
-
-            //discount only for containers
-            var discount = (model.totalPriceWithoutDiscountWithoutTax / (double)100) * entity.Discount;
-
-            //additional cost prices
-            foreach (var position in allPositions.Where(o => o.Positions.AdditionalCostId.HasValue))
-            {
-                model.totalPriceWithoutDiscountWithoutTax += position.Price * (double)position.Positions.Amount;
-            }
-
-            //discount
-            model.totalPriceWithoutTax = model.totalPriceWithoutDiscountWithoutTax - discount;
-
-            var taxValue = (model.totalPriceWithoutTax / (double)100) * entity.TaxValue;
-            if (entity.WithTaxes)
-            {
-                //with taxes
-                model.totalPrice = model.totalPriceWithoutTax + taxValue;
-            }
-            else
-            {
-                //without taxes
-                model.totalPrice = model.totalPriceWithoutTax;
-            }
-
-            //override total price with manual price
-            if (model.manualPrice.HasValue)
-            {
-                model.summaryPrice = model.manualPrice.Value;
-            }
-            else
-            {
-                model.summaryPrice = model.totalPrice;
-            }
+            model.totalPriceWithoutDiscountWithoutTax = totalPriceWithoutDiscountWithoutTax;
+            model.totalPriceWithoutTax = totalPriceWithoutTax;
+            model.totalPrice = totalPrice;
+            model.summaryPrice = summaryPrice;
         }
 
         protected override void ModelToEntity(InvoicesModel model, ContainerStar.Contracts.Entities.Invoices entity, ActionTypes actionType)

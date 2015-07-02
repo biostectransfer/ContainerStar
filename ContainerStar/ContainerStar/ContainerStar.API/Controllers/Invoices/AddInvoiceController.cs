@@ -7,6 +7,7 @@ using ContainerStar.Contracts.Enums;
 using ContainerStar.Contracts.Exceptions;
 using ContainerStar.Contracts.Managers;
 using ContainerStar.Contracts.Services;
+using ContainerStar.Lib.Managers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +36,7 @@ namespace ContainerStar.API.Controllers.Invoices
         public IHttpActionResult Post(AddInvoiceModel model)
         {
             var order = ordersManager.GetById(model.orderId);
-            double taxValue = CalculateTaxes();
+            double taxValue = CalculationHelper.CalculateTaxes(taxesManager);
 
             var invoice = new ContainerStar.Contracts.Entities.Invoices()
             {
@@ -157,22 +158,6 @@ namespace ContainerStar.API.Controllers.Invoices
                         DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
                 }
             }
-        }
-
-        private double CalculateTaxes()
-        {
-            var taxValues = taxesManager.GetEntities(o => o.FromDate.Date <= DateTime.Now.Date && o.ToDate.Date >= DateTime.Now).ToList();
-            double taxValue = 19;
-            if (taxValues.Count != 0)
-            {
-                var minToDate = taxValues.Min(o => o.ToDate.Date);
-                var temp = taxValues.FirstOrDefault(o => o.ToDate.Date == minToDate);
-                if (temp != null)
-                {
-                    taxValue = temp.Value;
-                }
-            }
-            return taxValue;
         }
     }
 }

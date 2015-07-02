@@ -1,5 +1,6 @@
 ﻿using ContainerStar.Contracts.Entities;
 using ContainerStar.Contracts.Enums;
+using ContainerStar.Contracts.Managers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,17 +15,17 @@ namespace ContainerStar.Lib.Managers
     {
         #region Prepare Print
 
-        public Stream PrepareRentOrderPrintData(int id, string path)
+        public Stream PrepareRentOrderPrintData(int id, string path, ITaxesManager taxesManager)
         {
-            return PrepareCommonOrderPrintData(id, path, PrintTypes.RentOrder);
+            return PrepareCommonOrderPrintData(id, path, PrintTypes.RentOrder, taxesManager);
         }
 
-        public Stream PrepareOfferPrintData(int id, string path)
+        public Stream PrepareOfferPrintData(int id, string path, ITaxesManager taxesManager)
         {
-            return PrepareCommonOrderPrintData(id, path, PrintTypes.Offer);
+            return PrepareCommonOrderPrintData(id, path, PrintTypes.Offer, taxesManager);
         }
 
-        private Stream PrepareCommonOrderPrintData(int id, string path, PrintTypes type)
+        private Stream PrepareCommonOrderPrintData(int id, string path, PrintTypes type, ITaxesManager taxesManager)
         {
             var result = new MemoryStream();
             try
@@ -36,7 +37,7 @@ namespace ContainerStar.Lib.Managers
                 GetXmlDoc(path, result, out pkg, out part, out xmlReader, out xmlMainXMLDoc);
 
                 //replace fields
-                var templateBody = ReplaceFields(id, type, xmlMainXMLDoc);
+                var templateBody = ReplaceFields(id, type, xmlMainXMLDoc, taxesManager);
 
                 xmlMainXMLDoc = SaveDoc(result, pkg, part, xmlReader, xmlMainXMLDoc, templateBody);
             }
@@ -98,7 +99,7 @@ namespace ContainerStar.Lib.Managers
 
         #region Replace Fields Info
 
-        private string ReplaceFields(int orderId, PrintTypes printType, XDocument xmlMainXMLDoc)
+        private string ReplaceFields(int orderId, PrintTypes printType, XDocument xmlMainXMLDoc, ITaxesManager taxesManager)
         {
             string result = xmlMainXMLDoc.Root.ToString();
 
@@ -112,6 +113,7 @@ namespace ContainerStar.Lib.Managers
                         result = ReplaceCommonFields(order, result);
                         result = ReplaceBaseOrderFields(order, result);
                         result = ReplaceRentPositions(order, result);
+                        result = ReplaceTotalPrice(order, result, taxesManager);
                         result = ReplaceRentAdditionalCostPositions(order, result);
                         break;
                     case PrintTypes.Offer:
@@ -182,9 +184,7 @@ namespace ContainerStar.Lib.Managers
 
             return xmlMainXMLDoc;
         }
-
-
-
+        
         private string ReplaceRentPositions(Orders order, string xmlMainXMLDoc)
         {
             if (order.Positions != null && order.Positions.Count != 0)
@@ -207,6 +207,28 @@ namespace ContainerStar.Lib.Managers
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#ContainerDescription", String.Empty);
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#FromDate", String.Empty);
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#ToDate", String.Empty);
+            }
+
+            return xmlMainXMLDoc;
+        }
+
+        private string ReplaceTotalPrice(Orders order, string xmlMainXMLDoc, ITaxesManager taxesManager)
+        {
+            if (order.Positions != null && order.Positions.Count != 0)
+            {
+                double totalPriceWithoutDiscountWithoutTax = 0;
+                double totalPriceWithoutTax = 0;
+                double totalPrice = 0;
+                double summaryPrice = 0;
+
+                CalculationHelper.CalculateOrderPrices(order, taxesManager, out totalPriceWithoutDiscountWithoutTax, out totalPriceWithoutTax,
+                out totalPrice, out summaryPrice);
+
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TotalPrice", summaryPrice.ToString());
+            }
+            else
+            {
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TotalPrice", String.Empty);
             }
 
             return xmlMainXMLDoc;

@@ -18,9 +18,12 @@ namespace ContainerStar.API.Controllers
     [AuthorizeByPermissions(PermissionTypes = new[] { Permissions.Orders })]
     public partial class PrintController: ApiController
     {
-        public PrintController(IOrdersManager manager) :
+        private ITaxesManager taxesManager;
+
+        public PrintController(IOrdersManager manager, ITaxesManager taxesManager) :
             base()
         {
+            this.taxesManager = taxesManager;
             Manager = manager;
             FilterExpressionCreator = new FilterExpressionCreator();
         }
@@ -41,11 +44,11 @@ namespace ContainerStar.API.Controllers
             {
                 case PrintTypes.RentOrder:
                     path = Path.Combine(dataDirectory, API.Configuration.RentOrderFileName);
-                    stream = Manager.PrepareRentOrderPrintData(id, path);
+                    stream = Manager.PrepareRentOrderPrintData(id, path, taxesManager);
                     break;
                 case PrintTypes.Offer:
                     path = Path.Combine(dataDirectory, API.Configuration.OfferFileName);
-                    stream = Manager.PrepareOfferPrintData(id, path);
+                    stream = Manager.PrepareOfferPrintData(id, path, taxesManager);
                     break;
                 default:
                     throw new NotImplementedException();

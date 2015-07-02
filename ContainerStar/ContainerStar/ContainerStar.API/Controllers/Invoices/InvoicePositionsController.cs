@@ -5,6 +5,7 @@ using ContainerStar.Contracts;
 using ContainerStar.Contracts.Entities;
 using ContainerStar.Contracts.Enums;
 using ContainerStar.Contracts.Managers;
+using ContainerStar.Lib.Managers;
 using System;
 
 namespace ContainerStar.API.Controllers.Invoices
@@ -30,23 +31,11 @@ namespace ContainerStar.API.Controllers.Invoices
                 model.isCointainerPosition = true;
                 model.price = entity.Price;
 
-                if (entity.Positions.IsSellOrder)
-                {
-                    model.totalPrice = model.price * model.amount;
-                }
-                else
-                {
-                    var duration = (entity.ToDate - entity.FromDate).Days + 1;
+                model.totalPrice = CalculationHelper.CalculatePositionPrice(entity.Positions.IsSellOrder, entity.Price, entity.Amount, 
+                    entity.FromDate, entity.ToDate);
 
-                    if (duration < 1)
-                    {
-                        duration = 1;
-                    }
-
-                    var dayPrice = entity.Price / (double)30;
-
-                    model.totalPrice = (double)entity.Amount * (double)duration * dayPrice;
-
+                if (!entity.Positions.IsSellOrder)
+                {                    
                     model.fromDate = entity.FromDate;
                     model.toDate = entity.ToDate;
                 }
@@ -54,6 +43,7 @@ namespace ContainerStar.API.Controllers.Invoices
 
             if (entity.Positions.AdditionalCostId.HasValue)
             {
+                model.totalPrice = model.price * model.amount;
                 model.description = entity.Positions.AdditionalCosts.Name;
                 model.isCointainerPosition = false;
             }
