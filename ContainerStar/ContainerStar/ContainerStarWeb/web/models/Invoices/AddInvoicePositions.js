@@ -9,10 +9,10 @@ define(function () {
 			                        editable: true, 
 			                        validation: { required: true }}
             ,fromDate: { type: "date", 
-			                        editable: true, 
+			                        editable: false, 
 				                    validation: { required: false, date: true } }						
 			,toDate: { type: "date", 
-			                        editable: true, 
+			                        editable: false, 
 				                    validation: { required: false, date: true } }		
             ,description: { type: "string", editable: false }
             ,amount: { type: "number", editable: false, validation: { required: true } }

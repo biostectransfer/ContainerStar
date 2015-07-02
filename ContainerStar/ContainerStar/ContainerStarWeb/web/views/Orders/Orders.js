@@ -6,31 +6,40 @@
 ], function (BaseView, Collection, FilterView, DetailView) {
 	'use strict';		
     
-    var generateBill = function (dataItem) {
-	    var self = this;
+    var generateMonthlyInvoice = function (dataItem) {
+        generateInvoice(dataItem, true);
+    },
 
-	    var model = new Backbone.Model();
-	    model.url = Application.apiUrl + 'addInvoices';
-	    model.set('orderId', dataItem.id);
-	    model.save({}, {
-	        success: function (model, response) {
+    generateCompleteInvoice = function (dataItem) {
+        generateInvoice(dataItem, false);
+    },
 
-	            debugger;
-	            location.href = '#Invoices/' + model.id;
-	        },
-	        error: function (model, response) {
+    generateInvoice = function (dataItem, isMonthlyInvoice) {
+        var self = this;
 
-	            require(['base/information-view'], function (View) {
-	                var view = new View({
-	                    title: 'Rechnung erstellen',
-	                    message: 'Für den ausgewählten Auftrag konnte die Rechnung nicht erstellt werden.'
-	                });
-	                self.addView(view);
-	                self.$el.append(view.render().$el);
-	            });
-	        }
-	    });
-	},
+        var model = new Backbone.Model();
+        model.url = Application.apiUrl + 'addInvoices';
+        model.set('orderId', dataItem.id); 
+        model.set('isMonthlyInvoice', isMonthlyInvoice);
+        model.save({}, {
+            success: function (model, response) {
+
+                debugger;
+                location.href = '#Invoices/' + model.id;
+            },
+            error: function (model, response) {
+
+                require(['base/information-view'], function (View) {
+                    var view = new View({
+                        title: 'Rechnung erstellen',
+                        message: 'Für den ausgewählten Auftrag konnte die Rechnung nicht erstellt werden.'
+                    });
+                    self.addView(view);
+                    self.$el.append(view.render().$el);
+                });
+            }
+        });
+    },
     
     view = BaseView.extend({
 
@@ -79,13 +88,14 @@
 					dataItem = grid.dataItem(grid.select());
 
 		        if (dataItem != undefined) {
-		            require(['base/confirmation-view'], function (View) {
+		            require(['l!t!Orders/CreateInvoiceConfirmation'], function (View) {
 
 		                var view = new View({
 		                    title: 'Rechnung erstellen',
-		                    message: 'Möchten Sie für ausgewählten Auftrag eine Rechnung erstellen?'
+		                    message: 'Möchten Sie für den ausgewählten Auftrag eine Rechnung erstellen?'
 		                });
-		                self.listenTo(view, 'continue', _.bind(generateBill, self, dataItem));
+		                self.listenTo(view, 'montlyInvoice', _.bind(generateMonthlyInvoice, self, dataItem));
+		                self.listenTo(view, 'completeInvoice', _.bind(generateCompleteInvoice, self, dataItem));
 		                self.addView(view);
 		                self.$el.append(view.render().$el);
 		            });

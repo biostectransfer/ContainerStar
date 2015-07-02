@@ -59,6 +59,10 @@ namespace ContainerStar.Lib.Data
             Property(t => t.DeleteDate)
                 .HasColumnName(InvoicePositions.Fields.DeleteDate);
 
+            Property(t => t.Amount)
+                .HasColumnName(InvoicePositions.Fields.Amount)
+                .IsRequired();
+
 
             //Relationships
             HasRequired(i => i.Invoices)

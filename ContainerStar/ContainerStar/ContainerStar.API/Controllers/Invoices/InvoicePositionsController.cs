@@ -22,20 +22,19 @@ namespace ContainerStar.API.Controllers.Invoices
             model.price = entity.Price;
             model.createDate = ((ISystemFields)entity).CreateDate;
             model.changeDate = ((ISystemFields)entity).ChangeDate;
+            model.amount = entity.Amount;
 
             if (entity.Positions.ContainerId.HasValue)
             {
                 model.description = String.Format("{0} {1}", entity.Positions.Containers.Number, entity.Positions.Containers.ContainerTypes.Name);
                 model.fromDate = entity.FromDate;
                 model.toDate = entity.ToDate;
-                model.amount = 1;
                 model.isCointainerPosition = true;
             }
 
             if (entity.Positions.AdditionalCostId.HasValue)
             {
                 model.description = entity.Positions.AdditionalCosts.Name;
-                model.amount = entity.Positions.Amount;
                 model.isCointainerPosition = false;
             }
         }

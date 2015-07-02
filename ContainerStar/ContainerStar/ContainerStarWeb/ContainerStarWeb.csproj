@@ -371,6 +371,8 @@
     <Content Include="web\resources\Invoices\InvoicesRelationships.en.js" />
     <Content Include="web\resources\Invoices\AddInvoicePositions.de.js" />
     <Content Include="web\resources\Invoices\AddInvoicePositions.en.js" />
+    <Content Include="web\resources\Orders\CreateInvoiceConfirmation.de.js" />
+    <Content Include="web\resources\Orders\CreateInvoiceConfirmation.en.js" />
     <Content Include="web\resources\Orders\FilterContainerSmart.de.js" />
     <Content Include="web\resources\Orders\FilterContainerSmart.en.js" />
     <Content Include="web\resources\Orders\AddPositions.de.js" />
@@ -745,6 +747,7 @@
     <Content Include="web\templates\Orders\AddOrders.html" />
     <Content Include="web\templates\Errors\Forbidden.html" />
     <Content Include="web\templates\Orders\AdditionalCostsSearch.html" />
+    <Content Include="web\templates\Orders\CreateInvoiceConfirmation.html" />
     <Content Include="web\templates\Orders\ContainerSearch.html" />
     <Content Include="web\templates\Orders\FilterOrders.html" />
     <Content Include="web\templates\Home\Home.html" />
@@ -937,6 +940,7 @@
     <Content Include="web\views\Invoices\InvoicesRelationships.js" />
     <Content Include="web\views\Invoices\AddInvoicePositions.js" />
     <Content Include="web\views\Orders\AdditionalCostsSearch.js" />
+    <Content Include="web\views\Orders\CreateInvoiceConfirmation.js" />
     <Content Include="web\views\Orders\ContainerSearch.js" />
     <Content Include="web\views\Orders\FilterContainerSmart.js" />
     <Content Include="web\views\Orders\Offers.js" />

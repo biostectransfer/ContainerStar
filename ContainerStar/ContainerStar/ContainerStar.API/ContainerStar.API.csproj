@@ -208,6 +208,7 @@
     </Compile>
     <Compile Include="Models\GlobalSysTableModel.cs" />
     <Compile Include="Models\Invoices\InvoicePositionsModel.cs" />
+    <Compile Include="Models\Invoices\AddInvoiceModel.cs" />
     <Compile Include="Models\Invoices\InvoicesModel.cs" />
     <Compile Include="Models\ISystemModelFields.cs" />
     <Compile Include="Models\IModelIntervalFields.cs" />
