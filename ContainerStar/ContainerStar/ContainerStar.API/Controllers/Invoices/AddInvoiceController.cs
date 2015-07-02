@@ -50,7 +50,7 @@ namespace ContainerStar.API.Controllers.Invoices
 
             invoicesManager.AddEntity(invoice);
 
-            AddInvoicePositions(order, invoice);
+            AddInvoicePositions(model, order, invoice);
 
             invoicesManager.SaveChanges();
 
@@ -58,7 +58,7 @@ namespace ContainerStar.API.Controllers.Invoices
             return Ok(model);
         }
 
-        private void AddInvoicePositions(Orders order, Contracts.Entities.Invoices invoice)
+        private void AddInvoicePositions(AddInvoiceModel model, Orders order, Contracts.Entities.Invoices invoice)
         {
             var orderPositions = order.Positions.Where(o => !o.DeleteDate.HasValue);
 
@@ -81,10 +81,9 @@ namespace ContainerStar.API.Controllers.Invoices
                 }
                 else if (orderPosition.Containers != null)
                 {
-                    //TODO prolongation
                     amount = 1;
 
-                    GetPeriod(orderPosition, invoicePositions, ref fromDate, ref toDate);
+                    GetPeriod(model, order, orderPosition, invoicePositions, ref fromDate, ref toDate, ref amount);
                 }
 
                 if (amount != 0)
@@ -105,11 +104,20 @@ namespace ContainerStar.API.Controllers.Invoices
             }
         }
 
-        private void GetPeriod(Positions orderPosition, IEnumerable<InvoicePositions> invoicePositions, ref DateTime fromDate, ref DateTime toDate)
+        private void GetPeriod(AddInvoiceModel model, Orders order, Positions orderPosition, IEnumerable<InvoicePositions> invoicePositions, 
+            ref DateTime fromDate, ref DateTime toDate, ref int amount)
         {
             if (invoicePositions != null && invoicePositions.Count() != 0)
             {
-                var maxDate = invoicePositions.Max(o => o.ToDate);
+                var maxDate = invoicePositions.Max(o => o.ToDate);               
+                //if not auto prolongation dont add 
+                if (!order.AutoProlongation &&
+                     orderPosition.ToDate <= maxDate)
+                {
+                    amount = 0;
+                    return;
+                }
+
 
                 if (maxDate.Day == DateTime.DaysInMonth(maxDate.Year, maxDate.Month))
                 {
@@ -125,17 +133,25 @@ namespace ContainerStar.API.Controllers.Invoices
                     toDate = new DateTime(maxDate.Year, maxDate.Month,
                         DateTime.DaysInMonth(maxDate.Year, maxDate.Month));
                 }
+
+
+                //check prolongation - (if not set end date)
+                //if not monthly invoice set to end date
+                if (!model.isMonthlyInvoice ||
+                    (!order.AutoProlongation && 
+                     orderPosition.ToDate.Month == toDate.Month &&
+                     orderPosition.ToDate.Year == toDate.Year))
+                {
+                    if (orderPosition.ToDate > toDate)
+                    {
+                        toDate = orderPosition.ToDate;
+                    }
+                }
             }
             else
             {
-                //if (orderPosition.FromDate.Month != DateTime.Now.Month ||
-                //    orderPosition.FromDate.Year != DateTime.Now.Year)
-                //{
-                //    fromDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-                //}
-
-                if (orderPosition.ToDate.Month != DateTime.Now.Month ||
-                    orderPosition.ToDate.Year != DateTime.Now.Year)
+                if (model.isMonthlyInvoice && (orderPosition.ToDate.Month != DateTime.Now.Month ||
+                    orderPosition.ToDate.Year != DateTime.Now.Year))
                 {
                     toDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month,
                         DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));

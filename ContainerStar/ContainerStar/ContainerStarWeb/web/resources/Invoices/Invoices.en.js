@@ -17,6 +17,7 @@ define(function () {
 		printBill: 'Print bill',
 		printRemaining: 'Print remaing',
 		pay: 'Pay',
+		rentOrderNumber: 'Rent order number',
 	};
 
 	return resources;

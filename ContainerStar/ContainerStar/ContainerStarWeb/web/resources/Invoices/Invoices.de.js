@@ -17,6 +17,7 @@ define(function () {
 	    printBill: 'Rechnung drucken',
 	    printRemaining: 'Mahnung drucken',
 	    pay: 'Bezahlen',
+	    rentOrderNumber: 'MV-Nummer',
 	};
 
 	return resources;
