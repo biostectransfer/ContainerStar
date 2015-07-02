@@ -9,6 +9,7 @@ define(function () {
 	    additionalCostId: 'Nebenkosten',
 	    description: 'Beschreibung',
 	    price: 'Preis',
+	    totalPrice: 'Gesamtpreis',
 	    fromDate: 'Von Datum',
 	    toDate: 'Bis Datum',
 	    rentContainer: 'Container vermieten',

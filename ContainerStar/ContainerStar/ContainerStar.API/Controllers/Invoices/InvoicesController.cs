@@ -47,7 +47,23 @@ namespace ContainerStar.API.Controllers.Invoices
             //container prices
             foreach (var position in allPositions.Where(o => o.Positions.ContainerId.HasValue))
             {
-                model.totalPriceWithoutDiscountWithoutTax += position.Price * position.Positions.Amount;
+                if (position.Positions.IsSellOrder)
+                {
+                    model.totalPriceWithoutDiscountWithoutTax += position.Price * (double)position.Positions.Amount;
+                }
+                else
+                {
+                    var duration = (position.ToDate - position.FromDate).Days + 1;
+
+                    if(duration < 1)
+                    {
+                        duration = 1;
+                    }
+
+                    var dayPrice = position.Price / (double)30;
+
+                    model.totalPriceWithoutDiscountWithoutTax += (double)position.Positions.Amount * (double)duration * dayPrice;
+                }
             }
 
             //discount only for containers
@@ -56,7 +72,7 @@ namespace ContainerStar.API.Controllers.Invoices
             //additional cost prices
             foreach (var position in allPositions.Where(o => o.Positions.AdditionalCostId.HasValue))
             {
-                model.totalPriceWithoutDiscountWithoutTax += position.Price * position.Positions.Amount;
+                model.totalPriceWithoutDiscountWithoutTax += position.Price * (double)position.Positions.Amount;
             }
 
             //discount
@@ -101,6 +117,7 @@ namespace ContainerStar.API.Controllers.Invoices
                 var clauses = new List<string>();
                 
                 return String.Format(
+                    "Orders.RentOrderNumber.Contains(\"{0}\") or " +
                     "Orders.Customers.Name.Contains(\"{0}\") or " +
                     "InvoiceNumber.Contains(\"{0}\") or " +
                     "Orders.CommunicationPartners.Name.Contains(\"{0}\") or " +
@@ -127,6 +144,13 @@ namespace ContainerStar.API.Controllers.Invoices
                 else
                     return entities.OrderBy(o => o.Orders.CommunicationPartners.Name).
                         ThenBy(o => o.Orders.CommunicationPartners.FirstName);
+            }
+            else if (sorting.Field == "rentOrderNumber")
+            {
+                if (sorting.Direction == "desc")
+                    return entities.OrderByDescending(o => o.Orders.RentOrderNumber);
+                else
+                    return entities.OrderBy(o => o.Orders.RentOrderNumber);
             }
 
             return base.Sort(entities, sorting);

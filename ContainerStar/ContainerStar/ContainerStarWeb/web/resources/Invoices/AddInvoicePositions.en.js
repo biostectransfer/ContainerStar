@@ -12,6 +12,7 @@ define(function () {
 	    additionalCostId: 'Additional cost',
 	    description: 'Description',
 	    price: 'Price',
+	    totalPrice: 'Total price',
 	    fromDate: 'From date',
 	    toDate: 'To date',
 	    rentContainer: 'Container rent',

@@ -27,9 +27,29 @@ namespace ContainerStar.API.Controllers.Invoices
             if (entity.Positions.ContainerId.HasValue)
             {
                 model.description = String.Format("{0} {1}", entity.Positions.Containers.Number, entity.Positions.Containers.ContainerTypes.Name);
-                model.fromDate = entity.FromDate;
-                model.toDate = entity.ToDate;
                 model.isCointainerPosition = true;
+                model.price = entity.Price;
+
+                if (entity.Positions.IsSellOrder)
+                {
+                    model.totalPrice = model.price * model.amount;
+                }
+                else
+                {
+                    var duration = (entity.ToDate - entity.FromDate).Days + 1;
+
+                    if (duration < 1)
+                    {
+                        duration = 1;
+                    }
+
+                    var dayPrice = entity.Price / (double)30;
+
+                    model.totalPrice = (double)entity.Amount * (double)duration * dayPrice;
+
+                    model.fromDate = entity.FromDate;
+                    model.toDate = entity.ToDate;
+                }
             }
 
             if (entity.Positions.AdditionalCostId.HasValue)

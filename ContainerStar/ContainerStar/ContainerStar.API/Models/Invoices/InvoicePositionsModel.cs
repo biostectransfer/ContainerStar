@@ -16,6 +16,10 @@ namespace ContainerStar.API.Models.Invoices
         [DataMember]
         public double price{ get; set; }
 
+        [Required]
+        [DataMember]
+        public double totalPrice { get; set; }
+
         [DataMember]
         public string description { get; set; }
 

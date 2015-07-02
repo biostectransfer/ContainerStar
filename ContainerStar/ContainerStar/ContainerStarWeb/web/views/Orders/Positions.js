@@ -110,7 +110,14 @@
                     model.url = Application.apiUrl + '/positions';
                     model.set('orderId', self.model.id);
                     model.set('containerId', item.id);
-                    model.set('price', item.get('price'));
+
+                    if (self.isSellOrder) {
+                        model.set('price', item.get('sellPrice'));
+                    }
+                    else {
+                        model.set('price', item.get('price'));
+                    }
+
                     model.set('fromDate', item.get('fromDate'));
                     model.set('toDate', item.get('toDate'));
                     model.set('isSellOrder', self.isSellOrder);
