@@ -3,8 +3,9 @@
     public enum PrintTypes
     {
         RentOrder = 0,
-        BillOrder = 1,
-        ReminderMail = 2,
-        Offer = 3
-        }
+        Invoice = 1,
+        StornoInvoice = 2,
+        ReminderMail = 3,
+        Offer = 4
+    }
 }

@@ -10,5 +10,7 @@ namespace ContainerStar.Contracts.Managers
         Stream PrepareRentOrderPrintData(int id, string path, ITaxesManager taxesManager);
 
         Stream PrepareOfferPrintData(int id, string path, ITaxesManager taxesManager);
+
+        Stream PrepareInvoicePrintData(int id, string path, IInvoicesManager invoicesManager, ITaxesManager taxesManager);
     }
 }

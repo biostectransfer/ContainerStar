@@ -20,6 +20,14 @@ namespace ContainerStar.API
             }
         }
 
+        public static string InvoiceFileName
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["InvoiceFileName"];
+            }
+        }
+
         public static string RentOrderPreffix
         {
             get { return ConfigurationManager.AppSettings["RentOrderNumberPreffix"]; }

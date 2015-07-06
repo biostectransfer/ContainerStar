@@ -117,7 +117,7 @@ define([
                 '#orderDate': 'orderDate',
                 '#orderedFrom': 'orderedFrom',
                 '#orderNumber': 'orderNumber',
-                '#customerOrderNumber': 'orderNumber',
+                '#customerOrderNumber': 'customerOrderNumber',
                 '#rentOrderNumber': 'rentOrderNumber',
                 '#rentFromDate': 'rentFromDate',
                 '#rentToDate': 'rentToDate',

@@ -19,11 +19,13 @@ namespace ContainerStar.API.Controllers
     public partial class PrintController: ApiController
     {
         private ITaxesManager taxesManager;
+        private IInvoicesManager invoicesManager;
 
-        public PrintController(IOrdersManager manager, ITaxesManager taxesManager) :
+        public PrintController(IOrdersManager manager, IInvoicesManager invoicesManager, ITaxesManager taxesManager) :
             base()
         {
             this.taxesManager = taxesManager;
+            this.invoicesManager = invoicesManager;
             Manager = manager;
             FilterExpressionCreator = new FilterExpressionCreator();
         }
@@ -49,6 +51,10 @@ namespace ContainerStar.API.Controllers
                 case PrintTypes.Offer:
                     path = Path.Combine(dataDirectory, API.Configuration.OfferFileName);
                     stream = Manager.PrepareOfferPrintData(id, path, taxesManager);
+                    break;
+                case PrintTypes.Invoice:
+                    path = Path.Combine(dataDirectory, API.Configuration.InvoiceFileName);
+                    stream = Manager.PrepareInvoicePrintData(id, path, invoicesManager, taxesManager);
                     break;
                 default:
                     throw new NotImplementedException();
