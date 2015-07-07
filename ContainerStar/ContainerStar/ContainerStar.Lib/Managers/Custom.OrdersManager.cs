@@ -403,6 +403,8 @@ namespace ContainerStar.Lib.Managers
 
             xmlMainXMLDoc = ReplaceRentInterval(xmlMainXMLDoc, order, invoice);
 
+            xmlMainXMLDoc = ReplaceFooterTexts(xmlMainXMLDoc, order, invoice);
+
             return xmlMainXMLDoc;
         }
 
@@ -499,7 +501,7 @@ namespace ContainerStar.Lib.Managers
         private string ReplaceRentInterval(string xmlMainXMLDoc, Orders order, Invoices invoice)
         {
             var xmlDoc = XDocument.Parse(xmlMainXMLDoc);
-            var temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#RentInterval"));
+            var temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#RentPeriod"));
             var parentElement = GetParentElementByName(temp, "<w:tr ");
 
             if (parentElement != null)
@@ -510,7 +512,7 @@ namespace ContainerStar.Lib.Managers
                     var minDate = positions.Min(o => o.FromDate);
                     var maxDate = positions.Max(o => o.ToDate);
 
-                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#RentInterval", String.Format("{0} bis {1}",
+                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#RentPeriod", String.Format("{0} bis {1}",
                         minDate.ToShortDateString(),
                         maxDate.ToShortDateString()));
                 }
@@ -661,6 +663,77 @@ namespace ContainerStar.Lib.Managers
             return xmlMainXMLDoc;
         }
 
+        private string ReplaceFooterTexts(string xmlMainXMLDoc, Orders order, Invoices invoice)
+        {
+            var xmlDoc = XDocument.Parse(xmlMainXMLDoc);
+            var temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#PlanedPayDate"));
+            var parentElement = GetParentElementByName(temp, "<w:tr ");
+
+            //pay due information
+            if (parentElement != null)
+            {
+                if (!String.IsNullOrEmpty(order.Customers.Iban) && !String.IsNullOrEmpty(order.Customers.Bic))
+                {
+
+                    temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#PayCash"));
+                    parentElement = GetParentElementByName(temp, "<w:tr ");
+                    parentElement.Remove();
+                    xmlMainXMLDoc = xmlDoc.Root.ToString();
+
+
+                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PlanedPayDate", invoice.CreateDate.AddDays(10).ToShortDateString()).
+                        Replace("#IBAN", order.Customers.Iban).
+                        Replace("#BIC", order.Customers.Bic);
+                }
+                else
+                {
+                    parentElement.Remove();
+                    xmlMainXMLDoc = xmlDoc.Root.ToString();
+                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PayCash", String.Empty);
+                }
+            }
+
+
+            //for sell Invoices
+            xmlDoc = XDocument.Parse(xmlMainXMLDoc);
+            temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#SellOrderOwnershipMessage"));
+            parentElement = GetParentElementByName(temp, "<w:tr ");
+
+            if (parentElement != null)
+            {
+                if (invoice.IsSellInvoice)
+                {
+                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#SellOrderOwnershipMessage", String.Empty);
+                }
+                else
+                {
+                    parentElement.Remove();
+                    xmlMainXMLDoc = xmlDoc.Root.ToString();
+                }
+            }
+
+
+            //Invoice without taxe
+            xmlDoc = XDocument.Parse(xmlMainXMLDoc);
+            temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#InvoiceWithoutTaxes"));
+            parentElement = GetParentElementByName(temp, "<w:tr ");
+
+            if (parentElement != null)
+            {
+                if (!invoice.WithTaxes)
+                {
+                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#InvoiceWithoutTaxes", String.Empty);
+                }
+                else
+                {
+                    parentElement.Remove();
+                    xmlMainXMLDoc = xmlDoc.Root.ToString();
+                }
+            }
+
+            return xmlMainXMLDoc;
+        }
+        
         #endregion
 
         #region Common Functions
