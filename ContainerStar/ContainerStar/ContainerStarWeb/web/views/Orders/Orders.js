@@ -7,16 +7,17 @@
 	'use strict';		
     
     var generateMonthlyInvoice = function (dataItem, isSell) {
-        generateInvoice(dataItem, true, isSell);
+        var self = this;
+        generateInvoice(self, dataItem, true, isSell);
     },
 
     generateCompleteInvoice = function (dataItem, isSell) {
-        generateInvoice(dataItem, false, isSell);
+        var self = this;
+        generateInvoice(self, dataItem, false, isSell);
     },
 
-    generateInvoice = function (dataItem, isMonthlyInvoice, isSell) {
-        var self = this;
-
+    generateInvoice = function (self, dataItem, isMonthlyInvoice, isSell) {
+        
         var model = new Backbone.Model();
         model.url = Application.apiUrl + 'addInvoices';
         model.set('orderId', dataItem.id); 
@@ -25,7 +26,19 @@
         model.save({}, {
             success: function (model, response) {
 
-                location.href = '#Invoices/' + model.id;
+                if(model.id != 0)
+                    location.href = '#Invoices/' + model.id;
+                else
+                {
+                    require(['base/information-view'], function (View) {
+                        var view = new View({
+                            title: 'Rechnung erstellen',
+                            message: "Für den ausgewählten Auftrag gibt's keine offene Positionen!"
+                        });
+                        self.addView(view);
+                        self.$el.append(view.render().$el);
+                    });
+                }
             },
             error: function (model, response) {
 

@@ -40,7 +40,6 @@ namespace ContainerStar.API.Controllers.Invoices
 
             var invoice = new ContainerStar.Contracts.Entities.Invoices()
             {
-                InvoiceNumber = numberProvider.GetNextInvoiceNumber(),
                 Orders = order,
                 TaxValue = taxValue,
                 WithTaxes = order.Customers.WithTaxes,
@@ -52,20 +51,25 @@ namespace ContainerStar.API.Controllers.Invoices
 
             invoicesManager.AddEntity(invoice);
 
-            AddInvoicePositions(model, order, invoice);
+            if(AddInvoicePositions(model, order, invoice))
+            {
+                invoice.InvoiceNumber = numberProvider.GetNextInvoiceNumber();
 
-            invoicesManager.SaveChanges();
+                invoicesManager.SaveChanges();
+            }
 
             model.Id = invoice.Id;
             return Ok(model);
         }
 
-        private void AddInvoicePositions(AddInvoiceModel model, Orders order, Contracts.Entities.Invoices invoice)
+        private bool AddInvoicePositions(AddInvoiceModel model, Orders order, Contracts.Entities.Invoices invoice)
         {
             var orderPositions = order.Positions.Where(o => !o.DeleteDate.HasValue);
 
             var allInvoicePositions = invoicePositionsManager.GetEntities(o => o.Positions.OrderId == order.Id && !o.DeleteDate.HasValue).ToList();
-            
+
+            bool hasOpenPositions = false;
+
             foreach (var orderPosition in orderPositions.Where(o => o.IsSellOrder == model.isSell))
             {
                 var invoicePositions = allInvoicePositions.Where(o => o.PositionId == orderPosition.Id);
@@ -102,8 +106,11 @@ namespace ContainerStar.API.Controllers.Invoices
                         ToDate = toDate,
                     };
                     invoicePositionsManager.AddEntity(newPosition);
+                    hasOpenPositions = true;
                 }
             }
+
+            return hasOpenPositions;
         }
 
         private void GetPeriod(AddInvoiceModel model, Orders order, Positions orderPosition, IEnumerable<InvoicePositions> invoicePositions, 
