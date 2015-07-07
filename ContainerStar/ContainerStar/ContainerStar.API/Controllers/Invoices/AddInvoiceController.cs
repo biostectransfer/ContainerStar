@@ -162,8 +162,18 @@ namespace ContainerStar.API.Controllers.Invoices
                 if (model.isMonthlyInvoice && (orderPosition.ToDate.Month != DateTime.Now.Month ||
                     orderPosition.ToDate.Year != DateTime.Now.Year))
                 {
-                    toDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month,
+                    var temp = new DateTime(DateTime.Now.Year, DateTime.Now.Month,
                         DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
+
+                    if (temp < fromDate)
+                    {
+                        toDate = new DateTime(fromDate.Year, fromDate.Month,
+                            DateTime.DaysInMonth(fromDate.Year, fromDate.Month));
+                    }
+                    else
+                    {
+                        toDate = temp;
+                    }
                 }
             }
         }
