@@ -18,5 +18,8 @@ namespace ContainerStar.API.Models.Invoices
         
         [DataMember]
         public bool isMonthlyInvoice { get; set; }
+        
+        [DataMember]
+        public bool isSell { get; set; }
     }
 }

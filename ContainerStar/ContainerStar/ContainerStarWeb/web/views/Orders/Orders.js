@@ -6,25 +6,25 @@
 ], function (BaseView, Collection, FilterView, DetailView) {
 	'use strict';		
     
-    var generateMonthlyInvoice = function (dataItem) {
-        generateInvoice(dataItem, true);
+    var generateMonthlyInvoice = function (dataItem, isSell) {
+        generateInvoice(dataItem, true, isSell);
     },
 
-    generateCompleteInvoice = function (dataItem) {
-        generateInvoice(dataItem, false);
+    generateCompleteInvoice = function (dataItem, isSell) {
+        generateInvoice(dataItem, false, isSell);
     },
 
-    generateInvoice = function (dataItem, isMonthlyInvoice) {
+    generateInvoice = function (dataItem, isMonthlyInvoice, isSell) {
         var self = this;
 
         var model = new Backbone.Model();
         model.url = Application.apiUrl + 'addInvoices';
         model.set('orderId', dataItem.id); 
         model.set('isMonthlyInvoice', isMonthlyInvoice);
+        model.set('isSell', isSell);
         model.save({}, {
             success: function (model, response) {
 
-                debugger;
                 location.href = '#Invoices/' + model.id;
             },
             error: function (model, response) {
@@ -81,7 +81,36 @@
 		            location.href = self.editUrl + '/' + dataItem.id;
 		        }
 		    },
-		    'click .generateBill': function (e) {
+		    'click .generateSellInvoice': function (e) {
+		        e.preventDefault();
+		        var self = this,
+                    grid = self.grid,
+					dataItem = grid.dataItem(grid.select());
+
+		        if (dataItem != undefined) {
+		            require(['base/confirmation-view'], function (View) {
+
+		                var view = new View({
+		                    title: 'Rechnung erstellen',
+		                    message: 'Möchten Sie für den ausgewählten Auftrag eine Rechnung erstellen?'
+		                });
+		                self.listenTo(view, 'continue', _.bind(generateCompleteInvoice, self, dataItem, true));
+		                self.addView(view);
+		                self.$el.append(view.render().$el);
+		            });
+		        }
+		        else {
+		            require(['base/information-view'], function (View) {
+		                var view = new View({
+		                    title: 'Rechnung erstellen',
+		                    message: 'Wählen Sie bitte ein Auftrag aus!'
+		                });
+		                self.addView(view);
+		                self.$el.append(view.render().$el);
+		            });
+		        }
+		    },
+		    'click .generateRentInvoice': function (e) {
 		        e.preventDefault();
 		        var self = this,
                     grid = self.grid,
@@ -94,8 +123,8 @@
 		                    title: 'Rechnung erstellen',
 		                    message: 'Möchten Sie für den ausgewählten Auftrag eine Rechnung erstellen?'
 		                });
-		                self.listenTo(view, 'montlyInvoice', _.bind(generateMonthlyInvoice, self, dataItem));
-		                self.listenTo(view, 'completeInvoice', _.bind(generateCompleteInvoice, self, dataItem));
+		                self.listenTo(view, 'montlyInvoice', _.bind(generateMonthlyInvoice, self, dataItem, false));
+		                self.listenTo(view, 'completeInvoice', _.bind(generateCompleteInvoice, self, dataItem, false));
 		                self.addView(view);
 		                self.$el.append(view.render().$el);
 		            });
@@ -143,7 +172,8 @@
 		            return '<a class="k-button k-button-icontext" href="' + self.editUrl +
 		            '/create" data-localized="' + self.createNewItemTitle + '"></a>' + 
                     '<a class="k-button k-button-icontext printRentOrder" href="#" data-localized="printRentOrder"></a>' +
-                    '<a class="k-button k-button-icontext generateBill" href="#" data-localized="generateBill"></a>';
+                    '<a class="k-button k-button-icontext generateSellInvoice" href="#" data-localized="generateSellInvoice"></a>' +
+		            '<a class="k-button k-button-icontext generateRentInvoice" href="#" data-localized="generateRentInvoice"></a>';
 		        }
 		    }];
 

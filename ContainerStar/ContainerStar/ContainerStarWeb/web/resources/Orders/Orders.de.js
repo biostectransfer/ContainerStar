@@ -9,7 +9,8 @@ define(function () {
 		pleaseSelect: 'Bitte auswählen',
 		customerId: 'Kunde',	
 		communicationPartnerId: 'Ansprechpartner',	
-		generateBill: 'Rechnung',
+		generateRentInvoice: 'Vermiet-Rechnung',
+		generateSellInvoice: 'Verkaufs-Rechnung',
 		printRentOrder: 'MV drucken',
         rentOrderNumber: 'MV-Nummer'
 	};

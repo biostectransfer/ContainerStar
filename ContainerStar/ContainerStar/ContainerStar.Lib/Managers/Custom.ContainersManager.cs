@@ -11,7 +11,12 @@ namespace ContainerStar.Lib.Managers
         public List<Positions> GetActualPositions(DateTime dateFrom, DateTime dateTo)
         {
             return DataContext.GetSet<Positions>()
-                .Where(r => r.ContainerId.HasValue)
+                .Where(r => 
+                    !r.DeleteDate.HasValue &&
+                    r.ContainerId.HasValue && 
+                    (!r.IsSellOrder || r.Containers.IsVirtual) && 
+                    !r.Orders.IsOffer
+                )
                 .Where(r =>
                     (r.FromDate >= dateFrom && r.FromDate <= dateTo) || //from date inside period
                     (r.ToDate >= dateFrom && r.ToDate <= dateTo) || // to date inside period

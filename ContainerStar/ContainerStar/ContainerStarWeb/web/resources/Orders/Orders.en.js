@@ -9,7 +9,8 @@ define(function () {
 		pleaseSelect: 'Please select',
 		customerId: 'Customer',	
 		communicationPartnerId: 'Communication partner',	
-		generateBill: 'Generate bill',
+		generateSellInvoice: 'Generate sell invoice',
+		generateRentInvoice: 'Generate rent invoice',
 		printRentOrder: 'Print rent order',
 		rentOrderNumber: 'Rent order number',
 	};

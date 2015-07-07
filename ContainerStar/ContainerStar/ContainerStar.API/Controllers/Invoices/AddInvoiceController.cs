@@ -47,6 +47,7 @@ namespace ContainerStar.API.Controllers.Invoices
                 Discount = order.Discount ?? 0,
                 CreateDate = DateTime.Now,
                 ChangeDate = DateTime.Now,
+                IsSellInvoice = model.isSell
             };
 
             invoicesManager.AddEntity(invoice);
@@ -65,7 +66,7 @@ namespace ContainerStar.API.Controllers.Invoices
 
             var allInvoicePositions = invoicePositionsManager.GetEntities(o => o.Positions.OrderId == order.Id && !o.DeleteDate.HasValue).ToList();
             
-            foreach (var orderPosition in orderPositions)
+            foreach (var orderPosition in orderPositions.Where(o => o.IsSellOrder == model.isSell))
             {
                 var invoicePositions = allInvoicePositions.Where(o => o.PositionId == orderPosition.Id);
                 var amount = 0;
