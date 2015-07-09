@@ -30,6 +30,31 @@ namespace ContainerStar.API.Controllers
         {
             this.customerManager = customersManager;
             this.numberProvider = numberProvider;
+
+            ActionSuccess += ClientBaseController_ActionSuccess;
+        }
+
+        private void ClientBaseController_ActionSuccess(object sender, ActionSuccessEventArgs<Orders, int> e)
+        {
+            if (e.ActionType != ActionTypes.Delete)
+            {
+                var order = e.Entity;
+
+                if (!order.IsOffer)
+                {
+                    if (String.IsNullOrEmpty(order.OrderNumber))
+                    {
+                        order.OrderNumber = numberProvider.GetNextOrderNumber();
+                    }
+
+                    if (String.IsNullOrEmpty(order.RentOrderNumber))
+                    {
+                        order.RentOrderNumber = numberProvider.GetNextRentOrderNumber(API.Configuration.RentOrderPreffix);
+                    }
+
+                    Manager.SaveChanges();
+                }
+            }
         }
 
         protected override void EntityToModel(Orders entity, OrdersModel model)
@@ -101,11 +126,6 @@ namespace ContainerStar.API.Controllers
             entity.AutoProlongation = model.autoProlongation;
             entity.CustomerOrderNumber = model.customerOrderNumber;
 
-            if (!entity.IsOffer && entity.IsNew())
-            {
-                entity.OrderNumber = numberProvider.GetNextOrderNumber();
-                entity.RentOrderNumber = numberProvider.GetNextRentOrderNumber(API.Configuration.RentOrderPreffix);
-            }
             if (entity.IsNew())
             {
                 entity.CreateDate = DateTime.Now;

@@ -4,6 +4,7 @@ using ContainerStar.Contracts.Enums;
 using ContainerStar.Contracts.Managers;
 using ContainerStar.Contracts.Services;
 using CoreBase;
+using System;
 using System.Web.Http;
 
 namespace ContainerStar.API.Controllers
@@ -28,11 +29,17 @@ namespace ContainerStar.API.Controllers
         {
             var order = manager.GetById(model.Id);
             order.IsOffer = false;
-            if (string.IsNullOrEmpty(order.OrderNumber))
+            
+            if (String.IsNullOrEmpty(order.OrderNumber))
             {
                 order.OrderNumber = numberProvider.GetNextOrderNumber();
+            }
+
+            if (String.IsNullOrEmpty(order.RentOrderNumber))
+            {
                 order.RentOrderNumber = numberProvider.GetNextRentOrderNumber(API.Configuration.RentOrderPreffix);
             }
+
             manager.SaveChanges();
 
             return Ok(new { id = model.Id });

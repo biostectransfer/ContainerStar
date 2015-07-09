@@ -34,7 +34,9 @@ namespace ContainerStar.API.Controllers.Invoices
             double taxValue = CalculationHelper.CalculateTaxes(taxesManager);
             var invoicesForCurrentMonth = new List<ContainerStar.Contracts.Entities.Invoices>();
 
-            var orders = ordersManager.GetEntities(o => !o.DeleteDate.HasValue && o.OrderStatus == OrderStatusTypes.Open).ToList();
+            var orders = ordersManager.GetEntities(o => 
+                !o.DeleteDate.HasValue && o.OrderStatus == OrderStatusTypes.Open && !o.IsOffer).ToList();
+
             foreach (var order in orders)
             {
                 var isSell = false;//TODO need generate for Sell positions monthly orders
