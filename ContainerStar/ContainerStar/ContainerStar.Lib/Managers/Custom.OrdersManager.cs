@@ -53,7 +53,10 @@ namespace ContainerStar.Lib.Managers
                     if(!firstElem)
                     {
                         var index = templateBody.IndexOf("</w:body");
-                        templateBody = templateBody.Substring(0, index) + bodyText + templateBody.Substring(index);
+                        var pageBreak = @"<w:p w:rsidRDefault=""00C97ADC"" w:rsidR=""00C97ADC""><w:pPr><w:rPr><w:lang w:val=""en-GB""/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:val=""en-GB""/>
+                            </w:rPr><w:br w:type=""page""/></w:r></w:p><w:p w:rsidRDefault=""009A5AB0"" w:rsidRPr=""00905C57"" w:rsidR=""009A5AB0"" w:rsidP=""0030272E"">
+                            <w:pPr><w:rPr><w:lang w:val=""en-GB""/></w:rPr></w:pPr><w:bookmarkStart w:name=""_GoBack"" w:id=""0""/><w:bookmarkEnd w:id=""0""/></w:p>";
+                        templateBody = templateBody.Substring(0, index) + pageBreak + bodyText + templateBody.Substring(index);
                     }
                     else
                     {
