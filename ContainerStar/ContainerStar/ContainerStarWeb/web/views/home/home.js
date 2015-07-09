@@ -44,20 +44,38 @@
 		            lang: "de",
 		            eventLimit: true, // allow "more" link when too many events
 
-		            events: {
-		                url: Application.apiUrl + 'disposition/?containerTypeId=777&name=ololo',
-		                type: 'POST',
-		                //data: {
-		                //    containerTypeId: 1,
-		                //    name: 'somethingelse'
-		                //},
-		                error: function (e) {
-		                    debugger;
-		                    //alert('there was an error while fetching events!');
-		                },
-		                //color: 'yellow',   // a non-ajax option
-		                //textColor: 'black' // a non-ajax option
+		            events: function (start, end, timezone, callback) {
+		                debugger;
+		                $.ajax({
+		                    url: Application.apiUrl + 'disposition',
+		                    type: 'POST',
+		                    data: {
+		                        containerTypeId: 555,
+		                        name: "LoL",
+		                        startDate: start.toString(),
+		                        endDate: end.toString()
+		                    },
+		                    success: function (doc) {
+
+		                        var events = [];
+		                        $(doc).each(function () {
+
+		                            events.push({
+		                                title: $(this).attr('title'),
+		                                start: $(this).attr('start'),
+		                                end: $(this).attr('end'),
+		                                url: $(this).attr('url'),
+		                            });
+		                        });
+		                        callback(events);
+		                    },
+		                    error: function (e) {
+		                        debugger;
+		                        //alert('there was an error while fetching events!');
+		                    },
+		                });
 		            }
+
 		        });
 		    }, 0);
 
