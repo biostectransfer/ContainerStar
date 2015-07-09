@@ -41,6 +41,30 @@
         });
     },
 
+    generateMonthInvoices = function () {
+        var self = this;
+
+        location.href = Application.apiUrl + 'generateMonthInvoices';
+        //var model = new Backbone.Model();
+        //model.url = Application.apiUrl + 'generateMonthInvoices/get';
+        //model.save({}, {
+        //    patch: true,
+        //    success: function (model, response) {
+        //        debugger;
+        //    },
+        //    error: function (model, response) {
+        //        require(['base/information-view'], function (View) {
+        //            var view = new View({
+        //                title: 'Monatsrechnungen erstellen',
+        //                message: 'Monatsrechnungen konnten nicht erstellen werden.'
+        //            });
+        //            self.addView(view);
+        //            self.$el.append(view.render().$el);
+        //        });
+        //    }
+        //});
+    },
+
 	view = BaseView.extend({
 
         collectionType: Collection,
@@ -126,7 +150,7 @@
 		            });
 		        }
 		    },
-		    'click .printBill': function (e) {
+		    'click .printInvoice': function (e) {
 
 		        e.preventDefault();
 		        var self = this,
@@ -148,7 +172,7 @@
 		            });
 		        }
 		    },
-		    'click .printRemaining': function (e) {
+		    'click .printRemainder': function (e) {
 
 		        e.preventDefault();
 		        var self = this,
@@ -169,6 +193,23 @@
 		                self.$el.append(view.render().$el);
 		            });
 		        }
+		    },
+		    'click .generateMonthInvoices': function (e) {
+
+                e.preventDefault();
+                var self = this;
+
+		        require(['base/confirmation-view'], function (View) {
+
+		            var view = new View({
+		                title: 'Monatsrechnungen erstellen',
+		                message: 'Möchten Sie Monatsrechnungen erstellen?'
+		            });
+
+		            self.listenTo(view, 'continue', _.bind(generateMonthInvoices, self));
+		            self.addView(view);
+		            self.$el.append(view.render().$el);
+		        });
 		    }
 		},
 
@@ -177,8 +218,9 @@
 		        result =
 		    [{
 		        template: function () {
-		            return '<a class="k-button k-button-icontext printBill" href="#" data-localized="printBill"></a>' +
-                    '<a class="k-button k-button-icontext printRemaining" href="#" data-localized="printRemaining"></a>' +
+		            return '<a class="k-button k-button-icontext printInvoice" href="#" data-localized="printInvoice"></a>' +
+                    '<a class="k-button k-button-icontext printRemainder" href="#" data-localized="printRemainder"></a>' +
+                    '<a class="k-button k-button-icontext generateMonthInvoices" href="#" data-localized="generateMonthInvoices"></a>' +
 		            '<a class="k-button k-button-icontext pay" href="#" data-localized="pay"></a>';
 		        }
 		    }];

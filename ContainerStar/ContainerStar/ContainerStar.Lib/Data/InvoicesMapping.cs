@@ -74,6 +74,18 @@ namespace ContainerStar.Lib.Data
                 .HasColumnName(Invoices.Fields.IsSellInvoice)
                 .IsRequired();
 
+            Property(t => t.ReminderCount)
+                .HasColumnName(Invoices.Fields.ReminderCount)
+                .IsRequired();
+
+            Property(t => t.DateVExportDate)
+                .HasColumnName(Invoices.Fields.DateVExportDate);
+
+            Property(t => t.DateVExportFile)
+                .HasColumnName(Invoices.Fields.DateVExportFile)
+                .IsUnicode()
+                .HasMaxLength(128);
+
 
             //Relationships
             HasRequired(i => i.Orders)

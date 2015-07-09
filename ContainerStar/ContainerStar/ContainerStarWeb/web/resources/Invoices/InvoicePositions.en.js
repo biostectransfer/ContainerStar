@@ -5,8 +5,6 @@ define(function () {
 
 		add: 'Add Invoice position',
 	    edit: 'Edit Invoice position',
-	    masterData: 'Settings',
-		driverLicenceMasterData: 'Driver licence masterdata',
 	    pageTitle: 'Invoice position',
 		pleaseSelect: 'Please select',
 		price: 'Price',

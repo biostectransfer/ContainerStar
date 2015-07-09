@@ -120,6 +120,10 @@ namespace ContainerStar.Lib.Data
                 .HasColumnName(Orders.Fields.AutoProlongation)
                 .IsRequired();
 
+            Property(t => t.Status)
+                .HasColumnName(Orders.Fields.Status)
+                .IsRequired();
+
 
             //Relationships
             HasRequired(o => o.Customers)

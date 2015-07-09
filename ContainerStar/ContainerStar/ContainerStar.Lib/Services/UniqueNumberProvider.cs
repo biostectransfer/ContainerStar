@@ -49,7 +49,5 @@ namespace ContainerStar.Lib.Services
                 return temp.CurrentNumber;
             }
         }
-
-
     }
 }

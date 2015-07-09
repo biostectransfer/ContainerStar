@@ -125,6 +125,7 @@
     <Compile Include="Entities\User.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Enums\OrderStatusType.cs" />
     <Compile Include="Enums\PrintTypes.cs" />
     <Compile Include="Enums\LogLevelEnum.cs" />
     <Compile Include="Enums\LogTypeEnum.cs" />

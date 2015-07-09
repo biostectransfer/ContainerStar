@@ -14,8 +14,9 @@ define(function () {
 	    customerName: 'Organisation',
 	    invoice: 'Rechnung',
 	    customer: 'Kunde',
-	    printBill: 'Rechnung drucken',
-	    printRemaining: 'Mahnung drucken',
+	    printInvoice: 'Rechnung drucken',
+	    printRemainder: 'Mahnung drucken',
+	    generateMonthInvoices: 'Monatsrechnungen',
 	    pay: 'Bezahlen',
 	    rentOrderNumber: 'MV-Nummer',
 	};

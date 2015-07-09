@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ContainerStar.Contracts.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -43,6 +44,14 @@ namespace ContainerStar.Contracts.Entities
                 }
 
                 return result;
+            }
+        }
+
+        public OrderStatusTypes OrderStatus
+        {
+            get
+            {
+                return (OrderStatusTypes)Status;
             }
         }
     }

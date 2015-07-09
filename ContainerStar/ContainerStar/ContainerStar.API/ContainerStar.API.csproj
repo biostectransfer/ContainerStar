@@ -128,6 +128,7 @@
     <Compile Include="Controllers\ClientBaseController.cs" />
     <Compile Include="Controllers\ClientApiController.cs" />
     <Compile Include="Controllers\ClientBaseWithoutDeleteController.cs" />
+    <Compile Include="Controllers\Invoices\GenerateMonthInvoicesController.cs" />
     <Compile Include="Controllers\Invoices\InvoicePositionsController.cs" />
     <Compile Include="Controllers\Invoices\AddInvoiceController.cs" />
     <Compile Include="Controllers\Invoices\InvoicesController.cs" />

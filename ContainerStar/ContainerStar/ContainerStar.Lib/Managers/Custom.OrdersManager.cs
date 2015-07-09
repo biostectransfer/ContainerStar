@@ -132,9 +132,14 @@ namespace ContainerStar.Lib.Managers
                     result = ReplaceCommonFields(order, result);
                     result = ReplaceBaseOrderFields(order, result);
                     result = ReplaceBaseInvoiceFields(invoice, result, printType);
-                    result = ReplaceContainerInvoicePositions(invoice.InvoicePositions.ToList(), result);
-                    result = ReplaceAdditionalCostInvoicePositions(invoice.InvoicePositions.ToList(), result);
-                    result = ReplaceInvoicePrices(invoice, result);
+
+                    //TODO delete this check
+                    if (invoice.InvoicePositions != null)
+                    {
+                        result = ReplaceContainerInvoicePositions(invoice.InvoicePositions.ToList(), result);
+                        result = ReplaceAdditionalCostInvoicePositions(invoice.InvoicePositions.ToList(), result);
+                        result = ReplaceInvoicePrices(invoice, result);
+                    }
                     break;
                 default:
                     throw new NotImplementedException();

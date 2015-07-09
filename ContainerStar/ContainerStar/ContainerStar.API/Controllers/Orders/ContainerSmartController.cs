@@ -63,8 +63,6 @@ namespace ContainerStar.API.Controllers
         protected override IQueryable<Containers> Filter(IQueryable<Containers> entities, Filtering filtering)
         {
             //Filter is performed by only 3 parameters : 1. container type, 2. available from, 3. available to
-            DateTime fromDateTemp;
-            DateTime toDateTemp;
             int? typeId;
             string name;
             List<int> equpmentIds;

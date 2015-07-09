@@ -70,6 +70,18 @@ namespace ContainerStar.Contracts.Entities
             /// Column name 'IsSellInvoice' for property <see cref="Invoices.IsSellInvoice"/>
             /// </summary>
             public static readonly string IsSellInvoice = "IsSellInvoice";
+            /// <summary>
+            /// Column name 'ReminderCount' for property <see cref="Invoices.ReminderCount"/>
+            /// </summary>
+            public static readonly string ReminderCount = "ReminderCount";
+            /// <summary>
+            /// Column name 'DateVExportDate' for property <see cref="Invoices.DateVExportDate"/>
+            /// </summary>
+            public static readonly string DateVExportDate = "DateVExportDate";
+            /// <summary>
+            /// Column name 'DateVExportFile' for property <see cref="Invoices.DateVExportFile"/>
+            /// </summary>
+            public static readonly string DateVExportFile = "DateVExportFile";
           
         }
         #endregion
@@ -86,6 +98,9 @@ namespace ContainerStar.Contracts.Entities
         public DateTime ChangeDate{ get; set; }
         public DateTime? DeleteDate{ get; set; }
         public bool IsSellInvoice{ get; set; }
+        public int ReminderCount{ get; set; }
+        public DateTime? DateVExportDate{ get; set; }
+        public string DateVExportFile{ get; set; }
         public virtual Orders Orders{ get; set; }
         public virtual ICollection<InvoicePositions> InvoicePositions{ get; set; }
         public bool HasOrders
@@ -122,6 +137,9 @@ namespace ContainerStar.Contracts.Entities
                        ChangeDate = ChangeDate,
                        DeleteDate = DeleteDate,
                        IsSellInvoice = IsSellInvoice,
+                       ReminderCount = ReminderCount,
+                       DateVExportDate = DateVExportDate,
+                       DateVExportFile = DateVExportFile,
         	           };
         }
     }

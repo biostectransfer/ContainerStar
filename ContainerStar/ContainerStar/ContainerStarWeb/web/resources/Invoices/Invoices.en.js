@@ -14,8 +14,9 @@ define(function () {
 		customerName: 'Organisation',
 		invoice: 'Invoice',
 		customer: 'Customer',
-		printBill: 'Print bill',
-		printRemaining: 'Print remaing',
+		printInvoice: 'Print invoice',
+		printRemainder: 'Print remainder',
+	    generateMonthInvoices: 'Month invoices',
 		pay: 'Pay',
 		rentOrderNumber: 'Rent order number',
 	};

@@ -17,11 +17,11 @@ namespace ContainerStar.API.Controllers.Invoices
 {
     public partial class AddInvoicesController: ApiController
     {
-        private readonly IInvoicesManager invoicesManager;
-        private readonly IUniqueNumberProvider numberProvider;
-        private readonly IOrdersManager ordersManager;
-        private readonly ITaxesManager taxesManager;
-        private readonly IInvoicePositionsManager invoicePositionsManager;
+        protected readonly IInvoicesManager invoicesManager;
+        protected readonly IUniqueNumberProvider numberProvider;
+        protected readonly IOrdersManager ordersManager;
+        protected readonly ITaxesManager taxesManager;
+        protected readonly IInvoicePositionsManager invoicePositionsManager;
 
         public AddInvoicesController(IInvoicesManager invoicesManager, IOrdersManager ordersManager,
             ITaxesManager taxesManager, IInvoicePositionsManager invoicePositionsManager, IUniqueNumberProvider numberProvider)
@@ -46,15 +46,16 @@ namespace ContainerStar.API.Controllers.Invoices
                 Discount = order.Discount ?? 0,
                 CreateDate = DateTime.Now,
                 ChangeDate = DateTime.Now,
-                IsSellInvoice = model.isSell
+                IsSellInvoice = model.isSell,
+                InvoicePositions = new List<InvoicePositions>()
             };
 
-            invoicesManager.AddEntity(invoice);
 
-            if(AddInvoicePositions(model, order, invoice))
+            if(AddInvoicePositions(model.isMonthlyInvoice, model.isSell, order, invoice))
             {
                 invoice.InvoiceNumber = numberProvider.GetNextInvoiceNumber();
 
+                invoicesManager.AddEntity(invoice);
                 invoicesManager.SaveChanges();
             }
 
@@ -62,7 +63,7 @@ namespace ContainerStar.API.Controllers.Invoices
             return Ok(model);
         }
 
-        private bool AddInvoicePositions(AddInvoiceModel model, Orders order, Contracts.Entities.Invoices invoice)
+        protected bool AddInvoicePositions(bool isMonthlyInvoice, bool isSell, Orders order, Contracts.Entities.Invoices invoice)
         {
             var orderPositions = order.Positions.Where(o => !o.DeleteDate.HasValue);
 
@@ -70,7 +71,7 @@ namespace ContainerStar.API.Controllers.Invoices
 
             bool hasOpenPositions = false;
 
-            foreach (var orderPosition in orderPositions.Where(o => o.IsSellOrder == model.isSell))
+            foreach (var orderPosition in orderPositions.Where(o => o.IsSellOrder == isSell))
             {
                 var invoicePositions = allInvoicePositions.Where(o => o.PositionId == orderPosition.Id);
                 var amount = 0;
@@ -89,7 +90,7 @@ namespace ContainerStar.API.Controllers.Invoices
                 {
                     amount = 1;
 
-                    GetPeriod(model, order, orderPosition, invoicePositions, ref fromDate, ref toDate, ref amount);
+                    GetPeriod(isMonthlyInvoice, order, orderPosition, invoicePositions, ref fromDate, ref toDate, ref amount);
                 }
 
                 if (amount != 0)
@@ -105,7 +106,7 @@ namespace ContainerStar.API.Controllers.Invoices
                         FromDate = fromDate,
                         ToDate = toDate,
                     };
-                    invoicePositionsManager.AddEntity(newPosition);
+                    invoice.InvoicePositions.Add(newPosition);
                     hasOpenPositions = true;
                 }
             }
@@ -113,7 +114,7 @@ namespace ContainerStar.API.Controllers.Invoices
             return hasOpenPositions;
         }
 
-        private void GetPeriod(AddInvoiceModel model, Orders order, Positions orderPosition, IEnumerable<InvoicePositions> invoicePositions, 
+        protected void GetPeriod(bool isMonthlyInvoice, Orders order, Positions orderPosition, IEnumerable<InvoicePositions> invoicePositions, 
             ref DateTime fromDate, ref DateTime toDate, ref int amount)
         {
             if (invoicePositions != null && invoicePositions.Count() != 0)
@@ -122,6 +123,13 @@ namespace ContainerStar.API.Controllers.Invoices
                 //if not auto prolongation dont add 
                 if (!order.AutoProlongation &&
                      orderPosition.ToDate <= maxDate)
+                {
+                    amount = 0;
+                    return;
+                }
+
+                //only if in current month doesnt exist invoices
+                if(maxDate.Month == DateTime.Now.Month && maxDate.Year == DateTime.Now.Year)
                 {
                     amount = 0;
                     return;
@@ -146,7 +154,7 @@ namespace ContainerStar.API.Controllers.Invoices
 
                 //check prolongation - (if not set end date)
                 //if not monthly invoice set to end date
-                if (!model.isMonthlyInvoice ||
+                if (!isMonthlyInvoice ||
                     (!order.AutoProlongation && 
                      orderPosition.ToDate.Month == toDate.Month &&
                      orderPosition.ToDate.Year == toDate.Year))
@@ -159,7 +167,7 @@ namespace ContainerStar.API.Controllers.Invoices
             }
             else
             {
-                if (model.isMonthlyInvoice && (orderPosition.ToDate.Month != DateTime.Now.Month ||
+                if (isMonthlyInvoice && (orderPosition.ToDate.Month != DateTime.Now.Month ||
                     orderPosition.ToDate.Year != DateTime.Now.Year))
                 {
                     var temp = new DateTime(DateTime.Now.Year, DateTime.Now.Month,
