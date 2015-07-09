@@ -56,6 +56,10 @@ namespace ContainerStar.API.Controllers
                     path = Path.Combine(dataDirectory, API.Configuration.InvoiceFileName);
                     stream = Manager.PrepareInvoicePrintData(id, path, invoicesManager, taxesManager);
                     break;
+                case PrintTypes.ReminderMail:
+                    path = Path.Combine(dataDirectory, API.Configuration.ReminderFileName);
+                    stream = Manager.PrepareReminderPrintData(id, path, invoicesManager, taxesManager);
+                    break;
                 default:
                     throw new NotImplementedException();
             }

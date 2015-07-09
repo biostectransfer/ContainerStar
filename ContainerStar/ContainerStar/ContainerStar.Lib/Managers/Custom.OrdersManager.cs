@@ -25,6 +25,11 @@ namespace ContainerStar.Lib.Managers
             return PrepareCommonOrderPrintData(id, path, PrintTypes.Offer, null, taxesManager);
         }
 
+        public Stream PrepareReminderPrintData(int id, string path, IInvoicesManager invoicesManager, ITaxesManager taxesManager)
+        {
+            return PrepareCommonOrderPrintData(id, path, PrintTypes.ReminderMail, invoicesManager, taxesManager);
+        }
+
         public Stream PrepareInvoicePrintData(int id, string path, IInvoicesManager invoicesManager, ITaxesManager taxesManager)
         {
             return PrepareCommonOrderPrintData(id, path, PrintTypes.Invoice, invoicesManager, taxesManager);
@@ -187,6 +192,16 @@ namespace ContainerStar.Lib.Managers
                     result = ReplaceContainerInvoicePositions(invoice.InvoicePositions.ToList(), result);
                     result = ReplaceAdditionalCostInvoicePositions(invoice.InvoicePositions.ToList(), result);
                     result = ReplaceInvoicePrices(invoice, result);
+                    break;
+                case PrintTypes.ReminderMail:
+                    
+                    invoice = invoicesManager.GetById(id);
+                    order = invoice.Orders;
+                    
+                    result = ReplaceCommonFields(order, result);
+                    result = ReplaceReminderPositions(invoice.InvoicePositions.ToList(), result);
+                    result = ReplaceReminderTotalPrice(invoice, result, taxesManager);
+
                     break;
                 default:
                     throw new NotImplementedException();
@@ -786,6 +801,82 @@ namespace ContainerStar.Lib.Managers
             return xmlMainXMLDoc;
         }
         
+        #endregion
+
+        #region Reminder
+        
+        private string ReplaceReminderPositions(List<InvoicePositions> positions, string xmlMainXMLDoc)
+        {
+            var xmlDoc = XDocument.Parse(xmlMainXMLDoc);
+            var temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#InvoiceNumber"));
+            var parentTableElement = GetParentElementByName(temp, "<w:tr ");
+
+            if (parentTableElement != null)
+            {
+                var prevTableElem = parentTableElement;
+
+                bool firstElem = true;
+                foreach (var position in positions)
+                {
+                    var price = CalculationHelper.CalculatePositionPrice(
+                        position.Positions.AdditionalCostId.HasValue ? true : position.Positions.IsSellOrder, 
+                        position.Price, position.Amount, position.FromDate, position.ToDate);
+
+                    var description = String.Empty;
+                    if(position.Positions.ContainerId.HasValue)
+                    {
+                        description = String.Format("{0} {1}", position.Amount,
+                            position.Positions.Containers.ContainerTypes.Name);
+                    }
+                    else
+                    {
+                        description = String.Format("{0} {1}", position.Amount,
+                            position.Positions.AdditionalCosts.Description);
+                    }
+
+                    var rowElem = XElement.Parse(parentTableElement.ToString().
+                        Replace("#InvoiceNumber", position.Invoices.InvoiceNumber).
+                        Replace("#InvoiceDate", position.Invoices.CreateDate.ToShortDateString()).
+                        Replace("#ReminderCount", position.Invoices.ReminderCount.ToString()).
+                        Replace("#Description", description).
+                        Replace("#Price", price.ToString()));
+                    prevTableElem.AddAfterSelf(rowElem);
+                    prevTableElem = rowElem;
+
+                    if (firstElem)
+                    {
+                        firstElem = false;
+                    }
+                }
+
+                parentTableElement.Remove();
+            }
+
+            return xmlDoc.Root.ToString();
+        }
+
+        private string ReplaceReminderTotalPrice(Invoices invoice, string xmlMainXMLDoc, ITaxesManager taxesManager)
+        {
+            if (invoice.InvoicePositions != null && invoice.InvoicePositions.Count != 0)
+            {
+                double totalPriceWithoutDiscountWithoutTax = 0;
+                double totalPriceWithoutTax = 0;
+                double totalPrice = 0;
+                double summaryPrice = 0;
+
+                CalculationHelper.CalculateInvoicePrices(invoice, out totalPriceWithoutDiscountWithoutTax, out totalPriceWithoutTax,
+                    out totalPrice, out summaryPrice);
+
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TotalPrice", summaryPrice.ToString());
+            }
+            else
+            {
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TotalPrice", String.Empty);
+            }
+
+            return xmlMainXMLDoc;
+        }
+
         #endregion
 
         #region Common Functions

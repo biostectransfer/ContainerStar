@@ -28,6 +28,14 @@ namespace ContainerStar.API
             }
         }
 
+        public static string ReminderFileName
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["ReminderFileName"];
+            }
+        }
+
         public static string RentOrderPreffix
         {
             get { return ConfigurationManager.AppSettings["RentOrderNumberPreffix"]; }
