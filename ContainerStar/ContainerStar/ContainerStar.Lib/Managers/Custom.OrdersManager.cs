@@ -30,7 +30,7 @@ namespace ContainerStar.Lib.Managers
             return PrepareCommonOrderPrintData(id, path, PrintTypes.Invoice, invoicesManager, taxesManager);
         }
 
-        private Stream PrepareCommonOrderPrintData(int id, string path, PrintTypes type, IInvoicesManager invoicesManager, ITaxesManager taxesManager)
+        public Stream PrepareMonthInvoicePrintData(IEnumerable<Invoices> invoices, string path, IInvoicesManager invoicesManager, ITaxesManager taxesManager)
         {
             var result = new MemoryStream();
             try
@@ -41,8 +41,51 @@ namespace ContainerStar.Lib.Managers
                 XDocument xmlMainXMLDoc;
                 GetXmlDoc(path, result, out pkg, out part, out xmlReader, out xmlMainXMLDoc);
 
+
+                var temp = xmlMainXMLDoc.Descendants().LastOrDefault(o => o.Value.Contains("#CustomerName"));
+                var parentElement = GetParentElementByName(temp, "<w:body ");
+                var bodyText = String.Join("", parentElement.Elements());
+
+                var templateBody = xmlMainXMLDoc.Root.ToString();
+                bool firstElem = true;
+                foreach (var invoice in invoices)
+                {
+                    if(!firstElem)
+                    {
+                        var index = templateBody.IndexOf("</w:body");
+                        templateBody = templateBody.Substring(0, index) + bodyText + templateBody.Substring(index);
+                    }
+                    else
+                    {
+                        firstElem = false;
+                    }
+
+                    //replace fields
+                    templateBody = ReplaceFields(0, PrintTypes.Invoice, templateBody, invoicesManager, taxesManager, invoice);
+                }
+
+                xmlMainXMLDoc = SaveDoc(result, pkg, part, xmlReader, xmlMainXMLDoc, templateBody);
+            }
+            catch
+            {
+            }
+
+            return result;
+        }
+        
+        private Stream PrepareCommonOrderPrintData(int id, string path, PrintTypes type, IInvoicesManager invoicesManager, ITaxesManager taxesManager)
+        {
+            var result = new MemoryStream();
+            try
+            {
+                Package pkg;
+                PackagePart part;
+                XmlReader xmlReader;
+                XDocument xmlMainXMLDoc;
+                GetXmlDoc(path, result, out pkg, out part, out xmlReader, out xmlMainXMLDoc);
+                
                 //replace fields
-                var templateBody = ReplaceFields(id, type, xmlMainXMLDoc, invoicesManager, taxesManager);
+                var templateBody = ReplaceFields(id, type, xmlMainXMLDoc.Root.ToString(), invoicesManager, taxesManager);
 
                 xmlMainXMLDoc = SaveDoc(result, pkg, part, xmlReader, xmlMainXMLDoc, templateBody);
             }
@@ -104,9 +147,9 @@ namespace ContainerStar.Lib.Managers
 
         #region Replace Fields Info
 
-        private string ReplaceFields(int id, PrintTypes printType, XDocument xmlMainXMLDoc, IInvoicesManager invoicesManager, ITaxesManager taxesManager)
+        private string ReplaceFields(int id, PrintTypes printType, string xmlMainXMLDoc, IInvoicesManager invoicesManager, ITaxesManager taxesManager, Invoices invoice = null)
         {
-            string result = xmlMainXMLDoc.Root.ToString();
+            string result = xmlMainXMLDoc;
 
             switch (printType)
             {
@@ -127,19 +170,20 @@ namespace ContainerStar.Lib.Managers
                     result = ReplaceRentAdditionalCostPositions(order, result);
                     break;
                 case PrintTypes.Invoice:
-                    var invoice = invoicesManager.GetById(id);
+
+                    if (invoice == null)
+                    {
+                        invoice = invoicesManager.GetById(id);
+                    }
+
                     order = invoice.Orders;
+                    
                     result = ReplaceCommonFields(order, result);
                     result = ReplaceBaseOrderFields(order, result);
                     result = ReplaceBaseInvoiceFields(invoice, result, printType);
-
-                    //TODO delete this check
-                    if (invoice.InvoicePositions != null)
-                    {
-                        result = ReplaceContainerInvoicePositions(invoice.InvoicePositions.ToList(), result);
-                        result = ReplaceAdditionalCostInvoicePositions(invoice.InvoicePositions.ToList(), result);
-                        result = ReplaceInvoicePrices(invoice, result);
-                    }
+                    result = ReplaceContainerInvoicePositions(invoice.InvoicePositions.ToList(), result);
+                    result = ReplaceAdditionalCostInvoicePositions(invoice.InvoicePositions.ToList(), result);
+                    result = ReplaceInvoicePrices(invoice, result);
                     break;
                 default:
                     throw new NotImplementedException();
@@ -378,7 +422,7 @@ namespace ContainerStar.Lib.Managers
         #endregion
 
         #region Invoices
-
+    
         private string ReplaceBaseInvoiceFields(Invoices invoice, string xmlMainXMLDoc, PrintTypes printType)
         {
             var order = invoice.Orders;

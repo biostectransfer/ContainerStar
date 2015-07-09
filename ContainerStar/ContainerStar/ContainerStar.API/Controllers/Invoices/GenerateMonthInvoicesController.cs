@@ -70,7 +70,7 @@ namespace ContainerStar.API.Controllers.Invoices
             var dataDirectory = Path.Combine(HttpRuntime.AppDomainAppPath, "App_Data");
             string path = Path.Combine(dataDirectory, API.Configuration.InvoiceFileName);
 
-            var stream = ordersManager.PrepareInvoicePrintData(invoicesForCurrentMonth.LastOrDefault().Id, path, invoicesManager, taxesManager);
+            var stream = ordersManager.PrepareMonthInvoicePrintData(invoicesForCurrentMonth, path, invoicesManager, taxesManager);
             
             response.Content = new StreamContent(stream);
             response.Content.Headers.ContentType =

@@ -140,7 +140,7 @@ define([
 
                 if (dataItem != undefined) {
 
-                    location.href = Application.apiUrl + 'print/?printTypeId=3&id=' + dataItem.id;
+                    location.href = Application.apiUrl + 'print/?printTypeId=4&id=' + dataItem.id;
                 }
                 else {
                     require(['base/information-view'], function (View) {
