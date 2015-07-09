@@ -502,3 +502,8 @@ a.gotoObjectDetail label {
 div.invoices table thead tr:first-child th {
     text-align: center;
 }
+
+#calendar {
+    max-width: 900px;
+    margin: 0 auto;
+}

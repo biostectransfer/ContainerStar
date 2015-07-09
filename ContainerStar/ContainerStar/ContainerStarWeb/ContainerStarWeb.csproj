@@ -147,6 +147,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\fullcalendar.css" />
+    <Content Include="css\fullcalendar.print.css" />
     <Content Include="css\images\Logo.png" />
     <Content Include="css\jquery-ui\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="css\jquery-ui\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
@@ -217,9 +219,59 @@
     <Content Include="Global.asax" />
     <Content Include="web.components\base\information-view.js" />
     <Content Include="web.components\base\templates\information-view.html" />
+    <Content Include="web.libs\fullcalendar.min.js" />
     <Content Include="web.libs\jquery.signalR-2.2.0.js" />
     <Content Include="web.libs\jquery.signalR-2.2.0.min.js" />
     <Content Include="web.libs\jszip.js" />
+    <Content Include="web.libs\fullCalendarLanguages.js" />
+    <Content Include="web.libs\lang\ar-ma.js" />
+    <Content Include="web.libs\lang\ar-sa.js" />
+    <Content Include="web.libs\lang\ar-tn.js" />
+    <Content Include="web.libs\lang\ar.js" />
+    <Content Include="web.libs\lang\bg.js" />
+    <Content Include="web.libs\lang\ca.js" />
+    <Content Include="web.libs\lang\cs.js" />
+    <Content Include="web.libs\lang\da.js" />
+    <Content Include="web.libs\lang\de-at.js" />
+    <Content Include="web.libs\lang\de.js" />
+    <Content Include="web.libs\lang\el.js" />
+    <Content Include="web.libs\lang\en-au.js" />
+    <Content Include="web.libs\lang\en-ca.js" />
+    <Content Include="web.libs\lang\en-gb.js" />
+    <Content Include="web.libs\lang\es.js" />
+    <Content Include="web.libs\lang\fa.js" />
+    <Content Include="web.libs\lang\fi.js" />
+    <Content Include="web.libs\lang\fr-ca.js" />
+    <Content Include="web.libs\lang\fr.js" />
+    <Content Include="web.libs\lang\he.js" />
+    <Content Include="web.libs\lang\hi.js" />
+    <Content Include="web.libs\lang\hr.js" />
+    <Content Include="web.libs\lang\hu.js" />
+    <Content Include="web.libs\lang\id.js" />
+    <Content Include="web.libs\lang\is.js" />
+    <Content Include="web.libs\lang\it.js" />
+    <Content Include="web.libs\lang\ja.js" />
+    <Content Include="web.libs\lang\ko.js" />
+    <Content Include="web.libs\lang\lt.js" />
+    <Content Include="web.libs\lang\lv.js" />
+    <Content Include="web.libs\lang\nb.js" />
+    <Content Include="web.libs\lang\nl.js" />
+    <Content Include="web.libs\lang\pl.js" />
+    <Content Include="web.libs\lang\pt-br.js" />
+    <Content Include="web.libs\lang\pt.js" />
+    <Content Include="web.libs\lang\ro.js" />
+    <Content Include="web.libs\lang\ru.js" />
+    <Content Include="web.libs\lang\sk.js" />
+    <Content Include="web.libs\lang\sl.js" />
+    <Content Include="web.libs\lang\sr-cyrl.js" />
+    <Content Include="web.libs\lang\sr.js" />
+    <Content Include="web.libs\lang\sv.js" />
+    <Content Include="web.libs\lang\th.js" />
+    <Content Include="web.libs\lang\tr.js" />
+    <Content Include="web.libs\lang\uk.js" />
+    <Content Include="web.libs\lang\vi.js" />
+    <Content Include="web.libs\lang\zh-cn.js" />
+    <Content Include="web.libs\lang\zh-tw.js" />
     <Content Include="web\collections\ContainersSmart.js" />
     <Content Include="web\collections\Invoices\AddInvoicePositions.js" />
     <Content Include="web\collections\Invoices\InvoicePositions.js" />
@@ -359,6 +411,7 @@
       <DependentUpon>web.models.tt</DependentUpon>
     </Content>
     <Content Include="web\models\view-collection.js" />
+    <Content Include="web\moment.js" />
     <Content Include="web\resources\Invoices\AddInvoices.de.js" />
     <Content Include="web\resources\Invoices\AddInvoices.en.js" />
     <Content Include="web\resources\Invoices\FilterInvoices.de.js" />
@@ -1345,6 +1398,9 @@
     <Content Include="web.components\mixins\resources\kendo-validator-form.de.js" />
     <Content Include="web.components\base\resources\base-edit-model-view.de.js" />
     <Content Include="App_Data\OfferFile.docx" />
+    <Content Include="App_Data\InvoiceFile.docx" />
+    <Content Include="App_Data\ReminderFile.docx" />
+    <Content Include="App_Data\RentOrderFile.docx" />
     <None Include="Properties\PublishProfiles\ContainerStar.pubxml" />
     <None Include="Properties\PublishProfiles\MasterData.pubxml" />
     <None Include="Properties\PublishProfiles\RTNU.deploy.pubxml" />
