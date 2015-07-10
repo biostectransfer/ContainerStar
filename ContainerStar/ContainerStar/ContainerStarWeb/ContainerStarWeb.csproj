@@ -219,6 +219,7 @@
     <Content Include="Global.asax" />
     <Content Include="web.components\base\information-view.js" />
     <Content Include="web.components\base\templates\information-view.html" />
+    <Content Include="web.libs\fullcalendar.js" />
     <Content Include="web.libs\fullcalendar.min.js" />
     <Content Include="web.libs\jquery.signalR-2.2.0.js" />
     <Content Include="web.libs\jquery.signalR-2.2.0.min.js" />

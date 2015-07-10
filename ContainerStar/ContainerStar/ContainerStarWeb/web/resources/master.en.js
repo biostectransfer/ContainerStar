@@ -4,11 +4,12 @@
 	var resource = {
 		language: 'German',
 		logout: 'Logout',
-		home: 'Home',
+		Home: 'Home',
 		Settings: 'Settings',
 		Orders: 'Orders',
 		Offers: 'Offers',
-		Invoices: 'Invoices'
+		Invoices: 'Invoices',
+		FreeContainers: 'Free containers'
 	};
 
 	return resource;

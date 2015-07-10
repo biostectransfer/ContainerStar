@@ -8,7 +8,7 @@ namespace ContainerStar.Lib.Managers
 {
     public partial class ContainersManager
     {
-        public List<Positions> GetActualPositions(DateTime dateFrom, DateTime dateTo)
+        public IQueryable<Positions> GetActualPositions(DateTime dateFrom, DateTime dateTo)
         {
             return DataContext.GetSet<Positions>()
                 .Where(r => 
@@ -20,7 +20,7 @@ namespace ContainerStar.Lib.Managers
                 .Where(r =>
                     (r.FromDate >= dateFrom && r.FromDate <= dateTo) || //from date inside period
                     (r.ToDate >= dateFrom && r.ToDate <= dateTo) || // to date inside period
-                    (r.FromDate <= dateFrom && r.ToDate >= dateTo)).ToList(); //period is a part of an existing one
+                    (r.FromDate <= dateFrom && r.ToDate >= dateTo)).AsQueryable(); //period is a part of an existing one
         }
 
         public IQueryable<Containers> GetFreeContainers(IEnumerable<int> usedIds, int? containerTypeId, string name, List<int> equipmentIds)
@@ -72,7 +72,7 @@ namespace ContainerStar.Lib.Managers
                     .Where(r =>
                         (r.FromDate >= dateFrom && r.FromDate <= dateTo) || //from date inside period
                         (r.ToDate >= dateFrom && r.ToDate <= dateTo) || // to date inside period
-                        (r.FromDate <= dateFrom && r.ToDate >= dateTo)).ToList() //period is a part of an existing one.ToList()
+                        (r.FromDate <= dateFrom && r.ToDate >= dateTo)).ToList() //period is a part of an existing one
                     .Where(r => equipmentIds.All(o => r.Containers.ContainerEquipmentRsps.Select(t => t.EquipmentId).Contains(o))).ToList();
             }
         }

@@ -135,7 +135,7 @@
     <Compile Include="Controllers\Orders\ContainerSearchController.cs" />
     <Compile Include="Controllers\FilterExpressionCreator.cs" />
     <Compile Include="Controllers\Invoices\PayBillController.cs" />
-    <Compile Include="Controllers\Orders\ShowRentContainerController.cs" />
+    <Compile Include="Controllers\Orders\ShowContainerController.cs" />
     <Compile Include="Controllers\Orders\PrintController.cs" />
     <Compile Include="Controllers\Orders\OffersController.cs" />
     <Compile Include="Controllers\Orders\PositionsController.cs" />

@@ -4,11 +4,12 @@
 	var resource = {
 		language: 'Englisch',
 		logout: 'Abmelden',
-		home: 'Hauptmaske',
+		Home: 'Hauptmaske',
 		Settings: 'Einstellungen',
 		Orders: 'Aufträge',
 		Offers: 'Angebote',
-	    Invoices: 'Rechnungen'
+		Invoices: 'Rechnungen',
+	    FreeContainers: 'Freie Containers'
 	};
 
 	return resource;

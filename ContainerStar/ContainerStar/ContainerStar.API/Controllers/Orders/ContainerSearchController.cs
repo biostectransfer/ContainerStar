@@ -81,7 +81,7 @@ namespace ContainerStar.API.Controllers
             }
 
             var positions = Manager.GetActualPositions(fromDate, toDate);
-            var ids = positions.Select(o => o.ContainerId.Value).Distinct();
+            var ids = positions.Select(o => o.ContainerId.Value).Distinct().ToList();
 
             return Manager.GetFreeContainers(ids, typeId, name, equpmentIds);
         }

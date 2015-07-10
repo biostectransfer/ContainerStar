@@ -8,7 +8,7 @@ namespace ContainerStar.Contracts.Managers
 {
     public partial interface IContainersManager
     {
-        List<Positions> GetActualPositions(DateTime dateFrom, DateTime dateTo);
+        IQueryable<Positions> GetActualPositions(DateTime dateFrom, DateTime dateTo);
 
         IQueryable<Containers> GetFreeContainers(IEnumerable<int> usedIds, int? containerTypeId, string name, List<int> equipmentIds);
 

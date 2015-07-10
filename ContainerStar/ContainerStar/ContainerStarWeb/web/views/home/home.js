@@ -13,6 +13,7 @@
 	    var model = self.model;
 
 	    require(['calendarLanguages'], function () {
+
 	        self.$el.find('#calendar').fullCalendar({
 	            header: {
 	                left: 'prev,next today',
@@ -22,20 +23,19 @@
 	            editable: false,
 	            lang: "de",
 	            eventLimit: true, // allow "more" link when too many events,
-
-	            specialCssStyle: 'margin: 0',
-
+                	            
 	            events: function (start, end, timezone, callback) {
 
 	                $.ajax({
-	                    url: Application.apiUrl + 'showRentContainer',
+	                    url: Application.apiUrl + 'showContainer',
 	                    type: 'POST',
 	                    data: {
 	                        containerTypeId: model.get('containerTypeId'),
 	                        name: model.get('name'),
 	                        equipments: model.get('equipments'),
 	                        startDateStr: start.date() + '.' + (start.month() + 1) + '.' + start.year(),
-	                        endDateStr: end.date() + '.' + (end.month() + 1) + '.' + end.year()
+	                        endDateStr: end.date() + '.' + (end.month() + 1) + '.' + end.year(),
+	                        searchFreeContainer: model.get('searchFreeContainer')
 	                    },
 	                    success: function (doc) {
 
@@ -93,8 +93,10 @@
 	    initialize: function () {
 
 	        view.__super__.initialize.apply(this, arguments);
-
-	        this.model = new Model();
+	        
+	        var self = this;
+	        self.model = new Model();
+	        self.model.set('searchFreeContainer', self.options.searchFreeContainer);
 	    },
 
 		render: function () {
