@@ -9,12 +9,13 @@ using ContainerStar.Contracts.Managers;
 
 namespace ContainerStar.API.Controllers
 {
-    public class ContainerSmartController : ClientApiController<ContainerSmartModel, Containers, int, IContainersManager>
+    public class ContainerSearchController : ClientApiController<ContainerSmartModel, Containers, int, IContainersManager>
     {
         private DateTime fromDate;
         private DateTime toDate;
-        
-        public ContainerSmartController(IContainersManager manager) : base(manager)
+
+        public ContainerSearchController(IContainersManager manager)
+            : base(manager)
         {
         }
 
@@ -80,24 +81,11 @@ namespace ContainerStar.API.Controllers
             }
 
             var positions = Manager.GetActualPositions(fromDate, toDate);
-            var ids = GetActualIds(positions);
+            var ids = positions.Select(o => o.ContainerId.Value).Distinct();
 
             return Manager.GetFreeContainers(ids, typeId, name, equpmentIds);
         }
-
-        private IEnumerable<int> GetActualIds(IEnumerable<Positions> positions)
-        {
-            var result = new List<int>();
-            foreach (var position in positions)
-            {
-                if (!result.Contains(position.ContainerId.Value))
-                {
-                    result.Add(position.ContainerId.Value);
-                }
-            }
-            return result;
-        }
-
+        
         private void GetFilters(Filtering filtering, out int? typeId, out string name, out List<int> equipmentIds)
         {
             fromDate = DateTime.MinValue;

@@ -2,7 +2,12 @@
 	'use strict';
 
 	var resource = {
-		core_masterdata: 'Stammdaten allgemein'
+	    apply: 'Suchen',
+	    cancel: 'Abbruch',
+	    pleaseSelect: 'Bitte auswählen',
+	    search: 'Container Suche:',
+	    name: 'Nummer',
+	    equipments: 'Ausstattungen'
 	};
 
 	return resource;

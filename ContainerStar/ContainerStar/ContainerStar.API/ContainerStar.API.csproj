@@ -132,10 +132,10 @@
     <Compile Include="Controllers\Invoices\InvoicePositionsController.cs" />
     <Compile Include="Controllers\Invoices\AddInvoiceController.cs" />
     <Compile Include="Controllers\Invoices\InvoicesController.cs" />
-    <Compile Include="Controllers\Orders\ContainerSmartController.cs" />
+    <Compile Include="Controllers\Orders\ContainerSearchController.cs" />
     <Compile Include="Controllers\FilterExpressionCreator.cs" />
     <Compile Include="Controllers\Invoices\PayBillController.cs" />
-    <Compile Include="Controllers\Orders\DispositionController.cs" />
+    <Compile Include="Controllers\Orders\ShowRentContainerController.cs" />
     <Compile Include="Controllers\Orders\PrintController.cs" />
     <Compile Include="Controllers\Orders\OffersController.cs" />
     <Compile Include="Controllers\Orders\PositionsController.cs" />

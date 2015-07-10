@@ -1,11 +1,11 @@
 define([
 	'base/base-collection',
-	'models/ContainerSmart'
+	'models/ContainerSearch'
 ], function (BaseCollection, Model) {
 	'use strict';
 
 	var collection = BaseCollection.extend({
-	    url: 'api/ContainerSmart',
+	    url: 'api/ContainerSearch',
 		model: Model
 	});
 

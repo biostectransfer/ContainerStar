@@ -272,7 +272,7 @@
     <Content Include="web.libs\lang\vi.js" />
     <Content Include="web.libs\lang\zh-cn.js" />
     <Content Include="web.libs\lang\zh-tw.js" />
-    <Content Include="web\collections\ContainersSmart.js" />
+    <Content Include="web\collections\ContainerSearch.js" />
     <Content Include="web\collections\Invoices\AddInvoicePositions.js" />
     <Content Include="web\collections\Invoices\InvoicePositions.js" />
     <Content Include="web\collections\Invoices\Invoices.js" />
@@ -325,7 +325,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>web.collections.tt</DependentUpon>
     </Content>
-    <Content Include="web\models\ContainerSmart.js" />
+    <Content Include="web\models\ContainerSearch.js" />
+    <Content Include="web\models\ShowContainer.js" />
     <Content Include="web\models\FilterContainerSmart.js" />
     <Content Include="web\models\FilterOrders.js" />
     <Content Include="web\models\Invoices\FilterInvoices.js" />

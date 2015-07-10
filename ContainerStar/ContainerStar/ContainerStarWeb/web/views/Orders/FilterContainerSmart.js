@@ -1,6 +1,6 @@
 ﻿define([
 	'base/base-object-filter-view',
-	'models/ContainerSmart'
+	'models/FilterContainerSmart'
 ], function (BaseFilterView, Filter) {
     'use strict'
 

@@ -1,20 +1,89 @@
 ﻿define([
 	'base/base-view',
     'calendar',
-    'calendarLanguages',
     'mixins/kendo-widget-form',
 	'mixins/kendo-validator-form',
-	'mixins/bound-form'
-], function (BaseView, Calendar, CalendarLanguages, KendoWidgetFormMixin, KendoValidatorFormMixin, BoundForm) {
+	'mixins/bound-form',
+    'models/ShowContainer'
+], function (BaseView, Calendar, KendoWidgetFormMixin, KendoValidatorFormMixin, BoundForm, Model) {
 	'use strict';
     
-	var view = BaseView.extend({
+	var bindCalendar = function (self) {
+
+	    var model = self.model;
+
+	    require(['calendarLanguages'], function () {
+	        self.$el.find('#calendar').fullCalendar({
+	            header: {
+	                left: 'prev,next today',
+	                center: 'title',
+	                right: ''
+	            },
+	            editable: false,
+	            lang: "de",
+	            eventLimit: true, // allow "more" link when too many events,
+
+	            specialCssStyle: 'margin: 0',
+
+	            events: function (start, end, timezone, callback) {
+
+	                $.ajax({
+	                    url: Application.apiUrl + 'showRentContainer',
+	                    type: 'POST',
+	                    data: {
+	                        containerTypeId: model.get('containerTypeId'),
+	                        name: model.get('name'),
+	                        equipments: model.get('equipments'),
+	                        startDateStr: start.date() + '.' + (start.month() + 1) + '.' + start.year(),
+	                        endDateStr: end.date() + '.' + (end.month() + 1) + '.' + end.year()
+	                    },
+	                    success: function (doc) {
+
+	                        var events = [];
+	                        $(doc).each(function () {
+
+	                            events.push({
+	                                title: this.title,
+	                                start: this.start,
+	                                end: this.end,
+	                                url: this.url,
+	                            });
+	                        });
+	                        callback(events);
+	                    },
+	                    error: function (e) {
+	                        debugger;
+	                        //alert('there was an error while fetching events!');
+	                    }
+	                });
+	            }
+	        });
+	    });
+	},
+
+
+	view = BaseView.extend({
 
 	    bindings: function () {
 
 	        var self = this;
 	        var result = {
-	            
+	            '#name': 'name',
+	            '#containerTypeId': {
+	                observe: 'containerTypeId',
+	                selectOptions: {
+	                    labelPath: 'name', valuePath: 'id',
+	                    collection: self.options.containerTypes,
+	                    defaultOption: { label: self.resources.pleaseSelect, value: null }
+	                },
+	            },
+	            '#equipments': {
+	                observe: 'equipments',
+	                selectOptions: {
+	                    labelPath: 'name', valuePath: 'id',
+	                    collection: self.options.equipments
+	                },
+	            }	            
 	        };
 
 
@@ -25,7 +94,7 @@
 
 	        view.__super__.initialize.apply(this, arguments);
 
-	        this.model = new Backbone.Model();
+	        this.model = new Model();
 	    },
 
 		render: function () {
@@ -33,53 +102,26 @@
 
 		    var self = this;
 
-		    setTimeout(function () {
-		        self.$el.find('#calendar').fullCalendar({
-		            header: {
-		                left: 'prev,next today',
-		                center: 'title',
-		                right: ''
-		            },
-		            editable: false,
-		            lang: "de",
-		            eventLimit: true, // allow "more" link when too many events
-
-		            events: function (start, end, timezone, callback) {
-		                debugger;
-		                $.ajax({
-		                    url: Application.apiUrl + 'disposition',
-		                    type: 'POST',
-		                    data: {
-		                        containerTypeId: 555,
-		                        name: "LoL",
-		                        startDate: start.toString(),
-		                        endDate: end.toString()
-		                    },
-		                    success: function (doc) {
-
-		                        var events = [];
-		                        $(doc).each(function () {
-
-		                            events.push({
-		                                title: $(this).attr('title'),
-		                                start: $(this).attr('start'),
-		                                end: $(this).attr('end'),
-		                                url: $(this).attr('url'),
-		                            });
-		                        });
-		                        callback(events);
-		                    },
-		                    error: function (e) {
-		                        debugger;
-		                        //alert('there was an error while fetching events!');
-		                    },
-		                });
-		            }
-
-		        });
-		    }, 0);
+		    setTimeout(function () { bindCalendar(self); }, 0);
 
 			return this;
+		},
+
+		events: {
+		    'click .apply': function (e) {
+
+		        var self = this;
+		        self.$el.find('#calendar').fullCalendar('destroy');
+		        bindCalendar(self);		        
+		    },
+		    'click .cancel': function (e) {
+
+		        var self = this;
+		        self.model.clear().set(self.model.defaults);
+
+		        self.$el.find('#calendar').fullCalendar('destroy');
+		        bindCalendar(self);		        
+		    },
 		}
 	});
     

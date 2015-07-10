@@ -2,8 +2,12 @@
 	'use strict';
 
 	var resource = {
-		title: 'Home',
-		text: 'This is the test project that show usage of new technologies.'
+	    apply: 'Apply',
+	    cancel: 'Cancel',
+	    pleaseSelect: 'Please select',
+	    search: 'Container search:',
+	    name: 'Name',
+        equipments: 'Equipments'
 	};
 
 	return resource;

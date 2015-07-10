@@ -8,19 +8,28 @@
 .fc {
 	direction: ltr;
 	text-align: left;
+    margin: 0;
 }
 
 .fc-rtl {
 	text-align: right;
+    margin: 0;
 }
 
 body .fc { /* extra precedence to overcome jqui */
 	font-size: 1em;
+    margin: 0;
 }
 
 
 /* Colors
 --------------------------------------------------------------------------------------------------*/
+
+.calendarBody {
+
+    margin: 0px;
+    padding: 0px;
+}
 
 .fc-unthemed th,
 .fc-unthemed td,

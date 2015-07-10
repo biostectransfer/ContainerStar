@@ -1,6 +1,6 @@
 define([
 'base/base-object-grid-view',
-'collections/ContainersSmart'
+'collections/ContainerSearch'
 ], function (BaseView, Collection) {
     'use strict';
 
