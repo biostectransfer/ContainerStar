@@ -97,6 +97,11 @@
         editUrl: '#Orders',
         selectable: true,
 
+        defaultSorting: {
+            field: 'id',
+            dir: 'desc'
+        },
+
         initialize: function () {
             view.__super__.initialize.apply(this, arguments);
             

@@ -22,6 +22,7 @@ namespace ContainerStar.API.Controllers.Invoices
 
         protected override void EntityToModel(ContainerStar.Contracts.Entities.Invoices entity, InvoicesModel model)
         {
+            model.Id = entity.Id;
             model.invoiceNumber = entity.InvoiceNumber;
             model.payDate = entity.PayDate;
             model.createDate = ((ISystemFields)entity).CreateDate;

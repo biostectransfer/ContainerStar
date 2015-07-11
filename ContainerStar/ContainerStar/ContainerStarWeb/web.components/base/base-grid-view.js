@@ -241,7 +241,7 @@
 	    showDeleteButton: true,
 	    showEditButton: true,
 
-	    defautSorting: null,
+	    defaultSorting: null,
 		defaultFitering: null,
 
 	    allowToSelect: false,
@@ -303,7 +303,7 @@
 	                data: 'data',
 	                total: 'total'
 	            },
-	            sort: _.result(self, 'defautSorting'),
+	            sort: _.result(self, 'defaultSorting'),
 	            filter: _.result(self, 'defaultFiltering'),
 	            pageSize: self.pageSize,
 	            error: function (e) {

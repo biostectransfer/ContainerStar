@@ -58,6 +58,7 @@ namespace ContainerStar.API.Controllers
 
         protected override void EntityToModel(Orders entity, OrdersModel model)
         {
+            model.Id = entity.Id;
             model.customerId = entity.CustomerId;
             model.communicationPartnerId = entity.CommunicationPartnerId;
             model.deliveryPlace = entity.DeliveryPlace;

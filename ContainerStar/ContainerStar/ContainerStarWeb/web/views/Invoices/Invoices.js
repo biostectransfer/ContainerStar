@@ -61,6 +61,11 @@
         editItemTitle: function () {
 	        return this.resources.edit;
         },
+
+        defaultSorting: {
+            field: 'invoiceNumber',
+            dir: 'desc'
+        },
         
         initialize: function () {
 
