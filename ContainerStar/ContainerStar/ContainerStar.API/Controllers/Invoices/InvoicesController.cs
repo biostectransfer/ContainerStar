@@ -34,6 +34,7 @@ namespace ContainerStar.API.Controllers.Invoices
             model.discount = entity.Discount;
             model.taxValue = entity.TaxValue;
             model.manualPrice = entity.ManualPrice;
+            model.isPayed = entity.PayDate.HasValue;
 
             CalculatePrices(entity, model);
         }
@@ -75,6 +76,16 @@ namespace ContainerStar.API.Controllers.Invoices
                     "InvoiceNumber.Contains(\"{0}\") or " +
                     "Orders.CommunicationPartners.Name.Contains(\"{0}\") or " +
                     "Orders.CommunicationPartners.FirstName.Contains(\"{0}\")", filter.Value);
+            }
+            else if (filter.Field == "isPayed")
+            {
+                int payStatus;
+                if (!String.IsNullOrEmpty(filter.Value))
+                {
+                    Int32.TryParse(filter.Value, out payStatus);
+
+                    return String.Format("PayDate{0}", payStatus == 1 ? " == null" : " != null");
+                }
             }
 
             return base.BuildWhereClause<T>(filter);

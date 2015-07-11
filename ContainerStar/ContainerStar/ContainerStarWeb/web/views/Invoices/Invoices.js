@@ -60,7 +60,15 @@
 
         editItemTitle: function () {
 	        return this.resources.edit;
-	    },
+        },
+        
+        initialize: function () {
+
+            view.__super__.initialize.apply(this, arguments);
+
+            this.defaultFiltering = { field: 'isPayed', operator: 'eq', value: 1 };
+        },
+
 		columns: function () {
 			
 		    return [

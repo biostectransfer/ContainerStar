@@ -440,7 +440,9 @@
     <Content Include="web\resources\Orders\ContainerSearch.de.js" />
     <Content Include="web\resources\Orders\AdditionalCostsSearch.en.js" />
     <Content Include="web\resources\Orders\ContainerSearch.en.js" />
+    <Content Include="web\resources\Orders\FilterOffers.de.js" />
     <Content Include="web\resources\Orders\FilterOrders.de.js" />
+    <Content Include="web\resources\Orders\FilterOffers.en.js" />
     <Content Include="web\resources\Orders\FilterOrders.en.js" />
     <Content Include="web\resources\Home\Home.de.js" />
     <Content Include="web\resources\Home\Home.en.js" />
@@ -804,6 +806,7 @@
     <Content Include="web\templates\Orders\AdditionalCostsSearch.html" />
     <Content Include="web\templates\Orders\CreateInvoiceConfirmation.html" />
     <Content Include="web\templates\Orders\ContainerSearch.html" />
+    <Content Include="web\templates\Orders\FilterOffers.html" />
     <Content Include="web\templates\Orders\FilterOrders.html" />
     <Content Include="web\templates\Home\Home.html" />
     <Content Include="web\templates\Home\Login.html" />
@@ -998,6 +1001,7 @@
     <Content Include="web\views\Orders\CreateInvoiceConfirmation.js" />
     <Content Include="web\views\Orders\ContainerSearch.js" />
     <Content Include="web\views\Orders\FilterContainerSmart.js" />
+    <Content Include="web\views\Orders\FilterOffers.js" />
     <Content Include="web\views\Orders\Offers.js" />
     <Content Include="web\views\Orders\AddPositions.js" />
     <Content Include="web\views\Orders\AddOrders.js" />

@@ -4,11 +4,12 @@ define(function () {
 	var resources = {
 
 		name: 'Suchwort',
-	    fromDate: 'Von Datum',
-	    toDate: 'Bis Datum',
-	    searchTitle: 'erweiterte Suche',
-	    apply: 'Suchen',
-	    cancel: 'Abbruch'
+		fromDate: 'Von Datum',
+		toDate: 'Bis Datum',
+		searchTitle: 'erweiterte Suche',
+		apply: 'Suchen',
+		cancel: 'Abbruch',
+		isPayed: 'Bezahlt'
 	};
 
 	return resources;
