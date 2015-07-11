@@ -13,6 +13,7 @@ define(function () {
 		generateRentInvoice: 'Generate rent invoice',
 		printRentOrder: 'Print rent order',
 		rentOrderNumber: 'Rent order number',
+		closeOrder: 'Close',
 	};
 
 	return resources;

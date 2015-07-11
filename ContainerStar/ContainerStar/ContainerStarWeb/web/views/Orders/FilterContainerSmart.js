@@ -59,7 +59,7 @@
 
             result.push({
                 field: 'name',
-                operator: 'eq',
+                operator: 'contains',
                 value: this.model.get('name')
             });
 
@@ -100,8 +100,7 @@
 
             return result;
         },
-
-
+        
         render: function () {
 
             var self = this;

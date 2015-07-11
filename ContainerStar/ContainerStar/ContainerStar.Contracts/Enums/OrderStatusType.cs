@@ -8,10 +8,10 @@
         /// <summary>
         /// Open
         /// </summary>
-        Open = 0,
+        Open = 1,
         /// <summary>
         /// Closed
         /// </summary>
-        Closed = 1,
+        Closed = 2,
     }
 }

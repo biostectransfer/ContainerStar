@@ -1,7 +1,7 @@
 define([
 'base/base-object-grid-view',
 'collections/Orders',
-'l!t!Orders/FilterOrders',
+'l!t!Orders/FilterOffers',
 'l!t!Orders/OrdersRelationships'
 ], function (BaseView, Collection, FilterView, DetailView) {
     'use strict';

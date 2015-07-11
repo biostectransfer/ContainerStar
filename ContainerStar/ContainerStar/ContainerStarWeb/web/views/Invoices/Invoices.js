@@ -45,24 +45,6 @@
         var self = this;
 
         location.href = Application.apiUrl + 'generateMonthInvoices';
-        //var model = new Backbone.Model();
-        //model.url = Application.apiUrl + 'generateMonthInvoices/get';
-        //model.save({}, {
-        //    patch: true,
-        //    success: function (model, response) {
-        //        debugger;
-        //    },
-        //    error: function (model, response) {
-        //        require(['base/information-view'], function (View) {
-        //            var view = new View({
-        //                title: 'Monatsrechnungen erstellen',
-        //                message: 'Monatsrechnungen konnten nicht erstellen werden.'
-        //            });
-        //            self.addView(view);
-        //            self.$el.append(view.render().$el);
-        //        });
-        //    }
-        //});
     },
 
 	view = BaseView.extend({

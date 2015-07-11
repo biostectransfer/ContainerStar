@@ -13,9 +13,7 @@ define([
             var result = [],
                 fromDate = this.model.get('fromDate'),
                 toDate = this.model.get('toDate'),
-                isClosed = this.model.get('isClosed'),
-                name = this.model.get('name'),
-                status = 1;
+                name = this.model.get('name');
 
             result.push({
                 field: 'createDate',
@@ -28,18 +26,7 @@ define([
                 operator: 'lte',
                 value: toDate
             });
-
-            if (isClosed)
-            {
-                status = 2
-            }
-
-            result.push({
-                field: 'status',
-                operator: 'eq',
-                value: status
-            });
-
+                        
             result.push({
                 field: 'name',
                 operator: 'contains',
@@ -57,8 +44,7 @@ define([
 
                 '#fromDate': 'fromDate',
                 '#toDate': 'toDate',
-                '#name': 'name',
-                '#isClosed': 'isClosed',                
+                '#name': 'name',             
             };
 
             return result;

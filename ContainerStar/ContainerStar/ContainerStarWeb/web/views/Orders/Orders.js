@@ -53,6 +53,40 @@
             }
         });
     },
+
+    closeOrder = function (dataItem) {
+        var self = this;
+
+        var model = new Backbone.Model();
+        model.url = Application.apiUrl + 'closeOrder';
+        model.set('id', dataItem.id);
+        model.save({}, {
+            success: function (model, response) {
+
+                require(['base/information-view'], function (View) {
+                    var view = new View({
+                        title: 'Auftrag abschließen',
+                        message: 'Auftrag wurde erfolgreich abgeschlossen.'
+                    });
+                    self.addView(view);
+                    self.$el.append(view.render().$el);
+
+                    self.grid.dataSource.read();
+                    self.grid.refresh();
+                });
+            },
+            error: function (model, response) {
+                require(['base/information-view'], function (View) {
+                    var view = new View({
+                        title: 'Auftrag abschließen',
+                        message: 'Ausgewählter Auftrag konnte nicht abgeschlossen werden.'
+                    });
+                    self.addView(view);
+                    self.$el.append(view.render().$el);
+                });
+            }
+        });
+    },
     
     view = BaseView.extend({
 
@@ -66,7 +100,9 @@
         initialize: function () {
             view.__super__.initialize.apply(this, arguments);
             
-            this.defaultFiltering = { field: 'isOffer', operator: 'eq', value: false };
+            this.defaultFiltering = [
+                { field: 'isOffer', operator: 'eq', value: false },
+		        { field: 'status', operator: 'eq', value: 1 }];
         },
 		
 		showDeleteButton: true,
@@ -174,7 +210,54 @@
                         self.$el.append(view.render().$el);
                     });
                 }
-            }
+            },
+            'click .closeOrder': function (e) {
+
+                e.preventDefault();
+                var self = this,
+                    grid = self.grid,
+					items = grid.select();
+
+                if (items != undefined && items.length == 1) {
+
+                    var dataItem = grid.dataItem(items[0]);
+                    if (dataItem.status == 2) {
+                        require(['base/information-view'], function (View) {
+
+                            var view = new View({
+                                title: 'Auftrag abschließen',
+                                message: 'Ausgewählter Auftrag ist bereits abgeschlossen!'
+                            });
+
+                            self.addView(view);
+                            self.$el.append(view.render().$el);
+                        });
+                    }
+                    else {
+                        require(['base/confirmation-view'], function (View) {
+
+                            var view = new View({
+                                title: 'Auftrag abschließen',
+                                message: 'Möchten Sie ausgewählten Auftrag abschließen?'
+                            });
+
+                            self.listenTo(view, 'continue', _.bind(closeOrder, self, dataItem));
+                            self.addView(view);
+                            self.$el.append(view.render().$el);
+                        });
+                    }
+                }
+                else {
+                    require(['base/information-view'], function (View) {
+                        var view = new View({
+                            title: 'Auftrag abschließen',
+                            message: 'Wählen Sie bitte einen Auftrag aus!'
+                        });
+                        self.addView(view);
+                        self.$el.append(view.render().$el);
+                    });
+                }
+            },
 		},
 
 		toolbar: function () {
@@ -186,7 +269,8 @@
 		            '/create" data-localized="' + self.createNewItemTitle + '"></a>' + 
                     '<a class="k-button k-button-icontext printRentOrder" href="#" data-localized="printRentOrder"></a>' +
                     '<a class="k-button k-button-icontext generateSellInvoice" href="#" data-localized="generateSellInvoice"></a>' +
-		            '<a class="k-button k-button-icontext generateRentInvoice" href="#" data-localized="generateRentInvoice"></a>';
+		            '<a class="k-button k-button-icontext generateRentInvoice" href="#" data-localized="generateRentInvoice"></a>' + 
+                    '<a class="k-button k-button-icontext closeOrder" href="#" data-localized="closeOrder"></a>';
 		        }
 		    }];
 

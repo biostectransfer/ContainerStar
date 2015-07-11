@@ -168,5 +168,8 @@ namespace ContainerStar.API.Models
 
         [DataMember]
         public bool isOffer { get; set; }
+
+        [DataMember]
+        public int status { get; set; }
     }
 }

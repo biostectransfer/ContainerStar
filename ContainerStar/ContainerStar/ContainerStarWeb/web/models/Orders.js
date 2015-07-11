@@ -86,6 +86,12 @@ define(function () {
             ,autoProlongation: { type: "boolean", 
                                     editable: Application.canTableItemBeEdit('Orders', 'autoProlongation'),
                                     validation: { required: false } }
+            ,createDate: { type: "date", 
+			                        editable: false,
+			                        validation: { required: false, date: true } }			
+            ,status: { type: "number", 
+                                    editable: false,
+                                    validation: { required: false } }
 		},
 		defaults: function () {
 			var dnf = new Date();

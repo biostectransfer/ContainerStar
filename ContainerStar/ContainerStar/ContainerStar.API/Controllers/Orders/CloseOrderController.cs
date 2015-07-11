@@ -12,22 +12,22 @@ namespace ContainerStar.API.Controllers
 {
 
     /// <summary>
-    ///     Controller for pay bill
+    ///     Controller for close order
     /// </summary>
-    [AuthorizeByPermissions(PermissionTypes = new[] { Permissions.Invoices })]
-    public partial class PayBillController : ApiController
+    [AuthorizeByPermissions(PermissionTypes = new[] { Permissions.Orders })]
+    public partial class CloseOrderController : ApiController
     {
-        private readonly IInvoicesManager manager;
+        private readonly IOrdersManager manager;
 
-        public PayBillController(IInvoicesManager manager)
+        public CloseOrderController(IOrdersManager manager)
         {
             this.manager = manager;
         }
 
-        public IHttpActionResult Put(InvoicesModel model)
+        public IHttpActionResult Put(OrdersModel model)
         {
             var invoice = manager.GetById(model.Id);
-            invoice.PayDate = DateTime.Now;
+            invoice.Status = (int)OrderStatusTypes.Closed;
             manager.SaveChanges();
 
             return Ok(new { id = model.Id });

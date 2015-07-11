@@ -79,6 +79,7 @@ namespace ContainerStar.API.Controllers
             model.isOffer = entity.IsOffer;
             model.customerOrderNumber = entity.CustomerOrderNumber;
             model.autoProlongation = entity.AutoProlongation;
+            model.status = entity.Status;
 
             ExtraEntityToModel(entity, model);
         }
@@ -124,6 +125,7 @@ namespace ContainerStar.API.Controllers
             entity.IsOffer = model.isOffer;
             entity.AutoProlongation = model.autoProlongation;
             entity.CustomerOrderNumber = model.customerOrderNumber;
+            entity.Status = model.status;
 
             if (entity.IsNew())
             {

@@ -9,7 +9,6 @@ define(function () {
 	    searchTitle: 'erweiterte Suche',
 	    apply: 'Suchen',
 	    cancel: 'Abbruch',
-        isClosed: 'Abgeschlossen'
 	};
 
 	return resources;
