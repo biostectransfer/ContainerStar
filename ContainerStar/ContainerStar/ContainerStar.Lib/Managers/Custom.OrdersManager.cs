@@ -30,9 +30,14 @@ namespace ContainerStar.Lib.Managers
             return PrepareCommonOrderPrintData(id, path, PrintTypes.ReminderMail, invoicesManager, taxesManager);
         }
 
-        public Stream PrepareInvoicePrintData(int id, string path, IInvoicesManager invoicesManager, ITaxesManager taxesManager)
+        public Stream PrepareInvoicePrintData(int id, string path, IInvoicesManager invoicesManager)
         {
-            return PrepareCommonOrderPrintData(id, path, PrintTypes.Invoice, invoicesManager, taxesManager);
+            return PrepareCommonOrderPrintData(id, path, PrintTypes.Invoice, invoicesManager, null);
+        }
+
+        public Stream PrepareInvoiceStornoPrintData(int id, string path, IInvoiceStornosManager invoiceStornosManager)
+        {
+            return PrepareCommonOrderPrintData(id, path, PrintTypes.InvoiceStorno, null, null, invoiceStornosManager);
         }
 
         public Stream PrepareMonthInvoicePrintData(IEnumerable<Invoices> invoices, string path, IInvoicesManager invoicesManager, ITaxesManager taxesManager)
@@ -81,7 +86,8 @@ namespace ContainerStar.Lib.Managers
             return result;
         }
         
-        private Stream PrepareCommonOrderPrintData(int id, string path, PrintTypes type, IInvoicesManager invoicesManager, ITaxesManager taxesManager)
+        private Stream PrepareCommonOrderPrintData(int id, string path, PrintTypes type,
+            IInvoicesManager invoicesManager, ITaxesManager taxesManager, IInvoiceStornosManager invoiceStornosManager = null)
         {
             var result = new MemoryStream();
             try
@@ -93,7 +99,8 @@ namespace ContainerStar.Lib.Managers
                 GetXmlDoc(path, result, out pkg, out part, out xmlReader, out xmlMainXMLDoc);
                 
                 //replace fields
-                var templateBody = ReplaceFields(id, type, xmlMainXMLDoc.Root.ToString(), invoicesManager, taxesManager);
+                var templateBody = ReplaceFields(id, type, xmlMainXMLDoc.Root.ToString(), 
+                    invoicesManager, taxesManager, null, invoiceStornosManager);
 
                 xmlMainXMLDoc = SaveDoc(result, pkg, part, xmlReader, xmlMainXMLDoc, templateBody);
             }
@@ -155,7 +162,9 @@ namespace ContainerStar.Lib.Managers
 
         #region Replace Fields Info
 
-        private string ReplaceFields(int id, PrintTypes printType, string xmlMainXMLDoc, IInvoicesManager invoicesManager, ITaxesManager taxesManager, Invoices invoice = null)
+        private string ReplaceFields(int id, PrintTypes printType, string xmlMainXMLDoc,
+            IInvoicesManager invoicesManager, ITaxesManager taxesManager, Invoices invoice = null, 
+            IInvoiceStornosManager invoiceStornosManager = null)
         {
             string result = xmlMainXMLDoc;
 
@@ -192,6 +201,17 @@ namespace ContainerStar.Lib.Managers
                     result = ReplaceContainerInvoicePositions(invoice.InvoicePositions.ToList(), result);
                     result = ReplaceAdditionalCostInvoicePositions(invoice.InvoicePositions.ToList(), result);
                     result = ReplaceInvoicePrices(invoice, result);
+                    break;
+                case PrintTypes.InvoiceStorno:
+
+                    var invoiceStorno = invoiceStornosManager.GetById(id);
+                    invoice = invoiceStorno.Invoices;
+                    order = invoice.Orders;
+
+                    result = ReplaceCommonFields(order, result);
+                    result = ReplaceBaseOrderFields(order, result);
+                    result = ReplaceBaseInvoiceFields(invoice, result, printType);
+                    result = ReplaceInvoiceStornoPrices(invoiceStorno, result);
                     break;
                 case PrintTypes.ReminderMail:
                     
@@ -305,7 +325,7 @@ namespace ContainerStar.Lib.Managers
                 CalculationHelper.CalculateOrderPrices(order, taxesManager, out totalPriceWithoutDiscountWithoutTax, out totalPriceWithoutTax,
                 out totalPrice, out summaryPrice);
 
-                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TotalPrice", summaryPrice.ToString());
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TotalPrice", summaryPrice.ToString("N2"));
             }
             else
             {
@@ -331,7 +351,7 @@ namespace ContainerStar.Lib.Managers
                     {
                         var textElem = XElement.Parse(parentTableElement.ToString().
                             Replace("#AdditionalCostDescription", position.AdditionalCosts.Description).
-                            Replace("#AdditionalCostPrice", Math.Round(position.Price * position.Amount, 2).ToString()));
+                            Replace("#AdditionalCostPrice", Math.Round(position.Price * position.Amount, 2).ToString("N2")));
                         prevElement.AddAfterSelf(textElem);
                         prevElement = textElem;
                     }
@@ -365,7 +385,7 @@ namespace ContainerStar.Lib.Managers
                 {
                     var textElem = XElement.Parse(parentTableElement.ToString().
                         Replace("#RentPositionDescription", position.Containers.ContainerTypes.Name).
-                        Replace("#RentPrice", Math.Round(position.Price / (double)30, 2).ToString()));
+                        Replace("#RentPrice", Math.Round(position.Price / (double)30, 2).ToString("N2")));
                     prevElement.AddAfterSelf(textElem);
                     prevElement = textElem;
                 }
@@ -445,7 +465,7 @@ namespace ContainerStar.Lib.Managers
         {
             var order = invoice.Orders;
 
-            if (printType == PrintTypes.StornoInvoice)
+            if (printType == PrintTypes.InvoiceStorno)
             {
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#InvoiceType", "Gutschrift");
             }
@@ -613,7 +633,7 @@ namespace ContainerStar.Lib.Managers
                             String.Format("{0}{1} Nr. {2}", firstElem ? "Mietgegenstand: " : "", 
                                 position.Positions.Containers.ContainerTypes.Name,
                                 position.Positions.Containers.Number)).
-                        Replace("#ContainerPrice", price.ToString()));
+                        Replace("#ContainerPrice", price.ToString("N2")));
                     prevTableElem.AddAfterSelf(rowElem);
                     prevTableElem = rowElem;
 
@@ -650,7 +670,7 @@ namespace ContainerStar.Lib.Managers
                             String.Format("{0}{1} {2}", firstElem ? "Nebenkosten: " : "",
                                 position.Amount,
                                 position.Positions.AdditionalCosts.Description)).
-                        Replace("#AdditionalCostPrice", price.ToString()));
+                        Replace("#AdditionalCostPrice", price.ToString("N2")));
                     prevTableElem.AddAfterSelf(rowElem);
                     prevTableElem = rowElem;
 
@@ -689,10 +709,10 @@ namespace ContainerStar.Lib.Managers
                         String.Format("Abzüglich {0}% Rabatt", invoice.Discount));
 
                     xmlMainXMLDoc = xmlMainXMLDoc.Replace("#DiscountValue",
-                        String.Format("-{0}", totalPriceWithoutDiscountWithoutTax - totalPriceWithoutTax));
+                        String.Format("-{0}", Math.Round(totalPriceWithoutDiscountWithoutTax - totalPriceWithoutTax, 2).
+                            ToString("N2")));
 
-                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PriceWithoutTax",
-                        String.Format("{0}", totalPriceWithoutTax));
+                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PriceWithoutTax", totalPriceWithoutTax.ToString("N2"));
                 }
                 else
                 {
@@ -714,7 +734,7 @@ namespace ContainerStar.Lib.Managers
                         String.Format("Zuzüglich {0}% MwSt.", invoice.TaxValue));
 
                     xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TaxValue",
-                        String.Format("{0}", totalPrice - totalPriceWithoutTax));
+                        String.Format("{0}", Math.Round(totalPrice - totalPriceWithoutTax, 2).ToString("N2")));
                 }
                 else
                 {
@@ -724,7 +744,7 @@ namespace ContainerStar.Lib.Managers
 
                 //total price
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TotalPriceText", "Zu zahlender Betrag");
-                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TotalPrice", totalPrice.ToString());
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TotalPrice", totalPrice.ToString("N2"));
             }
 
             return xmlMainXMLDoc;
@@ -803,8 +823,48 @@ namespace ContainerStar.Lib.Managers
         
         #endregion
 
+        #region Invoice Storno
+
+        private string ReplaceInvoiceStornoPrices(InvoiceStornos invoiceStorno, string xmlMainXMLDoc)
+        {
+            double totalPrice = invoiceStorno.Price;
+
+            //Discount
+            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PriceWithoutTax", totalPrice.ToString("N2"));
+
+            //Taxes
+            var xmlDoc = XDocument.Parse(xmlMainXMLDoc);
+            var temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#TaxText"));
+            var parentTableElement = GetParentElementByName(temp, "<w:tr ");
+
+            var invoice = invoiceStorno.Invoices;
+            if (invoice.WithTaxes && invoice.TaxValue > 0 && parentTableElement != null)
+            {
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TaxText",
+                    String.Format("Zuzüglich {0}% MwSt.", invoice.TaxValue));
+
+                var taxValue = (totalPrice / (double)100) * invoice.TaxValue;
+
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TaxValue", taxValue.ToString("N2"));
+
+                totalPrice += taxValue;
+            }
+            else
+            {
+                parentTableElement.Remove();
+                xmlMainXMLDoc = xmlDoc.Root.ToString();
+            }
+
+            //total price
+            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TotalPrice", String.Format("-{0}", totalPrice.ToString("N2")));
+
+            return xmlMainXMLDoc;
+        }
+
+        #endregion
+
         #region Reminder
-        
+
         private string ReplaceReminderPositions(List<InvoicePositions> positions, string xmlMainXMLDoc)
         {
             var xmlDoc = XDocument.Parse(xmlMainXMLDoc);

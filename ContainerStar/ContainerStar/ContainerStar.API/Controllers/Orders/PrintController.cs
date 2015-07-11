@@ -20,12 +20,15 @@ namespace ContainerStar.API.Controllers
     {
         private ITaxesManager taxesManager;
         private IInvoicesManager invoicesManager;
+        private IInvoiceStornosManager invoiceStornosManager;
 
-        public PrintController(IOrdersManager manager, IInvoicesManager invoicesManager, ITaxesManager taxesManager) :
+        public PrintController(IOrdersManager manager, IInvoicesManager invoicesManager, 
+            IInvoiceStornosManager invoiceStornosManager, ITaxesManager taxesManager) :
             base()
         {
             this.taxesManager = taxesManager;
             this.invoicesManager = invoicesManager;
+            this.invoiceStornosManager = invoiceStornosManager;
             Manager = manager;
             FilterExpressionCreator = new FilterExpressionCreator();
         }
@@ -54,11 +57,15 @@ namespace ContainerStar.API.Controllers
                     break;
                 case PrintTypes.Invoice:
                     path = Path.Combine(dataDirectory, API.Configuration.InvoiceFileName);
-                    stream = Manager.PrepareInvoicePrintData(id, path, invoicesManager, taxesManager);
+                    stream = Manager.PrepareInvoicePrintData(id, path, invoicesManager);
                     break;
                 case PrintTypes.ReminderMail:
                     path = Path.Combine(dataDirectory, API.Configuration.ReminderFileName);
                     stream = Manager.PrepareReminderPrintData(id, path, invoicesManager, taxesManager);
+                    break;
+                case PrintTypes.InvoiceStorno:
+                    path = Path.Combine(dataDirectory, API.Configuration.InvoiceStornoFileName);
+                    stream = Manager.PrepareInvoiceStornoPrintData(id, path, invoiceStornosManager);
                     break;
                 default:
                     throw new NotImplementedException();

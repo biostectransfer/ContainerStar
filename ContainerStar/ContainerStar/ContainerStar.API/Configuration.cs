@@ -28,6 +28,14 @@ namespace ContainerStar.API
             }
         }
 
+        public static string InvoiceStornoFileName
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["InvoiceStornoFileName"];
+            }
+        }
+
         public static string ReminderFileName
         {
             get

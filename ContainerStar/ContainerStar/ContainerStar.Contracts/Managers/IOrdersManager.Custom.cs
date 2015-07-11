@@ -12,7 +12,9 @@ namespace ContainerStar.Contracts.Managers
 
         Stream PrepareOfferPrintData(int id, string path, ITaxesManager taxesManager);
 
-        Stream PrepareInvoicePrintData(int id, string path, IInvoicesManager invoicesManager, ITaxesManager taxesManager);
+        Stream PrepareInvoicePrintData(int id, string path, IInvoicesManager invoicesManager);
+
+        Stream PrepareInvoiceStornoPrintData(int id, string path, IInvoiceStornosManager invoicesManager);
 
         Stream PrepareReminderPrintData(int id, string path, IInvoicesManager invoicesManager, ITaxesManager taxesManager);
 

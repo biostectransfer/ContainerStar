@@ -9,6 +9,7 @@ define(function () {
 		pleaseSelect: 'Bitte auswählen',
 		price: 'Preis',
 		proceedsAccount: 'Erlös-Konto',
+	    printInvoiceStorno: 'Gutschrift drucken'
 	};
 
 	return resources;
