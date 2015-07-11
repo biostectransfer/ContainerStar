@@ -44,6 +44,10 @@ namespace ContainerStar.Contracts
         /// </summary>
         IQueryable<RolePermissionRsp> RolePermissionRsp{get;}
         /// <summary>
+        ///     Set of <see cref="InvoiceStornos"/> entities from table dbo.InvoiceStornos
+        /// </summary>
+        IQueryable<InvoiceStornos> InvoiceStornos{get;}
+        /// <summary>
         ///     Set of <see cref="User"/> entities from table dbo.User
         /// </summary>
         IQueryable<User> User{get;}

@@ -28,6 +28,7 @@ namespace ContainerStar.Lib.Data
             modelBuilder.Configurations.Add(PermissionMapping.Instance);
             modelBuilder.Configurations.Add(RoleMapping.Instance);
             modelBuilder.Configurations.Add(RolePermissionRspMapping.Instance);
+            modelBuilder.Configurations.Add(InvoiceStornosMapping.Instance);
             modelBuilder.Configurations.Add(UserMapping.Instance);
             modelBuilder.Configurations.Add(EquipmentsMapping.Instance);
             modelBuilder.Configurations.Add(AdditionalCostsMapping.Instance);
@@ -69,6 +70,10 @@ namespace ContainerStar.Lib.Data
         ///     Set of <see cref="RolePermissionRsp"/> entities from table dbo.Role_Permission_Rsp
         /// </summary>
         public IQueryable<RolePermissionRsp> RolePermissionRsp{ get; set; }
+        /// <summary>
+        ///     Set of <see cref="InvoiceStornos"/> entities from table dbo.InvoiceStornos
+        /// </summary>
+        public IQueryable<InvoiceStornos> InvoiceStornos{ get; set; }
         /// <summary>
         ///     Set of <see cref="User"/> entities from table dbo.User
         /// </summary>

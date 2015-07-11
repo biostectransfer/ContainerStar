@@ -119,6 +119,9 @@
     <Compile Include="Data\InvoicesMapping.cs">
       <DependentUpon>ContainerStar.EntityMapping.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\InvoiceStornosMapping.cs">
+      <DependentUpon>ContainerStar.EntityMapping.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\NumbersMapping.cs" />
     <Compile Include="Data\OrdersMapping.cs">
       <DependentUpon>ContainerStar.EntityMapping.tt</DependentUpon>
@@ -187,6 +190,9 @@
       <DependentUpon>Managers.tt</DependentUpon>
     </Compile>
     <Compile Include="Managers\InvoicesManager.cs">
+      <DependentUpon>Managers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\InvoiceStornosManager.cs">
       <DependentUpon>Managers.tt</DependentUpon>
     </Compile>
     <Compile Include="Managers\OrdersManager.cs">

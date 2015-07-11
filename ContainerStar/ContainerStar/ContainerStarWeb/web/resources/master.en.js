@@ -9,6 +9,7 @@
 		Orders: 'Orders',
 		Offers: 'Offers',
 		Invoices: 'Invoices',
+		InvoiceStornos: 'Invoice storno',
 		FreeContainers: 'Free containers'
 	};
 

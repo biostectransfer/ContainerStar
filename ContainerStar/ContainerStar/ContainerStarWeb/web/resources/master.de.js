@@ -9,6 +9,7 @@
 		Orders: 'Aufträge',
 		Offers: 'Angebote',
 		Invoices: 'Rechnungen',
+		InvoiceStornos: 'Gutschriften',
 	    FreeContainers: 'Freie Containers'
 	};
 

@@ -274,6 +274,7 @@
     <Content Include="web.libs\lang\zh-cn.js" />
     <Content Include="web.libs\lang\zh-tw.js" />
     <Content Include="web\collections\ContainerSearch.js" />
+    <Content Include="web\collections\InvoiceStornos\InvoiceStornos.js" />
     <Content Include="web\collections\Invoices\AddInvoicePositions.js" />
     <Content Include="web\collections\Invoices\InvoicePositions.js" />
     <Content Include="web\collections\Invoices\Invoices.js" />
@@ -327,6 +328,8 @@
       <DependentUpon>web.collections.tt</DependentUpon>
     </Content>
     <Content Include="web\models\ContainerSearch.js" />
+    <Content Include="web\models\InvoiceStornos\AddInvoicePositions.js" />
+    <Content Include="web\models\InvoiceStornos\InvoiceStornos.js" />
     <Content Include="web\models\ShowContainer.js" />
     <Content Include="web\models\FilterContainerSmart.js" />
     <Content Include="web\models\FilterOrders.js" />
@@ -414,6 +417,14 @@
     </Content>
     <Content Include="web\models\view-collection.js" />
     <Content Include="web\moment.js" />
+    <Content Include="web\resources\InvoiceStornos\FilterInvoices.de.js" />
+    <Content Include="web\resources\InvoiceStornos\FilterInvoices.en.js" />
+    <Content Include="web\resources\InvoiceStornos\InvoiceStornos.de.js" />
+    <Content Include="web\resources\InvoiceStornos\InvoiceStornos.en.js" />
+    <Content Include="web\resources\InvoiceStornos\Invoices.de.js" />
+    <Content Include="web\resources\InvoiceStornos\Invoices.en.js" />
+    <Content Include="web\resources\InvoiceStornos\InvoicesRelationships.de.js" />
+    <Content Include="web\resources\InvoiceStornos\InvoicesRelationships.en.js" />
     <Content Include="web\resources\Invoices\AddInvoices.de.js" />
     <Content Include="web\resources\Invoices\AddInvoices.en.js" />
     <Content Include="web\resources\Invoices\FilterInvoices.de.js" />
@@ -794,6 +805,10 @@
       <DependentUpon>web.router.template.tt</DependentUpon>
     </Content>
     <Content Include="web\router.js" />
+    <Content Include="web\templates\InvoiceStornos\FilterInvoices.html" />
+    <Content Include="web\templates\InvoiceStornos\InvoiceStornos.html" />
+    <Content Include="web\templates\InvoiceStornos\Invoices.html" />
+    <Content Include="web\templates\InvoiceStornos\InvoicesRelationships.html" />
     <Content Include="web\templates\Invoices\AddInvoices.html" />
     <Content Include="web\templates\Invoices\FilterInvoices.html" />
     <Content Include="web\templates\Invoices\InvoicePositions.html" />
@@ -991,6 +1006,10 @@
       <DependentUpon>web.templates.tt</DependentUpon>
     </Content>
     <Content Include="web\application-start.js" />
+    <Content Include="web\views\InvoiceStornos\FilterInvoices.js" />
+    <Content Include="web\views\InvoiceStornos\InvoiceStornos.js" />
+    <Content Include="web\views\InvoiceStornos\Invoices.js" />
+    <Content Include="web\views\InvoiceStornos\InvoicesRelationships.js" />
     <Content Include="web\views\Invoices\AddInvoices.js" />
     <Content Include="web\views\Invoices\FilterInvoices.js" />
     <Content Include="web\views\Invoices\InvoicePositions.js" />

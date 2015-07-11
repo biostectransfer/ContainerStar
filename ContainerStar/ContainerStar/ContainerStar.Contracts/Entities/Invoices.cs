@@ -103,6 +103,7 @@ namespace ContainerStar.Contracts.Entities
         public string DateVExportFile{ get; set; }
         public virtual Orders Orders{ get; set; }
         public virtual ICollection<InvoicePositions> InvoicePositions{ get; set; }
+        public virtual ICollection<InvoiceStornos> InvoiceStornos{ get; set; }
         public bool HasOrders
         {
             get { return !ReferenceEquals(Orders, null); }

@@ -63,6 +63,20 @@
 		WHERE ID = 2
 	END
 	
+	IF NOT EXISTS (SELECT ID FROM [ContainerStar].[dbo].[PERMISSION] WHERE ID = 13 )
+	BEGIN
+		INSERT INTO [ContainerStar].[dbo].[PERMISSION] ([Id], [Name], [Description], [CreateDate], [ChangeDate], [DeleteDate])
+		VALUES(13, 'InvoiceStornos', 'Storno Rechnung' ,GETDATE() ,GETDATE() ,NULL);
+		INSERT INTO [ContainerStar].dbo.ROLE_PERMISSION_RSP(RoleId ,PermissionId ,CreateDate ,ChangeDate) 
+		VALUES (1 ,13 ,getdate() ,getdate());
+	END
+	ELSE
+	BEGIN
+		UPDATE [ContainerStar].[dbo].[PERMISSION]
+		SET [DESCRIPTION] = 'Storno Rechnung'
+		WHERE ID = 13
+	END
+	
 	IF NOT EXISTS (SELECT ID FROM [ContainerStar].[dbo].[PERMISSION] WHERE ID = 3 )
 	BEGIN
 		INSERT INTO [ContainerStar].[dbo].[PERMISSION] ([Id], [Name], [Description], [CreateDate], [ChangeDate], [DeleteDate])

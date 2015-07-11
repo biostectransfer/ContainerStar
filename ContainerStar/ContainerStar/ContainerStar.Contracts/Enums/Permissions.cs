@@ -27,6 +27,10 @@ namespace ContainerStar.Contracts.Enums
     		///</summary>
     		public const int Role = 2;
     		///<summary>
+    		/// Grant for edit InvoiceStornos table
+    		///</summary>
+    		public const int InvoiceStornos = 13;
+    		///<summary>
     		/// Grant for edit User table
     		///</summary>
     		public const int User = 3;
