@@ -96,7 +96,8 @@ namespace ContainerStar.API.Controllers.Invoices
 
                 if (amount != 0)
                 {
-                    if(isSell && orderPosition.Containers != null)
+                    if (isSell && orderPosition.Containers != null && 
+                        !orderPosition.Containers.IsVirtual)
                     {
                         orderPosition.Containers.IsSold = true;
                     }
