@@ -11,10 +11,10 @@ using System.Linq.Dynamic;
 
 namespace ContainerStar.API.Controllers
 {
-    [AuthorizeByPermissions(PermissionTypes = new[] { Permissions.Orders })]
     /// <summary>
     ///     Controller for <see cref="Positions"/> entity
     /// </summary>
+    [AuthorizeByPermissions(PermissionTypes = new[] { Permissions.Orders })]
     public partial class PositionsController: ClientApiController<PositionsModel, Positions, int, IPositionsManager>
     {
         public PositionsController(IPositionsManager manager) : base(manager) { }

@@ -13,6 +13,7 @@ namespace ContainerStar.API.Controllers.Invoices
     /// <summary>
     ///     Controller for <see cref="InvoicePositions"/> entity
     /// </summary>
+    [AuthorizeByPermissions(PermissionTypes = new[] { Permissions.Invoices })]
     public partial class InvoicePositionsController: ClientApiController<InvoicePositionsModel, InvoicePositions, int, IInvoicePositionsManager>
     {
 

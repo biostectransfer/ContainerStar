@@ -15,6 +15,7 @@ using System.Web.Http;
 
 namespace ContainerStar.API.Controllers.Invoices
 {
+    [AuthorizeByPermissions(PermissionTypes = new[] { Permissions.Invoices })]
     public partial class AddInvoicesController: ApiController
     {
         protected readonly IInvoicesManager invoicesManager;

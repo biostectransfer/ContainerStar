@@ -159,6 +159,16 @@ div.editor-field > .k-dropdown {
    width: 518px;
 }
 
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	.k-combobox.selectBox .k-input {
+		margin-left: -0.35em;
+	}
+
+	.k-grid .k-combobox.selectBox .k-input {
+		margin-left: -0.34em;
+	}
+}
+
 div.inline-block {
 	display: inline-block;
 	vertical-align: top;
@@ -228,16 +238,6 @@ table.settings {
 .k-list {
 	text-align: left;
 }
-
-.k-grid .k-combobox.selectBox .k-input {
-	margin-left: -0.33em;
-	padding-top: 0.2em;
-}
-
-.k-combobox.selectBox .k-input {
-	margin-left: -0.35em;
-}
-
 
 td.change-password {
 	width: 2em;

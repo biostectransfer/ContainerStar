@@ -6,9 +6,12 @@ using ContainerStar.API.Models.Orders;
 using ContainerStar.Contracts;
 using ContainerStar.Contracts.Entities;
 using ContainerStar.Contracts.Managers;
+using ContainerStar.API.Security;
+using ContainerStar.Contracts.Enums;
 
 namespace ContainerStar.API.Controllers
 {
+    [AuthorizeByPermissions(PermissionTypes = new[] { Permissions.Orders })]
     public class ContainerSearchController : ClientApiController<ContainerSmartModel, Containers, int, IContainersManager>
     {
         private DateTime fromDate;

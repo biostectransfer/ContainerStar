@@ -55,7 +55,7 @@
 	    return d.promise();
 	},
 	showView = function (baseRouter, viewPath, collectionTypes, options) {
-
+        
 	    var self = this;
 	    if (Application.user.get('isAuthenticated'))
 	        createView(baseRouter, viewPath, collectionTypes, options).done(

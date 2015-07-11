@@ -47,6 +47,7 @@
 	                                start: this.start,
 	                                end: this.end,
 	                                url: this.url,
+	                                color: model.get('searchFreeContainer') == true ? '#009D59' : ''
 	                            });
 	                        });
 	                        callback(events);

@@ -51,7 +51,7 @@
         Backbone.history.start();
 
         if (!Backbone.history.fragment)
-            router.navigate('home', { replace: true, trigger: true });
+            router.navigate('Home', { replace: true, trigger: true });
 
         router.on('router:view-created', function (view) {
             masterView.select(location.hash.split('/')[0]);
