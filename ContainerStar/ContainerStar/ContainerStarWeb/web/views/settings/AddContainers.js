@@ -31,6 +31,7 @@ define([
 			'#boughtPrice': 'boughtPrice',
 			'#comment': 'comment',
 			'#sellPrice': 'sellPrice',
+			'#isSold': 'isSold',
 			};
 
             return result;
@@ -55,6 +56,7 @@ define([
 			this.disableInput(this, 'boughtPrice', 'numeric');
 			this.disableInput(this, 'comment');
 			this.disableInput(this, 'sellPrice', 'numeric');
+			this.disableInput(this, 'isSold');
 
             return this;
         }

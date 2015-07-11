@@ -22,6 +22,7 @@ define(function () {
 		boughtPrice: 'Kaufpreis',	
 		comment: 'Bemerkung',	
 		sellPrice: 'Verkaufpreis',	
+		isSold: 'verkauft',	
 	};
 
 	return resources;

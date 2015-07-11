@@ -23,6 +23,7 @@ define(function () {
 		boughtPrice: 'Bought price',	
 		comment: 'Comment',	
 		sellPrice: 'Sell price',	
+		isSold: 'sold',	
 	};
 
 	return resources;

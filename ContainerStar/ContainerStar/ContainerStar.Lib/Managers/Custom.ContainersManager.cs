@@ -28,7 +28,7 @@ namespace ContainerStar.Lib.Managers
             if (equipmentIds == null || equipmentIds.Count == 0)
             {
                 return DataContext.GetSet<Containers>()
-                    .Where(r => !usedIds.Contains(r.Id))
+                    .Where(r => !r.IsSold && !usedIds.Contains(r.Id))
                     .Where(r => (!containerTypeId.HasValue || r.ContainerTypeId == containerTypeId.Value))
                     .Where(r => (String.IsNullOrEmpty(name) || r.Number.ToLower().Contains(name.ToLower())));
             }

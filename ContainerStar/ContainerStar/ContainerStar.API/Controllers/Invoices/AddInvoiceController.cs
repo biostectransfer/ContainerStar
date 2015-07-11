@@ -96,6 +96,11 @@ namespace ContainerStar.API.Controllers.Invoices
 
                 if (amount != 0)
                 {
+                    if(isSell && orderPosition.Containers != null)
+                    {
+                        orderPosition.Containers.IsSold = true;
+                    }
+
                     var newPosition = new InvoicePositions()
                     {
                         Positions = orderPosition,

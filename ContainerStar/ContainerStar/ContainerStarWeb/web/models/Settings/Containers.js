@@ -47,6 +47,9 @@ define(function () {
 			,sellPrice: { type: "number", 
 			                        editable: Application.canTableItemBeEdit('Containers', 'sellPrice'), 
 				                    validation: { required: true } }			
+			,isSold: { type: "boolean", 
+			                        editable: Application.canTableItemBeEdit('Containers', 'isSold'), 
+				                    validation: { required: false } }			
 		},
 		defaults: function () {
 			var dnf = new Date();

@@ -99,6 +99,10 @@ namespace ContainerStar.Lib.Data
                 .HasColumnName(Containers.Fields.SellPrice)
                 .IsRequired();
 
+            Property(t => t.IsSold)
+                .HasColumnName(Containers.Fields.IsSold)
+                .IsRequired();
+
 
             //Relationships
             HasRequired(c => c.ContainerTypes)

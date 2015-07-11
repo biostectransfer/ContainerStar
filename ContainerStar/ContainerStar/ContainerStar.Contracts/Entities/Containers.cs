@@ -90,6 +90,10 @@ namespace ContainerStar.Contracts.Entities
             /// Column name 'SellPrice' for property <see cref="Containers.SellPrice"/>
             /// </summary>
             public static readonly string SellPrice = "SellPrice";
+            /// <summary>
+            /// Column name 'IsSold' for property <see cref="Containers.IsSold"/>
+            /// </summary>
+            public static readonly string IsSold = "IsSold";
           
         }
         #endregion
@@ -111,6 +115,7 @@ namespace ContainerStar.Contracts.Entities
         public DateTime ChangeDate{ get; set; }
         public DateTime? DeleteDate{ get; set; }
         public double SellPrice{ get; set; }
+        public bool IsSold{ get; set; }
         public virtual ICollection<Positions> Positions{ get; set; }
         public virtual ContainerTypes ContainerTypes{ get; set; }
         public virtual ICollection<ContainerEquipmentRsp> ContainerEquipmentRsps{ get; set; }
@@ -153,6 +158,7 @@ namespace ContainerStar.Contracts.Entities
                        ChangeDate = ChangeDate,
                        DeleteDate = DeleteDate,
                        SellPrice = SellPrice,
+                       IsSold = IsSold,
         	           };
         }
     }

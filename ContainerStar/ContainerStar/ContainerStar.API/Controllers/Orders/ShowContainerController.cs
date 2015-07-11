@@ -85,7 +85,7 @@ namespace ContainerStar.API.Controllers
                     var positions = positionsQuery.ToList();
                     
                     //process rented containers in case if they are available at some days
-                    foreach (var container in positions.Select(o => o.Containers).Distinct())
+                    foreach (var container in positions.Select(o => o.Containers).Where(o => !o.IsSold).Distinct())
                     {
                         DateTime? startDate = null;
                         DateTime? endDate = null;
@@ -144,7 +144,7 @@ namespace ContainerStar.API.Controllers
         private void AddFreeContainers(ContainerSearchModel model, List<ContainerViewModel> result, List<Contracts.Entities.Positions> positions)
         {
             var ids = positions.Select(o => o.ContainerId.Value).Distinct();
-            var freeContainers = manager.GetEntities(o => !ids.Contains(o.Id) &&
+            var freeContainers = manager.GetEntities(o => !o.IsSold && !ids.Contains(o.Id) &&
                 (model.ContainerTypeId == 0 || o.ContainerTypeId == model.ContainerTypeId) &&
                 (String.IsNullOrEmpty(model.Name) || o.Number.ToLower().Contains(model.Name.ToLower())));
 
