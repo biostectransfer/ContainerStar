@@ -36,6 +36,14 @@ namespace ContainerStar.API
             }
         }
 
+        public static string TransportInvoiceFileName
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["TransportInvoiceFileName"];
+            }
+        }
+
         public static string ReminderFileName
         {
             get

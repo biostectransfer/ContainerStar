@@ -21,14 +21,17 @@ namespace ContainerStar.API.Controllers
         private ITaxesManager taxesManager;
         private IInvoicesManager invoicesManager;
         private IInvoiceStornosManager invoiceStornosManager;
+        private ITransportOrdersManager transportOrdersManager;
 
         public PrintController(IOrdersManager manager, IInvoicesManager invoicesManager, 
-            IInvoiceStornosManager invoiceStornosManager, ITaxesManager taxesManager) :
+            IInvoiceStornosManager invoiceStornosManager, ITaxesManager taxesManager,
+            ITransportOrdersManager transportOrdersManager) :
             base()
         {
             this.taxesManager = taxesManager;
             this.invoicesManager = invoicesManager;
             this.invoiceStornosManager = invoiceStornosManager;
+            this.transportOrdersManager = transportOrdersManager;
             Manager = manager;
             FilterExpressionCreator = new FilterExpressionCreator();
         }
@@ -66,6 +69,10 @@ namespace ContainerStar.API.Controllers
                 case PrintTypes.InvoiceStorno:
                     path = Path.Combine(dataDirectory, API.Configuration.InvoiceStornoFileName);
                     stream = Manager.PrepareInvoiceStornoPrintData(id, path, invoiceStornosManager);
+                    break;
+                case PrintTypes.TransportInvoice:
+                    path = Path.Combine(dataDirectory, API.Configuration.TransportInvoiceFileName);
+                    stream = Manager.PrepareTransportInvoicePrintData(id, path, transportOrdersManager, taxesManager);
                     break;
                 default:
                     throw new NotImplementedException();

@@ -6,6 +6,7 @@
         Invoice = 1,
         InvoiceStorno = 2,
         ReminderMail = 3,
-        Offer = 4
+        Offer = 4,
+        TransportInvoice = 5,
     }
 }

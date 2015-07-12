@@ -40,6 +40,11 @@ namespace ContainerStar.Lib.Managers
             return PrepareCommonOrderPrintData(id, path, PrintTypes.InvoiceStorno, null, null, invoiceStornosManager);
         }
 
+        public Stream PrepareTransportInvoicePrintData(int id, string path, ITransportOrdersManager transportOrdersManager, ITaxesManager taxesManager)
+        {
+            return PrepareCommonOrderPrintData(id, path, PrintTypes.TransportInvoice, null, taxesManager, null, transportOrdersManager);
+        }
+
         public Stream PrepareMonthInvoicePrintData(IEnumerable<Invoices> invoices, string path, IInvoicesManager invoicesManager, ITaxesManager taxesManager)
         {
             var result = new MemoryStream();
@@ -87,7 +92,8 @@ namespace ContainerStar.Lib.Managers
         }
         
         private Stream PrepareCommonOrderPrintData(int id, string path, PrintTypes type,
-            IInvoicesManager invoicesManager, ITaxesManager taxesManager, IInvoiceStornosManager invoiceStornosManager = null)
+            IInvoicesManager invoicesManager, ITaxesManager taxesManager, IInvoiceStornosManager invoiceStornosManager = null,
+            ITransportOrdersManager transportOrdersManager = null)
         {
             var result = new MemoryStream();
             try
@@ -99,8 +105,8 @@ namespace ContainerStar.Lib.Managers
                 GetXmlDoc(path, result, out pkg, out part, out xmlReader, out xmlMainXMLDoc);
                 
                 //replace fields
-                var templateBody = ReplaceFields(id, type, xmlMainXMLDoc.Root.ToString(), 
-                    invoicesManager, taxesManager, null, invoiceStornosManager);
+                var templateBody = ReplaceFields(id, type, xmlMainXMLDoc.Root.ToString(),
+                    invoicesManager, taxesManager, null, invoiceStornosManager, transportOrdersManager);
 
                 xmlMainXMLDoc = SaveDoc(result, pkg, part, xmlReader, xmlMainXMLDoc, templateBody);
             }
@@ -163,8 +169,9 @@ namespace ContainerStar.Lib.Managers
         #region Replace Fields Info
 
         private string ReplaceFields(int id, PrintTypes printType, string xmlMainXMLDoc,
-            IInvoicesManager invoicesManager, ITaxesManager taxesManager, Invoices invoice = null, 
-            IInvoiceStornosManager invoiceStornosManager = null)
+            IInvoicesManager invoicesManager, ITaxesManager taxesManager, Invoices invoice = null,
+            IInvoiceStornosManager invoiceStornosManager = null,
+            ITransportOrdersManager transportOrdersManager = null)
         {
             string result = xmlMainXMLDoc;
 
@@ -187,7 +194,7 @@ namespace ContainerStar.Lib.Managers
                     result = ReplaceRentAdditionalCostPositions(order, result);
                     break;
                 case PrintTypes.Invoice:
-
+                                        
                     if (invoice == null)
                     {
                         invoice = invoicesManager.GetById(id);
@@ -222,6 +229,15 @@ namespace ContainerStar.Lib.Managers
                     result = ReplaceReminderPositions(invoice.InvoicePositions.ToList(), result);
                     result = ReplaceReminderTotalPrice(invoice, result, taxesManager);
 
+                    break;
+                case PrintTypes.TransportInvoice:
+
+                    var transportOrder = transportOrdersManager.GetById(id);
+
+                    result = ReplaceTransportOrderCommonFields(transportOrder, result);
+                    result = ReplaceBaseTransportInvoiceFields(transportOrder, result, printType);
+                    result = ReplaceTransportPositions(transportOrder.TransportPositions.Where(o => !o.DeleteDate.HasValue).ToList(), result);
+                    result = ReplaceTransportInvoicePrices(transportOrder, result, taxesManager);
                     break;
                 default:
                     throw new NotImplementedException();
@@ -933,6 +949,271 @@ namespace ContainerStar.Lib.Managers
             {
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TotalPrice", String.Empty);
             }
+
+            return xmlMainXMLDoc;
+        }
+
+        #endregion
+
+        #region Transport Invoice
+
+        private string ReplaceTransportOrderCommonFields(TransportOrders transportOrder, string xmlMainXMLDoc)
+        {
+            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CustomerName", transportOrder.CustomerName);
+            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CustomerStreet", transportOrder.Customers.Street);
+            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CustomerZip", transportOrder.Customers.Zip.ToString());
+            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CustomerCity", transportOrder.Customers.City);
+            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#Today", DateTime.Now.ToShortDateString());
+            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#DeliveryPlace", transportOrder.DeliveryPlace);
+            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#Street", transportOrder.Street);
+            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#ZIP", transportOrder.Zip.ToString());
+            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#City", transportOrder.City);
+
+            return xmlMainXMLDoc;
+        }
+
+        private string ReplaceBaseTransportInvoiceFields(TransportOrders transportOrder, string xmlMainXMLDoc, PrintTypes printType)
+        {
+            if (printType == PrintTypes.InvoiceStorno)
+            {
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#InvoiceType", "Gutschrift");
+            }
+            else
+            {
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#InvoiceType", "Rechnung");
+            }
+
+            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#InvoiceNumber", transportOrder.OrderNumber);
+            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#InvoiceDate", transportOrder.CreateDate.ToShortDateString());
+            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CustomerNumber", transportOrder.Customers.Number);
+
+            xmlMainXMLDoc = ReplaceTransportOrderedFromInfo(xmlMainXMLDoc, transportOrder);
+
+            xmlMainXMLDoc = ReplaceTransportCustomerOrderNumber(xmlMainXMLDoc, transportOrder);
+            
+            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#OrderNumber", transportOrder.OrderNumber);
+
+            xmlMainXMLDoc = ReplaceTransportUstId(xmlMainXMLDoc, transportOrder);
+
+            xmlMainXMLDoc = ReplaceTransportFooterTexts(xmlMainXMLDoc, transportOrder);
+
+            return xmlMainXMLDoc;
+        }
+
+        private string ReplaceTransportOrderedFromInfo(string xmlMainXMLDoc, TransportOrders transportOrder)
+        {
+            var xmlDoc = XDocument.Parse(xmlMainXMLDoc);
+            var temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#OrderedFromInfo"));
+            var parentElement = GetParentElementByName(temp, "<w:tr ");
+
+            if (parentElement != null)
+            {
+                if (!String.IsNullOrEmpty(transportOrder.OrderedFrom) || transportOrder.OrderDate.HasValue)
+                {
+                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#OrderedFromInfo", String.Format("{0}{1}{2}",
+                        transportOrder.OrderDate.HasValue ? transportOrder.OrderDate.Value.ToShortDateString() : String.Empty,
+                        !String.IsNullOrEmpty(transportOrder.OrderedFrom) ? " durch " : String.Empty,
+                        !String.IsNullOrEmpty(transportOrder.OrderedFrom) ? transportOrder.OrderedFrom : String.Empty));
+                }
+                else
+                {
+                    parentElement.Remove();
+                    xmlMainXMLDoc = xmlDoc.Root.ToString();
+                }
+            }
+            return xmlMainXMLDoc;
+        }
+
+        private string ReplaceTransportCustomerOrderNumber(string xmlMainXMLDoc, TransportOrders transportOrder)
+        {
+            var xmlDoc = XDocument.Parse(xmlMainXMLDoc);
+            var temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#CustomerOrderNumber"));
+            var parentElement = GetParentElementByName(temp, "<w:tr ");
+
+            if (parentElement != null)
+            {
+                if (!String.IsNullOrEmpty(transportOrder.CustomerOrderNumber))
+                {
+                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CustomerOrderNumber", transportOrder.CustomerOrderNumber);
+                }
+                else
+                {
+                    parentElement.Remove();
+                    xmlMainXMLDoc = xmlDoc.Root.ToString();
+                }
+            }
+            return xmlMainXMLDoc;
+        }
+
+        private string ReplaceTransportUstId(string xmlMainXMLDoc, TransportOrders transportOrder)
+        {
+            var xmlDoc = XDocument.Parse(xmlMainXMLDoc);
+            var temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#CustomerUstId"));
+            var parentElement = GetParentElementByName(temp, "<w:tr ");
+
+            if (parentElement != null)
+            {
+                if (!String.IsNullOrEmpty(transportOrder.Customers.UstId))
+                {
+                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CustomerUstId", transportOrder.Customers.UstId);
+                }
+                else
+                {
+                    parentElement.Remove();
+                    xmlMainXMLDoc = xmlDoc.Root.ToString();
+                }
+            }
+            return xmlMainXMLDoc;
+        }
+
+        private string ReplaceTransportPositions(List<TransportPositions> positions, string xmlMainXMLDoc)
+        {
+            var xmlDoc = XDocument.Parse(xmlMainXMLDoc);
+            var temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#Description"));
+            var parentTableElement = GetParentElementByName(temp, "<w:tr ");
+
+            if (parentTableElement != null)
+            {
+                var prevTableElem = parentTableElement;
+
+                bool firstElem = true;
+                foreach (var position in positions)
+                {
+                    var rowElem = XElement.Parse(parentTableElement.ToString().
+                        Replace("#Description",
+                            String.Format("{0}{1} {2}", firstElem ? "Leistungen: " : "",
+                                position.Amount,
+                                position.TransportProducts.Name)).
+                        Replace("#Price", position.Price.ToString("N2")));
+                    prevTableElem.AddAfterSelf(rowElem);
+                    prevTableElem = rowElem;
+
+                    if (firstElem)
+                    {
+                        firstElem = false;
+                    }
+                }
+
+                parentTableElement.Remove();
+            }
+
+            return xmlDoc.Root.ToString();
+        }
+
+        private string ReplaceTransportInvoicePrices(TransportOrders transportOrder, string xmlMainXMLDoc, ITaxesManager taxesManager)
+        {
+            if (transportOrder.TransportPositions != null && transportOrder.TransportPositions.Count != 0)
+            {
+                double totalPriceWithoutDiscountWithoutTax = 0;
+                double totalPriceWithoutTax = 0;
+                double totalPrice = 0;
+                double summaryPrice = 0;
+                var withTaxes = true; //TODO 
+                double? manualPrice = null;
+                var taxValue = CalculationHelper.CalculateTaxes(taxesManager);
+
+                CalculationHelper.CalculateTransportInvoicePrices(transportOrder, taxValue, withTaxes, manualPrice,
+                    out totalPriceWithoutDiscountWithoutTax, out totalPriceWithoutTax, out totalPrice, out summaryPrice);
+
+                //Discount
+                var xmlDoc = XDocument.Parse(xmlMainXMLDoc);
+                var temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#DiscountText"));
+                var parentTableElement = GetParentElementByName(temp, "<w:tr ");
+
+                if (transportOrder.Discount > 0 && parentTableElement != null)
+                {
+                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#DiscountText",
+                        String.Format("Abzüglich {0}% Rabatt", transportOrder.Discount));
+
+                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#DiscountValue",
+                        String.Format("-{0}", Math.Round(totalPriceWithoutDiscountWithoutTax - totalPriceWithoutTax, 2).
+                            ToString("N2")));
+
+                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PriceWithoutTax", totalPriceWithoutTax.ToString("N2"));
+                }
+                else
+                {
+                    parentTableElement.Remove();
+                    temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#PriceWithoutTax"));
+                    parentTableElement = GetParentElementByName(temp, "<w:tr ");
+                    parentTableElement.Remove();
+                    xmlMainXMLDoc = xmlDoc.Root.ToString();
+                }
+
+                //Taxes
+                xmlDoc = XDocument.Parse(xmlMainXMLDoc);
+                temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#TaxText"));
+                parentTableElement = GetParentElementByName(temp, "<w:tr ");
+
+                if (withTaxes && taxValue > 0 && parentTableElement != null)
+                {
+                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TaxText",
+                        String.Format("Zuzüglich {0}% MwSt.", taxValue));
+
+                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TaxValue",
+                        String.Format("{0}", Math.Round(totalPrice - totalPriceWithoutTax, 2).ToString("N2")));
+                }
+                else
+                {
+                    parentTableElement.Remove();
+                    xmlMainXMLDoc = xmlDoc.Root.ToString();
+                }
+
+                //total price
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TotalPriceText", "Zu zahlender Betrag");
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TotalPrice", totalPrice.ToString("N2"));
+            }
+
+            return xmlMainXMLDoc;
+        }
+
+        private string ReplaceTransportFooterTexts(string xmlMainXMLDoc, TransportOrders transportOrder)
+        {
+            var xmlDoc = XDocument.Parse(xmlMainXMLDoc);
+            var temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#PlanedPayDate"));
+            var parentElement = GetParentElementByName(temp, "<w:tr ");
+
+            //pay due information
+            if (parentElement != null)
+            {
+                if (!String.IsNullOrEmpty(transportOrder.Customers.Iban) && !String.IsNullOrEmpty(transportOrder.Customers.Bic))
+                {
+
+                    temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#PayCash"));
+                    parentElement = GetParentElementByName(temp, "<w:tr ");
+                    parentElement.Remove();
+                    xmlMainXMLDoc = xmlDoc.Root.ToString();
+
+
+                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PlanedPayDate", transportOrder.CreateDate.AddDays(10).ToShortDateString()).
+                        Replace("#IBAN", transportOrder.Customers.Iban).
+                        Replace("#BIC", transportOrder.Customers.Bic);
+                }
+                else
+                {
+                    parentElement.Remove();
+                    xmlMainXMLDoc = xmlDoc.Root.ToString();
+                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PayCash", String.Empty);
+                }
+            }
+
+            //Invoice without taxes
+            //xmlDoc = XDocument.Parse(xmlMainXMLDoc);
+            //temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#InvoiceWithoutTaxes"));
+            //parentElement = GetParentElementByName(temp, "<w:tr ");
+
+            //if (parentElement != null)
+            //{
+            //    if (!invoice.WithTaxes)
+            //    {
+            //        xmlMainXMLDoc = xmlMainXMLDoc.Replace("#InvoiceWithoutTaxes", String.Empty);
+            //    }
+            //    else
+            //    {
+            //        parentElement.Remove();
+            //        xmlMainXMLDoc = xmlDoc.Root.ToString();
+            //    }
+            //}
 
             return xmlMainXMLDoc;
         }

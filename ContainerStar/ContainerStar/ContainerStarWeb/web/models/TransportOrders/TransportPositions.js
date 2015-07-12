@@ -15,7 +15,7 @@ define(function () {
 			                        editable: Application.canTableItemBeEdit('TransportPositions', 'price'), 
 				                    validation: { required: true } }
             ,amount: { type: "number", 
-			                        //editable: Application.canTableItemBeEdit('TransportPositions', 'amount'), 
+			                        editable: Application.canTableItemBeEdit('TransportPositions', 'amount'), 
 				                    validation: { required: true } }	
             ,description: { type: "string", editable: false }		
 		},
