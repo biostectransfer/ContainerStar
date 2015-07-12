@@ -131,6 +131,7 @@ namespace ContainerStar.API.Controllers
             if (entity.IsNew())
             {
                 entity.CreateDate = DateTime.Now;
+                entity.Status = (int)OrderStatusTypes.Open;
             }
         }
 

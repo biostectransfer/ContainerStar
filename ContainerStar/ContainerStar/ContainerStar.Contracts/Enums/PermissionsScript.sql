@@ -161,6 +161,20 @@
 		WHERE ID = 8
 	END
 	
+	IF NOT EXISTS (SELECT ID FROM [ContainerStar].[dbo].[PERMISSION] WHERE ID = 14 )
+	BEGIN
+		INSERT INTO [ContainerStar].[dbo].[PERMISSION] ([Id], [Name], [Description], [CreateDate], [ChangeDate], [DeleteDate])
+		VALUES(14, 'TransportOrders', 'Transport Auftrag' ,GETDATE() ,GETDATE() ,NULL);
+		INSERT INTO [ContainerStar].dbo.ROLE_PERMISSION_RSP(RoleId ,PermissionId ,CreateDate ,ChangeDate) 
+		VALUES (1 ,14 ,getdate() ,getdate());
+	END
+	ELSE
+	BEGIN
+		UPDATE [ContainerStar].[dbo].[PERMISSION]
+		SET [DESCRIPTION] = 'Transport Auftrag'
+		WHERE ID = 14
+	END
+	
 	IF NOT EXISTS (SELECT ID FROM [ContainerStar].[dbo].[PERMISSION] WHERE ID = 9 )
 	BEGIN
 		INSERT INTO [ContainerStar].[dbo].[PERMISSION] ([Id], [Name], [Description], [CreateDate], [ChangeDate], [DeleteDate])

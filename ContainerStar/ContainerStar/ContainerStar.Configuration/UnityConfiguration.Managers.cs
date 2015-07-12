@@ -30,7 +30,9 @@ namespace ContainerStar.Configuration
             container.RegisterType<ITransportProductsManager, TransportProductsManager>(new PerRequestLifetimeManager());
             container.RegisterType<ICustomersManager, CustomersManager>(new PerRequestLifetimeManager());
             container.RegisterType<ICommunicationPartnersManager, CommunicationPartnersManager>(new PerRequestLifetimeManager());
+            container.RegisterType<ITransportOrdersManager, TransportOrdersManager>(new PerRequestLifetimeManager());
             container.RegisterType<IContainerTypesManager, ContainerTypesManager>(new PerRequestLifetimeManager());
+            container.RegisterType<ITransportPositionsManager, TransportPositionsManager>(new PerRequestLifetimeManager());
             container.RegisterType<IContainerTypeEquipmentRspManager, ContainerTypeEquipmentRspManager>(new PerRequestLifetimeManager());
             container.RegisterType<IContainersManager, ContainersManager>(new PerRequestLifetimeManager());
             container.RegisterType<IContainerEquipmentRspManager, ContainerEquipmentRspManager>(new PerRequestLifetimeManager());

@@ -143,6 +143,12 @@
     <Compile Include="Data\TaxesMapping.cs">
       <DependentUpon>ContainerStar.EntityMapping.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\TransportOrdersMapping.cs">
+      <DependentUpon>ContainerStar.EntityMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\TransportPositionsMapping.cs">
+      <DependentUpon>ContainerStar.EntityMapping.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\TransportProductsMapping.cs">
       <DependentUpon>ContainerStar.EntityMapping.tt</DependentUpon>
     </Compile>
@@ -211,6 +217,12 @@
       <DependentUpon>Managers.tt</DependentUpon>
     </Compile>
     <Compile Include="Managers\TaxesManager.cs">
+      <DependentUpon>Managers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\TransportOrdersManager.cs">
+      <DependentUpon>Managers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\TransportPositionsManager.cs">
       <DependentUpon>Managers.tt</DependentUpon>
     </Compile>
     <Compile Include="Managers\TransportProductsManager.cs">

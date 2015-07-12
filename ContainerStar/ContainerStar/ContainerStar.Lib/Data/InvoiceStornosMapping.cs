@@ -51,6 +51,14 @@ namespace ContainerStar.Lib.Data
             Property(t => t.DeleteDate)
                 .HasColumnName(InvoiceStornos.Fields.DeleteDate);
 
+            Property(t => t.DateVExportDate)
+                .HasColumnName(InvoiceStornos.Fields.DateVExportDate);
+
+            Property(t => t.DateVExportFile)
+                .HasColumnName(InvoiceStornos.Fields.DateVExportFile)
+                .IsUnicode()
+                .HasMaxLength(128);
+
 
             //Relationships
             HasRequired(i => i.Invoices)

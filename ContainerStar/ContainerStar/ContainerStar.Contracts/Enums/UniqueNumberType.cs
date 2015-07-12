@@ -8,10 +8,12 @@ namespace ContainerStar.Contracts.Enums
     {
         None = 0,
 
-        OrderNumber = 1,
+        OrderNumber = 1,        
 
         RentOrderNumber = 2,
 
-        InvoiceNumber = 3
+        InvoiceNumber = 3,
+
+        TransportOrderNumber = 4,
     }
 }

@@ -7,6 +7,7 @@
 		Home: 'Home',
 		Settings: 'Settings',
 		Orders: 'Orders',
+		TransportOrders: 'TransportOrders',
 		Offers: 'Offers',
 		Invoices: 'Invoices',
 		InvoiceStornos: 'Invoice storno',

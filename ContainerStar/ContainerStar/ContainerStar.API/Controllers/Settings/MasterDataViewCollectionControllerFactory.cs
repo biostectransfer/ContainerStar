@@ -26,6 +26,10 @@ namespace ContainerStar.API.Controllers
             	result.Add("Equipments", GetViewCollection<Equipments, int, IEquipmentsManager>(
             		(IEquipmentsManager)resolver.GetService(typeof(IEquipmentsManager))));
 
+            if (model.TransportProducts)
+            	result.Add("TransportProducts", GetViewCollection<TransportProducts, int, ITransportProductsManager>(
+            		(ITransportProductsManager)resolver.GetService(typeof(ITransportProductsManager))));
+
             if (model.ContainerTypes)
             	result.Add("ContainerTypes", GetViewCollection<ContainerTypes, int, IContainerTypesManager>(
             		(IContainerTypesManager)resolver.GetService(typeof(IContainerTypesManager))));

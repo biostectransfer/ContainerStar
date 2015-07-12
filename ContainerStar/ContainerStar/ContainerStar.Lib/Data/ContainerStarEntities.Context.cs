@@ -36,7 +36,9 @@ namespace ContainerStar.Lib.Data
             modelBuilder.Configurations.Add(TransportProductsMapping.Instance);
             modelBuilder.Configurations.Add(CustomersMapping.Instance);
             modelBuilder.Configurations.Add(CommunicationPartnersMapping.Instance);
+            modelBuilder.Configurations.Add(TransportOrdersMapping.Instance);
             modelBuilder.Configurations.Add(ContainerTypesMapping.Instance);
+            modelBuilder.Configurations.Add(TransportPositionsMapping.Instance);
             modelBuilder.Configurations.Add(ContainerTypeEquipmentRspMapping.Instance);
             modelBuilder.Configurations.Add(ContainersMapping.Instance);
             modelBuilder.Configurations.Add(ContainerEquipmentRspMapping.Instance);
@@ -103,9 +105,17 @@ namespace ContainerStar.Lib.Data
         /// </summary>
         public IQueryable<CommunicationPartners> CommunicationPartners{ get; set; }
         /// <summary>
+        ///     Set of <see cref="TransportOrders"/> entities from table dbo.TransportOrders
+        /// </summary>
+        public IQueryable<TransportOrders> TransportOrders{ get; set; }
+        /// <summary>
         ///     Set of <see cref="ContainerTypes"/> entities from table dbo.ContainerTypes
         /// </summary>
         public IQueryable<ContainerTypes> ContainerTypes{ get; set; }
+        /// <summary>
+        ///     Set of <see cref="TransportPositions"/> entities from table dbo.TransportPositions
+        /// </summary>
+        public IQueryable<TransportPositions> TransportPositions{ get; set; }
         /// <summary>
         ///     Set of <see cref="ContainerTypeEquipmentRsp"/> entities from table dbo.ContainerType_Equipment_Rsp
         /// </summary>

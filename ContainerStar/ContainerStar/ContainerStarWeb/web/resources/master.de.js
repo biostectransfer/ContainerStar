@@ -7,6 +7,7 @@
 		Home: 'Hauptmaske',
 		Settings: 'Einstellungen',
 		Orders: 'Aufträge',
+		TransportOrders: 'Transport Aufträge',
 		Offers: 'Angebote',
 		Invoices: 'Rechnungen',
 		InvoiceStornos: 'Gutschriften',

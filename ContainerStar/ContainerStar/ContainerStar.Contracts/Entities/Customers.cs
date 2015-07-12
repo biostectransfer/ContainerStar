@@ -133,6 +133,7 @@ namespace ContainerStar.Contracts.Entities
         public DateTime? DeleteDate{ get; set; }
         public virtual ICollection<Orders> Orders{ get; set; }
         public virtual ICollection<CommunicationPartners> CommunicationPartners{ get; set; }
+        public virtual ICollection<TransportOrders> TransportOrders{ get; set; }
         DateTime ISystemFields.CreateDate
         {
             get { return CreateDate; }

@@ -78,6 +78,7 @@ namespace ContainerStar.Contracts.Entities
         public DateTime? DeleteDate{ get; set; }
         public virtual ICollection<Orders> Orders{ get; set; }
         public virtual Customers Customers{ get; set; }
+        public virtual ICollection<TransportOrders> TransportOrders{ get; set; }
         public bool HasCustomers
         {
             get { return !ReferenceEquals(Customers, null); }

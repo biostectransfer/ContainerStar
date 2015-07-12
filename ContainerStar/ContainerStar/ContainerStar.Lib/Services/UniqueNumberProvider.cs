@@ -23,6 +23,11 @@ namespace ContainerStar.Lib.Services
             return GetNextNumber(UniqueNumberType.OrderNumber).ToString();
         }
 
+        public string GetNextTransportOrderNumber()
+        {
+            return GetNextNumber(UniqueNumberType.TransportOrderNumber).ToString();
+        }
+        
         public string GetNextRentOrderNumber(string preffix)
         {
             var temp = GetNextNumber(UniqueNumberType.RentOrderNumber);

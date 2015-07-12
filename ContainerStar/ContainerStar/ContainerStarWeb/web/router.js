@@ -21,7 +21,7 @@
 		},
 
 		routes: function() {
-
+		    
 		    var commonRoutes =
             {
                 'Home': _.partial(BaseRouter.showView, this, 'l!t!home/home', { ContainerTypes: true, Equipments: true }, { searchFreeContainer: false }),
@@ -36,6 +36,9 @@
                 'Invoices': _.partial(BaseRouter.showView, this, 'l!t!Invoices/Invoices', false, false),
                 'Invoices/:id': _.partial(BaseRouter.showViewWithModel, this, 'l!t!Invoices/AddInvoices', 'models/Invoices/Invoices', false, false),
                 'InvoiceStornos': _.partial(BaseRouter.showView, this, 'l!t!InvoiceStornos/Invoices', false, false),
+                'TransportOrders': _.partial(BaseRouter.showView, this, 'l!t!TransportOrders/TransportOrders', { TransportProducts: true }, { isOffer: false }),
+                'TransportOrders/create': _.partial(BaseRouter.showViewWithModel, this, 'l!t!TransportOrders/AddTransportOrders', 'models/TransportOrders/TransportOrders', { CommunicationPartners: true, TransportProducts: true }, { isOffer: false }),
+                'TransportOrders/:id': _.partial(BaseRouter.showViewWithModel, this, 'l!t!TransportOrders/AddTransportOrders', 'models/TransportOrders/TransportOrders', { CommunicationPartners: true, TransportProducts: true }, { isOffer: false }),
             };
 		    
 		    var result = $.extend({}, commonRoutes, MasterDataRouter.getAllMasterDataRoutes(this));

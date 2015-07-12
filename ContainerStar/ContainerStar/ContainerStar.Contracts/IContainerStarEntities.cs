@@ -76,9 +76,17 @@ namespace ContainerStar.Contracts
         /// </summary>
         IQueryable<CommunicationPartners> CommunicationPartners{get;}
         /// <summary>
+        ///     Set of <see cref="TransportOrders"/> entities from table dbo.TransportOrders
+        /// </summary>
+        IQueryable<TransportOrders> TransportOrders{get;}
+        /// <summary>
         ///     Set of <see cref="ContainerTypes"/> entities from table dbo.ContainerTypes
         /// </summary>
         IQueryable<ContainerTypes> ContainerTypes{get;}
+        /// <summary>
+        ///     Set of <see cref="TransportPositions"/> entities from table dbo.TransportPositions
+        /// </summary>
+        IQueryable<TransportPositions> TransportPositions{get;}
         /// <summary>
         ///     Set of <see cref="ContainerTypeEquipmentRsp"/> entities from table dbo.ContainerType_Equipment_Rsp
         /// </summary>

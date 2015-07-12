@@ -1,0 +1,241 @@
+<% var title = typeof id !== 'undefined' ? '<label data-localized="' + (isOffer ? 'editOffer' : 'editOrder') + '"></label>' : '<label data-localized="' + (isOffer ? 'addOffer' : 'addOrder') + '"></label>'; %>
+
+<span class="breadcrumbs"><a href="#<%= isOffer ? 'TransportOffers' : 'TransportOrders' %>" data-localized="<%= isOffer ? 'pageOfferTitle' : 'pageOrderTitle' %>"></a> / <%= title %></span>
+
+<form method="post" class="add-model">
+    <input type="hidden" id="isOffer" name="isOffer" />
+    <table style="width: 100%; vertical-align: top; padding: 0px; margin: 0px; white-space: nowrap;" cellpadding="0" cellspacing="0">
+        <tr class="rowWithOrderNumbers">
+            <td style="padding-right: 25px; vertical-align: top;">
+                <div class="editor-label">
+                    <label for="orderNumber" data-localized="orderNumber"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" readonly="readonly" class="k-textbox" style="width: 489px; background-color: lightgrey" id="orderNumber" name="orderNumber" />
+                </div>
+            </td>
+            <td style="padding-right: 25px; vertical-align: top; " colspan="2">
+                <div class="editor-label">
+                    <label for="createDate" data-localized="createDate"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" readonly="readonly" style="background-color: lightgrey"  data-role="datepicker" id="createDate" name="createDate" />
+                </div>
+            </td>
+            <td style="width: 100%;">&nbsp;</td>
+        </tr>
+        <tr class="radioButtons">
+            <td style="padding-right: 25px; vertical-align: top; width: 280px;" colspan="2">
+                <input id="customerSelectType" name="customerSelectType" type="radio" value="1" checked="checked" /><label data-localized="existingCustomer"></label>
+                <input id="customerSelectType" name="customerSelectType" type="radio" value="2" /><label data-localized="newCustomer"></label>
+            </td>
+            <td style="width: 100%;">&nbsp;</td>
+        </tr>
+        <tr id="selectCustomerRow">
+            <td style="padding-right: 25px; vertical-align: top; width: 280px;">
+                <div class="editor-label">
+                    <label for="customerId" data-localized="customerId"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" class="k-textbox" style="width: 390px" disabled="disabled" id="customerId_Name" name="customerId_Name" />
+                    <button class="k-primary k-button SelectCustomer" style="width: auto;" type="button" data-localized="SelectCustomer"></button>
+                    <input type="hidden" id="customerId" name="customerId" />
+                </div>
+            </td>
+            <td style="padding-right: 25px; vertical-align: top; ">
+                <div class="editor-label">
+                    <label for="communicationPartnerId" data-localized="communicationPartnerId"></label>
+                </div>
+                <div class="editor-field">
+                    <select id="communicationPartnerId" name="communicationPartnerId" style="width: 362px;" />
+                </div>
+            </td>
+            <td style="width: 100%;">&nbsp;</td>
+        </tr>
+
+        <tr id="customerNumberRow" style="display: none;">
+            <td style="padding-right: 25px; vertical-align: top; ">
+                <div class="editor-label">
+                    <label for="customerNumber" data-localized="customerNumber"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" class="k-textbox" style="width: 489px" id="customerNumber" name="customerNumber" value="0" />
+                </div>
+            </td>
+            <td style="padding-right: 25px; vertical-align: top;" colspan="2">
+                <div class="editor-label">
+                    <label for="newCustomerName" data-localized="newCustomerName"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" class="k-textbox" style="width: 751px" id="newCustomerName" name="newCustomerName" value="0" />
+                </div>
+            </td>
+            <td style="width: 100%;">&nbsp;</td>
+        </tr>
+        <tr id="customerAddressRow" style="display: none;">
+            <td style="padding-right: 25px; vertical-align: top; ">
+                <div class="editor-label">
+                    <label for="customerStreet" data-localized="customerStreet"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" class="k-textbox" style="width: 489px" id="customerStreet" name="customerStreet" value="0" />
+                </div>
+            </td>
+            <td style="padding-right: 25px; vertical-align: top; ">
+                <div class="editor-label">
+                    <label for="customerCity" data-localized="customerCity"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" class="k-textbox" style="width: 362px" id="customerCity" name="customerCity" value="0" />
+                </div>
+            </td>
+            <td style="padding-right: 25px; vertical-align: top; ">
+                <div class="editor-label">
+                    <label for="customerZip" data-localized="customerZip"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" data-role="numerictextbox" id="customerZip" name="customerZip" value="0" />
+                </div>
+            </td>
+            <td style="width: 100%;">&nbsp;</td>
+        </tr>
+        <tr id="customerPhonesRow" style="display: none;">
+            <td style="padding-right: 25px; vertical-align: top; ">
+                <div class="editor-label">
+                    <label for="customerPhone" data-localized="customerPhone"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" class="k-textbox" style="width: 489px" id="customerPhone" name="customerPhone" />
+                </div>
+            </td>
+            <td style="padding-right: 25px; vertical-align: top; ">
+                <div class="editor-label">
+                    <label for="customerFax" data-localized="customerFax"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" class="k-textbox" style="width: 362px" id="customerFax" name="customerFax" />
+                </div>
+            </td>
+            <td style="padding-right: 25px; vertical-align: top; ">
+                <div class="editor-label">
+                    <label for="customerEmail" data-localized="customerEmail"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" class="k-textbox" style="width: 362px" id="customerEmail" name="customerEmail" />
+                </div>
+            </td>
+            <td style="width: 100%;">&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td style="padding-right: 25px; vertical-align: top; ">
+                <div class="editor-label">
+                    <label for="deliveryPlace" data-localized="deliveryPlace"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" class="k-textbox" style="width: 489px" id="deliveryPlace" name="deliveryPlace" />
+                </div>
+            </td>
+            <td style="padding-right: 25px; vertical-align: top; " colspan="2">
+                <div class="editor-label">
+                    <label for="comment" data-localized="comment"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" class="k-textbox" style="width: 570px" id="comment" name="comment" />
+                </div>
+            </td>
+            <td style="width: 100%;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="padding-right: 25px; vertical-align: top; ">
+                <div class="editor-label">
+                    <label for="street" data-localized="street"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" class="k-textbox" style="width: 489px" id="street" name="street" />
+                </div>
+            </td>
+            <td style="padding-right: 25px; vertical-align: top; ">
+                <div class="editor-label">
+                    <label for="city" data-localized="city"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" class="k-textbox" style="width: 362px" id="city" name="city" />
+                </div>
+            </td>
+            <td style="padding-right: 25px; vertical-align: top; ">
+                <div class="editor-label">
+                    <label for="zip" data-localized="zip"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" data-role="numerictextbox" id="zip" name="zip" />
+                </div>
+            </td>
+            <td style="width: 100%;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="padding-right: 25px; vertical-align: top;">
+                <div class="editor-label">
+                    <label for="orderedFrom" data-localized="orderedFrom"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" class="k-textbox" style="width: 489px" id="orderedFrom" name="orderedFrom" />
+                </div>
+            </td>
+            <td style="padding-right: 25px; vertical-align: top;">
+                <div class="editor-label">
+                    <label for="customerOrderNumber" data-localized="customerOrderNumber"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" class="k-textbox" style="width: 362px;" id="customerOrderNumber" name="customerOrderNumber" />
+                </div>
+            </td>
+            <td style="padding-right: 25px; vertical-align: top;">
+                <div class="editor-label">
+                    <label for="orderDate" data-localized="orderDate"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" data-role="datepicker" id="orderDate" name="orderDate" />
+                </div>
+            </td>
+            <td style="width: 100%;">&nbsp;</td>
+        </tr>        
+    </table>
+    <table style="width: 100%; vertical-align: top; padding: 0px; margin: 0px; white-space: nowrap;" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="padding-right: 25px; vertical-align: top; ">
+                <div class="editor-label">
+                    <label for="discount" data-localized="discount"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" data-role="floattextbox" id="discount" name="discount" />
+                </div>
+            </td>
+            <td style="padding-right: 25px; vertical-align: top; ">
+                <div class="editor-label">
+                    <label for="billTillDate" data-localized="billTillDate"></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" data-role="datepicker" id="billTillDate" name="billTillDate" />
+                </div>
+            </td>
+            <td style="width: 100%;">&nbsp;</td>
+        </tr>
+    </table>
+    <div class="inline-block">
+    </div>
+
+    <br />
+    <br />
+
+    <div class="relations-container">
+    </div>
+
+    <br />
+
+    <div>
+        <button class="k-primary k-button save" data-localized="save"></button>
+        <button class="k-button remove" data-localized="delete"></button>
+        <button class="k-button cancel" data-localized="cancel"></button>
+    </div>
+</form>

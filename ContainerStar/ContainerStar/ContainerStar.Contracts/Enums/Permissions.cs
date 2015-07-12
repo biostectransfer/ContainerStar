@@ -55,6 +55,10 @@ namespace ContainerStar.Contracts.Enums
     		///</summary>
     		public const int Customers = 8;
     		///<summary>
+    		/// Grant for edit TransportOrders table
+    		///</summary>
+    		public const int TransportOrders = 14;
+    		///<summary>
     		/// Grant for edit ContainerTypes table
     		///</summary>
     		public const int ContainerTypes = 9;

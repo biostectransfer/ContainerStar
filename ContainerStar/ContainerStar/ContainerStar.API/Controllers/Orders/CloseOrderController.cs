@@ -26,8 +26,8 @@ namespace ContainerStar.API.Controllers
 
         public IHttpActionResult Put(OrdersModel model)
         {
-            var invoice = manager.GetById(model.Id);
-            invoice.Status = (int)OrderStatusTypes.Closed;
+            var order = manager.GetById(model.Id);
+            order.Status = (int)OrderStatusTypes.Closed;
             manager.SaveChanges();
 
             return Ok(new { id = model.Id });

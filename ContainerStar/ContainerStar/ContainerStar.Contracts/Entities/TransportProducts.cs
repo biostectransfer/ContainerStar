@@ -1,9 +1,11 @@
 using ContainerStar.Contracts;
 using System;
+using System.Collections.Generic;
 
 namespace ContainerStar.Contracts.Entities
 {
     public partial class TransportProducts: IHasId<int>
+        ,IHasTitle<int>
         ,IRemovable
         ,ISystemFields
     {
@@ -60,6 +62,11 @@ namespace ContainerStar.Contracts.Entities
         public DateTime CreateDate{ get; set; }
         public DateTime ChangeDate{ get; set; }
         public DateTime? DeleteDate{ get; set; }
+        public virtual ICollection<TransportPositions> TransportPositions{ get; set; }
+        string IHasTitle<int>.EntityTitle
+        {
+            get { return Name; }
+        }
         DateTime ISystemFields.CreateDate
         {
             get { return CreateDate; }

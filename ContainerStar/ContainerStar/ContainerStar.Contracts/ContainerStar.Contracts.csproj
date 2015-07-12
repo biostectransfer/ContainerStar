@@ -88,6 +88,7 @@
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\Custom.CommunicationPartners.cs" />
+    <Compile Include="Entities\Custom.TransportOrders.cs" />
     <Compile Include="Entities\Custom.Orders.cs" />
     <Compile Include="Entities\Customers.cs">
       <DependentUpon>Entities.tt</DependentUpon>
@@ -120,6 +121,12 @@
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\Taxes.cs">
+      <DependentUpon>Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TransportOrders.cs">
+      <DependentUpon>Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TransportPositions.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\TransportProducts.cs">
@@ -193,6 +200,12 @@
       <DependentUpon>IManagers.tt</DependentUpon>
     </Compile>
     <Compile Include="Managers\ITaxesManager.cs">
+      <DependentUpon>IManagers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\ITransportOrdersManager.cs">
+      <DependentUpon>IManagers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\ITransportPositionsManager.cs">
       <DependentUpon>IManagers.tt</DependentUpon>
     </Compile>
     <Compile Include="Managers\ITransportProductsManager.cs">
