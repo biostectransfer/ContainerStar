@@ -1,3 +1,4 @@
+using ContainerStar.API.ActionResults;
 using ContainerStar.API.Security;
 using ContainerStar.Contracts.Enums;
 using ContainerStar.Contracts.Managers;
@@ -39,14 +40,12 @@ namespace ContainerStar.API.Controllers
         private IOrdersManager Manager { get; set; }
         private IFilterExpressionCreator FilterExpressionCreator { get; set; }
 
-        public HttpResponseMessage Get([FromUri]GridArgs args, int id, int printTypeId)
+        public IHttpActionResult Get([FromUri]GridArgs args, int id, int printTypeId)
 		{
-            var response = new HttpResponseMessage(HttpStatusCode.OK);
-            
             string path = String.Empty;
             var dataDirectory = Path.Combine(HttpRuntime.AppDomainAppPath, "App_Data");
             var report = (PrintTypes)printTypeId;
-            Stream stream = null;
+            MemoryStream stream = null;
 
             switch (report)
             {
@@ -77,12 +76,12 @@ namespace ContainerStar.API.Controllers
                 default:
                     throw new NotImplementedException();
             }
-            
-            response.Content = new StreamContent(stream);
-            response.Content.Headers.ContentType = 
-                new MediaTypeHeaderValue("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
 
-            return response;
+            var result = new StreamActionResult(new MemoryStream(stream.ToArray()));
+            result.ContentType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+            result.ContentDisposition = new ContentDispositionHeaderValue("attachment") { FileName = Path.GetFileName(path) };
+
+            return result;
 		}
     }
 }

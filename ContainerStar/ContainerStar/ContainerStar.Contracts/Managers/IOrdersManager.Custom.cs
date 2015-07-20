@@ -8,18 +8,18 @@ namespace ContainerStar.Contracts.Managers
     /// </summary>
     public partial interface IOrdersManager
     {
-        Stream PrepareRentOrderPrintData(int id, string path, ITaxesManager taxesManager);
+        MemoryStream PrepareRentOrderPrintData(int id, string path, ITaxesManager taxesManager);
 
-        Stream PrepareOfferPrintData(int id, string path, ITaxesManager taxesManager);
+        MemoryStream PrepareOfferPrintData(int id, string path, ITaxesManager taxesManager);
 
-        Stream PrepareInvoicePrintData(int id, string path, IInvoicesManager invoicesManager);
+        MemoryStream PrepareInvoicePrintData(int id, string path, IInvoicesManager invoicesManager);
 
-        Stream PrepareInvoiceStornoPrintData(int id, string path, IInvoiceStornosManager invoicesManager);
+        MemoryStream PrepareInvoiceStornoPrintData(int id, string path, IInvoiceStornosManager invoicesManager);
 
-        Stream PrepareReminderPrintData(int id, string path, IInvoicesManager invoicesManager, ITaxesManager taxesManager);
+        MemoryStream PrepareReminderPrintData(int id, string path, IInvoicesManager invoicesManager, ITaxesManager taxesManager);
 
-        Stream PrepareMonthInvoicePrintData(IEnumerable<Invoices> invoices, string path, IInvoicesManager invoicesManager, ITaxesManager taxesManager);
+        MemoryStream PrepareMonthInvoicePrintData(IEnumerable<Invoices> invoices, string path, IInvoicesManager invoicesManager, ITaxesManager taxesManager);
 
-        Stream PrepareTransportInvoicePrintData(int id, string path, ITransportOrdersManager transportOrdersManager, ITaxesManager taxesManager);
+        MemoryStream PrepareTransportInvoicePrintData(int id, string path, ITransportOrdersManager transportOrdersManager, ITaxesManager taxesManager);
     }
 }

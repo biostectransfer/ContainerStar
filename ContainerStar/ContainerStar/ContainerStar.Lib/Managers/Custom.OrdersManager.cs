@@ -15,37 +15,37 @@ namespace ContainerStar.Lib.Managers
     {
         #region Prepare Print
 
-        public Stream PrepareRentOrderPrintData(int id, string path, ITaxesManager taxesManager)
+        public MemoryStream PrepareRentOrderPrintData(int id, string path, ITaxesManager taxesManager)
         {
             return PrepareCommonOrderPrintData(id, path, PrintTypes.RentOrder, null, taxesManager);
         }
 
-        public Stream PrepareOfferPrintData(int id, string path, ITaxesManager taxesManager)
+        public MemoryStream PrepareOfferPrintData(int id, string path, ITaxesManager taxesManager)
         {
             return PrepareCommonOrderPrintData(id, path, PrintTypes.Offer, null, taxesManager);
         }
 
-        public Stream PrepareReminderPrintData(int id, string path, IInvoicesManager invoicesManager, ITaxesManager taxesManager)
+        public MemoryStream PrepareReminderPrintData(int id, string path, IInvoicesManager invoicesManager, ITaxesManager taxesManager)
         {
             return PrepareCommonOrderPrintData(id, path, PrintTypes.ReminderMail, invoicesManager, taxesManager);
         }
 
-        public Stream PrepareInvoicePrintData(int id, string path, IInvoicesManager invoicesManager)
+        public MemoryStream PrepareInvoicePrintData(int id, string path, IInvoicesManager invoicesManager)
         {
             return PrepareCommonOrderPrintData(id, path, PrintTypes.Invoice, invoicesManager, null);
         }
 
-        public Stream PrepareInvoiceStornoPrintData(int id, string path, IInvoiceStornosManager invoiceStornosManager)
+        public MemoryStream PrepareInvoiceStornoPrintData(int id, string path, IInvoiceStornosManager invoiceStornosManager)
         {
             return PrepareCommonOrderPrintData(id, path, PrintTypes.InvoiceStorno, null, null, invoiceStornosManager);
         }
 
-        public Stream PrepareTransportInvoicePrintData(int id, string path, ITransportOrdersManager transportOrdersManager, ITaxesManager taxesManager)
+        public MemoryStream PrepareTransportInvoicePrintData(int id, string path, ITransportOrdersManager transportOrdersManager, ITaxesManager taxesManager)
         {
             return PrepareCommonOrderPrintData(id, path, PrintTypes.TransportInvoice, null, taxesManager, null, transportOrdersManager);
         }
 
-        public Stream PrepareMonthInvoicePrintData(IEnumerable<Invoices> invoices, string path, IInvoicesManager invoicesManager, ITaxesManager taxesManager)
+        public MemoryStream PrepareMonthInvoicePrintData(IEnumerable<Invoices> invoices, string path, IInvoicesManager invoicesManager, ITaxesManager taxesManager)
         {
             var result = new MemoryStream();
             try
@@ -90,8 +90,8 @@ namespace ContainerStar.Lib.Managers
 
             return result;
         }
-        
-        private Stream PrepareCommonOrderPrintData(int id, string path, PrintTypes type,
+
+        private MemoryStream PrepareCommonOrderPrintData(int id, string path, PrintTypes type,
             IInvoicesManager invoicesManager, ITaxesManager taxesManager, IInvoiceStornosManager invoiceStornosManager = null,
             ITransportOrdersManager transportOrdersManager = null)
         {
@@ -284,9 +284,11 @@ namespace ContainerStar.Lib.Managers
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CommunicationPartnerName", String.Empty);
             }
 
-            if (order.Positions != null && order.Positions.Count != 0)
+            var positions = order.Positions != null ? order.Positions.Where(o => !o.DeleteDate.HasValue && o.ContainerId.HasValue).ToList() :
+                new List<Positions>();
+
+            if (positions.Count != 0)
             {
-                var positions = order.Positions.Where(o => !o.DeleteDate.HasValue && o.ContainerId.HasValue).ToList();
                 var minDate = positions.Min(o => o.FromDate);
                 var maxDate = positions.Max(o => o.ToDate);
                 var duration = maxDate - minDate;
@@ -304,9 +306,11 @@ namespace ContainerStar.Lib.Managers
 
         private string ReplaceRentPositions(Orders order, string xmlMainXMLDoc)
         {
-            if (order.Positions != null && order.Positions.Count != 0)
+            var positions = order.Positions != null ? order.Positions.Where(o => !o.DeleteDate.HasValue && o.ContainerId.HasValue).ToList() : 
+                new List<Positions>();
+
+            if (positions.Count != 0) 
             {
-                var positions = order.Positions.Where(o => !o.DeleteDate.HasValue && o.ContainerId.HasValue).ToList();
                 var minDate = positions.Min(o => o.FromDate);
                 var maxDate = positions.Max(o => o.ToDate);
 
@@ -324,6 +328,8 @@ namespace ContainerStar.Lib.Managers
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#ContainerDescription", String.Empty);
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#FromDate", String.Empty);
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#ToDate", String.Empty);
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#RentPositionDescription", String.Empty);
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#RentPrice", String.Empty);
             }
 
             return xmlMainXMLDoc;
@@ -609,9 +615,11 @@ namespace ContainerStar.Lib.Managers
 
             if (parentElement != null)
             {
-                if (!invoice.IsSellInvoice && invoice.InvoicePositions != null && invoice.InvoicePositions.Count != 0)
+                var positions = invoice.InvoicePositions != null ? invoice.InvoicePositions.Where(o => !o.DeleteDate.HasValue && o.Positions.ContainerId.HasValue).ToList() :
+                    new List<InvoicePositions>();
+
+                if (!invoice.IsSellInvoice && positions.Count != 0)
                 {
-                    var positions = invoice.InvoicePositions.Where(o => !o.DeleteDate.HasValue && o.Positions.ContainerId.HasValue).ToList();
                     var minDate = positions.Min(o => o.FromDate);
                     var maxDate = positions.Max(o => o.ToDate);
 

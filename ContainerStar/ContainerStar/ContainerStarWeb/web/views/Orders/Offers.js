@@ -18,7 +18,7 @@ define([
                 require(['base/information-view'], function (View) {
                     var view = new View({
                         title: 'Angebot -> Auftrag',
-                        message: 'Ausgewählte Angebot wurde erfolgreich in Auftrag verwandelt.'
+                        message: 'Ausgewähltes Angebot wurde erfolgreich in Auftrag verwandelt.'
                     });
                     self.addView(view);
                     self.$el.append(view.render().$el);
@@ -31,7 +31,7 @@ define([
                 require(['base/information-view'], function (View) {
                     var view = new View({
                         title: 'Angebot -> Auftrag',
-                        message: 'Ausgewählte Angebot konnte nicht in Auftrag verwandelt werden.'
+                        message: 'Ausgewähltes Angebot konnte nicht in Auftrag verwandelt werden.'
                     });
                     self.addView(view);
                     self.$el.append(view.render().$el);

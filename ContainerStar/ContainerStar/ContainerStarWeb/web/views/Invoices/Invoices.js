@@ -125,7 +125,7 @@
                             
 		                    var view = new View({
 		                        title: 'Rechnung bezahlen',
-		                        message: 'Möchten Sie ausgewählte Rechnung bezahlen?'
+		                        message: 'Möchten Sie die ausgewählte Rechnung bezahlen?'
 		                    });
                             
 		                    self.listenTo(view, 'continue', _.bind(payBill, self, dataItem));

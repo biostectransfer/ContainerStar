@@ -9,995 +9,1217 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
     <_PublishTargetUrl>C:\Users\Hedin\Desktop\ContainerStar</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
+    <File Include="App_Data/InvoiceFile.docx">
+      <publishTime>07/07/2015 09:25:58</publishTime>
+    </File>
+    <File Include="App_Data/OfferFile.docx">
+      <publishTime>07/09/2015 12:49:41</publishTime>
+    </File>
+    <File Include="App_Data/ReminderFile.docx">
+      <publishTime>07/09/2015 13:46:09</publishTime>
+    </File>
+    <File Include="App_Data/RentOrderFile.docx">
+      <publishTime>07/02/2015 21:53:51</publishTime>
+    </File>
     <File Include="bin/ContainerStar..Contracts.dll">
-      <publishTime>06/19/2015 14:52:22</publishTime>
+      <publishTime>07/13/2015 10:38:06</publishTime>
     </File>
     <File Include="bin/ContainerStar.API.dll">
-      <publishTime>06/19/2015 14:52:23</publishTime>
+      <publishTime>07/13/2015 10:38:09</publishTime>
     </File>
     <File Include="bin/ContainerStar.Configuration.dll">
-      <publishTime>06/19/2015 14:52:22</publishTime>
+      <publishTime>07/13/2015 10:38:09</publishTime>
     </File>
     <File Include="bin/ContainerStar.Lib.dll">
-      <publishTime>06/19/2015 14:52:22</publishTime>
+      <publishTime>07/13/2015 10:38:07</publishTime>
     </File>
     <File Include="bin/ContainerStarWeb.dll">
-      <publishTime>06/19/2015 14:52:24</publishTime>
+      <publishTime>07/13/2015 10:38:13</publishTime>
     </File>
     <File Include="bin/CoreBase.dll">
-      <publishTime>06/19/2015 14:52:22</publishTime>
+      <publishTime>07/13/2015 10:38:06</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
-      <publishTime>05/17/2015 17:12:57</publishTime>
+      <publishTime>06/28/2015 01:27:07</publishTime>
     </File>
     <File Include="bin/EntityFramework.SqlServer.dll">
-      <publishTime>05/17/2015 17:12:57</publishTime>
+      <publishTime>06/28/2015 01:27:07</publishTime>
     </File>
     <File Include="bin/FluentValidationNA.dll">
-      <publishTime>05/17/2015 17:09:37</publishTime>
+      <publishTime>06/28/2015 01:27:08</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.SignalR.Core.dll">
-      <publishTime>05/17/2015 17:12:58</publishTime>
+      <publishTime>06/28/2015 01:27:08</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.SignalR.SystemWeb.dll">
-      <publishTime>05/17/2015 17:12:58</publishTime>
+      <publishTime>06/28/2015 01:27:08</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.dll">
-      <publishTime>05/17/2015 17:32:43</publishTime>
+      <publishTime>06/28/2015 01:27:08</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Host.SystemWeb.dll">
-      <publishTime>05/17/2015 17:32:44</publishTime>
+      <publishTime>06/28/2015 01:27:08</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.dll">
-      <publishTime>05/17/2015 17:12:58</publishTime>
+      <publishTime>06/28/2015 01:27:08</publishTime>
     </File>
     <File Include="bin/Microsoft.Practices.ServiceLocation.dll">
-      <publishTime>05/17/2015 17:09:37</publishTime>
+      <publishTime>06/28/2015 01:27:07</publishTime>
     </File>
     <File Include="bin/Microsoft.Practices.Unity.Configuration.dll">
-      <publishTime>05/17/2015 17:09:38</publishTime>
+      <publishTime>06/28/2015 01:27:10</publishTime>
     </File>
     <File Include="bin/Microsoft.Practices.Unity.dll">
-      <publishTime>05/17/2015 17:09:38</publishTime>
+      <publishTime>06/28/2015 01:27:10</publishTime>
     </File>
     <File Include="bin/Microsoft.Practices.Unity.Mvc.dll">
-      <publishTime>05/17/2015 17:09:38</publishTime>
+      <publishTime>06/28/2015 01:27:10</publishTime>
     </File>
     <File Include="bin/Microsoft.Practices.Unity.RegistrationByConvention.dll">
-      <publishTime>05/17/2015 17:09:38</publishTime>
+      <publishTime>06/28/2015 01:27:10</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>05/17/2015 17:12:58</publishTime>
+      <publishTime>06/28/2015 01:27:09</publishTime>
     </File>
     <File Include="bin/Owin.dll">
-      <publishTime>05/17/2015 17:12:58</publishTime>
+      <publishTime>06/28/2015 01:27:09</publishTime>
     </File>
     <File Include="bin/System.Linq.Dynamic.dll">
-      <publishTime>05/17/2015 17:09:38</publishTime>
+      <publishTime>06/28/2015 01:27:10</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
-      <publishTime>05/17/2015 17:09:37</publishTime>
+      <publishTime>06/28/2015 01:27:08</publishTime>
     </File>
     <File Include="bin/System.Web.Http.dll">
-      <publishTime>05/17/2015 17:09:37</publishTime>
+      <publishTime>06/28/2015 01:27:08</publishTime>
     </File>
     <File Include="bin/System.Web.Http.WebHost.dll">
-      <publishTime>05/17/2015 17:09:37</publishTime>
+      <publishTime>06/28/2015 01:27:08</publishTime>
     </File>
     <File Include="bin/System.Web.Mvc.dll">
-      <publishTime>05/17/2015 17:09:37</publishTime>
+      <publishTime>06/28/2015 01:27:08</publishTime>
     </File>
     <File Include="bin/System.Web.Razor.dll">
-      <publishTime>05/17/2015 17:09:37</publishTime>
+      <publishTime>06/28/2015 01:27:08</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Deployment.dll">
-      <publishTime>05/17/2015 17:09:37</publishTime>
+      <publishTime>06/28/2015 01:27:08</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.dll">
-      <publishTime>05/17/2015 17:09:37</publishTime>
+      <publishTime>06/28/2015 01:27:08</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Razor.dll">
-      <publishTime>05/17/2015 17:09:37</publishTime>
+      <publishTime>06/28/2015 01:27:08</publishTime>
     </File>
     <File Include="bin/Unity.WebApi.dll">
-      <publishTime>05/17/2015 17:12:59</publishTime>
+      <publishTime>06/28/2015 01:27:10</publishTime>
+    </File>
+    <File Include="css/fullcalendar.css">
+      <publishTime>07/10/2015 15:31:27</publishTime>
+    </File>
+    <File Include="css/fullcalendar.print.css">
+      <publishTime>07/09/2015 18:18:38</publishTime>
     </File>
     <File Include="css/images/Logo.png">
-      <publishTime>06/08/2015 20:00:46</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/jquery-ui/images/ui-bg_diagonals-thick_18_b81900_40x40.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/jquery-ui/images/ui-bg_diagonals-thick_20_666666_40x40.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/jquery-ui/images/ui-bg_flat_10_000000_40x100.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/jquery-ui/images/ui-bg_glass_100_f6f6f6_1x400.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/jquery-ui/images/ui-bg_glass_100_fdf5ce_1x400.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/jquery-ui/images/ui-bg_glass_65_ffffff_1x400.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/jquery-ui/images/ui-bg_gloss-wave_35_f6a828_500x100.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/jquery-ui/images/ui-bg_highlight-soft_100_eeeeee_1x100.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/jquery-ui/images/ui-bg_highlight-soft_75_ffe45c_1x100.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/jquery-ui/images/ui-icons_222222_256x240.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/jquery-ui/images/ui-icons_228ef1_256x240.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/jquery-ui/images/ui-icons_ef8c08_256x240.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/jquery-ui/images/ui-icons_ffd27a_256x240.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/jquery-ui/images/ui-icons_ffffff_256x240.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/jquery-ui/jquery-ui.css">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/default/editor.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/default/imagebrowser.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/default/indeterminate.gif">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/default/loading-image.gif">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/default/loading.gif">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/default/loading_2x.gif">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/default/slider-h.gif">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/default/slider-v.gif">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/default/sprite.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/default/sprite_2x.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/default/sprite_kpi.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/default/sprite_kpi_2x.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/images/back.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/images/kendoui.svg">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/images/kendoui.ttf">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/images/kendoui.woff">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/images/wp8_icons.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/images/wp8_inverseicons.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/kendo.common.core.css">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/kendo.common.css">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/kendo.default.css">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/textures/brushed-metal.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/textures/dots1.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/textures/dots10.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/textures/dots11.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/textures/dots12.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/textures/dots13.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/textures/dots2.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/textures/dots3.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/textures/dots4.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/textures/dots5.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/textures/dots6.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/textures/dots7.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/textures/dots8.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/textures/dots9.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/textures/glass-lighter.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/textures/glass.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/textures/highlight.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/textures/hsv-gradient.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/textures/hue.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/textures/leather1.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/textures/leather2.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/textures/noise.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/textures/stripe1.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/textures/stripe2.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/textures/stripe3.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/textures/stripe4.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/textures/stripe5.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/textures/stripe6.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/textures/transparency.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/kendo/textures/transtexture.png">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="css/select-box.css">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>07/11/2015 13:12:55</publishTime>
     </File>
     <File Include="css/site.css">
-      <publishTime>06/10/2015 14:46:54</publishTime>
+      <publishTime>07/11/2015 13:19:15</publishTime>
     </File>
     <File Include="default.cshtml">
-      <publishTime>06/17/2015 11:26:52</publishTime>
+      <publishTime>07/12/2015 11:38:53</publishTime>
     </File>
     <File Include="Global.asax">
-      <publishTime>06/07/2015 10:41:39</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>05/17/2015 17:12:48</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/base/base-add-model-view.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/base/base-collection.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/base/base-edit-model-view.js">
-      <publishTime>05/17/2015 17:12:48</publishTime>
+      <publishTime>06/30/2015 09:55:49</publishTime>
     </File>
     <File Include="web.components/base/base-filter-view.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/29/2015 09:05:25</publishTime>
     </File>
     <File Include="web.components/base/base-grid-view.js">
-      <publishTime>05/17/2015 17:12:48</publishTime>
+      <publishTime>07/11/2015 19:04:39</publishTime>
     </File>
     <File Include="web.components/base/base-object-add-view.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/base/base-object-filter-view.js">
-      <publishTime>06/19/2015 14:49:38</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/base/base-object-grid-view.js">
-      <publishTime>05/17/2015 17:12:48</publishTime>
+      <publishTime>07/01/2015 04:04:48</publishTime>
     </File>
     <File Include="web.components/base/base-object-tab-view.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/base/base-view.js">
-      <publishTime>05/17/2015 17:12:48</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/base/base-window-view.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/base/confirmation-view.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
+    </File>
+    <File Include="web.components/base/information-view.js">
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/base/related-object-grid-view.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/base/resources/base-add-model-view.de.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/base/resources/base-add-model-view.en.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/base/resources/base-edit-model-view.de.js">
-      <publishTime>05/17/2015 17:12:48</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/base/resources/base-edit-model-view.en.js">
-      <publishTime>05/17/2015 17:12:48</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/base/resources/base-grid-view.de.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/base/resources/base-grid-view.en.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/base/resources/confirmation-view.de.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/base/resources/confirmation-view.en.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/base/templates/confirmation-view.html">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
+    </File>
+    <File Include="web.components/base/templates/information-view.html">
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo.backbone/backbone.client.transport.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo.backbone/backbone.datasource.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo.backbone/backbone.transport.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo.backbone/collection.adapter.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo.backbone/kendo.backbone.collection.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo.backbone/kendo.backbone.model.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo.backbone/kendo.backbone.viewevents.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo.editors/dropdownlist.js">
-      <publishTime>05/17/2015 17:12:48</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo.editors/editor-factory.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo.editors/multiselect.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo.editors/select-box.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo.filters/filter-factory.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo.filters/multiselect.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo.filters/resources/multiselect.de.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo.filters/resources/multiselect.en.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo.filters/resources/select-box.de.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo.filters/resources/select-box.en.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo.filters/select-box.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo/cultures/kendo.culture.de-DE.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo/cultures/kendo.culture.en-US.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.all.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.angular.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.autocomplete.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.binder.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.button.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.calendar.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.color.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.colorpicker.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.columnmenu.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.columnsorter.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.combobox.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.core.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.data.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.data.odata.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.data.signalr.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.data.xml.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.dataviz.barcode.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.dataviz.chart.funnel.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.dataviz.chart.js">
-      <publishTime>05/17/2015 17:09:30</publishTime>
+      <publishTime>06/28/2015 01:27:03</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.dataviz.chart.polar.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:03</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.dataviz.core.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:03</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.dataviz.diagram.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:03</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.dataviz.gauge.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:03</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.dataviz.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:03</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.dataviz.map.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:03</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.dataviz.mobile.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:03</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.dataviz.qrcode.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:03</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.dataviz.sparkline.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:03</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.dataviz.stock.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:03</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.dataviz.themes.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:03</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.dataviz.treemap.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:03</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.datepicker.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:03</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.datetimepicker.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:03</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.dom.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:03</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.draganddrop.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:03</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.drawing.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:03</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.dropdownlist.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:03</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.editable.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:03</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.editor.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:03</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.excel.js">
-      <publishTime>05/17/2015 17:12:48</publishTime>
+      <publishTime>06/28/2015 01:27:03</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.filebrowser.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:03</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.filtercell.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:03</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.filtermenu.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:03</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.fx.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:03</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.gantt.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.gantt.list.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.gantt.timeline.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.grid.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.groupable.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.imagebrowser.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.list.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.listview.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.maskedtextbox.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.menu.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.mobile.actionsheet.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.mobile.application.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.mobile.button.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.mobile.buttongroup.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.mobile.drawer.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.mobile.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.mobile.listview.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.mobile.loader.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.mobile.modalview.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.mobile.navbar.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.mobile.pane.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.mobile.popover.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.mobile.scroller.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.mobile.scrollview.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.mobile.shim.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.mobile.splitview.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.mobile.switch.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.mobile.tabstrip.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.mobile.view.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.multiselect.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.notification.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.numerictextbox.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.ooxml.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.pager.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.panelbar.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.pdf.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.pivot.configurator.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.pivot.fieldmenu.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.pivotgrid.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.popup.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.progressbar.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.reorderable.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.resizable.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.router.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.scheduler.agendaview.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.scheduler.dayview.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.scheduler.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.scheduler.monthview.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.scheduler.recurrence.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.scheduler.timelineview.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.scheduler.view.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.selectable.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.slider.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.sortable.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.splitter.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.tabstrip.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.timepicker.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.timezones.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.toolbar.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.tooltip.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.touch.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.treelist.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.treeview.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.upload.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.userevents.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.validator.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.view.js">
-      <publishTime>05/17/2015 17:09:31</publishTime>
+      <publishTime>06/28/2015 01:27:04</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.web.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web.components/kendo/kendo.window.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web.components/kendo/messages/kendo.messages.de.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web.components/kendo/messages/kendo.messages.en.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web.components/mixins/bound-form.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 22:18:46</publishTime>
     </File>
     <File Include="web.components/mixins/kendo-validator-form.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web.components/mixins/kendo-widget-form.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>07/02/2015 06:41:58</publishTime>
     </File>
     <File Include="web.components/mixins/localized-view.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web.components/mixins/resources/kendo-validator-form.de.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web.components/mixins/resources/kendo-validator-form.en.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web.components/widgets/kendo-select-box.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web.components/widgets/resources/select-box.de.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web.components/widgets/resources/select-box.en.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web.components/widgets/select-box.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/29/2015 06:50:25</publishTime>
     </File>
     <File Include="web.components/widgets/templates/select-box.html">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/15/2015 10:38:52</publishTime>
+      <publishTime>07/13/2015 10:38:16</publishTime>
     </File>
     <File Include="web.libs/backbone.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web.libs/backbone.min.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web.libs/backbone.stickit.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
+    </File>
+    <File Include="web.libs/fullcalendar.js">
+      <publishTime>07/10/2015 15:36:06</publishTime>
+    </File>
+    <File Include="web.libs/fullcalendar.min.js">
+      <publishTime>07/09/2015 18:18:38</publishTime>
+    </File>
+    <File Include="web.libs/fullCalendarLanguages.js">
+      <publishTime>07/09/2015 18:18:39</publishTime>
     </File>
     <File Include="web.libs/globalize/cultures/globalize.culture.de.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web.libs/globalize/globalize.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web.libs/jquery-2.1.1.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web.libs/jquery-2.1.1.min.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web.libs/jquery-ui.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web.libs/jquery-ui.min.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web.libs/jquery.signalR-2.2.0.js">
-      <publishTime>05/17/2015 17:12:48</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web.libs/jquery.signalR-2.2.0.min.js">
-      <publishTime>05/17/2015 17:12:48</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web.libs/json2.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web.libs/json2.min.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web.libs/jszip.js">
-      <publishTime>05/17/2015 17:12:48</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
+    </File>
+    <File Include="web.libs/lang/ar-ma.js">
+      <publishTime>07/09/2015 18:18:40</publishTime>
+    </File>
+    <File Include="web.libs/lang/ar-sa.js">
+      <publishTime>07/09/2015 18:18:40</publishTime>
+    </File>
+    <File Include="web.libs/lang/ar-tn.js">
+      <publishTime>07/09/2015 18:18:40</publishTime>
+    </File>
+    <File Include="web.libs/lang/ar.js">
+      <publishTime>07/09/2015 18:18:40</publishTime>
+    </File>
+    <File Include="web.libs/lang/bg.js">
+      <publishTime>07/09/2015 18:18:40</publishTime>
+    </File>
+    <File Include="web.libs/lang/ca.js">
+      <publishTime>07/09/2015 18:18:40</publishTime>
+    </File>
+    <File Include="web.libs/lang/cs.js">
+      <publishTime>07/09/2015 18:18:40</publishTime>
+    </File>
+    <File Include="web.libs/lang/da.js">
+      <publishTime>07/09/2015 18:18:40</publishTime>
+    </File>
+    <File Include="web.libs/lang/de-at.js">
+      <publishTime>07/09/2015 18:18:40</publishTime>
+    </File>
+    <File Include="web.libs/lang/de.js">
+      <publishTime>07/09/2015 18:18:40</publishTime>
+    </File>
+    <File Include="web.libs/lang/el.js">
+      <publishTime>07/09/2015 18:18:40</publishTime>
+    </File>
+    <File Include="web.libs/lang/en-au.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/en-ca.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/en-gb.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/es.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/fa.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/fi.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/fr-ca.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/fr.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/he.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/hi.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/hr.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/hu.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/id.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/is.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/it.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/ja.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/ko.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/lt.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/lv.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/nb.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/nl.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/pl.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/pt-br.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/pt.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/ro.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/ru.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/sk.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/sl.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/sr-cyrl.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/sr.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/sv.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/th.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/tr.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/uk.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/vi.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/zh-cn.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
+    </File>
+    <File Include="web.libs/lang/zh-tw.js">
+      <publishTime>07/09/2015 18:18:41</publishTime>
     </File>
     <File Include="web.libs/require.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web.libs/require.localized.kendo.widget.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web.libs/require.localized.resource.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web.libs/require.localized.view.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web.libs/require.templated.view.js">
-      <publishTime>05/17/2015 17:12:48</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web.libs/require.text.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web.libs/underscore.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web.libs/underscore.min.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/application-start.js">
-      <publishTime>05/17/2015 17:12:48</publishTime>
+      <publishTime>07/11/2015 12:55:14</publishTime>
     </File>
     <File Include="web/base-router.js">
-      <publishTime>06/17/2015 11:27:36</publishTime>
+      <publishTime>07/11/2015 12:48:04</publishTime>
+    </File>
+    <File Include="web/collections/ContainerSearch.js">
+      <publishTime>07/10/2015 10:30:24</publishTime>
+    </File>
+    <File Include="web/collections/Invoices/AddInvoicePositions.js">
+      <publishTime>07/02/2015 07:42:43</publishTime>
+    </File>
+    <File Include="web/collections/Invoices/InvoicePositions.js">
+      <publishTime>06/30/2015 08:54:59</publishTime>
+    </File>
+    <File Include="web/collections/Invoices/Invoices.js">
+      <publishTime>06/30/2015 08:55:04</publishTime>
+    </File>
+    <File Include="web/collections/InvoiceStornos/InvoiceStornos.js">
+      <publishTime>07/11/2015 22:25:50</publishTime>
     </File>
     <File Include="web/collections/Orders.js">
-      <publishTime>06/16/2015 15:50:55</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/collections/Positions.js">
-      <publishTime>06/17/2015 12:21:00</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/collections/Settings/AdditionalCosts.js">
-      <publishTime>06/09/2015 13:28:04</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/collections/Settings/CommunicationPartners.js">
-      <publishTime>06/09/2015 14:37:25</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/collections/Settings/ContainerEquipmentRsps.js">
-      <publishTime>06/10/2015 12:11:27</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/collections/Settings/Containers.js">
-      <publishTime>06/10/2015 12:11:27</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/collections/Settings/ContainerTypeEquipmentRsps.js">
-      <publishTime>06/10/2015 11:28:43</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/collections/Settings/ContainerTypes.js">
-      <publishTime>06/10/2015 11:28:43</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/collections/Settings/Customers.js">
-      <publishTime>06/09/2015 14:37:25</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/collections/Settings/Equipments.js">
-      <publishTime>06/09/2015 13:28:04</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/collections/Settings/Orders.js">
       <publishTime>06/10/2015 13:56:51</publishTime>
     </File>
     <File Include="web/collections/Settings/Permissions.js">
-      <publishTime>06/09/2015 13:15:04</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/collections/Settings/Positions.js">
       <publishTime>06/10/2015 13:56:51</publishTime>
     </File>
     <File Include="web/collections/Settings/RolePermissionRsps.js">
-      <publishTime>06/09/2015 13:15:04</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/collections/Settings/Roles.js">
-      <publishTime>06/09/2015 13:15:04</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/collections/Settings/Taxes.js">
-      <publishTime>06/09/2015 13:53:34</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/collections/Settings/TransportProducts.js">
-      <publishTime>06/09/2015 13:58:16</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/collections/Settings/Users.js">
-      <publishTime>06/09/2015 13:15:04</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/collections/Settings/web.collections.txt">
-      <publishTime>06/19/2015 14:49:41</publishTime>
+      <publishTime>07/12/2015 12:44:16</publishTime>
+    </File>
+    <File Include="web/collections/TransportOrders.js">
+      <publishTime>07/12/2015 12:18:33</publishTime>
+    </File>
+    <File Include="web/collections/TransportPositions.js">
+      <publishTime>07/12/2015 12:19:19</publishTime>
     </File>
     <File Include="web/master-footer.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/master.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
+    </File>
+    <File Include="web/models/ContainerSearch.js">
+      <publishTime>07/10/2015 10:30:36</publishTime>
+    </File>
+    <File Include="web/models/FilterContainerSmart.js">
+      <publishTime>06/29/2015 00:14:14</publishTime>
     </File>
     <File Include="web/models/FilterOrders.js">
-      <publishTime>06/10/2015 13:56:54</publishTime>
+      <publishTime>07/11/2015 18:15:47</publishTime>
+    </File>
+    <File Include="web/models/Invoices/AddInvoicePositions.js">
+      <publishTime>07/02/2015 13:13:38</publishTime>
+    </File>
+    <File Include="web/models/Invoices/FilterInvoices.js">
+      <publishTime>07/11/2015 18:26:01</publishTime>
+    </File>
+    <File Include="web/models/Invoices/InvoicePositions.js">
+      <publishTime>07/01/2015 19:07:53</publishTime>
+    </File>
+    <File Include="web/models/Invoices/Invoices.js">
+      <publishTime>07/01/2015 21:58:42</publishTime>
+    </File>
+    <File Include="web/models/InvoiceStornos/AddInvoicePositions.js">
+      <publishTime>07/11/2015 22:25:58</publishTime>
+    </File>
+    <File Include="web/models/InvoiceStornos/InvoiceStornos.js">
+      <publishTime>07/11/2015 22:58:21</publishTime>
     </File>
     <File Include="web/models/login.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/models/Orders.js">
-      <publishTime>06/10/2015 13:56:54</publishTime>
+      <publishTime>07/11/2015 17:19:49</publishTime>
     </File>
     <File Include="web/models/Positions.js">
-      <publishTime>06/17/2015 12:25:14</publishTime>
+      <publishTime>06/28/2015 06:20:01</publishTime>
     </File>
     <File Include="web/models/Settings/AdditionalCosts.js">
-      <publishTime>06/09/2015 14:45:06</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/models/Settings/CommunicationPartners.js">
-      <publishTime>06/09/2015 14:37:34</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/models/Settings/ContainerEquipmentRsp.js">
-      <publishTime>06/10/2015 12:11:30</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/models/Settings/Containers.js">
-      <publishTime>06/10/2015 12:11:30</publishTime>
+      <publishTime>07/11/2015 13:42:13</publishTime>
     </File>
     <File Include="web/models/Settings/ContainerTypeEquipmentRsp.js">
-      <publishTime>06/10/2015 11:44:40</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/models/Settings/ContainerTypes.js">
-      <publishTime>06/10/2015 11:44:40</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/models/Settings/Customers.js">
-      <publishTime>06/09/2015 14:45:06</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/models/Settings/Equipments.js">
-      <publishTime>06/09/2015 13:28:05</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/models/Settings/FilterAdditionalCosts.js">
-      <publishTime>06/19/2015 14:49:45</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/models/Settings/FilterCommunicationPartners.js">
       <publishTime>06/09/2015 14:37:34</publishTime>
@@ -1006,205 +1228,340 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/10/2015 12:11:30</publishTime>
     </File>
     <File Include="web/models/Settings/FilterContainers.js">
-      <publishTime>06/19/2015 14:49:45</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/models/Settings/FilterContainerTypeEquipmentRsp.js">
       <publishTime>06/10/2015 11:28:48</publishTime>
     </File>
     <File Include="web/models/Settings/FilterContainerTypes.js">
-      <publishTime>06/19/2015 14:49:45</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/models/Settings/FilterCustomers.js">
-      <publishTime>06/19/2015 14:49:45</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/models/Settings/FilterEquipments.js">
-      <publishTime>06/19/2015 14:49:45</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/models/Settings/FilterOrders.js">
       <publishTime>06/10/2015 13:56:54</publishTime>
     </File>
     <File Include="web/models/Settings/FilterPermission.js">
-      <publishTime>06/19/2015 14:49:45</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/models/Settings/FilterPositions.js">
       <publishTime>06/10/2015 13:56:54</publishTime>
     </File>
     <File Include="web/models/Settings/FilterRole.js">
-      <publishTime>06/19/2015 14:49:45</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/models/Settings/FilterRolePermissionRsp.js">
       <publishTime>06/09/2015 13:15:05</publishTime>
     </File>
     <File Include="web/models/Settings/FilterTaxes.js">
-      <publishTime>06/19/2015 14:33:26</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/models/Settings/FilterTransportProducts.js">
-      <publishTime>06/19/2015 14:49:45</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/models/Settings/FilterUser.js">
-      <publishTime>06/19/2015 14:49:45</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/models/Settings/Orders.js">
       <publishTime>06/10/2015 13:56:54</publishTime>
     </File>
     <File Include="web/models/Settings/Permission.js">
-      <publishTime>06/09/2015 13:28:05</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/models/Settings/Positions.js">
       <publishTime>06/10/2015 13:56:54</publishTime>
     </File>
     <File Include="web/models/Settings/Role.js">
-      <publishTime>06/09/2015 13:15:05</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/models/Settings/RolePermissionRsp.js">
-      <publishTime>06/09/2015 13:15:05</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/models/Settings/Taxes.js">
-      <publishTime>06/09/2015 13:53:37</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/models/Settings/TransportProducts.js">
-      <publishTime>06/09/2015 13:58:16</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/models/Settings/User.js">
-      <publishTime>06/09/2015 13:15:05</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/models/Settings/web.models.txt">
-      <publishTime>06/19/2015 14:49:45</publishTime>
+      <publishTime>07/12/2015 12:44:21</publishTime>
+    </File>
+    <File Include="web/models/ShowContainer.js">
+      <publishTime>07/10/2015 12:30:14</publishTime>
+    </File>
+    <File Include="web/models/TransportOrders/FilterTransportOrders.js">
+      <publishTime>07/12/2015 12:18:11</publishTime>
+    </File>
+    <File Include="web/models/TransportOrders/TransportOrders.js">
+      <publishTime>07/12/2015 12:19:59</publishTime>
+    </File>
+    <File Include="web/models/TransportOrders/TransportPositions.js">
+      <publishTime>07/12/2015 13:34:42</publishTime>
     </File>
     <File Include="web/models/view-collection.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
+    </File>
+    <File Include="web/moment.js">
+      <publishTime>07/09/2015 19:01:12</publishTime>
     </File>
     <File Include="web/resources/Errors/Forbidden.de.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Errors/Forbidden.en.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Home/Home.de.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>07/10/2015 16:11:13</publishTime>
     </File>
     <File Include="web/resources/Home/Home.en.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>07/10/2015 16:10:50</publishTime>
     </File>
     <File Include="web/resources/Home/Login.de.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Home/Login.en.js">
-      <publishTime>05/17/2015 17:09:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
+    </File>
+    <File Include="web/resources/Invoices/AddInvoicePositions.de.js">
+      <publishTime>07/02/2015 13:18:19</publishTime>
+    </File>
+    <File Include="web/resources/Invoices/AddInvoicePositions.en.js">
+      <publishTime>07/02/2015 13:18:37</publishTime>
+    </File>
+    <File Include="web/resources/Invoices/AddInvoices.de.js">
+      <publishTime>07/02/2015 01:31:16</publishTime>
+    </File>
+    <File Include="web/resources/Invoices/AddInvoices.en.js">
+      <publishTime>07/02/2015 01:32:34</publishTime>
+    </File>
+    <File Include="web/resources/Invoices/FilterInvoices.de.js">
+      <publishTime>07/11/2015 18:24:24</publishTime>
+    </File>
+    <File Include="web/resources/Invoices/FilterInvoices.en.js">
+      <publishTime>07/11/2015 18:24:31</publishTime>
+    </File>
+    <File Include="web/resources/Invoices/InvoicePositions.de.js">
+      <publishTime>07/01/2015 03:13:49</publishTime>
+    </File>
+    <File Include="web/resources/Invoices/InvoicePositions.en.js">
+      <publishTime>07/07/2015 11:53:44</publishTime>
+    </File>
+    <File Include="web/resources/Invoices/Invoices.de.js">
+      <publishTime>07/07/2015 11:54:24</publishTime>
+    </File>
+    <File Include="web/resources/Invoices/Invoices.en.js">
+      <publishTime>07/07/2015 11:54:57</publishTime>
+    </File>
+    <File Include="web/resources/Invoices/InvoicesRelationships.de.js">
+      <publishTime>06/30/2015 08:36:12</publishTime>
+    </File>
+    <File Include="web/resources/Invoices/InvoicesRelationships.en.js">
+      <publishTime>06/30/2015 08:36:12</publishTime>
+    </File>
+    <File Include="web/resources/InvoiceStornos/FilterInvoices.de.js">
+      <publishTime>07/11/2015 22:23:46</publishTime>
+    </File>
+    <File Include="web/resources/InvoiceStornos/FilterInvoices.en.js">
+      <publishTime>07/11/2015 22:23:46</publishTime>
+    </File>
+    <File Include="web/resources/InvoiceStornos/Invoices.de.js">
+      <publishTime>07/11/2015 22:37:05</publishTime>
+    </File>
+    <File Include="web/resources/InvoiceStornos/Invoices.en.js">
+      <publishTime>07/11/2015 22:37:32</publishTime>
+    </File>
+    <File Include="web/resources/InvoiceStornos/InvoicesRelationships.de.js">
+      <publishTime>07/11/2015 22:52:01</publishTime>
+    </File>
+    <File Include="web/resources/InvoiceStornos/InvoicesRelationships.en.js">
+      <publishTime>07/11/2015 22:52:26</publishTime>
+    </File>
+    <File Include="web/resources/InvoiceStornos/InvoiceStornos.de.js">
+      <publishTime>07/11/2015 23:06:28</publishTime>
+    </File>
+    <File Include="web/resources/InvoiceStornos/InvoiceStornos.en.js">
+      <publishTime>07/11/2015 23:06:39</publishTime>
     </File>
     <File Include="web/resources/master.de.js">
-      <publishTime>06/17/2015 12:39:12</publishTime>
+      <publishTime>07/12/2015 11:44:27</publishTime>
     </File>
     <File Include="web/resources/master.en.js">
-      <publishTime>06/17/2015 12:39:21</publishTime>
+      <publishTime>07/12/2015 11:44:41</publishTime>
+    </File>
+    <File Include="web/resources/Orders/AdditionalCostsSearch.de.js">
+      <publishTime>06/28/2015 01:27:05</publishTime>
+    </File>
+    <File Include="web/resources/Orders/AdditionalCostsSearch.en.js">
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Orders/AddOrders.de.js">
-      <publishTime>06/11/2015 17:01:57</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Orders/AddOrders.en.js">
-      <publishTime>06/11/2015 17:02:14</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Orders/AddPositions.de.js">
-      <publishTime>06/17/2015 12:35:54</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Orders/AddPositions.en.js">
-      <publishTime>06/17/2015 12:35:54</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
+    </File>
+    <File Include="web/resources/Orders/ContainerSearch.de.js">
+      <publishTime>06/28/2015 01:27:05</publishTime>
+    </File>
+    <File Include="web/resources/Orders/ContainerSearch.en.js">
+      <publishTime>06/28/2015 01:27:05</publishTime>
+    </File>
+    <File Include="web/resources/Orders/CreateInvoiceConfirmation.de.js">
+      <publishTime>07/02/2015 07:31:40</publishTime>
+    </File>
+    <File Include="web/resources/Orders/CreateInvoiceConfirmation.en.js">
+      <publishTime>07/02/2015 07:31:18</publishTime>
     </File>
     <File Include="web/resources/Orders/CustomerSearch.de.js">
-      <publishTime>06/10/2015 14:38:11</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Orders/CustomerSearch.en.js">
-      <publishTime>06/10/2015 14:38:24</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
+    </File>
+    <File Include="web/resources/Orders/FilterContainerSmart.de.js">
+      <publishTime>06/28/2015 23:50:00</publishTime>
+    </File>
+    <File Include="web/resources/Orders/FilterContainerSmart.en.js">
+      <publishTime>06/28/2015 23:50:11</publishTime>
+    </File>
+    <File Include="web/resources/Orders/FilterOffers.de.js">
+      <publishTime>07/11/2015 18:23:02</publishTime>
+    </File>
+    <File Include="web/resources/Orders/FilterOffers.en.js">
+      <publishTime>07/11/2015 18:23:40</publishTime>
     </File>
     <File Include="web/resources/Orders/FilterOrders.de.js">
-      <publishTime>06/10/2015 13:56:57</publishTime>
+      <publishTime>07/11/2015 18:22:57</publishTime>
     </File>
     <File Include="web/resources/Orders/FilterOrders.en.js">
-      <publishTime>06/10/2015 13:56:57</publishTime>
+      <publishTime>07/11/2015 18:23:32</publishTime>
+    </File>
+    <File Include="web/resources/Orders/Offers.de.js">
+      <publishTime>06/30/2015 04:10:38</publishTime>
+    </File>
+    <File Include="web/resources/Orders/Offers.en.js">
+      <publishTime>06/30/2015 04:10:38</publishTime>
     </File>
     <File Include="web/resources/Orders/Orders.de.js">
-      <publishTime>06/17/2015 14:59:52</publishTime>
+      <publishTime>07/11/2015 16:25:28</publishTime>
     </File>
     <File Include="web/resources/Orders/Orders.en.js">
-      <publishTime>06/10/2015 13:57:02</publishTime>
+      <publishTime>07/11/2015 16:25:38</publishTime>
     </File>
     <File Include="web/resources/Orders/OrdersRelationships.de.js">
-      <publishTime>06/17/2015 12:06:22</publishTime>
+      <publishTime>06/29/2015 07:45:59</publishTime>
     </File>
     <File Include="web/resources/Orders/OrdersRelationships.en.js">
-      <publishTime>06/17/2015 12:06:30</publishTime>
+      <publishTime>06/29/2015 07:45:54</publishTime>
     </File>
     <File Include="web/resources/Orders/Positions.de.js">
-      <publishTime>06/17/2015 12:28:13</publishTime>
+      <publishTime>07/01/2015 03:06:21</publishTime>
     </File>
     <File Include="web/resources/Orders/Positions.en.js">
-      <publishTime>06/17/2015 12:28:52</publishTime>
+      <publishTime>07/01/2015 03:06:09</publishTime>
+    </File>
+    <File Include="web/resources/Orders/RentPositions.de.js">
+      <publishTime>07/01/2015 03:06:26</publishTime>
+    </File>
+    <File Include="web/resources/Orders/RentPositions.en.js">
+      <publishTime>07/01/2015 03:05:49</publishTime>
+    </File>
+    <File Include="web/resources/Orders/SalePositions.de.js">
+      <publishTime>07/01/2015 03:06:31</publishTime>
+    </File>
+    <File Include="web/resources/Orders/SalePositions.en.js">
+      <publishTime>07/01/2015 03:06:00</publishTime>
+    </File>
+    <File Include="web/resources/Orders/SelectAdditionalCosts.de.js">
+      <publishTime>06/28/2015 01:27:05</publishTime>
+    </File>
+    <File Include="web/resources/Orders/SelectAdditionalCosts.en.js">
+      <publishTime>06/28/2015 01:27:05</publishTime>
+    </File>
+    <File Include="web/resources/Orders/SelectContainer.de.js">
+      <publishTime>06/28/2015 01:27:05</publishTime>
+    </File>
+    <File Include="web/resources/Orders/SelectContainer.en.js">
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Orders/SelectCustomer.de.js">
-      <publishTime>06/10/2015 14:32:33</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Orders/SelectCustomer.en.js">
-      <publishTime>06/10/2015 14:32:39</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/AddAdditionalCosts.de.js">
-      <publishTime>06/09/2015 13:28:06</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/AddAdditionalCosts.en.js">
-      <publishTime>06/09/2015 13:28:06</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/AddCommunicationPartners.de.js">
-      <publishTime>06/09/2015 14:37:36</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/AddCommunicationPartners.en.js">
-      <publishTime>06/09/2015 14:37:36</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/AddContainerEquipmentRsp.de.js">
-      <publishTime>06/10/2015 12:11:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/AddContainerEquipmentRsp.en.js">
-      <publishTime>06/10/2015 12:11:32</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/AddContainers.de.js">
-      <publishTime>06/10/2015 12:11:32</publishTime>
+      <publishTime>07/11/2015 13:42:14</publishTime>
     </File>
     <File Include="web/resources/Settings/AddContainers.en.js">
-      <publishTime>06/10/2015 12:11:32</publishTime>
+      <publishTime>07/11/2015 13:42:14</publishTime>
     </File>
     <File Include="web/resources/Settings/AddContainerTypeEquipmentRsp.de.js">
-      <publishTime>06/10/2015 11:44:41</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/AddContainerTypeEquipmentRsp.en.js">
-      <publishTime>06/10/2015 11:44:41</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/AddContainerTypes.de.js">
-      <publishTime>06/10/2015 11:28:50</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/AddContainerTypes.en.js">
-      <publishTime>06/10/2015 11:28:50</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/AddCustomers.de.js">
-      <publishTime>06/09/2015 14:41:37</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/AddCustomers.en.js">
-      <publishTime>06/09/2015 14:41:37</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/AddEquipments.de.js">
-      <publishTime>06/09/2015 13:28:06</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/AddEquipments.en.js">
-      <publishTime>06/09/2015 13:28:06</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/AdditionalCosts.de.js">
-      <publishTime>06/09/2015 13:28:08</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/AdditionalCosts.en.js">
-      <publishTime>06/09/2015 13:28:08</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/AdditionalCostsRelationships.de.js">
-      <publishTime>06/09/2015 13:28:07</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/AdditionalCostsRelationships.en.js">
-      <publishTime>06/09/2015 13:28:07</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/AddOrders.de.js">
       <publishTime>06/11/2015 17:01:57</publishTime>
@@ -1213,10 +1570,10 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/11/2015 17:02:14</publishTime>
     </File>
     <File Include="web/resources/Settings/AddPermission.de.js">
-      <publishTime>06/09/2015 13:15:06</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/AddPermission.en.js">
-      <publishTime>06/09/2015 13:15:06</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/AddPositions.de.js">
       <publishTime>06/10/2015 13:56:55</publishTime>
@@ -1225,94 +1582,94 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/10/2015 13:56:55</publishTime>
     </File>
     <File Include="web/resources/Settings/AddRole.de.js">
-      <publishTime>06/09/2015 13:15:06</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/AddRole.en.js">
-      <publishTime>06/09/2015 13:15:06</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/AddRolePermissionRsp.de.js">
-      <publishTime>06/09/2015 13:15:06</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/AddRolePermissionRsp.en.js">
-      <publishTime>06/09/2015 13:15:06</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/AddTaxes.de.js">
-      <publishTime>06/09/2015 13:53:37</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/AddTaxes.en.js">
-      <publishTime>06/09/2015 13:53:37</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/AddTransportProducts.de.js">
-      <publishTime>06/09/2015 13:58:17</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/AddTransportProducts.en.js">
-      <publishTime>06/09/2015 13:58:17</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/AddUser.de.js">
-      <publishTime>06/09/2015 13:15:06</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/AddUser.en.js">
-      <publishTime>06/09/2015 13:15:06</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/CommunicationPartners.de.js">
-      <publishTime>06/09/2015 14:37:40</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/CommunicationPartners.en.js">
-      <publishTime>06/09/2015 14:37:40</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/ContainerEquipmentRsps.de.js">
-      <publishTime>06/10/2015 12:11:38</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/ContainerEquipmentRsps.en.js">
-      <publishTime>06/10/2015 12:11:38</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/Containers.de.js">
-      <publishTime>06/10/2015 12:11:38</publishTime>
+      <publishTime>07/11/2015 13:42:17</publishTime>
     </File>
     <File Include="web/resources/Settings/Containers.en.js">
-      <publishTime>06/10/2015 12:11:38</publishTime>
+      <publishTime>07/11/2015 13:42:17</publishTime>
     </File>
     <File Include="web/resources/Settings/ContainersRelationships.de.js">
-      <publishTime>06/10/2015 12:11:37</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/ContainersRelationships.en.js">
-      <publishTime>06/10/2015 12:11:37</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/ContainerTypeEquipmentRsps.de.js">
-      <publishTime>06/10/2015 11:44:44</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/ContainerTypeEquipmentRsps.en.js">
-      <publishTime>06/10/2015 11:44:44</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/ContainerTypes.de.js">
-      <publishTime>06/10/2015 11:28:56</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/ContainerTypes.en.js">
-      <publishTime>06/10/2015 11:28:56</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/ContainerTypesRelationships.de.js">
-      <publishTime>06/10/2015 11:28:54</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/ContainerTypesRelationships.en.js">
-      <publishTime>06/10/2015 11:28:54</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/Custom.ChangePassword.de.js">
-      <publishTime>05/17/2015 17:12:50</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/Custom.ChangePassword.en.js">
-      <publishTime>05/17/2015 17:12:50</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/Custom.User.de.js">
-      <publishTime>05/17/2015 17:12:50</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/Custom.User.en.js">
-      <publishTime>05/17/2015 17:12:50</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/Customers.de.js">
-      <publishTime>06/09/2015 14:41:38</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/Customers.en.js">
-      <publishTime>06/09/2015 14:41:38</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/CustomerSearch.de.js">
       <publishTime>06/10/2015 14:38:11</publishTime>
@@ -1321,28 +1678,28 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/10/2015 14:38:24</publishTime>
     </File>
     <File Include="web/resources/Settings/CustomersRelationships.de.js">
-      <publishTime>06/09/2015 14:45:07</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/CustomersRelationships.en.js">
-      <publishTime>06/09/2015 14:45:07</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/Equipments.de.js">
-      <publishTime>06/09/2015 13:28:08</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/Equipments.en.js">
-      <publishTime>06/09/2015 13:28:08</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/EquipmentsRelationships.de.js">
-      <publishTime>06/09/2015 13:28:07</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/EquipmentsRelationships.en.js">
-      <publishTime>06/09/2015 13:28:07</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/FilterAdditionalCosts.de.js">
-      <publishTime>06/19/2015 14:49:47</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/FilterAdditionalCosts.en.js">
-      <publishTime>06/19/2015 14:49:47</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/FilterCommunicationPartners.de.js">
       <publishTime>06/09/2015 14:37:37</publishTime>
@@ -1357,10 +1714,10 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/10/2015 12:11:34</publishTime>
     </File>
     <File Include="web/resources/Settings/FilterContainers.de.js">
-      <publishTime>06/19/2015 14:49:47</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/FilterContainers.en.js">
-      <publishTime>06/19/2015 14:49:47</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/FilterContainerTypeEquipmentRsp.de.js">
       <publishTime>06/10/2015 11:28:52</publishTime>
@@ -1369,22 +1726,22 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/10/2015 11:28:52</publishTime>
     </File>
     <File Include="web/resources/Settings/FilterContainerTypes.de.js">
-      <publishTime>06/19/2015 14:49:47</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/FilterContainerTypes.en.js">
-      <publishTime>06/19/2015 14:49:47</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/FilterCustomers.de.js">
-      <publishTime>06/19/2015 14:49:47</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/FilterCustomers.en.js">
-      <publishTime>06/19/2015 14:49:47</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/FilterEquipments.de.js">
-      <publishTime>06/19/2015 14:49:47</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/FilterEquipments.en.js">
-      <publishTime>06/19/2015 14:49:47</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/FilterOrders.de.js">
       <publishTime>06/10/2015 13:56:57</publishTime>
@@ -1393,10 +1750,10 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/10/2015 13:56:57</publishTime>
     </File>
     <File Include="web/resources/Settings/FilterPermission.de.js">
-      <publishTime>06/19/2015 14:49:47</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/FilterPermission.en.js">
-      <publishTime>06/19/2015 14:49:47</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/FilterPositions.de.js">
       <publishTime>06/10/2015 13:56:57</publishTime>
@@ -1405,10 +1762,10 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/10/2015 13:56:57</publishTime>
     </File>
     <File Include="web/resources/Settings/FilterRole.de.js">
-      <publishTime>06/19/2015 14:49:47</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/FilterRole.en.js">
-      <publishTime>06/19/2015 14:49:47</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/FilterRolePermissionRsp.de.js">
       <publishTime>06/09/2015 13:15:07</publishTime>
@@ -1417,22 +1774,22 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/09/2015 13:15:07</publishTime>
     </File>
     <File Include="web/resources/Settings/FilterTaxes.de.js">
-      <publishTime>06/19/2015 14:11:53</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/FilterTaxes.en.js">
-      <publishTime>06/19/2015 14:11:57</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/FilterTransportProducts.de.js">
-      <publishTime>06/19/2015 14:49:47</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/FilterTransportProducts.en.js">
-      <publishTime>06/19/2015 14:49:47</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/FilterUser.de.js">
-      <publishTime>06/19/2015 14:49:47</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/FilterUser.en.js">
-      <publishTime>06/19/2015 14:49:47</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/Orders.de.js">
       <publishTime>06/10/2015 13:57:00</publishTime>
@@ -1447,16 +1804,16 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/10/2015 13:56:59</publishTime>
     </File>
     <File Include="web/resources/Settings/PermissionRelationships.de.js">
-      <publishTime>06/09/2015 13:15:08</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/PermissionRelationships.en.js">
-      <publishTime>06/09/2015 13:15:08</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/Permissions.de.js">
-      <publishTime>06/09/2015 13:15:09</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/Permissions.en.js">
-      <publishTime>06/09/2015 13:15:09</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/Positions.de.js">
       <publishTime>06/10/2015 13:57:00</publishTime>
@@ -1465,22 +1822,22 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/10/2015 13:57:00</publishTime>
     </File>
     <File Include="web/resources/Settings/RolePermissionRsps.de.js">
-      <publishTime>06/09/2015 13:15:09</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/RolePermissionRsps.en.js">
-      <publishTime>06/09/2015 13:15:09</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/RoleRelationships.de.js">
-      <publishTime>06/09/2015 13:15:08</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/RoleRelationships.en.js">
-      <publishTime>06/09/2015 13:15:08</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/Roles.de.js">
-      <publishTime>06/09/2015 13:15:09</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/Roles.en.js">
-      <publishTime>06/09/2015 13:15:09</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/SelectCustomer.de.js">
       <publishTime>06/10/2015 14:32:33</publishTime>
@@ -1489,202 +1846,322 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/10/2015 14:32:39</publishTime>
     </File>
     <File Include="web/resources/Settings/Settings.de.js">
-      <publishTime>06/17/2015 12:09:59</publishTime>
+      <publishTime>06/30/2015 08:50:01</publishTime>
     </File>
     <File Include="web/resources/Settings/Settings.en.js">
-      <publishTime>06/17/2015 12:09:59</publishTime>
+      <publishTime>06/30/2015 08:50:01</publishTime>
     </File>
     <File Include="web/resources/Settings/Taxes.de.js">
-      <publishTime>06/09/2015 13:53:40</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/Taxes.en.js">
-      <publishTime>06/09/2015 13:53:40</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/TaxesRelationships.de.js">
-      <publishTime>06/09/2015 13:53:39</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/TaxesRelationships.en.js">
-      <publishTime>06/09/2015 13:53:39</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/TransportProducts.de.js">
-      <publishTime>06/09/2015 13:58:19</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/TransportProducts.en.js">
-      <publishTime>06/09/2015 13:58:19</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/TransportProductsRelationships.de.js">
-      <publishTime>06/09/2015 13:58:18</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/TransportProductsRelationships.en.js">
-      <publishTime>06/09/2015 13:58:18</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/UserRelationships.de.js">
-      <publishTime>06/09/2015 13:15:08</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/UserRelationships.en.js">
-      <publishTime>06/09/2015 13:15:08</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/Users.de.js">
-      <publishTime>06/09/2015 13:15:09</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/Users.en.js">
-      <publishTime>06/09/2015 13:15:09</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/web.add.resources.txt">
-      <publishTime>06/19/2015 14:49:46</publishTime>
+      <publishTime>07/12/2015 12:44:21</publishTime>
     </File>
     <File Include="web/resources/Settings/web.filter.resources.txt">
-      <publishTime>06/19/2015 14:49:47</publishTime>
+      <publishTime>07/12/2015 12:44:22</publishTime>
     </File>
     <File Include="web/resources/Settings/web.menu.resources.txt">
-      <publishTime>06/19/2015 14:49:47</publishTime>
+      <publishTime>07/12/2015 12:44:23</publishTime>
     </File>
     <File Include="web/resources/Settings/web.relationships.resources.txt">
-      <publishTime>06/19/2015 14:49:48</publishTime>
+      <publishTime>07/12/2015 12:44:24</publishTime>
     </File>
     <File Include="web/resources/Settings/web.resources.txt">
-      <publishTime>06/19/2015 14:49:49</publishTime>
+      <publishTime>07/12/2015 12:44:24</publishTime>
+    </File>
+    <File Include="web/resources/TransportOrders/AddTransportOrders.de.js">
+      <publishTime>07/12/2015 12:17:23</publishTime>
+    </File>
+    <File Include="web/resources/TransportOrders/AddTransportOrders.en.js">
+      <publishTime>07/12/2015 12:16:51</publishTime>
+    </File>
+    <File Include="web/resources/TransportOrders/AddTransportPositions.de.js">
+      <publishTime>07/12/2015 12:15:35</publishTime>
+    </File>
+    <File Include="web/resources/TransportOrders/AddTransportPositions.en.js">
+      <publishTime>07/12/2015 12:15:15</publishTime>
+    </File>
+    <File Include="web/resources/TransportOrders/FilterTransportOffers.de.js">
+      <publishTime>07/12/2015 12:10:50</publishTime>
+    </File>
+    <File Include="web/resources/TransportOrders/FilterTransportOffers.en.js">
+      <publishTime>07/12/2015 12:10:50</publishTime>
+    </File>
+    <File Include="web/resources/TransportOrders/FilterTransportOrders.de.js">
+      <publishTime>07/12/2015 12:10:50</publishTime>
+    </File>
+    <File Include="web/resources/TransportOrders/FilterTransportOrders.en.js">
+      <publishTime>07/12/2015 12:10:50</publishTime>
+    </File>
+    <File Include="web/resources/TransportOrders/SelectTransportProduct.de.js">
+      <publishTime>07/12/2015 12:14:17</publishTime>
+    </File>
+    <File Include="web/resources/TransportOrders/SelectTransportProduct.en.js">
+      <publishTime>07/12/2015 12:14:04</publishTime>
+    </File>
+    <File Include="web/resources/TransportOrders/TransportOffers.de.js">
+      <publishTime>07/12/2015 12:37:00</publishTime>
+    </File>
+    <File Include="web/resources/TransportOrders/TransportOffers.en.js">
+      <publishTime>07/12/2015 12:36:30</publishTime>
+    </File>
+    <File Include="web/resources/TransportOrders/TransportOrders.de.js">
+      <publishTime>07/12/2015 12:35:47</publishTime>
+    </File>
+    <File Include="web/resources/TransportOrders/TransportOrders.en.js">
+      <publishTime>07/12/2015 12:36:05</publishTime>
+    </File>
+    <File Include="web/resources/TransportOrders/TransportOrdersRelationships.de.js">
+      <publishTime>07/12/2015 12:12:42</publishTime>
+    </File>
+    <File Include="web/resources/TransportOrders/TransportOrdersRelationships.en.js">
+      <publishTime>07/12/2015 12:13:01</publishTime>
+    </File>
+    <File Include="web/resources/TransportOrders/TransportPositions.de.js">
+      <publishTime>07/12/2015 12:32:50</publishTime>
+    </File>
+    <File Include="web/resources/TransportOrders/TransportPositions.en.js">
+      <publishTime>07/12/2015 12:33:12</publishTime>
+    </File>
+    <File Include="web/resources/TransportOrders/TransportProductSearch.de.js">
+      <publishTime>07/12/2015 12:16:18</publishTime>
+    </File>
+    <File Include="web/resources/TransportOrders/TransportProductSearch.en.js">
+      <publishTime>07/12/2015 12:15:59</publishTime>
     </File>
     <File Include="web/router-masterdata.js">
-      <publishTime>06/16/2015 15:47:33</publishTime>
+      <publishTime>06/30/2015 08:50:09</publishTime>
     </File>
     <File Include="web/router.js">
-      <publishTime>06/17/2015 13:32:16</publishTime>
+      <publishTime>07/12/2015 12:24:25</publishTime>
     </File>
     <File Include="web/templates/Errors/Forbidden.html">
-      <publishTime>05/17/2015 17:09:33</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Home/Home.html">
-      <publishTime>06/08/2015 20:08:09</publishTime>
+      <publishTime>07/10/2015 16:14:18</publishTime>
     </File>
     <File Include="web/templates/Home/Login.html">
-      <publishTime>05/17/2015 17:09:33</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
+    </File>
+    <File Include="web/templates/Invoices/AddInvoicePositions.html">
+      <publishTime>07/01/2015 07:29:18</publishTime>
+    </File>
+    <File Include="web/templates/Invoices/AddInvoices.html">
+      <publishTime>07/02/2015 01:33:52</publishTime>
+    </File>
+    <File Include="web/templates/Invoices/FilterInvoices.html">
+      <publishTime>07/11/2015 18:22:19</publishTime>
+    </File>
+    <File Include="web/templates/Invoices/InvoicePositions.html">
+      <publishTime>06/30/2015 08:20:29</publishTime>
+    </File>
+    <File Include="web/templates/Invoices/Invoices.html">
+      <publishTime>06/30/2015 09:29:46</publishTime>
+    </File>
+    <File Include="web/templates/Invoices/InvoicesRelationships.html">
+      <publishTime>06/30/2015 08:36:14</publishTime>
+    </File>
+    <File Include="web/templates/InvoiceStornos/FilterInvoices.html">
+      <publishTime>07/11/2015 22:22:22</publishTime>
+    </File>
+    <File Include="web/templates/InvoiceStornos/Invoices.html">
+      <publishTime>07/11/2015 22:22:22</publishTime>
+    </File>
+    <File Include="web/templates/InvoiceStornos/InvoicesRelationships.html">
+      <publishTime>07/11/2015 22:32:36</publishTime>
+    </File>
+    <File Include="web/templates/InvoiceStornos/InvoiceStornos.html">
+      <publishTime>07/11/2015 22:22:22</publishTime>
     </File>
     <File Include="web/templates/master-footer.html">
-      <publishTime>05/17/2015 17:09:33</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/master.html">
-      <publishTime>06/17/2015 12:38:40</publishTime>
+      <publishTime>07/12/2015 11:44:02</publishTime>
+    </File>
+    <File Include="web/templates/Orders/AdditionalCostsSearch.html">
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Orders/AddOrders.html">
-      <publishTime>06/17/2015 13:34:44</publishTime>
+      <publishTime>07/02/2015 01:07:11</publishTime>
     </File>
     <File Include="web/templates/Orders/AddPositions.html">
-      <publishTime>06/17/2015 12:35:48</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
+    </File>
+    <File Include="web/templates/Orders/ContainerSearch.html">
+      <publishTime>06/28/2015 21:16:33</publishTime>
+    </File>
+    <File Include="web/templates/Orders/CreateInvoiceConfirmation.html">
+      <publishTime>07/02/2015 08:45:20</publishTime>
     </File>
     <File Include="web/templates/Orders/CustomerSearch.html">
-      <publishTime>06/10/2015 14:34:52</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
+    </File>
+    <File Include="web/templates/Orders/FilterContainerSmart.html">
+      <publishTime>06/30/2015 05:21:23</publishTime>
+    </File>
+    <File Include="web/templates/Orders/FilterOffers.html">
+      <publishTime>07/11/2015 18:21:56</publishTime>
     </File>
     <File Include="web/templates/Orders/FilterOrders.html">
-      <publishTime>06/10/2015 13:57:05</publishTime>
+      <publishTime>07/11/2015 18:21:52</publishTime>
+    </File>
+    <File Include="web/templates/Orders/Offers.html">
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Orders/Orders.html">
-      <publishTime>06/17/2015 12:40:05</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Orders/OrdersRelationships.html">
-      <publishTime>06/17/2015 12:08:22</publishTime>
+      <publishTime>06/29/2015 07:46:53</publishTime>
     </File>
     <File Include="web/templates/Orders/Positions.html">
-      <publishTime>06/17/2015 12:29:38</publishTime>
+      <publishTime>06/28/2015 20:41:53</publishTime>
+    </File>
+    <File Include="web/templates/Orders/RentPositions.html">
+      <publishTime>06/29/2015 08:02:17</publishTime>
+    </File>
+    <File Include="web/templates/Orders/SalePositions.html">
+      <publishTime>06/29/2015 08:30:21</publishTime>
+    </File>
+    <File Include="web/templates/Orders/SelectAdditionalCosts.html">
+      <publishTime>06/28/2015 01:27:05</publishTime>
+    </File>
+    <File Include="web/templates/Orders/SelectContainer.html">
+      <publishTime>06/28/2015 22:22:29</publishTime>
     </File>
     <File Include="web/templates/Orders/SelectCustomer.html">
-      <publishTime>06/10/2015 14:11:27</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/AddAdditionalCosts.html">
-      <publishTime>06/09/2015 13:28:09</publishTime>
+      <publishTime>07/01/2015 22:38:19</publishTime>
     </File>
     <File Include="web/templates/Settings/AddCommunicationPartners.html">
-      <publishTime>06/09/2015 14:37:42</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/AddContainerEquipmentRsp.html">
-      <publishTime>06/10/2015 12:11:40</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/AddContainers.html">
-      <publishTime>06/10/2015 12:11:40</publishTime>
+      <publishTime>07/11/2015 13:42:18</publishTime>
     </File>
     <File Include="web/templates/Settings/AddContainerTypeEquipmentRsp.html">
-      <publishTime>06/10/2015 11:44:45</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/AddContainerTypes.html">
-      <publishTime>06/10/2015 11:28:57</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/AddCustomers.html">
-      <publishTime>06/09/2015 14:41:39</publishTime>
+      <publishTime>07/01/2015 22:38:19</publishTime>
     </File>
     <File Include="web/templates/Settings/AddEquipments.html">
-      <publishTime>06/09/2015 13:28:09</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/AdditionalCosts.html">
-      <publishTime>06/09/2015 13:28:10</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/AdditionalCostsRelationships.html">
-      <publishTime>06/09/2015 13:28:10</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/AddOrders.html">
       <publishTime>06/11/2015 16:58:46</publishTime>
     </File>
     <File Include="web/templates/Settings/AddPermission.html">
-      <publishTime>06/09/2015 13:15:10</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/AddPositions.html">
       <publishTime>06/10/2015 13:57:02</publishTime>
     </File>
     <File Include="web/templates/Settings/AddRole.html">
-      <publishTime>06/09/2015 13:15:10</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/AddRolePermissionRsp.html">
-      <publishTime>06/09/2015 13:15:10</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/AddTaxes.html">
-      <publishTime>06/09/2015 13:53:41</publishTime>
+      <publishTime>07/01/2015 22:38:19</publishTime>
     </File>
     <File Include="web/templates/Settings/AddTransportProducts.html">
-      <publishTime>06/09/2015 13:58:19</publishTime>
+      <publishTime>07/01/2015 22:38:19</publishTime>
     </File>
     <File Include="web/templates/Settings/AddUser.html">
-      <publishTime>06/09/2015 13:15:10</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/ChangePassword.html">
-      <publishTime>05/17/2015 17:12:52</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/CommunicationPartners.html">
-      <publishTime>06/09/2015 14:37:44</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/ContainerEquipmentRsps.html">
-      <publishTime>06/10/2015 12:11:44</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/Containers.html">
-      <publishTime>06/10/2015 12:11:44</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/ContainersRelationships.html">
-      <publishTime>06/10/2015 12:11:43</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/ContainerTypeEquipmentRsps.html">
-      <publishTime>06/10/2015 11:29:01</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/ContainerTypes.html">
-      <publishTime>06/10/2015 11:29:01</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/ContainerTypesRelationships.html">
-      <publishTime>06/10/2015 11:29:00</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/Customers.html">
-      <publishTime>06/09/2015 14:37:44</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/CustomerSearch.html">
       <publishTime>06/10/2015 14:34:52</publishTime>
     </File>
     <File Include="web/templates/Settings/CustomersRelationships.html">
-      <publishTime>06/09/2015 14:45:09</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/Equipments.html">
-      <publishTime>06/09/2015 13:28:10</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/EquipmentsRelationships.html">
-      <publishTime>06/09/2015 13:28:10</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/FilterAdditionalCosts.html">
-      <publishTime>06/19/2015 14:49:52</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/FilterCommunicationPartners.html">
       <publishTime>06/09/2015 14:37:44</publishTime>
@@ -1693,43 +2170,43 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/10/2015 12:11:44</publishTime>
     </File>
     <File Include="web/templates/Settings/FilterContainers.html">
-      <publishTime>06/19/2015 14:49:52</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/FilterContainerTypeEquipmentRsp.html">
       <publishTime>06/10/2015 11:29:01</publishTime>
     </File>
     <File Include="web/templates/Settings/FilterContainerTypes.html">
-      <publishTime>06/19/2015 14:49:52</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/FilterCustomers.html">
-      <publishTime>06/19/2015 14:49:52</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/FilterEquipments.html">
-      <publishTime>06/19/2015 14:49:52</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/FilterOrders.html">
       <publishTime>06/10/2015 13:57:05</publishTime>
     </File>
     <File Include="web/templates/Settings/FilterPermission.html">
-      <publishTime>06/19/2015 14:49:52</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/FilterPositions.html">
       <publishTime>06/10/2015 13:57:05</publishTime>
     </File>
     <File Include="web/templates/Settings/FilterRole.html">
-      <publishTime>06/19/2015 14:49:52</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/FilterRolePermissionRsp.html">
       <publishTime>06/09/2015 13:15:12</publishTime>
     </File>
     <File Include="web/templates/Settings/FilterTaxes.html">
-      <publishTime>06/19/2015 14:33:12</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/FilterTransportProducts.html">
-      <publishTime>06/19/2015 14:49:52</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/FilterUser.html">
-      <publishTime>06/19/2015 14:49:52</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/Orders.html">
       <publishTime>06/10/2015 13:57:05</publishTime>
@@ -1738,223 +2215,313 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/10/2015 13:57:04</publishTime>
     </File>
     <File Include="web/templates/Settings/PermissionRelationships.html">
-      <publishTime>06/09/2015 13:15:11</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/Permissions.html">
-      <publishTime>06/09/2015 13:15:12</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/Positions.html">
       <publishTime>06/10/2015 13:57:05</publishTime>
     </File>
     <File Include="web/templates/Settings/RolePermissionRsps.html">
-      <publishTime>06/09/2015 13:15:12</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/RoleRelationships.html">
-      <publishTime>06/09/2015 13:15:11</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/Roles.html">
-      <publishTime>06/09/2015 13:15:12</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/SelectCustomer.html">
       <publishTime>06/10/2015 14:11:27</publishTime>
     </File>
     <File Include="web/templates/Settings/Settings.html">
-      <publishTime>06/17/2015 12:55:45</publishTime>
+      <publishTime>06/30/2015 08:50:04</publishTime>
     </File>
     <File Include="web/templates/Settings/Taxes.html">
-      <publishTime>06/09/2015 13:53:43</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/TaxesRelationships.html">
-      <publishTime>06/09/2015 13:53:42</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/TransportProducts.html">
-      <publishTime>06/09/2015 13:58:20</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/TransportProductsRelationships.html">
-      <publishTime>06/09/2015 13:58:20</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/UserRelationships.html">
-      <publishTime>06/09/2015 13:15:11</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/Users.html">
-      <publishTime>06/09/2015 13:15:12</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/web.add.templates.txt">
-      <publishTime>06/19/2015 14:49:50</publishTime>
+      <publishTime>07/12/2015 12:44:25</publishTime>
     </File>
     <File Include="web/templates/Settings/web.menu.template.txt">
-      <publishTime>06/19/2015 14:49:50</publishTime>
+      <publishTime>07/12/2015 12:44:26</publishTime>
     </File>
     <File Include="web/templates/Settings/web.relationships.templates.txt">
-      <publishTime>06/19/2015 14:49:51</publishTime>
+      <publishTime>07/12/2015 12:44:27</publishTime>
     </File>
     <File Include="web/templates/Settings/web.templates.txt">
-      <publishTime>06/19/2015 14:49:52</publishTime>
+      <publishTime>07/12/2015 12:44:27</publishTime>
+    </File>
+    <File Include="web/templates/TransportOrders/AddTransportOrders.html">
+      <publishTime>07/12/2015 12:27:16</publishTime>
+    </File>
+    <File Include="web/templates/TransportOrders/AddTransportPositions.html">
+      <publishTime>07/12/2015 12:05:15</publishTime>
+    </File>
+    <File Include="web/templates/TransportOrders/FilterTransportOffers.html">
+      <publishTime>07/12/2015 12:05:15</publishTime>
+    </File>
+    <File Include="web/templates/TransportOrders/FilterTransportOrders.html">
+      <publishTime>07/12/2015 12:05:15</publishTime>
+    </File>
+    <File Include="web/templates/TransportOrders/SelectTransportProduct.html">
+      <publishTime>07/12/2015 12:09:49</publishTime>
+    </File>
+    <File Include="web/templates/TransportOrders/TransportOffers.html">
+      <publishTime>07/12/2015 12:05:15</publishTime>
+    </File>
+    <File Include="web/templates/TransportOrders/TransportOrders.html">
+      <publishTime>07/12/2015 12:05:15</publishTime>
+    </File>
+    <File Include="web/templates/TransportOrders/TransportOrdersRelationships.html">
+      <publishTime>07/12/2015 12:10:17</publishTime>
+    </File>
+    <File Include="web/templates/TransportOrders/TransportPositions.html">
+      <publishTime>07/12/2015 12:05:15</publishTime>
+    </File>
+    <File Include="web/templates/TransportOrders/TransportProductSearch.html">
+      <publishTime>07/12/2015 12:26:44</publishTime>
     </File>
     <File Include="web/views/Errors/Forbidden.js">
-      <publishTime>05/17/2015 17:09:33</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Home/Home.js">
-      <publishTime>05/17/2015 17:09:33</publishTime>
+      <publishTime>07/11/2015 13:00:18</publishTime>
     </File>
     <File Include="web/views/Home/Login.js">
-      <publishTime>05/17/2015 17:12:55</publishTime>
+      <publishTime>06/30/2015 10:34:07</publishTime>
+    </File>
+    <File Include="web/views/Invoices/AddInvoicePositions.js">
+      <publishTime>07/02/2015 13:18:48</publishTime>
+    </File>
+    <File Include="web/views/Invoices/AddInvoices.js">
+      <publishTime>07/02/2015 01:36:02</publishTime>
+    </File>
+    <File Include="web/views/Invoices/FilterInvoices.js">
+      <publishTime>07/11/2015 18:41:01</publishTime>
+    </File>
+    <File Include="web/views/Invoices/InvoicePositions.js">
+      <publishTime>07/06/2015 22:23:11</publishTime>
+    </File>
+    <File Include="web/views/Invoices/Invoices.js">
+      <publishTime>07/11/2015 18:59:49</publishTime>
+    </File>
+    <File Include="web/views/Invoices/InvoicesRelationships.js">
+      <publishTime>07/01/2015 07:11:16</publishTime>
+    </File>
+    <File Include="web/views/InvoiceStornos/FilterInvoices.js">
+      <publishTime>07/11/2015 22:27:11</publishTime>
+    </File>
+    <File Include="web/views/InvoiceStornos/Invoices.js">
+      <publishTime>07/11/2015 22:53:51</publishTime>
+    </File>
+    <File Include="web/views/InvoiceStornos/InvoicesRelationships.js">
+      <publishTime>07/11/2015 22:50:38</publishTime>
+    </File>
+    <File Include="web/views/InvoiceStornos/InvoiceStornos.js">
+      <publishTime>07/11/2015 23:50:07</publishTime>
+    </File>
+    <File Include="web/views/Orders/AdditionalCostsSearch.js">
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Orders/AddOrders.js">
-      <publishTime>06/17/2015 13:33:25</publishTime>
+      <publishTime>07/06/2015 15:58:28</publishTime>
     </File>
     <File Include="web/views/Orders/AddPositions.js">
-      <publishTime>06/17/2015 12:35:28</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
+    </File>
+    <File Include="web/views/Orders/ContainerSearch.js">
+      <publishTime>07/10/2015 10:31:31</publishTime>
+    </File>
+    <File Include="web/views/Orders/CreateInvoiceConfirmation.js">
+      <publishTime>07/02/2015 07:34:17</publishTime>
     </File>
     <File Include="web/views/Orders/CustomerSearch.js">
-      <publishTime>06/10/2015 14:40:59</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
+    </File>
+    <File Include="web/views/Orders/FilterContainerSmart.js">
+      <publishTime>07/11/2015 17:06:35</publishTime>
+    </File>
+    <File Include="web/views/Orders/FilterOffers.js">
+      <publishTime>07/11/2015 18:17:09</publishTime>
     </File>
     <File Include="web/views/Orders/FilterOrders.js">
-      <publishTime>06/16/2015 15:52:46</publishTime>
+      <publishTime>07/11/2015 18:15:26</publishTime>
+    </File>
+    <File Include="web/views/Orders/Offers.js">
+      <publishTime>07/11/2015 18:52:54</publishTime>
     </File>
     <File Include="web/views/Orders/Orders.js">
-      <publishTime>06/19/2015 14:46:52</publishTime>
+      <publishTime>07/11/2015 18:51:49</publishTime>
     </File>
     <File Include="web/views/Orders/OrdersRelationships.js">
-      <publishTime>06/17/2015 12:33:22</publishTime>
+      <publishTime>06/29/2015 08:30:15</publishTime>
     </File>
     <File Include="web/views/Orders/Positions.js">
-      <publishTime>06/17/2015 12:33:55</publishTime>
+      <publishTime>07/02/2015 13:16:37</publishTime>
+    </File>
+    <File Include="web/views/Orders/RentPositions.js">
+      <publishTime>06/29/2015 08:34:34</publishTime>
+    </File>
+    <File Include="web/views/Orders/SalePositions.js">
+      <publishTime>06/29/2015 08:34:32</publishTime>
+    </File>
+    <File Include="web/views/Orders/SelectAdditionalCosts.js">
+      <publishTime>06/28/2015 21:21:04</publishTime>
+    </File>
+    <File Include="web/views/Orders/SelectContainer.js">
+      <publishTime>06/29/2015 08:51:37</publishTime>
     </File>
     <File Include="web/views/Orders/SelectCustomer.js">
-      <publishTime>06/17/2015 11:15:57</publishTime>
+      <publishTime>06/28/2015 21:21:08</publishTime>
     </File>
     <File Include="web/views/Settings/AddAdditionalCosts.js">
-      <publishTime>06/09/2015 13:28:11</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/AddCommunicationPartners.js">
-      <publishTime>06/09/2015 14:37:45</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/AddContainerEquipmentRsp.js">
-      <publishTime>06/10/2015 12:11:46</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/AddContainers.js">
-      <publishTime>06/10/2015 12:11:46</publishTime>
+      <publishTime>07/11/2015 13:42:22</publishTime>
     </File>
     <File Include="web/views/Settings/AddContainerTypeEquipmentRsp.js">
-      <publishTime>06/10/2015 11:44:48</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/AddContainerTypes.js">
-      <publishTime>06/10/2015 11:29:02</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/AddCustomers.js">
-      <publishTime>06/09/2015 14:41:40</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/AddEquipments.js">
-      <publishTime>06/09/2015 13:28:11</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/AdditionalCosts.js">
-      <publishTime>06/09/2015 13:53:45</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/AdditionalCostsRelationships.js">
-      <publishTime>06/09/2015 13:28:12</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/AddOrders.js">
       <publishTime>06/11/2015 17:03:48</publishTime>
     </File>
     <File Include="web/views/Settings/AddPermission.js">
-      <publishTime>06/09/2015 13:15:13</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/AddPositions.js">
       <publishTime>06/10/2015 13:57:07</publishTime>
     </File>
     <File Include="web/views/Settings/AddRole.js">
-      <publishTime>06/09/2015 13:15:13</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/AddRolePermissionRsp.js">
-      <publishTime>06/09/2015 13:15:13</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/AddTaxes.js">
-      <publishTime>06/09/2015 13:53:43</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/AddTransportProducts.js">
-      <publishTime>06/09/2015 13:58:21</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/AddUser.js">
-      <publishTime>06/09/2015 13:15:13</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/ChangePassword.js">
-      <publishTime>05/17/2015 17:12:55</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/CommunicationPartners.js">
-      <publishTime>06/09/2015 14:37:46</publishTime>
+      <publishTime>07/11/2015 16:51:36</publishTime>
     </File>
     <File Include="web/views/Settings/ContainerEquipmentRsps.js">
-      <publishTime>06/10/2015 12:11:47</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/Containers.js">
-      <publishTime>06/10/2015 12:14:19</publishTime>
+      <publishTime>07/11/2015 13:42:24</publishTime>
     </File>
     <File Include="web/views/Settings/ContainersRelationships.js">
-      <publishTime>06/10/2015 12:11:48</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/ContainerTypeEquipmentRsps.js">
-      <publishTime>06/10/2015 11:44:49</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/ContainerTypes.js">
-      <publishTime>06/10/2015 11:29:06</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/ContainerTypesRelationships.js">
-      <publishTime>06/10/2015 11:29:05</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/Custom.Events.User.js">
-      <publishTime>05/17/2015 17:12:53</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/Custom.User.js">
-      <publishTime>05/17/2015 17:12:53</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/Customers.js">
-      <publishTime>06/09/2015 14:45:10</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/CustomerSearch.js">
       <publishTime>06/10/2015 14:40:59</publishTime>
     </File>
     <File Include="web/views/Settings/CustomersRelationships.js">
-      <publishTime>06/09/2015 14:45:10</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/Equipments.js">
-      <publishTime>06/09/2015 13:53:45</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/EquipmentsRelationships.js">
-      <publishTime>06/09/2015 13:28:12</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/FilterAdditionalCosts.js">
-      <publishTime>06/09/2015 13:28:12</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/FilterContainers.js">
-      <publishTime>06/10/2015 12:11:50</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/FilterContainerTypes.js">
-      <publishTime>06/10/2015 11:29:06</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/FilterCustomers.js">
-      <publishTime>06/09/2015 14:37:48</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/FilterEquipments.js">
-      <publishTime>06/09/2015 13:28:12</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/FilterOrders.js">
       <publishTime>06/10/2015 13:57:10</publishTime>
     </File>
     <File Include="web/views/Settings/FilterPermission.js">
-      <publishTime>06/09/2015 13:15:14</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/FilterRole.js">
-      <publishTime>06/09/2015 13:15:14</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/FilterTaxes.js">
-      <publishTime>06/19/2015 14:32:36</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/FilterTransportProducts.js">
-      <publishTime>06/09/2015 13:58:22</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/FilterUser.js">
-      <publishTime>06/09/2015 13:15:14</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/Orders.js">
       <publishTime>06/10/2015 13:57:10</publishTime>
@@ -1963,61 +2530,91 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/10/2015 13:57:09</publishTime>
     </File>
     <File Include="web/views/Settings/PermissionRelationships.js">
-      <publishTime>06/09/2015 13:15:13</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/Permissions.js">
-      <publishTime>06/09/2015 13:15:14</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/Positions.js">
       <publishTime>06/10/2015 13:57:08</publishTime>
     </File>
     <File Include="web/views/Settings/RolePermissionRsps.js">
-      <publishTime>06/09/2015 13:15:13</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/RoleRelationships.js">
-      <publishTime>06/09/2015 13:15:13</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/Roles.js">
-      <publishTime>06/09/2015 13:15:14</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/SelectCustomer.js">
       <publishTime>06/10/2015 14:37:42</publishTime>
     </File>
     <File Include="web/views/Settings/Settings.js">
-      <publishTime>05/17/2015 17:09:33</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/Taxes.js">
-      <publishTime>06/09/2015 13:53:45</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/TaxesRelationships.js">
-      <publishTime>06/09/2015 13:53:44</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/TransportProducts.js">
-      <publishTime>06/09/2015 13:58:22</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/TransportProductsRelationships.js">
-      <publishTime>06/09/2015 13:58:22</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/UserRelationships.js">
-      <publishTime>06/09/2015 13:15:13</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/Users.js">
-      <publishTime>06/09/2015 13:15:14</publishTime>
+      <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/web.add.views.txt">
-      <publishTime>06/19/2015 14:49:52</publishTime>
+      <publishTime>07/12/2015 12:44:28</publishTime>
     </File>
     <File Include="web/views/Settings/web.related.views.txt">
-      <publishTime>06/19/2015 14:49:53</publishTime>
+      <publishTime>07/12/2015 12:44:29</publishTime>
     </File>
     <File Include="web/views/Settings/web.relationships.views.txt">
-      <publishTime>06/19/2015 14:49:54</publishTime>
+      <publishTime>07/12/2015 12:44:30</publishTime>
     </File>
     <File Include="web/views/Settings/web.views.txt">
-      <publishTime>06/19/2015 14:49:55</publishTime>
+      <publishTime>07/12/2015 12:44:30</publishTime>
+    </File>
+    <File Include="web/views/TransportOrders/AddTransportOrders.js">
+      <publishTime>07/12/2015 12:00:49</publishTime>
+    </File>
+    <File Include="web/views/TransportOrders/AddTransportPositions.js">
+      <publishTime>07/12/2015 11:45:07</publishTime>
+    </File>
+    <File Include="web/views/TransportOrders/FilterTransportOffers.js">
+      <publishTime>07/12/2015 12:21:26</publishTime>
+    </File>
+    <File Include="web/views/TransportOrders/FilterTransportOrders.js">
+      <publishTime>07/12/2015 12:21:14</publishTime>
+    </File>
+    <File Include="web/views/TransportOrders/SelectTransportProduct.js">
+      <publishTime>07/12/2015 12:05:37</publishTime>
+    </File>
+    <File Include="web/views/TransportOrders/TransportOffers.js">
+      <publishTime>07/12/2015 11:58:00</publishTime>
+    </File>
+    <File Include="web/views/TransportOrders/TransportOrders.js">
+      <publishTime>07/12/2015 12:37:35</publishTime>
+    </File>
+    <File Include="web/views/TransportOrders/TransportOrdersRelationships.js">
+      <publishTime>07/12/2015 11:49:28</publishTime>
+    </File>
+    <File Include="web/views/TransportOrders/TransportPositions.js">
+      <publishTime>07/12/2015 13:35:19</publishTime>
+    </File>
+    <File Include="web/views/TransportOrders/TransportProductSearch.js">
+      <publishTime>07/12/2015 12:04:54</publishTime>
     </File>
     <File Include="web/web.router.template.txt">
-      <publishTime>06/19/2015 14:49:55</publishTime>
+      <publishTime>07/12/2015 12:44:31</publishTime>
     </File>
   </ItemGroup>
 </Project>
