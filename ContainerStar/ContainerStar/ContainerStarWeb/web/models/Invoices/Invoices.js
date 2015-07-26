@@ -36,6 +36,18 @@ define(function () {
             ,totalPrice: { type: "number", 
 			                        editable: false, 
 				                    validation: { required: false } }
+            ,payInDays: { type: "number", 
+                                    editable: true, 
+                                    validation: { required: true } }
+            ,payPartOne: { type: "number", 
+                                    editable: true, 
+                                    validation: { required: false } }
+            ,payPartTwo: { type: "number", 
+                                    editable: true, 
+                                    validation: { required: false } }
+            ,payPartTree: { type: "number", 
+                                    editable: true, 
+                                    validation: { required: false } }
 		}
 	});
 	return model;

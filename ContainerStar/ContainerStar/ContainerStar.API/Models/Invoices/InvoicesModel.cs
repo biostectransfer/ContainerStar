@@ -59,6 +59,19 @@ namespace ContainerStar.API.Models.Invoices
         public double summaryPrice { get; set; }
         
         [DataMember]
-        public bool isPayed { get; set; }        
+        public bool isPayed { get; set; }
+
+        [Required]
+        [DataMember]
+        public int payInDays { get; set; }
+
+        [DataMember]
+        public int? payPartOne { get; set; }
+
+        [DataMember]
+        public int? payPartTwo { get; set; }
+
+        [DataMember]
+        public int? payPartTree { get; set; }
     }
 }

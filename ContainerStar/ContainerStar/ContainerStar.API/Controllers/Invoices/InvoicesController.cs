@@ -36,6 +36,10 @@ namespace ContainerStar.API.Controllers.Invoices
             model.taxValue = entity.TaxValue;
             model.manualPrice = entity.ManualPrice;
             model.isPayed = entity.PayDate.HasValue;
+            model.payInDays = entity.PayInDays;
+            model.payPartOne = entity.PayPartOne;
+            model.payPartTwo = entity.PayPartTwo;
+            model.payPartTree = entity.PayPartTree;
 
             CalculatePrices(entity, model);
         }
@@ -63,6 +67,10 @@ namespace ContainerStar.API.Controllers.Invoices
             entity.WithTaxes = model.withTaxes;
             entity.Discount = model.discount;
             entity.ManualPrice = model.manualPrice;
+            entity.PayInDays = model.payInDays;
+            entity.PayPartOne = model.payPartOne;
+            entity.PayPartTwo = model.payPartTwo;
+            entity.PayPartTree = model.payPartTree;
         }
 
         protected override string BuildWhereClause<T>(Filter filter)

@@ -39,3 +39,9 @@ GO
 ALTER TABLE [dbo].[TransportOrders]
  ALTER COLUMN [ZIP] nvarchar(10) NOT NULL
 GO
+ALTER TABLE [dbo].[Invoices]
+ ADD [PayInDays] int NOT NULL default (0),
+ [PayPartOne] int NULL,
+ [PayPartTwo] int NULL,
+ [PayPartTree] int NULL
+GO

@@ -82,6 +82,22 @@ namespace ContainerStar.Contracts.Entities
             /// Column name 'DateVExportFile' for property <see cref="Invoices.DateVExportFile"/>
             /// </summary>
             public static readonly string DateVExportFile = "DateVExportFile";
+            /// <summary>
+            /// Column name 'PayInDays' for property <see cref="Invoices.PayInDays"/>
+            /// </summary>
+            public static readonly string PayInDays = "PayInDays";
+            /// <summary>
+            /// Column name 'PayPartOne' for property <see cref="Invoices.PayPartOne"/>
+            /// </summary>
+            public static readonly string PayPartOne = "PayPartOne";
+            /// <summary>
+            /// Column name 'PayPartTwo' for property <see cref="Invoices.PayPartTwo"/>
+            /// </summary>
+            public static readonly string PayPartTwo = "PayPartTwo";
+            /// <summary>
+            /// Column name 'PayPartTree' for property <see cref="Invoices.PayPartTree"/>
+            /// </summary>
+            public static readonly string PayPartTree = "PayPartTree";
           
         }
         #endregion
@@ -101,6 +117,10 @@ namespace ContainerStar.Contracts.Entities
         public int ReminderCount{ get; set; }
         public DateTime? DateVExportDate{ get; set; }
         public string DateVExportFile{ get; set; }
+        public int PayInDays{ get; set; }
+        public int? PayPartOne{ get; set; }
+        public int? PayPartTwo{ get; set; }
+        public int? PayPartTree{ get; set; }
         public virtual Orders Orders{ get; set; }
         public virtual ICollection<InvoicePositions> InvoicePositions{ get; set; }
         public virtual ICollection<InvoiceStornos> InvoiceStornos{ get; set; }
@@ -141,6 +161,10 @@ namespace ContainerStar.Contracts.Entities
                        ReminderCount = ReminderCount,
                        DateVExportDate = DateVExportDate,
                        DateVExportFile = DateVExportFile,
+                       PayInDays = PayInDays,
+                       PayPartOne = PayPartOne,
+                       PayPartTwo = PayPartTwo,
+                       PayPartTree = PayPartTree,
         	           };
         }
     }

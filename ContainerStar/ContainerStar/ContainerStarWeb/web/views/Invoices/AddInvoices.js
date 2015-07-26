@@ -52,6 +52,17 @@ define([
                 '#summaryPrice': 'summaryPrice',
                 '#totalPriceWithoutTax': 'totalPriceWithoutTax',
                 '#totalPriceWithoutDiscountWithoutTax': 'totalPriceWithoutDiscountWithoutTax',
+                '#payInDays': {
+                    observe: 'payInDays',
+                    selectOptions: {
+                        labelPath: 'name', valuePath: 'id',
+                        collection: self.options.paymentIntervals,
+                        //defaultOption: { label: self.resources.pleaseSelect, value: 10 }
+                    },
+                },
+                '#payPartOne': 'payPartOne',
+                '#payPartTwo': 'payPartTwo',
+                '#payPartTree': 'payPartTree',
 			};
 
             return result;

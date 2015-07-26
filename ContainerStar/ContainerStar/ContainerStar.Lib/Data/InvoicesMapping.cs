@@ -86,6 +86,19 @@ namespace ContainerStar.Lib.Data
                 .IsUnicode()
                 .HasMaxLength(128);
 
+            Property(t => t.PayInDays)
+                .HasColumnName(Invoices.Fields.PayInDays)
+                .IsRequired();
+
+            Property(t => t.PayPartOne)
+                .HasColumnName(Invoices.Fields.PayPartOne);
+
+            Property(t => t.PayPartTwo)
+                .HasColumnName(Invoices.Fields.PayPartTwo);
+
+            Property(t => t.PayPartTree)
+                .HasColumnName(Invoices.Fields.PayPartTree);
+
 
             //Relationships
             HasRequired(i => i.Orders)

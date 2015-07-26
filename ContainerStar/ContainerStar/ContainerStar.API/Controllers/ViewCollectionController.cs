@@ -14,6 +14,7 @@ namespace ContainerStar.API.Controllers
     public partial class CollectionTypesModel
     {
         public bool CommunicationPartners { get; set; }
+        public bool PaymentIntervals { get; set; }
     }
 
     public class IdNameModel<TId>
@@ -45,6 +46,15 @@ namespace ContainerStar.API.Controllers
                 result.Add("CommunicationPartners", manager.GetEntities().
                     Select(o => new { id = o.Id, name = o.Title, customerId = o.CustomerId }).ToList());
             }
+
+            if (model.PaymentIntervals)
+                result.Add("PaymentIntervals", new[]
+                {
+                    new { id = 0, name = "Sofort"},
+                    new { id = 5, name = "5 Tage"},
+                    new { id = 10, name = "10 Tage"},
+                    new { id = 30, name = "30 Tage"},
+                });
             
             new MasterDataViewCollectionControllerFactory().GetViewCollections(
                 GlobalConfiguration.Configuration.DependencyResolver, model, result);

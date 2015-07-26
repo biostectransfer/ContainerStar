@@ -48,6 +48,7 @@ namespace ContainerStar.API.Controllers.Invoices
                 CreateDate = DateTime.Now,
                 ChangeDate = DateTime.Now,
                 IsSellInvoice = model.isSell,
+                PayInDays = 10,
                 InvoicePositions = new List<InvoicePositions>()
             };
 

@@ -18,7 +18,11 @@ define(function () {
 		summaryPrice: 'Gesamtpreis',
 		totalPriceWithoutDiscountWithoutTax: 'Netto Preis ohne MwSt. und ohne Rabatt',
 		totalPriceWithoutTax: 'Netto Preis ohne MwSt. mit Rabatt',
-	    totalPrice: 'Brutto Preis'
+		totalPrice: 'Brutto Preis',
+		payInDays: 'Zahlungsziel',
+		payPartOne: 'Erste Anteil',
+		payPartTwo: 'Zweite Anteil',
+		payPartTree: 'Dritte Anteil',
 	};
 
 	return resources;
