@@ -32,6 +32,10 @@ define([
 			'#autoBill': 'autoBill',
 			'#discount': 'discount',
 			'#ustId': 'ustId',
+			'#bank': 'bank',
+			'#accountNumber': 'accountNumber',
+			'#blz': 'blz',
+			'#isProspectiveCustomer': 'isProspectiveCustomer',
 			};
 
             return result;
@@ -45,7 +49,7 @@ define([
 			this.disableInput(this, 'number');
 			this.disableInput(this, 'name');
 			this.disableInput(this, 'street');
-			this.disableInput(this, 'zip', 'numeric');
+			this.disableInput(this, 'zip');
 			this.disableInput(this, 'city');
 			this.disableInput(this, 'country');
 			this.disableInput(this, 'phone');
@@ -60,6 +64,9 @@ define([
 			this.disableInput(this, 'autoBill');
 			this.disableInput(this, 'discount', 'numeric');
 			this.disableInput(this, 'ustId');
+			this.disableInput(this, 'bank');
+			this.disableInput(this, 'accountNumber');
+			this.disableInput(this, 'blz');
 
             return this;
         }

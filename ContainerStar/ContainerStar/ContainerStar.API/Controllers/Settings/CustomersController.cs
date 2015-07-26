@@ -38,6 +38,10 @@ namespace ContainerStar.API.Controllers.Settings
             model.autoBill = entity.AutoBill;
             model.discount = entity.Discount;
             model.ustId = entity.UstId;
+            model.bank = entity.Bank;
+            model.accountNumber = entity.AccountNumber;
+            model.blz = entity.Blz;
+            model.isProspectiveCustomer = entity.IsProspectiveCustomer;
             model.createDate = ((ISystemFields)entity).CreateDate;
             model.changeDate = ((ISystemFields)entity).ChangeDate;
         }
@@ -61,6 +65,10 @@ namespace ContainerStar.API.Controllers.Settings
             entity.AutoBill = model.autoBill;
             entity.Discount = model.discount;
             entity.UstId = model.ustId;
+            entity.Bank = model.bank;
+            entity.AccountNumber = model.accountNumber;
+            entity.Blz = model.blz;
+            entity.IsProspectiveCustomer = model.isProspectiveCustomer;
         }
     }
 }

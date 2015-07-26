@@ -72,7 +72,7 @@ namespace ContainerStar.API.Controllers
             var entities = GetEntities();
             entities = Filter(entities, args.Filtering);
             entities = Sort(entities, args.Sorting);
-            
+
             if (entities == null)
             {
                 var empty = new GridResult<TModel, TId>
@@ -129,12 +129,12 @@ namespace ContainerStar.API.Controllers
 
             if (!String.IsNullOrEmpty(sorting.Field))
             {
-                var entityType = (typeof (TEntity));
+                var entityType = (typeof(TEntity));
                 var property = entityType.GetProperty(sorting.Field,
                     BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
                 if (property != null)
                 {
-                    result = (typeof (IHasId<TId>).IsAssignableFrom(property.PropertyType))
+                    result = (typeof(IHasId<TId>).IsAssignableFrom(property.PropertyType))
                         ? entities.OrderBy(sorting.Field + ".ID " + sorting.Direction)
                         : entities.OrderBy(sorting.Field + " " + sorting.Direction);
                 }
@@ -185,7 +185,7 @@ namespace ContainerStar.API.Controllers
 
         protected virtual string BuildWhereClause<T>(Filter filter)
         {
-            var entityType = (typeof (T));
+            var entityType = (typeof(T));
             PropertyInfo property;
 
             if (filter.Field.Contains('.'))
@@ -202,7 +202,7 @@ namespace ContainerStar.API.Controllers
                 property = entityType.GetProperty(filter.Field, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
             }
 
-            if (typeof (IEnumerable<IHasId<TId>>).IsAssignableFrom(property.PropertyType))
+            if (typeof(IEnumerable<IHasId<TId>>).IsAssignableFrom(property.PropertyType))
             {
                 switch (filter.Operator.ToLower())
                 {
@@ -212,7 +212,7 @@ namespace ContainerStar.API.Controllers
                         throw new ArgumentException("This operator is not yet supported for this Grid", filter.Operator);
                 }
             }
-            if (typeof (IHasId<TId>).IsAssignableFrom(property.PropertyType))
+            if (typeof(IHasId<TId>).IsAssignableFrom(property.PropertyType))
             {
                 switch (filter.Operator.ToLower())
                 {
@@ -233,20 +233,42 @@ namespace ContainerStar.API.Controllers
                 case "gt":
                 case "lte":
                 case "lt":
-                    if (typeof (DateTime).IsAssignableFrom(property.PropertyType) ||
-                        typeof (DateTime?).IsAssignableFrom(property.PropertyType))
+                    if (typeof(DateTime).IsAssignableFrom(property.PropertyType) || typeof(DateTime?).IsAssignableFrom(property.PropertyType))
                     {
                         var date = DateTime.Parse(filter.Value, CultureInfo.InvariantCulture).Date;
                         return string.Format(@"{0} {1} DateTime({2}, {3}, {4})",
                             filter.Field, ToLinqOperator(filter.Operator), date.Year, date.Month, date.Day);
                     }
 
-                    if (typeof (int).IsAssignableFrom(property.PropertyType) || typeof (double).IsAssignableFrom(property.PropertyType))
+                    int intValue = 0;
+                    if ((typeof(int).IsAssignableFrom(property.PropertyType) || typeof(int?).IsAssignableFrom(property.PropertyType))
+                        && Int32.TryParse(filter.Value, out intValue))
                     {
-                        return string.Format("{0} {1} {2}", filter.Field, ToLinqOperator(filter.Operator), ToFormattedString(filter.Value));
+                        return string.Format("{0} {1} {2}", filter.Field, ToLinqOperator(filter.Operator), intValue);
                     }
 
-                    if (typeof(Boolean).IsAssignableFrom(property.PropertyType))
+                    double doubleValue = 0;
+                    if ((typeof(double).IsAssignableFrom(property.PropertyType) || typeof(double?).IsAssignableFrom(property.PropertyType))
+                        && Double.TryParse(filter.Value, out doubleValue))
+                    {
+                        return string.Format("{0} {1} {2}", filter.Field, ToLinqOperator(filter.Operator), doubleValue);
+                    }
+
+                    decimal decimalValue = 0;
+                    if ((typeof(decimal).IsAssignableFrom(property.PropertyType) || typeof(decimal?).IsAssignableFrom(property.PropertyType))
+                        && Decimal.TryParse(filter.Value, out decimalValue))
+                    {
+                        return string.Format("{0} {1} {2}", filter.Field, ToLinqOperator(filter.Operator), decimalValue);
+                    }
+
+                    float floatValue = 0;
+                    if ((typeof(float).IsAssignableFrom(property.PropertyType) || typeof(float?).IsAssignableFrom(property.PropertyType))
+                        && float.TryParse(filter.Value, out floatValue))
+                    {
+                        return string.Format("{0} {1} {2}", filter.Field, ToLinqOperator(filter.Operator), floatValue);
+                    }
+
+                    if (typeof(Boolean).IsAssignableFrom(property.PropertyType) || typeof(Boolean?).IsAssignableFrom(property.PropertyType))
                     {
                         return string.Format("{0} {1} {2}", filter.Field, ToLinqOperator(filter.Operator), filter.Value);
                     }

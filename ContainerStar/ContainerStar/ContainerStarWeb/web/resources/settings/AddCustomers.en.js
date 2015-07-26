@@ -26,6 +26,10 @@ define(function () {
 		autoBill: 'Auto bill',	
 		discount: 'Auto discount in %',	
 		ustId: 'Ust-Id',	
+		bank: 'Bank',	
+		accountNumber: 'Account number',	
+		blz: 'BLZ',	
+		isProspectiveCustomer: 'Is Prospective Customer',	
 	};
 
 	return resources;

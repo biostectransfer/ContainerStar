@@ -53,7 +53,9 @@ namespace ContainerStar.Lib.Data
 
             Property(t => t.Zip)
                 .HasColumnName(Orders.Fields.Zip)
-                .IsRequired();
+                .IsRequired()
+                .IsUnicode()
+                .HasMaxLength(10);
 
             Property(t => t.City)
                 .HasColumnName(Orders.Fields.City)

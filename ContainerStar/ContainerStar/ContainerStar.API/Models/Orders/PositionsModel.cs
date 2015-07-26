@@ -42,5 +42,9 @@ namespace ContainerStar.API.Models
 
         [DataMember]
         public DateTime? toDate { get; set; }
+
+        [Required]
+        [DataMember]
+        public bool isMain { get; set; }
     }
 }

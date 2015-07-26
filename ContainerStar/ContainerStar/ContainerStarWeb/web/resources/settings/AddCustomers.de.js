@@ -21,11 +21,15 @@ define(function () {
 		comment: 'Bemerkung',	
 		iban: 'IBAN',	
 		bic: 'BIC',	
-		withTaxes: 'Rechnung mit MwSt.',	
-		autoDebitEntry: 'Automat. Abbuchung',	
-		autoBill: 'Automat. Rechnung',	
-		discount: 'Automat. Rabatt in %',	
+		withTaxes: 'MwSt.',	
+		autoDebitEntry: 'A. Abbuchung',	
+		autoBill: 'A. Rechnung',	
+		discount: 'Rabatt in %',	
 		ustId: 'Ust-Id',	
+		bank: 'Kreditinstitut',	
+		accountNumber: 'Kontonummer',	
+		blz: 'BLZ',	
+		isProspectiveCustomer: 'Interessent',	
 	};
 
 	return resources;

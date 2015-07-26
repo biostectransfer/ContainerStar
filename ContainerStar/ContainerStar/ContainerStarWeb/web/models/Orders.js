@@ -17,7 +17,7 @@ define(function () {
 			,street: { type: "string", 
 			                        editable: Application.canTableItemBeEdit('Orders', 'street'), 
 				                    validation: { required: true, maxLength: 128 } }			
-			,zip: { type: "number", 
+			,zip: { type: "string", 
 			                        editable: Application.canTableItemBeEdit('Orders', 'zip'), 
 				                    validation: { required: true } }			
 			,city: { type: "string", 

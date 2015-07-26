@@ -106,6 +106,22 @@ namespace ContainerStar.Contracts.Entities
             /// Column name 'DeleteDate' for property <see cref="Customers.DeleteDate"/>
             /// </summary>
             public static readonly string DeleteDate = "DeleteDate";
+            /// <summary>
+            /// Column name 'Bank' for property <see cref="Customers.Bank"/>
+            /// </summary>
+            public static readonly string Bank = "Bank";
+            /// <summary>
+            /// Column name 'AccountNumber' for property <see cref="Customers.AccountNumber"/>
+            /// </summary>
+            public static readonly string AccountNumber = "AccountNumber";
+            /// <summary>
+            /// Column name 'BLZ' for property <see cref="Customers.Blz"/>
+            /// </summary>
+            public static readonly string Blz = "BLZ";
+            /// <summary>
+            /// Column name 'IsProspectiveCustomer' for property <see cref="Customers.IsProspectiveCustomer"/>
+            /// </summary>
+            public static readonly string IsProspectiveCustomer = "IsProspectiveCustomer";
           
         }
         #endregion
@@ -113,7 +129,7 @@ namespace ContainerStar.Contracts.Entities
         public string Number{ get; set; }
         public string Name{ get; set; }
         public string Street{ get; set; }
-        public int Zip{ get; set; }
+        public string Zip{ get; set; }
         public string City{ get; set; }
         public string Country{ get; set; }
         public string Phone{ get; set; }
@@ -131,6 +147,10 @@ namespace ContainerStar.Contracts.Entities
         public DateTime CreateDate{ get; set; }
         public DateTime ChangeDate{ get; set; }
         public DateTime? DeleteDate{ get; set; }
+        public string Bank{ get; set; }
+        public string AccountNumber{ get; set; }
+        public string Blz{ get; set; }
+        public bool IsProspectiveCustomer{ get; set; }
         public virtual ICollection<Orders> Orders{ get; set; }
         public virtual ICollection<CommunicationPartners> CommunicationPartners{ get; set; }
         public virtual ICollection<TransportOrders> TransportOrders{ get; set; }
@@ -173,6 +193,10 @@ namespace ContainerStar.Contracts.Entities
                        CreateDate = CreateDate,
                        ChangeDate = ChangeDate,
                        DeleteDate = DeleteDate,
+                       Bank = Bank,
+                       AccountNumber = AccountNumber,
+                       Blz = Blz,
+                       IsProspectiveCustomer = IsProspectiveCustomer,
         	           };
         }
     }

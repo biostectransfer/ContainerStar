@@ -47,7 +47,7 @@ namespace ContainerStar.API.Models
         /// </summary>
         [Required]
         [DataMember]
-        public int zip{ get; set; }
+        public string zip{ get; set; }
         /// <summary>
         ///     Model property for <see cref="Orders.City"/> entity
         /// </summary>
@@ -140,7 +140,7 @@ namespace ContainerStar.API.Models
         /// </summary>
         [Required]
         [DataMember]
-        public int customerZip { get; set; }
+        public string customerZip { get; set; }
         /// <summary>
         ///     Model property for <see cref="Customers.City"/> entity
         /// </summary>

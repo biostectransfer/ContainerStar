@@ -40,6 +40,11 @@ namespace ContainerStar.API.Controllers
                 order.RentOrderNumber = numberProvider.GetNextRentOrderNumber(API.Configuration.RentOrderPreffix);
             }
 
+            if(order.Customers.IsProspectiveCustomer)
+            {
+                order.Customers.IsProspectiveCustomer = false;
+            }
+
             manager.SaveChanges();
 
             return Ok(new { id = model.Id });

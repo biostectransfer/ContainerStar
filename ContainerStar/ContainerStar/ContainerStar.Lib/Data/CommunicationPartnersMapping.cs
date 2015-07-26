@@ -36,7 +36,6 @@ namespace ContainerStar.Lib.Data
 
             Property(t => t.FirstName)
                 .HasColumnName(CommunicationPartners.Fields.FirstName)
-                .IsRequired()
                 .IsUnicode()
                 .HasMaxLength(128);
 
@@ -46,7 +45,6 @@ namespace ContainerStar.Lib.Data
 
             Property(t => t.Phone)
                 .HasColumnName(CommunicationPartners.Fields.Phone)
-                .IsRequired()
                 .IsUnicode()
                 .HasMaxLength(20);
 

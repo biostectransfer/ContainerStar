@@ -36,7 +36,7 @@ namespace ContainerStar.API.Models.Settings
         /// </summary>
         [Required]
         [DataMember]
-        public int zip{ get; set; }
+        public string zip{ get; set; }
         /// <summary>
         ///     Model property for <see cref="Customers.City"/> entity
         /// </summary>
@@ -108,6 +108,26 @@ namespace ContainerStar.API.Models.Settings
         /// </summary>
         [DataMember]
         public string ustId{ get; set; }
+        /// <summary>
+        ///     Model property for <see cref="Customers.Bank"/> entity
+        /// </summary>
+        [DataMember]
+        public string bank{ get; set; }
+        /// <summary>
+        ///     Model property for <see cref="Customers.AccountNumber"/> entity
+        /// </summary>
+        [DataMember]
+        public string accountNumber{ get; set; }
+        /// <summary>
+        ///     Model property for <see cref="Customers.Blz"/> entity
+        /// </summary>
+        [DataMember]
+        public string blz{ get; set; }
+        /// <summary>
+        ///     Model property for <see cref="Customers.IsProspectiveCustomer"/> entity
+        /// </summary>
+        [DataMember]
+        public bool isProspectiveCustomer{ get; set; }
 
     }
 }

@@ -70,6 +70,7 @@
                      editor: amountEditor, template: "#=amount#",
                      title: this.resources.amount
                  },
+                 { field: 'isMain', title: this.resources.isMain, headerTitle: this.resources.isMain, checkbox: true },
                  { field: 'fromDate', title: this.resources.fromDate, format: '{0:d}' },
                  { field: 'toDate', title: this.resources.toDate, format: '{0:d}' }
             ];
@@ -121,7 +122,8 @@
                     model.set('fromDate', item.get('fromDate'));
                     model.set('toDate', item.get('toDate'));
                     model.set('isSellOrder', self.isSellOrder);
- 
+                    model.set('isMain', true);
+
                     model.save({}, {
                         data: kendo.stringify(model),
                         method: 'post',
@@ -155,6 +157,7 @@
                     model.set('price', item.get('price'));
                     model.set('amount', 1);
                     model.set('isSellOrder', self.isSellOrder);
+                    model.set('isMain', false);
 
                     model.save({}, {
                         data: kendo.stringify(model),

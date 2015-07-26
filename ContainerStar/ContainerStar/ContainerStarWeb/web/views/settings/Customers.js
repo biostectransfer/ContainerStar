@@ -31,6 +31,7 @@ define([
 				{ field: 'withTaxes', title: this.resources.withTaxes , headerTitle: this.resources.withTaxes, checkbox: true},
 				{ field: 'autoBill', title: this.resources.autoBill , headerTitle: this.resources.autoBill, checkbox: true},
 				{ field: 'discount', title: this.resources.discount },
+				{ field: 'isProspectiveCustomer', title: this.resources.isProspectiveCustomer , headerTitle: this.resources.isProspectiveCustomer, checkbox: true},
 			];
 		}
 

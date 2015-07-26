@@ -11,6 +11,9 @@ define(function () {
             ,isSellOrder: { type: "boolean", 
 			                        editable: Application.canTableItemBeEdit('Positions', 'isSellOrder'), 
 				                    validation: { required: true } }	
+            ,isMain: { type: "boolean", 
+			                        editable: Application.canTableItemBeEdit('Positions', 'isMain'), 
+				                    validation: { required: false } }	
 			,containerId: { type: "number", 
 			                        editable: Application.canTableItemBeEdit('Positions', 'containerId'), 
 				                    validation: { required: false } }			

@@ -48,7 +48,9 @@ namespace ContainerStar.Lib.Data
 
             Property(t => t.Zip)
                 .HasColumnName(Customers.Fields.Zip)
-                .IsRequired();
+                .IsRequired()
+                .IsUnicode()
+                .HasMaxLength(10);
 
             Property(t => t.City)
                 .HasColumnName(Customers.Fields.City)
@@ -59,7 +61,7 @@ namespace ContainerStar.Lib.Data
             Property(t => t.Country)
                 .HasColumnName(Customers.Fields.Country)
                 .IsUnicode()
-                .HasMaxLength(2);
+                .HasMaxLength(50);
 
             Property(t => t.Phone)
                 .HasColumnName(Customers.Fields.Phone)
@@ -89,12 +91,12 @@ namespace ContainerStar.Lib.Data
             Property(t => t.Iban)
                 .HasColumnName(Customers.Fields.Iban)
                 .IsUnicode()
-                .HasMaxLength(22);
+                .HasMaxLength(30);
 
             Property(t => t.Bic)
                 .HasColumnName(Customers.Fields.Bic)
                 .IsUnicode()
-                .HasMaxLength(10);
+                .HasMaxLength(20);
 
             Property(t => t.WithTaxes)
                 .HasColumnName(Customers.Fields.WithTaxes)
@@ -114,7 +116,7 @@ namespace ContainerStar.Lib.Data
             Property(t => t.UstId)
                 .HasColumnName(Customers.Fields.UstId)
                 .IsUnicode()
-                .HasMaxLength(10);
+                .HasMaxLength(20);
 
             Property(t => t.CreateDate)
                 .HasColumnName(Customers.Fields.CreateDate)
@@ -126,6 +128,25 @@ namespace ContainerStar.Lib.Data
 
             Property(t => t.DeleteDate)
                 .HasColumnName(Customers.Fields.DeleteDate);
+
+            Property(t => t.Bank)
+                .HasColumnName(Customers.Fields.Bank)
+                .IsUnicode()
+                .HasMaxLength(128);
+
+            Property(t => t.AccountNumber)
+                .HasColumnName(Customers.Fields.AccountNumber)
+                .IsUnicode()
+                .HasMaxLength(128);
+
+            Property(t => t.Blz)
+                .HasColumnName(Customers.Fields.Blz)
+                .IsUnicode()
+                .HasMaxLength(128);
+
+            Property(t => t.IsProspectiveCustomer)
+                .HasColumnName(Customers.Fields.IsProspectiveCustomer)
+                .IsRequired();
 
 
             //Relationships

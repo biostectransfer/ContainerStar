@@ -67,6 +67,10 @@ namespace ContainerStar.Contracts.Entities
             /// Column name 'Amount' for property <see cref="Positions.Amount"/>
             /// </summary>
             public static readonly string Amount = "Amount";
+            /// <summary>
+            /// Column name 'IsMain' for property <see cref="Positions.IsMain"/>
+            /// </summary>
+            public static readonly string IsMain = "IsMain";
           
         }
         #endregion
@@ -82,6 +86,7 @@ namespace ContainerStar.Contracts.Entities
         public DateTime ChangeDate{ get; set; }
         public DateTime? DeleteDate{ get; set; }
         public int Amount{ get; set; }
+        public bool IsMain{ get; set; }
         public virtual Orders Orders{ get; set; }
         public virtual Containers Containers{ get; set; }
         public virtual AdditionalCosts AdditionalCosts{ get; set; }
@@ -137,6 +142,7 @@ namespace ContainerStar.Contracts.Entities
                        ChangeDate = ChangeDate,
                        DeleteDate = DeleteDate,
                        Amount = Amount,
+                       IsMain = IsMain,
         	           };
         }
     }

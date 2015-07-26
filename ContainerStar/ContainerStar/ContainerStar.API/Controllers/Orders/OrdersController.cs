@@ -100,7 +100,8 @@ namespace ContainerStar.API.Controllers
                     Zip = model.customerZip,
                     Phone = model.customerPhone,
                     Fax = model.customerFax,
-                    Email = model.customerEmail
+                    Email = model.customerEmail,
+                    IsProspectiveCustomer = model.isOffer
                 };
                 customerManager.AddEntity(customer);
                 customerManager.SaveChanges();

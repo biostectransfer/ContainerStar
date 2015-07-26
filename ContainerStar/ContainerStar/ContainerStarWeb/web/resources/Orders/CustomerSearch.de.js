@@ -24,7 +24,7 @@ define(function () {
 		withTaxes: 'Rechnung mit MwSt.',	
 		autoDebitEntry: 'Automat. Abbuchung',	
 		autoBill: 'Automat. Rechnung',	
-		discount: 'Automat. Rabatt in %',	
+		discount: 'Rabatt in %',	
 		ustId: 'Ust-Id',
 		select: 'Auswählen',
 		cancel: 'Abbruch',

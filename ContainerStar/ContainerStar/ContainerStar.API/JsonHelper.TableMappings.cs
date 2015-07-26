@@ -68,7 +68,7 @@ namespace ContainerStar.API
                 {"ProceedsAccount", "proceedsAccount"},
             });
 
-            tables.Add("Customers", new TableMapping("Customers", "Customers", 18)
+            tables.Add("Customers", new TableMapping("Customers", "Customers", 22)
             {
                 {"Number", "number"},
                 {"Name", "name"},
@@ -88,6 +88,10 @@ namespace ContainerStar.API
                 {"AutoBill", "autoBill"},
                 {"Discount", "discount"},
                 {"UstId", "ustId"},
+                {"Bank", "bank"},
+                {"AccountNumber", "accountNumber"},
+                {"BLZ", "blz"},
+                {"IsProspectiveCustomer", "isProspectiveCustomer"},
             });
 
             tables.Add("CommunicationPartners", new TableMapping("CommunicationPartners", "CommunicationPartners", 7)

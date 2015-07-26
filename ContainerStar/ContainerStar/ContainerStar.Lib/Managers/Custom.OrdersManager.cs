@@ -205,8 +205,10 @@ namespace ContainerStar.Lib.Managers
                     result = ReplaceCommonFields(order, result);
                     result = ReplaceBaseOrderFields(order, result);
                     result = ReplaceBaseInvoiceFields(invoice, result, printType);
-                    result = ReplaceContainerInvoicePositions(invoice.InvoicePositions.ToList(), result);
-                    result = ReplaceAdditionalCostInvoicePositions(invoice.InvoicePositions.ToList(), result);
+                    result = ReplaceInvoicePositions(invoice.InvoicePositions.ToList(), result, 
+                        "#ContainerDescription", "#ContainerPrice", "Mietgegenstand: ", true);
+                    result = ReplaceInvoicePositions(invoice.InvoicePositions.ToList(), result, 
+                        "#AdditionalCostDescription", "#AdditionalCostPrice", "Nebenkosten: ", false);
                     result = ReplaceInvoicePrices(invoice, result);
                     break;
                 case PrintTypes.InvoiceStorno:
@@ -636,10 +638,11 @@ namespace ContainerStar.Lib.Managers
             return xmlMainXMLDoc;
         }
         
-        private string ReplaceContainerInvoicePositions(List<InvoicePositions> positions, string xmlMainXMLDoc)
+        private string ReplaceInvoicePositions(List<InvoicePositions> positions, string xmlMainXMLDoc,
+            string parentTag, string priceTag, string titleText, bool isMain)
         {
             var xmlDoc = XDocument.Parse(xmlMainXMLDoc);
-            var temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#ContainerDescription"));
+            var temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains(parentTag));
             var parentTableElement = GetParentElementByName(temp, "<w:tr ");
 
             if (parentTableElement != null)
@@ -647,17 +650,17 @@ namespace ContainerStar.Lib.Managers
                 var prevTableElem = parentTableElement;
 
                 bool firstElem = true;
-                foreach (var position in positions.Where(o => o.Positions.Containers != null))
+                foreach (var position in positions.Where(o => o.Positions.IsMain == isMain && o.Positions.Containers != null))
                 {
                     var price = CalculationHelper.CalculatePositionPrice(position.Positions.IsSellOrder, position.Price,
                         position.Amount, position.FromDate, position.ToDate);
 
                     var rowElem = XElement.Parse(parentTableElement.ToString().
-                        Replace("#ContainerDescription", 
+                        Replace(parentTag, 
                             String.Format("{0}{1} Nr. {2}", firstElem ? "Mietgegenstand: " : "", 
                                 position.Positions.Containers.ContainerTypes.Name,
                                 position.Positions.Containers.Number)).
-                        Replace("#ContainerPrice", price.ToString("N2")));
+                        Replace(priceTag, price.ToString("N2")));
                     prevTableElem.AddAfterSelf(rowElem);
                     prevTableElem = rowElem;
 
@@ -667,34 +670,17 @@ namespace ContainerStar.Lib.Managers
                     }
                 }
 
-                parentTableElement.Remove();
-            }
-
-            return xmlDoc.Root.ToString();
-        }
-
-        private string ReplaceAdditionalCostInvoicePositions(List<InvoicePositions> positions, string xmlMainXMLDoc)
-        {
-            var xmlDoc = XDocument.Parse(xmlMainXMLDoc);
-            var temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#AdditionalCostDescription"));
-            var parentTableElement = GetParentElementByName(temp, "<w:tr ");
-
-            if (parentTableElement != null)
-            {
-                var prevTableElem = parentTableElement;
-
-                bool firstElem = true;
-                foreach (var position in positions.Where(o => o.Positions.AdditionalCosts != null))
+                foreach (var position in positions.Where(o => o.Positions.IsMain == isMain && o.Positions.AdditionalCosts != null))
                 {
                     var price = CalculationHelper.CalculatePositionPrice(true, position.Price,
                         position.Amount, position.FromDate, position.ToDate);
 
                     var rowElem = XElement.Parse(parentTableElement.ToString().
-                        Replace("#AdditionalCostDescription",
-                            String.Format("{0}{1} {2}", firstElem ? "Nebenkosten: " : "",
+                        Replace(parentTag,
+                            String.Format("{0}{1} {2}", firstElem ? titleText : "",
                                 position.Amount,
                                 position.Positions.AdditionalCosts.Description)).
-                        Replace("#AdditionalCostPrice", price.ToString("N2")));
+                        Replace(priceTag, price.ToString("N2")));
                     prevTableElem.AddAfterSelf(rowElem);
                     prevTableElem = rowElem;
 
@@ -709,7 +695,7 @@ namespace ContainerStar.Lib.Managers
 
             return xmlDoc.Root.ToString();
         }
-
+        
         private string ReplaceInvoicePrices(Invoices invoice, string xmlMainXMLDoc)
         {
             if (invoice.InvoicePositions != null && invoice.InvoicePositions.Count != 0)

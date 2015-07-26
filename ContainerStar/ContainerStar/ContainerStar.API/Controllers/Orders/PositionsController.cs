@@ -24,6 +24,7 @@ namespace ContainerStar.API.Controllers
             model.orderId = entity.OrderId;
             model.isSellOrder = entity.IsSellOrder;
             model.containerId = entity.ContainerId;
+            model.isMain = entity.IsMain;
 
             if(entity.ContainerId.HasValue)
             {
@@ -54,6 +55,7 @@ namespace ContainerStar.API.Controllers
             entity.Price = model.price;
             entity.FromDate = model.fromDate.HasValue ? model.fromDate.Value.Date : DateTime.Now.Date;
             entity.ToDate = model.toDate.HasValue ? model.toDate.Value.Date : DateTime.Now.Date;
+            entity.IsMain = model.isMain;
 
             if (model.containerId.HasValue)
                 entity.Amount = 1;

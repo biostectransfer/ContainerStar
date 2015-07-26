@@ -69,6 +69,10 @@ namespace ContainerStar.Lib.Data
                 .HasColumnName(Positions.Fields.Amount)
                 .IsRequired();
 
+            Property(t => t.IsMain)
+                .HasColumnName(Positions.Fields.IsMain)
+                .IsRequired();
+
 
             //Relationships
             HasRequired(p => p.Orders)

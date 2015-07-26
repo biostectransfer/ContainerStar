@@ -123,7 +123,7 @@ namespace ContainerStar.Contracts.Entities
         public bool IsOffer{ get; set; }
         public string DeliveryPlace{ get; set; }
         public string Street{ get; set; }
-        public int Zip{ get; set; }
+        public string Zip{ get; set; }
         public string City{ get; set; }
         public string Comment{ get; set; }
         public DateTime? OrderDate{ get; set; }
