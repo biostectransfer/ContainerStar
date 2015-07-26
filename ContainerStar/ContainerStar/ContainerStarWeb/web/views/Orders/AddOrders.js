@@ -147,6 +147,10 @@ define([
                         return val != undefined && val != "" && !self.model.get('isOffer');
                     }
                 },
+                '.remove': {
+                    observe: 'id',
+                    visible: true
+                }
             };
             
             return result;
@@ -154,7 +158,7 @@ define([
 
         render: function () {
 
-            view.__super__.render.apply(this, arguments);
+            view.__super__.renderWithoutBindings.apply(this, arguments);
 
             this.stickit();
 
@@ -199,11 +203,31 @@ define([
                 }
             });
             
+            if (!self.model.isNew()) {
+                var model = new Backbone.Model({}),
+                options = _.extend({}, {
+                    model: model
+                }),
+                options = _.extend(options, self.options),
+                detView = new self.tabView(options);
+
+                self.showView(detView, self.containerSelector);
+            }
+            
             return this;
         },
 
         save: function () {
-            
+
+            var self = this;
+            require(['base/information-view'], function (View) {
+                var view = new View({
+                    title: 'Information speichern',
+                    message: 'Information wurde erfolgreich gespeichert.'
+                });
+                self.addView(view);
+                self.$el.append(view.render().$el);
+            });
         },
 
         events: {

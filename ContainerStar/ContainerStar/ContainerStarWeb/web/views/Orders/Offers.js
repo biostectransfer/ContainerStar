@@ -50,7 +50,7 @@ define([
         selectable: true,
 
         defaultSorting: {
-            field: 'id',
+            field: 'createDate',
             dir: 'desc'
         },
 
@@ -68,6 +68,7 @@ define([
         columns: function () {
 
             return [
+				{ field: 'createDate', title: this.resources.createDate, format: '{0:d}' },
 				{ field: 'customerName', title: this.resources.customerId },
 				{ field: 'communicationPartnerTitle', title: this.resources.communicationPartnerId },
             ];

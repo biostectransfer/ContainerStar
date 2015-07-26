@@ -28,6 +28,20 @@
 		successAction: null,
 		cancelAction: null,		
 
+		renderWithoutBindings: function () {
+
+		    var self = this;
+		    view.__super__.render.apply(self, arguments);
+
+		    if (!Application.canTableItemBeEdit(self.tableName))
+		        self.$('.save').remove();
+
+		    if (!Application.canTableItemBeDeleted(self.tableName))
+		        self.$('.remove').remove();		    
+            
+		    return self;
+		},
+
 		render: function () {
 
 		    var self = this;

@@ -74,8 +74,17 @@ define([
             return this;
         },
         
-        save: function(){
+        save: function () {
 
+            var self = this;
+            require(['base/information-view'], function (View) {
+                var view = new View({
+                    title: 'Information speichern',
+                    message: 'Information wurde erfolgreich gespeichert.'
+                });
+                self.addView(view);
+                self.$el.append(view.render().$el);
+            });
         },
 
         events: {

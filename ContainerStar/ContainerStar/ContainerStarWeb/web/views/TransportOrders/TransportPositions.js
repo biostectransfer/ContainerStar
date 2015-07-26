@@ -73,7 +73,6 @@
                             self.grid.refresh();                            
                         },
                         error: function (model, response) {
-                            debugger;
                             //TODO
                         }
                     });

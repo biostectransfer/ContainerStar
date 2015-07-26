@@ -53,7 +53,7 @@
 	                        callback(events);
 	                    },
 	                    error: function (e) {
-	                        debugger;
+
 	                        //alert('there was an error while fetching events!');
 	                    }
 	                });

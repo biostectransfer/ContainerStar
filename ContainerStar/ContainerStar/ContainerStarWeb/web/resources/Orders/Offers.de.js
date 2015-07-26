@@ -13,6 +13,7 @@ define(function () {
 		printRentOrder: 'MV drucken',
 		rentOrderNumber: 'MV-Nummer',
 		printOffer: 'Angebot drucken',
+	    createDate: 'Datum',
 	};
 
 	return resources;

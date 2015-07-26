@@ -4,7 +4,7 @@
     'use strict';
     
     var view = BaseView.extend({
-
+        
         isSellOrder: false,
 
         render: function () {

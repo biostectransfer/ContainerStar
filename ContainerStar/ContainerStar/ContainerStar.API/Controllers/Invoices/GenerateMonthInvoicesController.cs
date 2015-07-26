@@ -35,7 +35,10 @@ namespace ContainerStar.API.Controllers.Invoices
             var invoicesForCurrentMonth = new List<ContainerStar.Contracts.Entities.Invoices>();
 
             var orders = ordersManager.GetEntities(o => 
-                !o.DeleteDate.HasValue && o.OrderStatus == OrderStatusTypes.Open && !o.IsOffer).ToList();
+                !o.DeleteDate.HasValue && 
+                o.OrderStatus == OrderStatusTypes.Open && 
+                !o.IsOffer &&
+                o.AutoBill).ToList();
 
             foreach (var order in orders)
             {

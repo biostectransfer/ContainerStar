@@ -131,7 +131,6 @@
                             self.grid.refresh();                            
                         },
                         error: function (model, response) {
-                            debugger;
                             //TODO
                         }
                     });
@@ -166,7 +165,6 @@
                             self.grid.refresh();
                         },
                         error: function (model, response) {
-                            debugger;
                             //TODO
                         }
                     });                    
