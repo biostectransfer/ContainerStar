@@ -98,7 +98,7 @@
         selectable: true,
 
         defaultSorting: {
-            field: 'id',
+            field: 'rentOrderNumber',
             dir: 'desc'
         },
 

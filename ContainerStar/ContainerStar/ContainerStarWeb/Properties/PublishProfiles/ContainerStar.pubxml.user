@@ -22,22 +22,22 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>07/02/2015 21:53:51</publishTime>
     </File>
     <File Include="bin/ContainerStar..Contracts.dll">
-      <publishTime>07/13/2015 10:38:06</publishTime>
+      <publishTime>07/23/2015 14:10:27</publishTime>
     </File>
     <File Include="bin/ContainerStar.API.dll">
-      <publishTime>07/13/2015 10:38:09</publishTime>
+      <publishTime>07/23/2015 14:10:30</publishTime>
     </File>
     <File Include="bin/ContainerStar.Configuration.dll">
-      <publishTime>07/13/2015 10:38:09</publishTime>
+      <publishTime>07/23/2015 14:10:30</publishTime>
     </File>
     <File Include="bin/ContainerStar.Lib.dll">
-      <publishTime>07/13/2015 10:38:07</publishTime>
+      <publishTime>07/23/2015 14:10:28</publishTime>
     </File>
     <File Include="bin/ContainerStarWeb.dll">
-      <publishTime>07/13/2015 10:38:13</publishTime>
+      <publishTime>07/23/2015 14:10:32</publishTime>
     </File>
     <File Include="bin/CoreBase.dll">
-      <publishTime>07/13/2015 10:38:06</publishTime>
+      <publishTime>07/20/2015 14:06:42</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>06/28/2015 01:27:07</publishTime>
@@ -847,7 +847,7 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/13/2015 10:38:16</publishTime>
+      <publishTime>07/23/2015 14:10:32</publishTime>
     </File>
     <File Include="web.libs/backbone.js">
       <publishTime>06/28/2015 01:27:05</publishTime>
@@ -1336,7 +1336,7 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>07/02/2015 13:18:37</publishTime>
     </File>
     <File Include="web/resources/Invoices/AddInvoices.de.js">
-      <publishTime>07/02/2015 01:31:16</publishTime>
+      <publishTime>07/13/2015 20:21:57</publishTime>
     </File>
     <File Include="web/resources/Invoices/AddInvoices.en.js">
       <publishTime>07/02/2015 01:32:34</publishTime>
@@ -1390,7 +1390,7 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>07/11/2015 23:06:39</publishTime>
     </File>
     <File Include="web/resources/master.de.js">
-      <publishTime>07/12/2015 11:44:27</publishTime>
+      <publishTime>07/17/2015 17:37:00</publishTime>
     </File>
     <File Include="web/resources/master.en.js">
       <publishTime>07/12/2015 11:44:41</publishTime>
@@ -2320,7 +2320,7 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>07/06/2015 22:23:11</publishTime>
     </File>
     <File Include="web/views/Invoices/Invoices.js">
-      <publishTime>07/11/2015 18:59:49</publishTime>
+      <publishTime>07/13/2015 20:24:44</publishTime>
     </File>
     <File Include="web/views/Invoices/InvoicesRelationships.js">
       <publishTime>07/01/2015 07:11:16</publishTime>
@@ -2365,7 +2365,7 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>07/11/2015 18:15:26</publishTime>
     </File>
     <File Include="web/views/Orders/Offers.js">
-      <publishTime>07/11/2015 18:52:54</publishTime>
+      <publishTime>07/13/2015 20:23:56</publishTime>
     </File>
     <File Include="web/views/Orders/Orders.js">
       <publishTime>07/11/2015 18:51:49</publishTime>

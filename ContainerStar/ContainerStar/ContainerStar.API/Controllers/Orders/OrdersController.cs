@@ -129,7 +129,6 @@ namespace ContainerStar.API.Controllers
             entity.IsOffer = model.isOffer;
             entity.AutoProlongation = model.autoProlongation;
             entity.CustomerOrderNumber = model.customerOrderNumber;
-            entity.Status = model.status;
 
             if (entity.IsNew())
             {

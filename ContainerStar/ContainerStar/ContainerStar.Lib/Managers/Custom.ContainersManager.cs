@@ -3,21 +3,28 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ContainerStar.Contracts.Entities;
+using ContainerStar.Contracts.Enums;
 
 namespace ContainerStar.Lib.Managers
 {
     public partial class ContainersManager
     {
-        public IQueryable<Positions> GetActualPositions(DateTime dateFrom, DateTime dateTo)
+        public IQueryable<Positions> GetActualPositions()
         {
             return DataContext.GetSet<Positions>()
-                .Where(r => 
-                    !r.DeleteDate.HasValue &&
-                    r.ContainerId.HasValue && 
-                    (!r.IsSellOrder || r.Containers.IsVirtual) && 
-                    !r.Orders.IsOffer
-                )
                 .Where(r =>
+                    !r.DeleteDate.HasValue &&
+                    r.ContainerId.HasValue &&
+                    (!r.IsSellOrder || r.Containers.IsVirtual) &&
+                    !r.Orders.IsOffer &&
+                    r.Orders.Status == (int)OrderStatusTypes.Open
+                );
+        }
+
+        public IQueryable<Positions> GetActualPositions(DateTime dateFrom, DateTime dateTo)
+        {
+            return GetActualPositions().
+                Where(r =>
                     (r.FromDate >= dateFrom && r.FromDate <= dateTo) || //from date inside period
                     (r.ToDate >= dateFrom && r.ToDate <= dateTo) || // to date inside period
                     (r.FromDate <= dateFrom && r.ToDate >= dateTo)).AsQueryable(); //period is a part of an existing one
@@ -46,12 +53,7 @@ namespace ContainerStar.Lib.Managers
         {
             if (equipmentIds == null || equipmentIds.Count() == 0)
             {
-                return DataContext.GetSet<Positions>()
-                    .Where(r =>
-                        !r.DeleteDate.HasValue &&
-                        r.ContainerId.HasValue &&
-                        (!r.IsSellOrder || r.Containers.IsVirtual) &&
-                        !r.Orders.IsOffer)
+                return GetActualPositions()
                     .Where(r => (!containerTypeId.HasValue || r.Containers.ContainerTypeId == containerTypeId.Value))
                     .Where(r => (String.IsNullOrEmpty(name) || r.Containers.Number.ToLower().Contains(name.ToLower())))
                     .Where(r =>
@@ -61,12 +63,7 @@ namespace ContainerStar.Lib.Managers
             }
             else
             {
-                return DataContext.GetSet<Positions>()
-                    .Where(r =>
-                        !r.DeleteDate.HasValue &&
-                        r.ContainerId.HasValue &&
-                        (!r.IsSellOrder || r.Containers.IsVirtual) &&
-                        !r.Orders.IsOffer)
+                return GetActualPositions()
                     .Where(r => (!containerTypeId.HasValue || r.Containers.ContainerTypeId == containerTypeId.Value))
                     .Where(r => (String.IsNullOrEmpty(name) || r.Containers.Number.ToLower().Contains(name.ToLower())))
                     .Where(r =>

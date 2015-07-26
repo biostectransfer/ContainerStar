@@ -9,7 +9,7 @@
 		searchTitle: 'Suchkriterien',
 		containerTypeId: 'Ausführung',
 		pleaseSelect: 'Bitte auswählen',
-		name: 'Text',
+		name: 'Nummer',
 	    equipments: 'Ausstattungen'
 	};
 
