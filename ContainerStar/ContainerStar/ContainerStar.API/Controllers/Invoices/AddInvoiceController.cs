@@ -83,7 +83,15 @@ namespace ContainerStar.API.Controllers.Invoices
                 if(orderPosition.AdditionalCosts != null)
                 {
                     var oldAmount = invoicePositions.Sum(o => o.Amount);
-                    if (orderPosition.Amount > oldAmount)
+
+                    if(oldAmount == 0)
+                    {
+                        if(orderPosition.AdditionalCosts.IncludeInFirstBill)
+                        {
+                            amount = orderPosition.Amount;
+                        }
+                    }
+                    else if (orderPosition.Amount > oldAmount)
                     {
                         amount = orderPosition.Amount - oldAmount;
                     }
