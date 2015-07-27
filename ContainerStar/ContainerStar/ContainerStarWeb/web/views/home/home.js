@@ -8,7 +8,7 @@
 ], function (BaseView, Calendar, KendoWidgetFormMixin, KendoValidatorFormMixin, BoundForm, Model) {
 	'use strict';
     
-	var bindCalendar = function (self) {
+    var bindCalendar = function (self, needLoadData) {
 
 	    var model = self.model;
 
@@ -25,43 +25,43 @@
 	            eventLimit: true, // allow "more" link when too many events,
                 	            
 	            events: function (start, end, timezone, callback) {
+    
+	                if (needLoadData) {
+	                    $.ajax({
+	                        url: Application.apiUrl + 'showContainer',
+	                        type: 'POST',
+	                        data: {
+	                            containerTypeId: model.get('containerTypeId'),
+	                            name: model.get('name'),
+	                            equipments: model.get('equipments'),
+	                            startDateStr: start.date() + '.' + (start.month() + 1) + '.' + start.year(),
+	                            endDateStr: end.date() + '.' + (end.month() + 1) + '.' + end.year(),
+	                            searchFreeContainer: model.get('searchFreeContainer')
+	                        },
+	                        success: function (doc) {
 
-	                $.ajax({
-	                    url: Application.apiUrl + 'showContainer',
-	                    type: 'POST',
-	                    data: {
-	                        containerTypeId: model.get('containerTypeId'),
-	                        name: model.get('name'),
-	                        equipments: model.get('equipments'),
-	                        startDateStr: start.date() + '.' + (start.month() + 1) + '.' + start.year(),
-	                        endDateStr: end.date() + '.' + (end.month() + 1) + '.' + end.year(),
-	                        searchFreeContainer: model.get('searchFreeContainer')
-	                    },
-	                    success: function (doc) {
+	                            var events = [];
+	                            $(doc).each(function () {
 
-	                        var events = [];
-	                        $(doc).each(function () {
-
-	                            events.push({
-	                                title: this.title,
-	                                start: this.start,
-	                                end: this.end,
-	                                url: this.url,
-	                                color: model.get('searchFreeContainer') == true ? '#009D59' : ''
+	                                events.push({
+	                                    title: this.title,
+	                                    start: this.start,
+	                                    end: this.end,
+	                                    url: this.url,
+	                                    color: model.get('searchFreeContainer') == true ? '#009D59' : ''
+	                                });
 	                            });
-	                        });
-	                        callback(events);
-	                    },
-	                    error: function (e) {
-
-	                        //alert('there was an error while fetching events!');
-	                    }
-	                });
+	                            callback(events);
+	                        },
+	                        error: function (e) {
+	                            //alert('there was an error while fetching events!');
+	                        }
+	                    });
+	                }
 	            }
 	        });
 	    });
 	},
-
 
 	view = BaseView.extend({
 
@@ -87,7 +87,6 @@
 	            }	            
 	        };
 
-
 	        return result;
 	    },
 
@@ -103,9 +102,14 @@
 		render: function () {
 		    view.__super__.render.apply(this, arguments);
 
-		    var self = this;
+		    var self = this,
+                needLoadData = true;
 
-		    setTimeout(function () { bindCalendar(self); }, 0);
+		    if (self.options.searchFreeContainer) {
+		        needLoadData = false;
+		    }
+
+		    setTimeout(function () { bindCalendar(self, needLoadData); }, 0);
 
 			return this;
 		},
@@ -115,15 +119,19 @@
 
 		        var self = this;
 		        self.$el.find('#calendar').fullCalendar('destroy');
-		        bindCalendar(self);		        
+		        bindCalendar(self, true);		        
 		    },
 		    'click .cancel': function (e) {
 
-		        var self = this;
+		        var self = this,
+                    searchFreeContainer = self.options.searchFreeContainer;
+
 		        self.model.clear().set(self.model.defaults);
 
+		        self.model.set('searchFreeContainer', searchFreeContainer);
+
 		        self.$el.find('#calendar').fullCalendar('destroy');
-		        bindCalendar(self);		        
+		        bindCalendar(self, true);		        
 		    },
 		}
 	});

@@ -51,9 +51,12 @@
 		},
 
 		select: function (route) {
+
 			this.$('.menu li').removeClass('selected');
 
-			this.$('.menu li a[href=#' + route + ']').parent().addClass('selected');
+			if (route) {
+			    this.$('.menu li a[href=' + route + ']').parent().addClass('selected');
+			}
 		}
 	});
 
