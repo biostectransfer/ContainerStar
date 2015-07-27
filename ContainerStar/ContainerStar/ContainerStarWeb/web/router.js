@@ -24,7 +24,7 @@
 		    
 		    var commonRoutes =
             {
-                'Home': _.partial(BaseRouter.showView, this, 'l!t!home/home', { ContainerTypes: true, Equipments: true }, { searchFreeContainer: false }),
+                'Home': _.partial(BaseRouter.showView, this, 'l!t!home/home', { ContainerTypesForDisposition: true, Equipments: true }, { searchFreeContainer: false }),
                 'FreeContainers': _.partial(BaseRouter.showView, this, 'l!t!home/home', { ContainerTypes: true, Equipments: true }, { searchFreeContainer: true }),
                 'Settings': _.partial(BaseRouter.showView, this, 'l!t!Settings/Settings'),
                 'Offers': _.partial(BaseRouter.showView, this, 'l!t!Orders/Offers', { ContainerTypes: true, Equipments: true }, { isOffer: true }),

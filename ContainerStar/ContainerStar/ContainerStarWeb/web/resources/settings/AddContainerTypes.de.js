@@ -10,6 +10,7 @@ define(function () {
 		pleaseSelect: 'Bitte auswählen',
 		name: 'Bauart',	
 		comment: 'Bemerkung',	
+		dispositionRelevant: 'Disposition',	
 	};
 
 	return resources;

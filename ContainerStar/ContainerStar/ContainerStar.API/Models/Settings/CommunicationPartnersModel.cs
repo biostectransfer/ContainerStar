@@ -22,7 +22,6 @@ namespace ContainerStar.API.Models.Settings
         /// <summary>
         ///     Model property for <see cref="CommunicationPartners.FirstName"/> entity
         /// </summary>
-        [Required]
         [DataMember]
         public string firstName{ get; set; }
         /// <summary>
@@ -34,7 +33,6 @@ namespace ContainerStar.API.Models.Settings
         /// <summary>
         ///     Model property for <see cref="CommunicationPartners.Phone"/> entity
         /// </summary>
-        [Required]
         [DataMember]
         public string phone{ get; set; }
         /// <summary>

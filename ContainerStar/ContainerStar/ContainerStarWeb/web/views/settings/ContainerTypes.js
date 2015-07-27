@@ -25,6 +25,7 @@ define([
 			return [
 				{ field: 'name', title: this.resources.name },
 				{ field: 'comment', title: this.resources.comment },
+				{ field: 'dispositionRelevant', title: this.resources.dispositionRelevant , headerTitle: this.resources.dispositionRelevant, checkbox: true},
 			];
 		}
 

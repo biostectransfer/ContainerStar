@@ -10,13 +10,13 @@ define(function () {
 				                    validation: { required: true, maxLength: 128 } }			
 			,firstName: { type: "string", 
 			                        editable: Application.canTableItemBeEdit('CommunicationPartners', 'firstName'), 
-				                    validation: { required: true, maxLength: 128 } }			
+				                    validation: { required: false, maxLength: 128 } }			
 			,customerId: { type: "number", 
 			                        editable: Application.canTableItemBeEdit('CommunicationPartners', 'customerId'), 
 				                    validation: { required: true } }			
 			,phone: { type: "string", 
 			                        editable: Application.canTableItemBeEdit('CommunicationPartners', 'phone'), 
-				                    validation: { required: true, maxLength: 20 } }			
+				                    validation: { required: false, maxLength: 20 } }			
 			,mobile: { type: "string", 
 			                        editable: Application.canTableItemBeEdit('CommunicationPartners', 'mobile'), 
 				                    validation: { required: false, maxLength: 20 } }			

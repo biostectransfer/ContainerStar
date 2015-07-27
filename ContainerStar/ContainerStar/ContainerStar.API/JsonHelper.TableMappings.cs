@@ -105,10 +105,11 @@ namespace ContainerStar.API
                 {"Email", "email"},
             });
 
-            tables.Add("ContainerTypes", new TableMapping("ContainerTypes", "ContainerTypes", 2)
+            tables.Add("ContainerTypes", new TableMapping("ContainerTypes", "ContainerTypes", 3)
             {
                 {"Name", "name"},
                 {"Comment", "comment"},
+                {"DispositionRelevant", "dispositionRelevant"},
             });
 
             tables.Add("ContainerType_Equipment_Rsp", new TableMapping("ContainerType_Equipment_Rsp", "ContainerTypeEquipmentRsp", 3)

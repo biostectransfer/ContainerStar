@@ -50,6 +50,10 @@ namespace ContainerStar.Lib.Data
             Property(t => t.DeleteDate)
                 .HasColumnName(ContainerTypes.Fields.DeleteDate);
 
+            Property(t => t.DispositionRelevant)
+                .HasColumnName(ContainerTypes.Fields.DispositionRelevant)
+                .IsRequired();
+
 
             //Relationships
         }

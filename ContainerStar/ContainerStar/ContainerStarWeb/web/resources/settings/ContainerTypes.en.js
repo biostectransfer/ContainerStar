@@ -11,6 +11,7 @@ define(function () {
 		pleaseSelect: 'Please select',
 		name: 'Name',	
 		comment: 'Comment',	
+		dispositionRelevant: 'Disposition',	
 	};
 
 	return resources;

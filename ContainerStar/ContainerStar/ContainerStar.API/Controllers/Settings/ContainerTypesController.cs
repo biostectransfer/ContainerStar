@@ -22,6 +22,7 @@ namespace ContainerStar.API.Controllers.Settings
         {
             model.name = entity.Name;
             model.comment = entity.Comment;
+            model.dispositionRelevant = entity.DispositionRelevant;
             model.createDate = ((ISystemFields)entity).CreateDate;
             model.changeDate = ((ISystemFields)entity).ChangeDate;
         }
@@ -29,6 +30,7 @@ namespace ContainerStar.API.Controllers.Settings
         {
             entity.Name = model.name;
             entity.Comment = model.comment;
+            entity.DispositionRelevant = model.dispositionRelevant;
         }
     }
 }

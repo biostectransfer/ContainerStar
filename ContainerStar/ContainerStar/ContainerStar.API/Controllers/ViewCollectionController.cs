@@ -15,6 +15,8 @@ namespace ContainerStar.API.Controllers
     {
         public bool CommunicationPartners { get; set; }
         public bool PaymentIntervals { get; set; }
+        public bool PaymentTypes { get; set; }
+        public bool ContainerTypesForDisposition { get; set; }
     }
 
     public class IdNameModel<TId>
@@ -55,7 +57,26 @@ namespace ContainerStar.API.Controllers
                     new { id = 10, name = "10 Tage"},
                     new { id = 30, name = "30 Tage"},
                 });
-            
+
+            if (model.PaymentTypes)
+                result.Add("PaymentIntervals", new[]
+                {
+                    new { id = 0, name = "Monat"},
+                    new { id = 1, name = "Tag"},
+                    new { id = 2, name = "Pauschal"},
+                });
+
+
+            if (model.ContainerTypesForDisposition)
+            {
+                var manager = (IContainerTypesManager)GlobalConfiguration.Configuration.DependencyResolver.
+                    GetService(typeof(IContainerTypesManager));
+                var containerTypes = manager.GetEntities().Where(o => o.DispositionRelevant && !o.DeleteDate.HasValue).ToList();
+
+                result.Add("ContainerTypesForDisposition", containerTypes.Cast<IHasTitle<int>>().OrderBy(o => o.EntityTitle)
+                         .Select(o => new IdNameModel<int> { id = o.Id, name = o.EntityTitle }));
+            }
+
             new MasterDataViewCollectionControllerFactory().GetViewCollections(
                 GlobalConfiguration.Configuration.DependencyResolver, model, result);
                        			

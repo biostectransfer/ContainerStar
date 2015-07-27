@@ -45,3 +45,6 @@ ALTER TABLE [dbo].[Invoices]
  [PayPartTwo] int NULL,
  [PayPartTree] int NULL
 GO
+ALTER TABLE [dbo].[ContainerTypes]
+ ADD [DispositionRelevant] bit NOT NULL default (1)
+GO

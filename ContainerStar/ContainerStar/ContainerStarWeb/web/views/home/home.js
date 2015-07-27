@@ -74,7 +74,7 @@
 	                observe: 'containerTypeId',
 	                selectOptions: {
 	                    labelPath: 'name', valuePath: 'id',
-	                    collection: self.options.containerTypes,
+	                    collection: self.options.containerTypesForDisposition,
 	                    defaultOption: { label: self.resources.pleaseSelect, value: null }
 	                },
 	            },

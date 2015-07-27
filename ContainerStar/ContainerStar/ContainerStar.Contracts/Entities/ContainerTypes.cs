@@ -43,6 +43,10 @@ namespace ContainerStar.Contracts.Entities
             /// Column name 'DeleteDate' for property <see cref="ContainerTypes.DeleteDate"/>
             /// </summary>
             public static readonly string DeleteDate = "DeleteDate";
+            /// <summary>
+            /// Column name 'DispositionRelevant' for property <see cref="ContainerTypes.DispositionRelevant"/>
+            /// </summary>
+            public static readonly string DispositionRelevant = "DispositionRelevant";
           
         }
         #endregion
@@ -52,6 +56,7 @@ namespace ContainerStar.Contracts.Entities
         public DateTime CreateDate{ get; set; }
         public DateTime ChangeDate{ get; set; }
         public DateTime? DeleteDate{ get; set; }
+        public bool DispositionRelevant{ get; set; }
         public virtual ICollection<ContainerTypeEquipmentRsp> ContainerTypeEquipmentRsps{ get; set; }
         public virtual ICollection<Containers> Containers{ get; set; }
         string IHasTitle<int>.EntityTitle
@@ -81,6 +86,7 @@ namespace ContainerStar.Contracts.Entities
                        CreateDate = CreateDate,
                        ChangeDate = ChangeDate,
                        DeleteDate = DeleteDate,
+                       DispositionRelevant = DispositionRelevant,
         	           };
         }
     }

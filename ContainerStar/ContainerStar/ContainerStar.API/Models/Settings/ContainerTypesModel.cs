@@ -24,6 +24,11 @@ namespace ContainerStar.API.Models.Settings
         /// </summary>
         [DataMember]
         public string comment{ get; set; }
+        /// <summary>
+        ///     Model property for <see cref="ContainerTypes.DispositionRelevant"/> entity
+        /// </summary>
+        [DataMember]
+        public bool dispositionRelevant{ get; set; }
 
     }
 }

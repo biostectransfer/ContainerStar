@@ -11,6 +11,9 @@ define(function () {
 			,comment: { type: "string", 
 			                        editable: Application.canTableItemBeEdit('ContainerTypes', 'comment'), 
 				                    validation: { required: false, maxLength: 256 } }			
+			,dispositionRelevant: { type: "boolean", 
+			                        editable: Application.canTableItemBeEdit('ContainerTypes', 'dispositionRelevant'), 
+				                    validation: { required: false } }			
 		},
 		defaults: function () {
 			var dnf = new Date();
