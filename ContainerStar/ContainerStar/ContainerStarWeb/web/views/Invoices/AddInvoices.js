@@ -88,6 +88,7 @@ define([
         save: function () {
 
             var self = this;
+
             require(['base/information-view'], function (View) {
                 var view = new View({
                     title: 'Information speichern',

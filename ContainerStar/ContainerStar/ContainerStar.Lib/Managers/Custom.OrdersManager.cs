@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Packaging;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Linq;
 
@@ -13,6 +14,8 @@ namespace ContainerStar.Lib.Managers
 {
     public partial class OrdersManager
     {
+        private static Regex htmlRegex = new Regex("<.*?>", RegexOptions.Compiled);
+
         #region Prepare Print
 
         public MemoryStream PrepareRentOrderPrintData(int id, string path, ITaxesManager taxesManager)
@@ -250,10 +253,10 @@ namespace ContainerStar.Lib.Managers
 
         private string ReplaceCommonFields(Orders order, string xmlMainXMLDoc)
         {
-            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CustomerName", order.CustomerName);
-            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CustomerStreet", order.Customers.Street);
-            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CustomerZip", order.Customers.Zip.ToString());
-            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CustomerCity", order.Customers.City);
+            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerName", order.CustomerName);
+            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerStreet", order.Customers.Street);
+            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerZip", order.Customers.Zip.ToString());
+            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerCity", order.Customers.City);
             xmlMainXMLDoc = xmlMainXMLDoc.Replace("#Today", DateTime.Now.ToShortDateString());
 
             return xmlMainXMLDoc;
@@ -262,23 +265,23 @@ namespace ContainerStar.Lib.Managers
         private string ReplaceBaseOrderFields(Orders order, string xmlMainXMLDoc)
         {
             xmlMainXMLDoc = xmlMainXMLDoc.Replace("#RentOrderNumber", order.RentOrderNumber);
-            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#DeliveryPlace", order.DeliveryPlace);
-            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#Street", order.Street);
-            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#ZIP", order.Zip.ToString());
-            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#City", order.City);
+            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#DeliveryPlace", order.DeliveryPlace);
+            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#Street", order.Street);
+            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#ZIP", order.Zip.ToString());
+            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#City", order.City);
 
             return xmlMainXMLDoc;
         }
 
         private string ReplaceBaseOfferFields(Orders order, string xmlMainXMLDoc)
         {
-            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CustomerPhone", order.Customers.Phone);
-            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CustomerFax", order.Customers.Fax);
-            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CustomerNumber", order.Customers.Number);
+            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerPhone", order.Customers.Phone);
+            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerFax", order.Customers.Fax);
+            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerNumber", order.Customers.Number);
 
             if (order.CommunicationPartners != null)
             {
-                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CommunicationPartnerName",
+                xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CommunicationPartnerName",
                     String.Format("{0} {1}", order.CommunicationPartners.FirstName, order.CommunicationPartners.Name));
             }
             else
@@ -373,8 +376,8 @@ namespace ContainerStar.Lib.Managers
                 {
                     foreach (var position in positions)
                     {
-                        var textElem = XElement.Parse(parentTableElement.ToString().
-                            Replace("#AdditionalCostDescription", position.AdditionalCosts.Description).
+                        var textElem = XElement.Parse(ReplaceFieldValue(
+                            parentTableElement.ToString(), "#AdditionalCostDescription", position.AdditionalCosts.Description).
                             Replace("#AdditionalCostPrice", Math.Round(position.Price * position.Amount, 2).ToString("N2")));
                         prevElement.AddAfterSelf(textElem);
                         prevElement = textElem;
@@ -407,8 +410,8 @@ namespace ContainerStar.Lib.Managers
             {
                 foreach (var position in positions)
                 {
-                    var textElem = XElement.Parse(parentTableElement.ToString().
-                        Replace("#RentPositionDescription", position.Containers.ContainerTypes.Name).
+                    var textElem = XElement.Parse(ReplaceFieldValue(
+                        parentTableElement.ToString(), "#RentPositionDescription", position.Containers.ContainerTypes.Name).
                         Replace("#RentPrice", Math.Round(position.Price / (double)30, 2).ToString("N2")));
                     prevElement.AddAfterSelf(textElem);
                     prevElement = textElem;
@@ -440,9 +443,9 @@ namespace ContainerStar.Lib.Managers
                     var textElem = GetParentElementByName(temp2, "<w:p ");
                     var prevTextElem = textElem;
 
-                    var elem = XElement.Parse(textElem.ToString().
-                        Replace("#ContainerDescription", String.Format("*\t 1 Stück {0}",
-                        position.Containers.ContainerTypes.Name)));
+                    var elem = XElement.Parse(ReplaceFieldValue(
+                        textElem.ToString(), "#ContainerDescription", 
+                        String.Format("*\t 1 Stück {0}", position.Containers.ContainerTypes.Name)));
 
                     prevTextElem.AddAfterSelf(elem);
                     prevTextElem = elem;
@@ -464,8 +467,8 @@ namespace ContainerStar.Lib.Managers
 
                     foreach (var equipment in position.Containers.ContainerEquipmentRsps)
                     {
-                        elem = XElement.Parse(textElem.ToString().
-                            Replace("#ContainerDescription",
+                        elem = XElement.Parse(ReplaceFieldValue(
+                            textElem.ToString(), "#ContainerDescription",
                             String.Format("{0} x {1}", equipment.Amount, equipment.Equipments.Description)));
 
                         prevTextElem.AddAfterSelf(elem);
@@ -500,7 +503,7 @@ namespace ContainerStar.Lib.Managers
 
             xmlMainXMLDoc = xmlMainXMLDoc.Replace("#InvoiceNumber", invoice.InvoiceNumber);
             xmlMainXMLDoc = xmlMainXMLDoc.Replace("#InvoiceDate", invoice.CreateDate.ToShortDateString());
-            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CustomerNumber", order.Customers.Number);
+            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerNumber", order.Customers.Number);
 
             xmlMainXMLDoc = ReplaceOrderedFromInfo(xmlMainXMLDoc, order);
             
@@ -529,7 +532,7 @@ namespace ContainerStar.Lib.Managers
             {
                 if (!String.IsNullOrEmpty(order.OrderedFrom) || order.OrderDate.HasValue)
                 {
-                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#OrderedFromInfo", String.Format("{0}{1}{2}",
+                    xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#OrderedFromInfo", String.Format("{0}{1}{2}",
                         order.OrderDate.HasValue ? order.OrderDate.Value.ToShortDateString() : String.Empty,
                         !String.IsNullOrEmpty(order.OrderedFrom) ? " durch " : String.Empty,
                         !String.IsNullOrEmpty(order.OrderedFrom) ? order.OrderedFrom : String.Empty));
@@ -553,7 +556,7 @@ namespace ContainerStar.Lib.Managers
             {
                 if (!String.IsNullOrEmpty(order.CustomerOrderNumber))
                 {
-                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CustomerOrderNumber", order.CustomerOrderNumber);
+                    xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerOrderNumber", order.CustomerOrderNumber);
                 }
                 else
                 {
@@ -598,7 +601,7 @@ namespace ContainerStar.Lib.Managers
             {
                 if (!String.IsNullOrEmpty(order.Customers.UstId))
                 {
-                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CustomerUstId", order.Customers.UstId);
+                    xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerUstId", order.Customers.UstId);
                 }
                 else
                 {
@@ -655,8 +658,8 @@ namespace ContainerStar.Lib.Managers
                     var price = CalculationHelper.CalculatePositionPrice(position.Positions.IsSellOrder, position.Price,
                         position.Amount, position.FromDate, position.ToDate);
 
-                    var rowElem = XElement.Parse(parentTableElement.ToString().
-                        Replace(parentTag, 
+                    var rowElem = XElement.Parse(ReplaceFieldValue(
+                        parentTableElement.ToString(), parentTag, 
                             String.Format("{0}{1} Nr. {2}", firstElem ? "Mietgegenstand: " : "", 
                                 position.Positions.Containers.ContainerTypes.Name,
                                 position.Positions.Containers.Number)).
@@ -675,8 +678,8 @@ namespace ContainerStar.Lib.Managers
                     var price = CalculationHelper.CalculatePositionPrice(true, position.Price,
                         position.Amount, position.FromDate, position.ToDate);
 
-                    var rowElem = XElement.Parse(parentTableElement.ToString().
-                        Replace(parentTag,
+                    var rowElem = XElement.Parse(ReplaceFieldValue(
+                        parentTableElement.ToString(), parentTag,
                             String.Format("{0}{1} {2}", firstElem ? titleText : "",
                                 position.Amount,
                                 position.Positions.AdditionalCosts.Description)).
@@ -771,16 +774,15 @@ namespace ContainerStar.Lib.Managers
             {
                 if (!String.IsNullOrEmpty(order.Customers.Iban) && !String.IsNullOrEmpty(order.Customers.Bic))
                 {
-
                     temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#PayCash"));
                     parentElement = GetParentElementByName(temp, "<w:tr ");
                     parentElement.Remove();
                     xmlMainXMLDoc = xmlDoc.Root.ToString();
 
 
-                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PlanedPayDate", invoice.CreateDate.AddDays(10).ToShortDateString()).
-                        Replace("#IBAN", order.Customers.Iban).
-                        Replace("#BIC", order.Customers.Bic);
+                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PlanedPayDate", invoice.CreateDate.AddDays(10).ToShortDateString());
+                    xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#IBAN", order.Customers.Iban);
+                    xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#BIC", order.Customers.Bic);
                 }
                 else
                 {
@@ -895,13 +897,13 @@ namespace ContainerStar.Lib.Managers
                     var description = String.Empty;
                     if(position.Positions.ContainerId.HasValue)
                     {
-                        description = String.Format("{0} {1}", position.Amount,
-                            position.Positions.Containers.ContainerTypes.Name);
+                        description = ReplaceFieldValue("#", "#", String.Format("{0} {1}", position.Amount,
+                            position.Positions.Containers.ContainerTypes.Name));
                     }
                     else
                     {
-                        description = String.Format("{0} {1}", position.Amount,
-                            position.Positions.AdditionalCosts.Description);
+                        description = ReplaceFieldValue("#", "#", String.Format("{0} {1}", position.Amount,
+                            position.Positions.AdditionalCosts.Description));
                     }
 
                     var rowElem = XElement.Parse(parentTableElement.ToString().
@@ -953,15 +955,15 @@ namespace ContainerStar.Lib.Managers
 
         private string ReplaceTransportOrderCommonFields(TransportOrders transportOrder, string xmlMainXMLDoc)
         {
-            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CustomerName", transportOrder.CustomerName);
-            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CustomerStreet", transportOrder.Customers.Street);
-            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CustomerZip", transportOrder.Customers.Zip.ToString());
-            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CustomerCity", transportOrder.Customers.City);
+            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerName", transportOrder.CustomerName);
+            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerStreet", transportOrder.Customers.Street);
+            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerZip", transportOrder.Customers.Zip.ToString());
+            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerCity", transportOrder.Customers.City);
             xmlMainXMLDoc = xmlMainXMLDoc.Replace("#Today", DateTime.Now.ToShortDateString());
-            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#DeliveryPlace", transportOrder.DeliveryPlace);
-            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#Street", transportOrder.Street);
-            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#ZIP", transportOrder.Zip.ToString());
-            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#City", transportOrder.City);
+            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#DeliveryPlace", transportOrder.DeliveryPlace);
+            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#Street", transportOrder.Street);
+            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#ZIP", transportOrder.Zip.ToString());
+            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#City", transportOrder.City);
 
             return xmlMainXMLDoc;
         }
@@ -979,7 +981,7 @@ namespace ContainerStar.Lib.Managers
 
             xmlMainXMLDoc = xmlMainXMLDoc.Replace("#InvoiceNumber", transportOrder.OrderNumber);
             xmlMainXMLDoc = xmlMainXMLDoc.Replace("#InvoiceDate", transportOrder.CreateDate.ToShortDateString());
-            xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CustomerNumber", transportOrder.Customers.Number);
+            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerNumber", transportOrder.Customers.Number);
 
             xmlMainXMLDoc = ReplaceTransportOrderedFromInfo(xmlMainXMLDoc, transportOrder);
 
@@ -1004,7 +1006,7 @@ namespace ContainerStar.Lib.Managers
             {
                 if (!String.IsNullOrEmpty(transportOrder.OrderedFrom) || transportOrder.OrderDate.HasValue)
                 {
-                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#OrderedFromInfo", String.Format("{0}{1}{2}",
+                    xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#OrderedFromInfo", String.Format("{0}{1}{2}",
                         transportOrder.OrderDate.HasValue ? transportOrder.OrderDate.Value.ToShortDateString() : String.Empty,
                         !String.IsNullOrEmpty(transportOrder.OrderedFrom) ? " durch " : String.Empty,
                         !String.IsNullOrEmpty(transportOrder.OrderedFrom) ? transportOrder.OrderedFrom : String.Empty));
@@ -1028,7 +1030,7 @@ namespace ContainerStar.Lib.Managers
             {
                 if (!String.IsNullOrEmpty(transportOrder.CustomerOrderNumber))
                 {
-                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CustomerOrderNumber", transportOrder.CustomerOrderNumber);
+                    xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerOrderNumber", transportOrder.CustomerOrderNumber);
                 }
                 else
                 {
@@ -1049,7 +1051,7 @@ namespace ContainerStar.Lib.Managers
             {
                 if (!String.IsNullOrEmpty(transportOrder.Customers.UstId))
                 {
-                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#CustomerUstId", transportOrder.Customers.UstId);
+                    xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerUstId", transportOrder.Customers.UstId);
                 }
                 else
                 {
@@ -1073,8 +1075,8 @@ namespace ContainerStar.Lib.Managers
                 bool firstElem = true;
                 foreach (var position in positions)
                 {
-                    var rowElem = XElement.Parse(parentTableElement.ToString().
-                        Replace("#Description",
+                    var rowElem = XElement.Parse(ReplaceFieldValue(
+                        parentTableElement.ToString(), "#Description",
                             String.Format("{0}{1} {2}", firstElem ? "Leistungen: " : "",
                                 position.Amount,
                                 position.TransportProducts.Name)).
@@ -1179,9 +1181,9 @@ namespace ContainerStar.Lib.Managers
                     xmlMainXMLDoc = xmlDoc.Root.ToString();
 
 
-                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PlanedPayDate", transportOrder.CreateDate.AddDays(10).ToShortDateString()).
-                        Replace("#IBAN", transportOrder.Customers.Iban).
-                        Replace("#BIC", transportOrder.Customers.Bic);
+                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PlanedPayDate", transportOrder.CreateDate.AddDays(10).ToShortDateString());
+                    xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#IBAN", transportOrder.Customers.Iban);
+                    xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#BIC", transportOrder.Customers.Bic);
                 }
                 else
                 {
@@ -1266,6 +1268,16 @@ namespace ContainerStar.Lib.Managers
             }
 
             return result;
+        }
+
+        private string ReplaceFieldValue(string source, string fieldKey, string fieldValue)
+        {
+            return source.Replace(fieldKey, htmlRegex.Replace(fieldValue, String.Empty).
+                Replace("&", "&amp;").
+                Replace("<", "&lt;").
+                Replace(">", "&gt;").
+                Replace("\"", "&quot;").
+                Replace("'", "&apos;"));
         }
 
         #endregion
