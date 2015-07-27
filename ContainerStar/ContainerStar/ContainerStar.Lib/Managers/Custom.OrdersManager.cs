@@ -257,6 +257,9 @@ namespace ContainerStar.Lib.Managers
             xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerStreet", order.Customers.Street);
             xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerZip", order.Customers.Zip.ToString());
             xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerCity", order.Customers.City);
+            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerNumber", order.Customers.Number);
+            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#IBAN", order.Customers.Iban);
+            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#BIC", order.Customers.Bic);
             xmlMainXMLDoc = xmlMainXMLDoc.Replace("#Today", DateTime.Now.ToShortDateString());
 
             return xmlMainXMLDoc;
@@ -277,7 +280,6 @@ namespace ContainerStar.Lib.Managers
         {
             xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerPhone", order.Customers.Phone);
             xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerFax", order.Customers.Fax);
-            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerNumber", order.Customers.Number);
 
             if (order.CommunicationPartners != null)
             {
@@ -503,7 +505,6 @@ namespace ContainerStar.Lib.Managers
 
             xmlMainXMLDoc = xmlMainXMLDoc.Replace("#InvoiceNumber", invoice.InvoiceNumber);
             xmlMainXMLDoc = xmlMainXMLDoc.Replace("#InvoiceDate", invoice.CreateDate.ToShortDateString());
-            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerNumber", order.Customers.Number);
 
             xmlMainXMLDoc = ReplaceOrderedFromInfo(xmlMainXMLDoc, order);
             
@@ -781,8 +782,6 @@ namespace ContainerStar.Lib.Managers
 
 
                     xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PlanedPayDate", invoice.CreateDate.AddDays(10).ToShortDateString());
-                    xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#IBAN", order.Customers.Iban);
-                    xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#BIC", order.Customers.Bic);
                 }
                 else
                 {
