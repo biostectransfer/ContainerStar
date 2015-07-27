@@ -220,7 +220,7 @@ define([
         save: function () {
 
             var self = this;
-            //debugger;
+
             if (!self.model.isNew()) {
                 require(['base/information-view'], function (View) {
                     var view = new View({
