@@ -184,6 +184,9 @@ namespace ContainerStar.Lib.Managers
                     var order = GetById(id);
                     result = ReplaceCommonFields(order, result);
                     result = ReplaceBaseOrderFields(order, result);
+
+                    result = result.Replace("#SignatureDate", order.CreateDate.AddDays(2).ToShortDateString());
+
                     result = ReplaceRentPositions(order, result);
                     result = ReplaceTotalPrice(order, result, taxesManager);
                     result = ReplaceRentAdditionalCostPositions(order, result);
@@ -320,10 +323,12 @@ namespace ContainerStar.Lib.Managers
             {
                 var minDate = positions.Min(o => o.FromDate);
                 var maxDate = positions.Max(o => o.ToDate);
+                var totalSellPrice = positions.Sum(o => o.Containers.SellPrice);
 
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#FromDate", minDate.ToShortDateString());
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#ToDate", maxDate.ToShortDateString());
-
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#LastPaymentDate", maxDate.AddDays(10).ToShortDateString());
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TotalSellPrice", totalSellPrice.ToString("N2"));
 
                 xmlMainXMLDoc = ReplacePositionWithDescription(positions, xmlMainXMLDoc);
 
@@ -335,6 +340,8 @@ namespace ContainerStar.Lib.Managers
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#ContainerDescription", String.Empty);
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#FromDate", String.Empty);
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#ToDate", String.Empty);
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#LastPaymentDate", String.Empty);
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TotalSellPrice", String.Empty);
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#RentPositionDescription", String.Empty);
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#RentPrice", String.Empty);
             }
@@ -379,7 +386,8 @@ namespace ContainerStar.Lib.Managers
                     foreach (var position in positions)
                     {
                         var textElem = XElement.Parse(ReplaceFieldValue(
-                            parentTableElement.ToString(), "#AdditionalCostDescription", position.AdditionalCosts.Description).
+                            parentTableElement.ToString(), "#AdditionalCostDescription", 
+                            String.Format("{0} {1}", position.Amount, position.AdditionalCosts.Description)).
                             Replace("#AdditionalCostPrice", Math.Round(position.Price * position.Amount, 2).ToString("N2")));
                         prevElement.AddAfterSelf(textElem);
                         prevElement = textElem;
