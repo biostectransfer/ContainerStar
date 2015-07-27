@@ -203,6 +203,13 @@ define([
                     self.model.set('customerId', item.id);
                     self.$el.find('#customerId').val(item.id);
                     self.$el.find('#customerId_Name').val(item.get('name'));
+
+                    self.$el.find('#discount').data("kendoNumericTextBox").value(item.get('discount'));
+                    self.model.set('discount', item.get('discount'));
+
+                    var autoBill = item.get('autoBill');
+                    self.$el.find('#autoBill').val(autoBill);
+                    self.model.set('autoBill', autoBill);
                 });
 
                 self.addView(view);
