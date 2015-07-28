@@ -187,7 +187,7 @@ namespace ContainerStar.Lib.Managers
 
                     result = result.Replace("#SignatureDate", order.CreateDate.AddDays(2).ToShortDateString());
 
-                    result = ReplaceRentPositions(order, result);
+                    result = ReplaceRentPositions(order, result, taxesManager);
                     result = ReplaceTotalPrice(order, result, taxesManager);
                     result = ReplaceRentAdditionalCostPositions(order, result);
                     break;
@@ -196,7 +196,7 @@ namespace ContainerStar.Lib.Managers
                     result = ReplaceCommonFields(order, result);
                     result = ReplaceBaseOfferFields(order, result);
                     result = ReplaceBaseOrderFields(order, result);
-                    result = ReplaceRentPositions(order, result);
+                    result = ReplaceRentPositions(order, result, taxesManager);
                     result = ReplaceRentAdditionalCostPositions(order, result);
                     break;
                 case PrintTypes.Invoice:
@@ -314,7 +314,7 @@ namespace ContainerStar.Lib.Managers
 
         #region Offers/Orders
 
-        private string ReplaceRentPositions(Orders order, string xmlMainXMLDoc)
+        private string ReplaceRentPositions(Orders order, string xmlMainXMLDoc, ITaxesManager taxesManager)
         {
             var positions = order.Positions != null ? order.Positions.Where(o => !o.DeleteDate.HasValue && o.ContainerId.HasValue).ToList() : 
                 new List<Positions>();
@@ -325,14 +325,41 @@ namespace ContainerStar.Lib.Managers
                 var maxDate = positions.Max(o => o.ToDate);
                 var totalSellPrice = positions.Sum(o => o.Containers.SellPrice);
 
+                if (positions.Any(o => o.Payment == PaymentTypes.Total))
+                {
+                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#RentPositionDescription", "Container gemäß Position 1");
+                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PaymentType", "Pauschal");
+
+                    var totalPriceWithoutTax = positions.Sum(o => o.Price);
+                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#RentPrice", totalPriceWithoutTax.ToString("N2"));
+
+                    if (order.Customers.WithTaxes)
+                    {
+                        var taxes = CalculationHelper.CalculateTaxes(taxesManager);
+
+                        var taxValue = (totalPriceWithoutTax / (double)100) * taxes;
+                        //with taxes
+                        var totalPrice = totalPriceWithoutTax + taxValue;
+
+                        xmlMainXMLDoc = xmlMainXMLDoc.Replace("#BruttoPauschalPreis", totalPrice.ToString("N2"));
+                    }
+                    else
+                    {
+                        xmlMainXMLDoc = xmlMainXMLDoc.Replace("#BruttoPauschalPreis", totalPriceWithoutTax.ToString("N2"));
+                    }
+                }
+                else
+                {
+                    xmlMainXMLDoc = ReplaceShortPositionDescription(positions, xmlMainXMLDoc);
+                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#BruttoPauschalPreis", String.Empty);
+                }
+
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#FromDate", minDate.ToShortDateString());
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#ToDate", maxDate.ToShortDateString());
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#LastPaymentDate", maxDate.AddDays(10).ToShortDateString());
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TotalSellPrice", totalSellPrice.ToString("N2"));
 
                 xmlMainXMLDoc = ReplacePositionWithDescription(positions, xmlMainXMLDoc);
-
-                xmlMainXMLDoc = ReplaceShortPositionDescription(positions, xmlMainXMLDoc);
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#ContainerDescription", String.Empty);
             }
             else
@@ -341,6 +368,7 @@ namespace ContainerStar.Lib.Managers
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#FromDate", String.Empty);
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#ToDate", String.Empty);
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#LastPaymentDate", String.Empty);
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#BruttoPauschalPreis", String.Empty);
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TotalSellPrice", String.Empty);
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#RentPositionDescription", String.Empty);
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#RentPrice", String.Empty);
@@ -422,6 +450,7 @@ namespace ContainerStar.Lib.Managers
                 {
                     var textElem = XElement.Parse(ReplaceFieldValue(
                         parentTableElement.ToString(), "#RentPositionDescription", position.Containers.ContainerTypes.Name).
+                        Replace("#PaymentType", position.PaymentTypeString).
                         Replace("#RentPrice", Math.Round(position.Price / (double)30, 2).ToString("N2")));
                     prevElement.AddAfterSelf(textElem);
                     prevElement = textElem;
@@ -1279,6 +1308,11 @@ namespace ContainerStar.Lib.Managers
 
         private string ReplaceFieldValue(string source, string fieldKey, string fieldValue)
         {
+            if(String.IsNullOrEmpty(fieldValue))
+            {
+                fieldValue = String.Empty;
+            }
+
             return source.Replace(fieldKey, htmlRegex.Replace(fieldValue, String.Empty).
                 Replace("&", "&amp;").
                 Replace("<", "&lt;").

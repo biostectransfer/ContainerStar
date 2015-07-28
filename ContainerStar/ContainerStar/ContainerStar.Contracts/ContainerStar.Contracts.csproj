@@ -88,6 +88,7 @@
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\Custom.CommunicationPartners.cs" />
+    <Compile Include="Entities\Custom.Positions.cs" />
     <Compile Include="Entities\Custom.TransportOrders.cs" />
     <Compile Include="Entities\Custom.Orders.cs" />
     <Compile Include="Entities\Customers.cs">
@@ -135,7 +136,8 @@
     <Compile Include="Entities\User.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Enums\OrderStatusType.cs" />
+    <Compile Include="Enums\PaymentTypes.cs" />
+    <Compile Include="Enums\OrderStatusTypes.cs" />
     <Compile Include="Enums\PrintTypes.cs" />
     <Compile Include="Enums\LogLevelEnum.cs" />
     <Compile Include="Enums\LogTypeEnum.cs" />
