@@ -259,10 +259,12 @@ namespace ContainerStar.Lib.Managers
                     result = ReplaceCommonFields(order, result);
                     result = ReplaceBaseOrderFields(order, result);
                     result = ReplaceBaseInvoiceFields(invoice, result, printType);
-                    result = ReplaceInvoicePositions(invoice.InvoicePositions.ToList(), result, 
-                        "#ContainerDescription", "#ContainerPrice", "Mietgegenstand: ", true);
-                    result = ReplaceInvoicePositions(invoice.InvoicePositions.ToList(), result, 
-                        "#AdditionalCostDescription", "#AdditionalCostPrice", "Nebenkosten: ", false);
+
+                    bool manualPricePrinted = false;
+                    result = ReplaceInvoicePositions(invoice, invoice.InvoicePositions.ToList(), result,
+                        "#ContainerDescription", "#ContainerPrice", "Mietgegenstand: ", true, ref manualPricePrinted);
+                    result = ReplaceInvoicePositions(invoice, invoice.InvoicePositions.ToList(), result,
+                        "#AdditionalCostDescription", "#AdditionalCostPrice", "Nebenkosten: ", false, ref manualPricePrinted);
                     result = ReplaceInvoicePrices(invoice, result);
                     break;
                 case PrintTypes.InvoiceStorno:
@@ -732,8 +734,8 @@ namespace ContainerStar.Lib.Managers
             return xmlMainXMLDoc;
         }
         
-        private string ReplaceInvoicePositions(List<InvoicePositions> positions, string xmlMainXMLDoc,
-            string parentTag, string priceTag, string titleText, bool isMain)
+        private string ReplaceInvoicePositions(Invoices invoice, List<InvoicePositions> positions, string xmlMainXMLDoc,
+            string parentTag, string priceTag, string titleText, bool isMain, ref bool manualPricePrinted)
         {
             var xmlDoc = XDocument.Parse(xmlMainXMLDoc);
             var temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains(parentTag));
@@ -744,14 +746,24 @@ namespace ContainerStar.Lib.Managers
                 var prevTableElem = parentTableElement;
 
                 bool firstElem = true;
+
                 foreach (var position in positions.Where(o => o.Positions.IsMain == isMain && o.Positions.Containers != null))
                 {
-                    var price = CalculationHelper.CalculatePositionPrice(position.Positions.IsSellOrder, position.Price,
+                    double price = 0;
+                    if (!invoice.ManualPrice.HasValue)
+                    {
+                        price = CalculationHelper.CalculatePositionPrice(position.Positions.IsSellOrder, position.Price,
                         position.Amount, position.FromDate, position.ToDate, position.Payment);
+                    }
+                    else if (!manualPricePrinted)
+                    {
+                        price = invoice.ManualPrice.Value;
+                        manualPricePrinted = true;
+                    }
 
                     var rowElem = XElement.Parse(ReplaceFieldValue(
                         parentTableElement.ToString(), parentTag, 
-                            String.Format("{0}{1} Nr. {2}", firstElem ? "Mietgegenstand: " : "", 
+                            String.Format("{0}{1} Nr. {2}", firstElem ? titleText : "", 
                                 position.Positions.Containers.ContainerTypes.Name,
                                 position.Positions.Containers.Number)).
                         Replace(priceTag, price.ToString("N2")));
@@ -766,8 +778,17 @@ namespace ContainerStar.Lib.Managers
 
                 foreach (var position in positions.Where(o => o.Positions.IsMain == isMain && o.Positions.AdditionalCosts != null))
                 {
-                    var price = CalculationHelper.CalculatePositionPrice(true, position.Price,
+                    double price = 0;
+                    if (!invoice.ManualPrice.HasValue)
+                    {
+                        price = CalculationHelper.CalculatePositionPrice(true, position.Price,
                         position.Amount, position.FromDate, position.ToDate, position.Payment);
+                    }
+                    else if (!manualPricePrinted)
+                    {
+                        price = invoice.ManualPrice.Value;
+                        manualPricePrinted = true;
+                    }
 
                     var rowElem = XElement.Parse(ReplaceFieldValue(
                         parentTableElement.ToString(), parentTag,
@@ -800,15 +821,28 @@ namespace ContainerStar.Lib.Managers
                 double totalPrice = 0;
                 double summaryPrice = 0;
 
-                CalculationHelper.CalculateInvoicePrices(invoice, out totalPriceForMainPositions, out totalPriceWithoutDiscountWithoutTax, out totalPriceWithoutTax,
-                    out totalPrice, out summaryPrice);
+                if (!invoice.ManualPrice.HasValue)
+                {
+                    CalculationHelper.CalculateInvoicePrices(invoice, out totalPriceForMainPositions, out totalPriceWithoutDiscountWithoutTax, out totalPriceWithoutTax,
+                        out totalPrice, out summaryPrice);
+                }
+                else
+                {
+                    totalPriceWithoutTax = invoice.ManualPrice.Value;
+                    var taxValue = (totalPriceWithoutTax / (double)100) * invoice.TaxValue;
+                    if (invoice.WithTaxes && invoice.TaxValue > 0)
+                    {
+                        //with taxes
+                        totalPrice = totalPriceWithoutTax + taxValue;
+                    }
+                }
 
                 //Discount
                 var xmlDoc = XDocument.Parse(xmlMainXMLDoc);
                 var temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#DiscountText"));
                 var parentTableElement = GetParentElementByName(temp, "<w:tr ");
 
-                if (invoice.Discount > 0 && parentTableElement != null)
+                if (!invoice.ManualPrice.HasValue && invoice.Discount > 0 && parentTableElement != null)
                 {
                     xmlMainXMLDoc = xmlMainXMLDoc.Replace("#DiscountText",
                         String.Format("Abzüglich {0}% Rabatt", invoice.Discount));
@@ -847,8 +881,20 @@ namespace ContainerStar.Lib.Managers
                     xmlMainXMLDoc = xmlDoc.Root.ToString();
                 }
 
-                //total price without discount and tax for main positions only                
-                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TotalPriceWithoutDiscount", totalPriceForMainPositions.ToString("N2"));
+                if (!invoice.ManualPrice.HasValue)
+                {
+                    //total price without discount and tax for main positions only                
+                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TotalPriceWithoutDiscount", totalPriceForMainPositions.ToString("N2"));
+                }
+                else
+                {
+                    xmlDoc = XDocument.Parse(xmlMainXMLDoc);
+                    temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#TotalPriceWithoutDiscount"));
+                    parentTableElement = GetParentElementByName(temp, "<w:tr ");
+                    parentTableElement.Remove();
+                    xmlMainXMLDoc = xmlDoc.Root.ToString();
+                }
+
 
                 //total price
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TotalPriceText", "Zu zahlender Betrag");
