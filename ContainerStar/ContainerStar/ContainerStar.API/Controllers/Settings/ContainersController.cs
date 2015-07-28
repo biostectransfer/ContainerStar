@@ -35,6 +35,7 @@ namespace ContainerStar.API.Controllers.Settings
             model.comment = entity.Comment;
             model.sellPrice = entity.SellPrice;
             model.isSold = entity.IsSold;
+            model.minPrice = entity.MinPrice;
             model.createDate = ((ISystemFields)entity).CreateDate;
             model.changeDate = ((ISystemFields)entity).ChangeDate;
         }
@@ -55,6 +56,7 @@ namespace ContainerStar.API.Controllers.Settings
             entity.Comment = model.comment;
             entity.SellPrice = model.sellPrice;
             entity.IsSold = model.isSold;
+            entity.MinPrice = model.minPrice;
 
             ExtraModelToEntity(entity, model, actionType);
         }

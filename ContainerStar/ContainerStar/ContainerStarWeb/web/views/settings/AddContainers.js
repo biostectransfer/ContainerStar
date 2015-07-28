@@ -32,6 +32,7 @@ define([
 			'#comment': 'comment',
 			'#sellPrice': 'sellPrice',
 			'#isSold': 'isSold',
+			'#minPrice': 'minPrice',
 			};
 
             return result;
@@ -57,6 +58,7 @@ define([
 			this.disableInput(this, 'comment');
 			this.disableInput(this, 'sellPrice', 'numeric');
 			this.disableInput(this, 'isSold');
+			this.disableInput(this, 'minPrice', 'numeric');
 
             return this;
         }

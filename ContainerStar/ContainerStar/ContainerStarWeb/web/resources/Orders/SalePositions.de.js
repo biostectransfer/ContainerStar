@@ -18,7 +18,8 @@ define(function () {
 		saleContainer: 'Container verkaufen',
 		selectAdditionalCosts: 'Nebenkosten',
 		amount: 'Menge',
-		isMain: 'Haupt'
+		isMain: 'Haupt',
+		paymentType: 'Preiseinheit'
 	};
 
 	return resources;

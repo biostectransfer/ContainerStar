@@ -33,6 +33,7 @@ define([
 				{ field: 'isVirtual', title: this.resources.isVirtual , headerTitle: this.resources.isVirtual, checkbox: true},
 				{ field: 'sellPrice', title: this.resources.sellPrice },
 				{ field: 'isSold', title: this.resources.isSold , headerTitle: this.resources.isSold, checkbox: true},
+				{ field: 'minPrice', title: this.resources.minPrice },
 			];
 		}
 

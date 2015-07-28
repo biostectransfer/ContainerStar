@@ -97,6 +97,12 @@ namespace ContainerStar.API.Models.Settings
         /// </summary>
         [DataMember]
         public bool isSold{ get; set; }
+        /// <summary>
+        ///     Model property for <see cref="Containers.MinPrice"/> entity
+        /// </summary>
+        [Required]
+        [DataMember]
+        public double minPrice{ get; set; }
 
     }
 }

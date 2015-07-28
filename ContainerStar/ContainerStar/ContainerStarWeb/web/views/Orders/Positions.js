@@ -63,17 +63,18 @@
 
         columns: function () {
             return [
-                 { field: 'description', title: this.resources.description, filterable: false, sortable: false },
-                 { field: 'price', title: this.resources.price },
-                 { field: 'paymentType', title: this.resources.paymentType, collection: this.options.paymentTypes },
+                 { field: 'description', title: this.resources.description, filterable: false, sortable: false, attributes: { "class": "positions-cell" } },
+                 { field: 'price', title: this.resources.price, attributes: { "class": "positions-cell" } },
+                 { field: 'paymentType', title: this.resources.paymentType, collection: this.options.paymentTypes, attributes: { "class": "positions-cell" } },
                  {
                      field: 'amount',
                      editor: amountEditor, template: "#=amount#",
-                     title: this.resources.amount
+                     title: this.resources.amount,
+                     attributes: { "class": "positions-cell" }
                  },
-                 { field: 'isMain', title: this.resources.isMain, headerTitle: this.resources.isMain, checkbox: true },
-                 { field: 'fromDate', title: this.resources.fromDate, format: '{0:d}' },
-                 { field: 'toDate', title: this.resources.toDate, format: '{0:d}' }
+                 { field: 'isMain', title: this.resources.isMain, headerTitle: this.resources.isMain, checkbox: true, attributes: { "class": "positions-cell" } },
+                 { field: 'fromDate', title: this.resources.fromDate, format: '{0:d}', attributes: { "class": "positions-cell" } },
+                 { field: 'toDate', title: this.resources.toDate, format: '{0:d}', attributes: { "class": "positions-cell" } }
             ];
         },
 

@@ -29,9 +29,9 @@
 
         columns: function () {
             return [
-                 { field: 'description', title: this.resources.description, filterable: false, sortable: false },
-                 { field: 'price', title: this.resources.price },
-                 { field: 'amount', title: this.resources.amount }
+                 { field: 'description', title: this.resources.description, filterable: false, sortable: false, attributes: { "class": "positions-cell" } },
+                 { field: 'price', title: this.resources.price, attributes: { "class": "positions-cell" } },
+                 { field: 'amount', title: this.resources.amount, attributes: { "class": "positions-cell" } }
             ];
         },
 

@@ -119,7 +119,7 @@ namespace ContainerStar.API
                 {"Amount", "amount"},
             });
 
-            tables.Add("Containers", new TableMapping("Containers", "Containers", 15)
+            tables.Add("Containers", new TableMapping("Containers", "Containers", 16)
             {
                 {"Number", "number"},
                 {"ContainerTypeId", "containerTypeId"},
@@ -136,6 +136,7 @@ namespace ContainerStar.API
                 {"Comment", "comment"},
                 {"SellPrice", "sellPrice"},
                 {"IsSold", "isSold"},
+                {"MinPrice", "minPrice"},
             });
 
             tables.Add("Container_Equipment_Rsp", new TableMapping("Container_Equipment_Rsp", "ContainerEquipmentRsp", 3)

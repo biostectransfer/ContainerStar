@@ -50,6 +50,9 @@ define(function () {
 			,isSold: { type: "boolean", 
 			                        editable: Application.canTableItemBeEdit('Containers', 'isSold'), 
 				                    validation: { required: false } }			
+			,minPrice: { type: "number", 
+			                        editable: Application.canTableItemBeEdit('Containers', 'minPrice'), 
+				                    validation: { required: true } }			
 		},
 		defaults: function () {
 			var dnf = new Date();

@@ -23,6 +23,7 @@ define(function () {
 		comment: 'Bemerkung',	
 		sellPrice: 'Verkaufpreis',	
 		isSold: 'verkauft',	
+		minPrice: 'Min Preis',	
 	};
 
 	return resources;

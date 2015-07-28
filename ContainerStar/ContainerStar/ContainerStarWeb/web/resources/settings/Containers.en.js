@@ -24,6 +24,7 @@ define(function () {
 		comment: 'Comment',	
 		sellPrice: 'Sell price',	
 		isSold: 'sold',	
+		minPrice: 'Min Price',	
 	};
 
 	return resources;
