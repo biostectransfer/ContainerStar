@@ -99,6 +99,9 @@ namespace ContainerStar.Lib.Data
             Property(t => t.PayPartTree)
                 .HasColumnName(Invoices.Fields.PayPartTree);
 
+            Property(t => t.LastReminderDate)
+                .HasColumnName(Invoices.Fields.LastReminderDate);
+
 
             //Relationships
             HasRequired(i => i.Orders)

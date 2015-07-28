@@ -27,12 +27,7 @@ namespace ContainerStar.Lib.Managers
         {
             return PrepareCommonOrderPrintData(id, path, PrintTypes.Offer, null, taxesManager);
         }
-
-        public MemoryStream PrepareReminderPrintData(int id, string path, IInvoicesManager invoicesManager, ITaxesManager taxesManager)
-        {
-            return PrepareCommonOrderPrintData(id, path, PrintTypes.ReminderMail, invoicesManager, taxesManager);
-        }
-
+        
         public MemoryStream PrepareInvoicePrintData(int id, string path, IInvoicesManager invoicesManager)
         {
             return PrepareCommonOrderPrintData(id, path, PrintTypes.Invoice, invoicesManager, null);
@@ -84,7 +79,60 @@ namespace ContainerStar.Lib.Managers
                     //replace fields
                     templateBody = ReplaceFields(0, PrintTypes.Invoice, templateBody, invoicesManager, taxesManager, invoice);
                 }
+                
+                xmlMainXMLDoc = SaveDoc(result, pkg, part, xmlReader, xmlMainXMLDoc, templateBody);
+            }
+            catch
+            {
+            }
 
+            return result;
+        }
+
+        public MemoryStream PrepareReminderPrintData(IEnumerable<Invoices> invoices, string path, IInvoicesManager invoicesManager, ITaxesManager taxesManager)
+        {
+            var result = new MemoryStream();
+            try
+            {
+                Package pkg;
+                PackagePart part;
+                XmlReader xmlReader;
+                XDocument xmlMainXMLDoc;
+                GetXmlDoc(path, result, out pkg, out part, out xmlReader, out xmlMainXMLDoc);
+
+
+                var temp = xmlMainXMLDoc.Descendants().LastOrDefault(o => o.Value.Contains("#CustomerName"));
+                var parentElement = GetParentElementByName(temp, "<w:body ");
+                var bodyText = String.Join("", parentElement.Elements());
+
+                var templateBody = xmlMainXMLDoc.Root.ToString();
+                bool firstElem = true;
+                foreach (var invoiceGroup in invoices.GroupBy(o => o.Orders.Customers))
+                {
+                    if (!firstElem)
+                    {
+                        var index = templateBody.IndexOf("</w:body");
+                        var pageBreak = @"<w:p w:rsidRDefault=""00C97ADC"" w:rsidR=""00C97ADC""><w:pPr><w:rPr><w:lang w:val=""en-GB""/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:val=""en-GB""/>
+                            </w:rPr><w:br w:type=""page""/></w:r></w:p><w:p w:rsidRDefault=""009A5AB0"" w:rsidRPr=""00905C57"" w:rsidR=""009A5AB0"" w:rsidP=""0030272E"">
+                            <w:pPr><w:rPr><w:lang w:val=""en-GB""/></w:rPr></w:pPr><w:bookmarkStart w:name=""_GoBack"" w:id=""0""/><w:bookmarkEnd w:id=""0""/></w:p>";
+                        templateBody = templateBody.Substring(0, index) + pageBreak + bodyText + templateBody.Substring(index);
+                    }
+                    else
+                    {
+                        firstElem = false;
+                    }
+
+                    //replace fields
+                    templateBody = ReplaceCommonFields(invoiceGroup.Key, templateBody);
+                    templateBody = ReplaceTotalReminderPositions(invoiceGroup.ToList(), templateBody);
+                }
+
+                //if (firstElem)
+                //{
+                //    templateBody = XDocument.Parse(templateBody.Substring(0, templateBody.IndexOf("<w:body>")) + "<w:body>" + 
+                //        templateBody.Substring(templateBody.IndexOf("</w:body"))).Root.ToString();
+                //}
+                
                 xmlMainXMLDoc = SaveDoc(result, pkg, part, xmlReader, xmlMainXMLDoc, templateBody);
             }
             catch
@@ -256,13 +304,18 @@ namespace ContainerStar.Lib.Managers
 
         private string ReplaceCommonFields(Orders order, string xmlMainXMLDoc)
         {
-            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerName", order.CustomerName);
-            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerStreet", order.Customers.Street);
-            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerZip", order.Customers.Zip.ToString());
-            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerCity", order.Customers.City);
-            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerNumber", order.Customers.Number.ToString());
-            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#IBAN", order.Customers.Iban);
-            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#BIC", order.Customers.Bic);
+            return ReplaceCommonFields(order.Customers, xmlMainXMLDoc);
+        }
+
+        private string ReplaceCommonFields(Customers customer, string xmlMainXMLDoc)
+        {
+            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerName", customer.Name);
+            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerStreet", customer.Street);
+            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerZip", customer.Zip.ToString());
+            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerCity", customer.City);
+            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerNumber", customer.Number.ToString());
+            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#IBAN", customer.Iban);
+            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#BIC", customer.Bic);
             xmlMainXMLDoc = xmlMainXMLDoc.Replace("#Today", DateTime.Now.ToShortDateString());
 
             return xmlMainXMLDoc;
@@ -927,6 +980,58 @@ namespace ContainerStar.Lib.Managers
 
         #region Reminder
 
+        private string ReplaceTotalReminderPositions(List<Invoices> invoices, string xmlMainXMLDoc)
+        {
+            var xmlDoc = XDocument.Parse(xmlMainXMLDoc);
+            var temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#InvoiceNumber"));
+            var parentTableElement = GetParentElementByName(temp, "<w:tr ");
+            
+            if (parentTableElement != null)
+            {
+                var prevTableElem = parentTableElement;
+
+                bool firstElem = true;
+                double totalPriceForCustomer = 0;
+
+                foreach (var invoice in invoices)
+                {
+                    double totalPriceForMainPositions = 0;
+                    double totalPriceWithoutDiscountWithoutTax = 0;
+                    double totalPriceWithoutTax = 0;
+                    double totalPrice = 0;
+                    double summaryPrice = 0;
+
+                    CalculationHelper.CalculateInvoicePrices(invoice, out totalPriceForMainPositions, out totalPriceWithoutDiscountWithoutTax, out totalPriceWithoutTax,
+                        out totalPrice, out summaryPrice);
+
+                    totalPriceForCustomer += summaryPrice;
+                    
+                    var rowElem = XElement.Parse(parentTableElement.ToString().
+                        Replace("#InvoiceNumber", invoice.InvoiceNumber).
+                        Replace("#InvoiceDate", invoice.CreateDate.ToShortDateString()).
+                        Replace("#ReminderCount", invoice.ReminderCount.ToString()).
+                        Replace("#Price", summaryPrice.ToString()));
+                    prevTableElem.AddAfterSelf(rowElem);
+                    prevTableElem = rowElem;
+
+                    if (firstElem)
+                    {
+                        firstElem = false;
+                    }
+                }            
+
+                parentTableElement.Remove();
+
+                xmlMainXMLDoc = xmlDoc.Root.ToString();
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TotalPrice", totalPriceForCustomer.ToString("N2"));
+
+                var maxDate = invoices.Max(o => o.LastReminderDate.Value);
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PayDueDate", maxDate.AddDays(8).ToShortDateString());
+            }
+
+            return xmlMainXMLDoc;
+        }
+
         private string ReplaceReminderPositions(List<InvoicePositions> positions, string xmlMainXMLDoc)
         {
             var xmlDoc = XDocument.Parse(xmlMainXMLDoc);
@@ -961,7 +1066,7 @@ namespace ContainerStar.Lib.Managers
                         Replace("#InvoiceDate", position.Invoices.CreateDate.ToShortDateString()).
                         Replace("#ReminderCount", position.Invoices.ReminderCount.ToString()).
                         Replace("#Description", description).
-                        Replace("#Price", price.ToString()));
+                        Replace("#Price", price.ToString("N2")));
                     prevTableElem.AddAfterSelf(rowElem);
                     prevTableElem = rowElem;
 
@@ -990,7 +1095,7 @@ namespace ContainerStar.Lib.Managers
                 CalculationHelper.CalculateInvoicePrices(invoice, out totalPriceForMainPositions, out totalPriceWithoutDiscountWithoutTax, out totalPriceWithoutTax,
                     out totalPrice, out summaryPrice);
 
-                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TotalPrice", summaryPrice.ToString());
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TotalPrice", summaryPrice.ToString("N2"));
             }
             else
             {

@@ -16,7 +16,7 @@ namespace ContainerStar.Contracts.Managers
 
         MemoryStream PrepareInvoiceStornoPrintData(int id, string path, IInvoiceStornosManager invoicesManager);
 
-        MemoryStream PrepareReminderPrintData(int id, string path, IInvoicesManager invoicesManager, ITaxesManager taxesManager);
+        MemoryStream PrepareReminderPrintData(IEnumerable<Invoices> invoices, string path, IInvoicesManager invoicesManager, ITaxesManager taxesManager);
 
         MemoryStream PrepareMonthInvoicePrintData(IEnumerable<Invoices> invoices, string path, IInvoicesManager invoicesManager, ITaxesManager taxesManager);
 

@@ -170,24 +170,7 @@
 		    'click .printRemainder': function (e) {
 
 		        e.preventDefault();
-		        var self = this,
-                    grid = self.grid,
-					dataItem = grid.dataItem(grid.select());
-
-		        if (dataItem != undefined) {
-
-		            location.href = Application.apiUrl + 'print/?printTypeId=3&id=' + dataItem.id;
-		        }
-		        else {
-		            require(['base/information-view'], function (View) {
-		                var view = new View({
-		                    title: 'Rechnung auswählen',
-		                    message: 'Wählen Sie bitte eine Rechnung aus!'
-		                });
-		                self.addView(view);
-		                self.$el.append(view.render().$el);
-		            });
-		        }
+		        location.href = Application.apiUrl + 'print/?printTypeId=3&id=0';
 		    },
 		    'click .generateMonthInvoices': function (e) {
 

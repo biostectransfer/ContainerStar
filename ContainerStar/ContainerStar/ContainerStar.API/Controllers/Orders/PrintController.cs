@@ -9,6 +9,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Http;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace ContainerStar.API.Controllers
 {
@@ -63,7 +65,27 @@ namespace ContainerStar.API.Controllers
                     break;
                 case PrintTypes.ReminderMail:
                     path = Path.Combine(dataDirectory, API.Configuration.ReminderFileName);
-                    stream = Manager.PrepareReminderPrintData(id, path, invoicesManager, taxesManager);
+
+                    var invoices = invoicesManager.GetEntities(o => !o.PayDate.HasValue &&
+                        ( (!o.LastReminderDate.HasValue && o.CreateDate.AddDays(o.PayInDays) < DateTime.Now) ||
+                          (o.LastReminderDate.HasValue && o.LastReminderDate.Value.AddDays(8) < DateTime.Now)
+                        )).ToList();
+
+                    foreach(var invoice in invoices)
+                    {
+                        invoice.LastReminderDate = DateTime.Now;
+                        invoice.ReminderCount++;
+                    }
+
+                    invoicesManager.SaveChanges();
+
+                    var newIds = invoices.Select(o => o.Id).ToList();
+
+                    var allInvoicesToReminder = new List<Contracts.Entities.Invoices>(invoices);
+                    allInvoicesToReminder.AddRange(invoicesManager.GetEntities(o => !o.PayDate.HasValue && o.ReminderCount != 0 &&
+                        !newIds.Contains(o.Id)).ToList());
+
+                    stream = Manager.PrepareReminderPrintData(allInvoicesToReminder, path, invoicesManager, taxesManager);
                     break;
                 case PrintTypes.InvoiceStorno:
                     path = Path.Combine(dataDirectory, API.Configuration.InvoiceStornoFileName);

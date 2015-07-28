@@ -57,3 +57,6 @@ GO
 ALTER TABLE [dbo].[Containers]
  ADD [MinPrice] float NOT NULL default(0)
 GO
+ALTER TABLE [dbo].[Invoices]
+ ADD [LastReminderDate] datetime2(2) NULL
+GO

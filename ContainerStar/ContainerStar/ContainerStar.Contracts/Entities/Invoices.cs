@@ -98,6 +98,10 @@ namespace ContainerStar.Contracts.Entities
             /// Column name 'PayPartTree' for property <see cref="Invoices.PayPartTree"/>
             /// </summary>
             public static readonly string PayPartTree = "PayPartTree";
+            /// <summary>
+            /// Column name 'LastReminderDate' for property <see cref="Invoices.LastReminderDate"/>
+            /// </summary>
+            public static readonly string LastReminderDate = "LastReminderDate";
           
         }
         #endregion
@@ -121,6 +125,7 @@ namespace ContainerStar.Contracts.Entities
         public int? PayPartOne{ get; set; }
         public int? PayPartTwo{ get; set; }
         public int? PayPartTree{ get; set; }
+        public DateTime? LastReminderDate{ get; set; }
         public virtual Orders Orders{ get; set; }
         public virtual ICollection<InvoicePositions> InvoicePositions{ get; set; }
         public virtual ICollection<InvoiceStornos> InvoiceStornos{ get; set; }
@@ -165,6 +170,7 @@ namespace ContainerStar.Contracts.Entities
                        PayPartOne = PayPartOne,
                        PayPartTwo = PayPartTwo,
                        PayPartTree = PayPartTree,
+                       LastReminderDate = LastReminderDate,
         	           };
         }
     }
