@@ -811,38 +811,48 @@ namespace ContainerStar.Lib.Managers
             var temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#PlanedPayDate"));
             var parentElement = GetParentElementByName(temp, "<w:tr ");
 
+            var payDate = invoice.CreateDate.AddDays(invoice.PayInDays).ToShortDateString();
+
             //pay due information
             if (parentElement != null)
             {
                 if (!String.IsNullOrEmpty(order.Customers.Iban) && !String.IsNullOrEmpty(order.Customers.Bic))
                 {
-                    temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#PayCash"));
+                    temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#PayCashInterval"));
                     parentElement = GetParentElementByName(temp, "<w:tr ");
                     parentElement.Remove();
                     xmlMainXMLDoc = xmlDoc.Root.ToString();
-
-
-                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PlanedPayDate", invoice.CreateDate.AddDays(10).ToShortDateString());
+                    
+                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PlanedPayDate", payDate);
                 }
                 else
                 {
                     parentElement.Remove();
                     xmlMainXMLDoc = xmlDoc.Root.ToString();
-                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PayCash", String.Empty);
+                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PayCashInterval", 
+                        invoice.PayInDays == 0 ? "einem Tag" : String.Format("{0} Tage", invoice.PayInDays));
                 }
             }
 
 
             //for sell Invoices
             xmlDoc = XDocument.Parse(xmlMainXMLDoc);
-            temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#SellOrderOwnershipMessage"));
+            temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#PayParts"));
             parentElement = GetParentElementByName(temp, "<w:tr ");
 
             if (parentElement != null)
             {
                 if (invoice.IsSellInvoice)
                 {
-                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#SellOrderOwnershipMessage", String.Empty);
+                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PayParts", 
+                        String.Format("{0}% der Gesamtsumme bis {1} rein netto. {2}{3}% der Gesamtsumme nach Lieferung rein netto.",
+                            invoice.PayPartOne.HasValue ? invoice.PayPartOne.Value : 75,
+                            payDate,
+                            invoice.PayPartTwo.HasValue && invoice.PayPartTree.HasValue ? 
+                                String.Format("{0}% der Gesamtsumme rein netto. ", invoice.PayPartTwo.Value) : String.Empty,
+                            invoice.PayPartTwo.HasValue && invoice.PayPartTree.HasValue ? invoice.PayPartTree.Value :
+                                invoice.PayPartTwo.HasValue ? invoice.PayPartTwo.Value : 25
+                        ));
                 }
                 else
                 {
