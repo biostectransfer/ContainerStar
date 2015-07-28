@@ -260,7 +260,7 @@ namespace ContainerStar.Lib.Managers
             xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerStreet", order.Customers.Street);
             xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerZip", order.Customers.Zip.ToString());
             xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerCity", order.Customers.City);
-            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerNumber", order.Customers.Number);
+            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerNumber", order.Customers.Number.ToString());
             xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#IBAN", order.Customers.Iban);
             xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#BIC", order.Customers.Bic);
             xmlMainXMLDoc = xmlMainXMLDoc.Replace("#Today", DateTime.Now.ToShortDateString());
@@ -988,7 +988,7 @@ namespace ContainerStar.Lib.Managers
 
             xmlMainXMLDoc = xmlMainXMLDoc.Replace("#InvoiceNumber", transportOrder.OrderNumber);
             xmlMainXMLDoc = xmlMainXMLDoc.Replace("#InvoiceDate", transportOrder.CreateDate.ToShortDateString());
-            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerNumber", transportOrder.Customers.Number);
+            xmlMainXMLDoc = ReplaceFieldValue(xmlMainXMLDoc, "#CustomerNumber", transportOrder.Customers.Number.ToString());
 
             xmlMainXMLDoc = ReplaceTransportOrderedFromInfo(xmlMainXMLDoc, transportOrder);
 

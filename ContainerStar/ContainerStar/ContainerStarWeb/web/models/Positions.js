@@ -22,6 +22,10 @@ define(function () {
 				                    validation: { required: false } }			
 			,price: { type: "number", 
 			                        editable: Application.canTableItemBeEdit('Positions', 'price'), 
+			                        validation: { required: true }
+			}
+            ,paymentType: { type: "number", 
+			                        editable: Application.canTableItemBeEdit('Positions', 'paymentType'), 
 				                    validation: { required: true } }
             ,amount: { type: "number", 
 			                        //editable: Application.canTableItemBeEdit('Positions', 'amount'), 

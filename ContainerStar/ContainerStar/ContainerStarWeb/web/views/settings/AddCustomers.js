@@ -46,7 +46,7 @@ define([
             view.__super__.render.apply(this, arguments);
 
 			//TODO foreach model field
-			this.disableInput(this, 'number');
+			this.disableInput(this, 'number', 'numeric');
 			this.disableInput(this, 'name');
 			this.disableInput(this, 'street');
 			this.disableInput(this, 'zip');

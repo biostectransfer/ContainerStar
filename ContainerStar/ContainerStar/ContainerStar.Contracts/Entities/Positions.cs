@@ -71,6 +71,10 @@ namespace ContainerStar.Contracts.Entities
             /// Column name 'IsMain' for property <see cref="Positions.IsMain"/>
             /// </summary>
             public static readonly string IsMain = "IsMain";
+            /// <summary>
+            /// Column name 'PaymentType' for property <see cref="Positions.PaymentType"/>
+            /// </summary>
+            public static readonly string PaymentType = "PaymentType";
           
         }
         #endregion
@@ -87,6 +91,7 @@ namespace ContainerStar.Contracts.Entities
         public DateTime? DeleteDate{ get; set; }
         public int Amount{ get; set; }
         public bool IsMain{ get; set; }
+        public int PaymentType{ get; set; }
         public virtual Orders Orders{ get; set; }
         public virtual Containers Containers{ get; set; }
         public virtual AdditionalCosts AdditionalCosts{ get; set; }
@@ -143,6 +148,7 @@ namespace ContainerStar.Contracts.Entities
                        DeleteDate = DeleteDate,
                        Amount = Amount,
                        IsMain = IsMain,
+                       PaymentType = PaymentType,
         	           };
         }
     }

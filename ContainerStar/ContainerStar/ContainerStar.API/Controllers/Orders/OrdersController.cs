@@ -103,6 +103,13 @@ namespace ContainerStar.API.Controllers
                     Email = model.customerEmail,
                     IsProspectiveCustomer = model.isOffer
                 };
+
+                if(!model.isOffer)
+                {
+                    var lastCustomerNumber = customerManager.GetEntities().Max(o => o.Number);
+                    customer.Number = lastCustomerNumber + 1;
+                }
+
                 customerManager.AddEntity(customer);
                 customerManager.SaveChanges();
                 entity.CustomerId = customer.Id;

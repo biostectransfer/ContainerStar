@@ -30,9 +30,7 @@ namespace ContainerStar.Lib.Data
 
             Property(t => t.Number)
                 .HasColumnName(Customers.Fields.Number)
-                .IsRequired()
-                .IsUnicode()
-                .HasMaxLength(20);
+                .IsRequired();
 
             Property(t => t.Name)
                 .HasColumnName(Customers.Fields.Name)

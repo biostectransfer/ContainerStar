@@ -169,7 +169,7 @@ define([
 		        template: function () {
 		            return '<a class="k-button k-button-icontext" href="' + self.editUrl +
 		            '/create" data-localized="' + self.createNewItemTitle + '"></a>' +
-		            '<a class="k-button k-button-icontext printRentOrder" href="#" data-localized="printRentOrder"></a>' +
+		            //'<a class="k-button k-button-icontext printRentOrder" href="#" data-localized="printRentOrder"></a>' +
                     '<a class="k-button k-button-icontext printOffer" href="#" data-localized="printOffer"></a>' +
                     '<a class="k-button k-button-icontext offerToOrder" href="#" data-localized="offerToOrder"></a>';
 		        }

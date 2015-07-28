@@ -100,22 +100,6 @@ define([
         },
 
         events: {
-            'click .SelectCustomer': function (e) {
-                e.preventDefault();
-
-                var self = this,
-                    view = new SelectCustomerView();
-
-                self.listenTo(view, 'select', function (item) {
-
-                    self.model.set('customerId', item.id);
-                    self.$el.find('#customerId').val(item.id);
-                    self.$el.find('#customerId_Name').val(item.get('name'));
-                });
-
-                self.addView(view);
-                self.$el.append(view.render().$el);
-            },
             'click .save': function (e) {
 
                 e.preventDefault();
@@ -129,6 +113,12 @@ define([
                     self.$el.find('#totalPriceWithoutDiscountWithoutTax').data("kendoNumericTextBox").value(self.model.get('totalPriceWithoutDiscountWithoutTax'));
                 });
             },
+            'click .print': function (e) {
+                e.preventDefault();
+                var self = this;
+
+                location.href = Application.apiUrl + 'print/?printTypeId=1&id=' + self.model.id;
+            }
         }
     });
 

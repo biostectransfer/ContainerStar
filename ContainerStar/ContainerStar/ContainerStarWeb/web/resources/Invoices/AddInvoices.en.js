@@ -23,6 +23,7 @@ define(function () {
 	    payPartOne: 'Pay part one',
 	    payPartTwo: 'Pay part two',
 	    payPartTree: 'Pay part tree',
+	    print: 'Print',
 	};
 
 	return resources;

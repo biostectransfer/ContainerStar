@@ -65,6 +65,7 @@
             return [
                  { field: 'description', title: this.resources.description, filterable: false, sortable: false },
                  { field: 'price', title: this.resources.price },
+                 { field: 'paymentType', title: this.resources.paymentType, collection: this.options.paymentTypes },
                  {
                      field: 'amount',
                      editor: amountEditor, template: "#=amount#",

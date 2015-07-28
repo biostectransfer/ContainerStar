@@ -23,6 +23,7 @@ define(function () {
 		payPartOne: 'Erste Anteil',
 		payPartTwo: 'Zweite Anteil',
 		payPartTree: 'Dritte Anteil',
+        print: 'Drucken',
 	};
 
 	return resources;

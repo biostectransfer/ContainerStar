@@ -18,7 +18,7 @@ namespace ContainerStar.API.Models.Settings
         /// </summary>
         [Required]
         [DataMember]
-        public string number{ get; set; }
+        public int number{ get; set; }
         /// <summary>
         ///     Model property for <see cref="Customers.Name"/> entity
         /// </summary>

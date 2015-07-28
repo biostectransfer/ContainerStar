@@ -5,9 +5,9 @@ define(function () {
 	    urlRoot: 'api/Customers',
 		fields: {
 			id: { type: "number", editable: false }
-			,number: { type: "string", 
+			,number: { type: "number", 
 			                        editable: Application.canTableItemBeEdit('Customers', 'number'), 
-				                    validation: { required: true, maxLength: 20 } }			
+				                    validation: { required: true } }			
 			,name: { type: "string", 
 			                        editable: Application.canTableItemBeEdit('Customers', 'name'), 
 				                    validation: { required: true, maxLength: 128 } }			

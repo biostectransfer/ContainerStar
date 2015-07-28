@@ -42,13 +42,15 @@ define([
                 'communicationPartnerId',
                 'customerSelectType',
                 'autoProlongation',
-                'isOffer');
+                'isOffer',
+                'customerNumber');
         
-        attributesToSave["customerNumber"] = $('#customerNumber').val();
+
         attributesToSave["newCustomerName"] = $('#newCustomerName').val();
         attributesToSave["customerStreet"] = $('#customerStreet').val();
         attributesToSave["customerCity"] = $('#customerCity').val();
         attributesToSave["customerZip"] = $('#customerZip').val();
+
 
         if (self.validate()) {
             self.model.save({}, {
@@ -124,11 +126,6 @@ define([
                 '#autoBill': 'autoBill',
                 '#discount': 'discount',
                 '#billTillDate': 'billTillDate',
-                //'#customerNumber': 'customerNumber',
-                //'#newCustomerName': 'newCustomerName',
-                //'#customerStreet': 'customerStreet',
-                //'#customerCity': 'customerCity',
-                //'#customerZip': 'customerZip',
                 '#customerPhone': 'customerPhone',
                 '#customerFax': 'customerFax',
                 '#customerEmail': 'customerEmail',
@@ -181,7 +178,6 @@ define([
                     $('#customerAddressRow').hide();
                     $('#customerPhonesRow').hide();
                     $('#newCustomerName').val('0');
-                    $('#customerNumber').val('0');
                     $('#customerStreet').val('0');
                     $('#customerCity').val('0');
                     $('#customerZip').val('0');
@@ -195,7 +191,6 @@ define([
                     $('#customerAddressRow').show();
                     $('#customerPhonesRow').show();
                     $('#newCustomerName').val('');
-                    $('#customerNumber').val('');
                     $('#customerStreet').val('');
                     $('#customerCity').val('');
                     $('#customerZip').val('');

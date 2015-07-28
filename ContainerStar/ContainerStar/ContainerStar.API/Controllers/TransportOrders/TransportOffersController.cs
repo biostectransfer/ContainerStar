@@ -6,6 +6,7 @@ using ContainerStar.Contracts.Services;
 using CoreBase;
 using System;
 using System.Web.Http;
+using System.Linq;
 
 namespace ContainerStar.API.Controllers
 {
@@ -18,10 +19,12 @@ namespace ContainerStar.API.Controllers
     {
         private readonly ITransportOrdersManager manager;
         private readonly IUniqueNumberProvider numberProvider;
+        private readonly ICustomersManager customerManager;
 
-        public TransportOffersController(ITransportOrdersManager manager, IUniqueNumberProvider numberProvider)
+        public TransportOffersController(ITransportOrdersManager manager, ICustomersManager customerManager, IUniqueNumberProvider numberProvider)
         {
             this.manager = manager;
+            this.customerManager = customerManager;
             this.numberProvider = numberProvider;
         }
 
@@ -33,6 +36,13 @@ namespace ContainerStar.API.Controllers
             if (String.IsNullOrEmpty(order.OrderNumber))
             {
                 order.OrderNumber = numberProvider.GetNextTransportOrderNumber();
+            }
+
+            if (order.Customers.IsProspectiveCustomer)
+            {
+                order.Customers.IsProspectiveCustomer = false;
+                var lastCustomerNumber = customerManager.GetEntities().Max(o => o.Number);
+                order.Customers.Number = lastCustomerNumber + 1;
             }
             
             manager.SaveChanges();

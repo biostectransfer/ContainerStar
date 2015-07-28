@@ -48,3 +48,12 @@ GO
 ALTER TABLE [dbo].[ContainerTypes]
  ADD [DispositionRelevant] bit NOT NULL default (1)
 GO
+ALTER TABLE [dbo].[Positions]
+ ADD [PaymentType] int NOT NULL default(0)
+GO
+ALTER TABLE [dbo].[Customers]
+ ALTER COLUMN [Number] int NOT NULL
+GO
+ALTER TABLE [dbo].[Containers]
+ ADD [MinPrice] float NOT NULL default(0)
+GO

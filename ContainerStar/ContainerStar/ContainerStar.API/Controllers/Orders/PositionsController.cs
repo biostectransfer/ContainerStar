@@ -25,6 +25,7 @@ namespace ContainerStar.API.Controllers
             model.isSellOrder = entity.IsSellOrder;
             model.containerId = entity.ContainerId;
             model.isMain = entity.IsMain;
+            model.paymentType = entity.PaymentType;
 
             if(entity.ContainerId.HasValue)
             {
@@ -56,6 +57,7 @@ namespace ContainerStar.API.Controllers
             entity.FromDate = model.fromDate.HasValue ? model.fromDate.Value.Date : DateTime.Now.Date;
             entity.ToDate = model.toDate.HasValue ? model.toDate.Value.Date : DateTime.Now.Date;
             entity.IsMain = model.isMain;
+            entity.PaymentType = model.paymentType;
 
             if (model.containerId.HasValue)
                 entity.Amount = 1;

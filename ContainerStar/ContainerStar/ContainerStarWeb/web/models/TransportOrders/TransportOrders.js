@@ -62,9 +62,9 @@ define(function () {
 			,customerEmail: { type: "string", 
 			                        editable: Application.canTableItemBeEdit('Orders', 'customerEmail'), 
 				                    validation: { required: false, maxLength: 50 } }	
-            ,customerNumber: { type: "string", 
+            ,customerNumber: { type: "number", 
 			                        editable: Application.canTableItemBeEdit('Orders', 'customerNumber'), 
-				                    validation: { required: true, maxLength: 20 } }			
+				                    validation: { required: true } }			
 			,newCustomerName: { type: "string", 
 			                        editable: Application.canTableItemBeEdit('Orders', 'newCustomerName'), 
 				                    validation: { required: true, maxLength: 128 } }

@@ -59,7 +59,7 @@ namespace ContainerStar.API.Controllers
                 });
 
             if (model.PaymentTypes)
-                result.Add("PaymentIntervals", new[]
+                result.Add("PaymentTypes", new[]
                 {
                     new { id = 0, name = "Monat"},
                     new { id = 1, name = "Tag"},

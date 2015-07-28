@@ -89,6 +89,13 @@ namespace ContainerStar.API.Controllers
                     Fax = model.customerFax,
                     Email = model.customerEmail
                 };
+
+                if (!model.isOffer)
+                {
+                    var lastCustomerNumber = customerManager.GetEntities().Max(o => o.Number);
+                    customer.Number = lastCustomerNumber + 1;
+                }
+
                 customerManager.AddEntity(customer);
                 customerManager.SaveChanges();
                 entity.CustomerId = customer.Id;
