@@ -741,12 +741,13 @@ namespace ContainerStar.Lib.Managers
         {
             if (invoice.InvoicePositions != null && invoice.InvoicePositions.Count != 0)
             {
+                double totalPriceForMainPositions = 0;
                 double totalPriceWithoutDiscountWithoutTax = 0;
                 double totalPriceWithoutTax = 0;
                 double totalPrice = 0;
                 double summaryPrice = 0;
 
-                CalculationHelper.CalculateInvoicePrices(invoice, out totalPriceWithoutDiscountWithoutTax, out totalPriceWithoutTax,
+                CalculationHelper.CalculateInvoicePrices(invoice, out totalPriceForMainPositions, out totalPriceWithoutDiscountWithoutTax, out totalPriceWithoutTax,
                     out totalPrice, out summaryPrice);
 
                 //Discount
@@ -792,6 +793,9 @@ namespace ContainerStar.Lib.Managers
                     parentTableElement.Remove();
                     xmlMainXMLDoc = xmlDoc.Root.ToString();
                 }
+
+                //total price without discount and tax for main positions only                
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TotalPriceWithoutDiscount", totalPriceForMainPositions.ToString("N2"));
 
                 //total price
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TotalPriceText", "Zu zahlender Betrag");
@@ -967,12 +971,13 @@ namespace ContainerStar.Lib.Managers
         {
             if (invoice.InvoicePositions != null && invoice.InvoicePositions.Count != 0)
             {
+                double totalPriceForMainPositions = 0;
                 double totalPriceWithoutDiscountWithoutTax = 0;
                 double totalPriceWithoutTax = 0;
                 double totalPrice = 0;
                 double summaryPrice = 0;
 
-                CalculationHelper.CalculateInvoicePrices(invoice, out totalPriceWithoutDiscountWithoutTax, out totalPriceWithoutTax,
+                CalculationHelper.CalculateInvoicePrices(invoice, out totalPriceForMainPositions, out totalPriceWithoutDiscountWithoutTax, out totalPriceWithoutTax,
                     out totalPrice, out summaryPrice);
 
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TotalPrice", summaryPrice.ToString());

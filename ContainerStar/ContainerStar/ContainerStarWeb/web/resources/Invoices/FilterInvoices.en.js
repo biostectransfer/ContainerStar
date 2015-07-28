@@ -9,7 +9,8 @@ define(function () {
 		searchTitle: 'Advanced search',
 		apply: 'Apply',
 		cancel: 'Cancel',
-		isPayed: 'Payed'
+		isPayed: 'Payed',
+		autoDebitEntry: 'Auto bill'
 	};
 
 	return resources;

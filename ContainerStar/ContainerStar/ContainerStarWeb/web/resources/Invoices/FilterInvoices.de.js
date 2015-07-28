@@ -9,7 +9,8 @@ define(function () {
 		searchTitle: 'erweiterte Suche',
 		apply: 'Suchen',
 		cancel: 'Abbruch',
-		isPayed: 'Bezahlt'
+		isPayed: 'Bezahlt',
+		autoDebitEntry: 'Automat. Abbuchung'
 	};
 
 	return resources;

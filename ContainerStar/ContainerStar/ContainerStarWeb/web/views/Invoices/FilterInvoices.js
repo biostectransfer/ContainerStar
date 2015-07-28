@@ -14,8 +14,10 @@ define([
                 fromDate = this.model.get('fromDate'),
                 toDate = this.model.get('toDate'),
                 isPayed = this.model.get('isPayed'),
+                autoDebitEntry = this.model.get('autoDebitEntry'),
                 name = this.model.get('name'),
-                payStatus = 1;
+                payStatus = 1,
+                autoDebitEntryStatus = 1;
 
             result.push({
                 field: 'createDate',
@@ -40,6 +42,16 @@ define([
                 value: payStatus
             });
 
+            if (autoDebitEntry) {
+                autoDebitEntryStatus = 2;
+            }
+
+            result.push({
+                field: 'autoDebitEntry',
+                operator: 'eq',
+                value: autoDebitEntryStatus
+            });
+
             result.push({
                 field: 'name',
                 operator: 'contains',
@@ -59,6 +71,7 @@ define([
                 '#toDate': 'toDate',
                 '#name': 'name',
                 '#isPayed': 'isPayed',
+                '#autoDebitEntry': 'autoDebitEntry',
             };
 
             return result;

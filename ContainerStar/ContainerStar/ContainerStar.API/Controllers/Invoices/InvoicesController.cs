@@ -46,12 +46,13 @@ namespace ContainerStar.API.Controllers.Invoices
 
         private void CalculatePrices(ContainerStar.Contracts.Entities.Invoices entity, InvoicesModel model)
         {
+            double totalPriceForMainPositions = 0;
             double totalPriceWithoutDiscountWithoutTax = 0;
             double totalPriceWithoutTax = 0;
             double totalPrice = 0;
             double summaryPrice = 0;
 
-            CalculationHelper.CalculateInvoicePrices(entity, out totalPriceWithoutDiscountWithoutTax, out totalPriceWithoutTax,
+            CalculationHelper.CalculateInvoicePrices(entity, out totalPriceForMainPositions, out totalPriceWithoutDiscountWithoutTax, out totalPriceWithoutTax,
                 out totalPrice, out summaryPrice);
 
             model.totalPriceWithoutDiscountWithoutTax = totalPriceWithoutDiscountWithoutTax;
@@ -95,6 +96,17 @@ namespace ContainerStar.API.Controllers.Invoices
 
                     return String.Format("PayDate{0}", payStatus == 1 ? " == null" : " != null");
                 }
+            }
+            else if (filter.Field == "autoDebitEntry")
+            {
+                int autoDebitEntryStatus;
+                if (!String.IsNullOrEmpty(filter.Value) &&
+                    Int32.TryParse(filter.Value, out autoDebitEntryStatus) && autoDebitEntryStatus == 2)
+                {
+                    return String.Format("Orders.Customers.AutoDebitEntry == true");
+                }
+
+                return "true == true";
             }
 
             return base.BuildWhereClause<T>(filter);
