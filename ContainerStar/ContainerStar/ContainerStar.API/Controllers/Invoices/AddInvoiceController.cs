@@ -121,6 +121,7 @@ namespace ContainerStar.API.Controllers.Invoices
                         ChangeDate = DateTime.Now,
                         FromDate = fromDate,
                         ToDate = toDate,
+                        PaymentType = orderPosition.PaymentType
                     };
                     invoice.InvoicePositions.Add(newPosition);
                     hasOpenPositions = true;

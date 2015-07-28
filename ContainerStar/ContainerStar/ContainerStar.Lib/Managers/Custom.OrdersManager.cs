@@ -747,7 +747,7 @@ namespace ContainerStar.Lib.Managers
                 foreach (var position in positions.Where(o => o.Positions.IsMain == isMain && o.Positions.Containers != null))
                 {
                     var price = CalculationHelper.CalculatePositionPrice(position.Positions.IsSellOrder, position.Price,
-                        position.Amount, position.FromDate, position.ToDate);
+                        position.Amount, position.FromDate, position.ToDate, position.Payment);
 
                     var rowElem = XElement.Parse(ReplaceFieldValue(
                         parentTableElement.ToString(), parentTag, 
@@ -767,7 +767,7 @@ namespace ContainerStar.Lib.Managers
                 foreach (var position in positions.Where(o => o.Positions.IsMain == isMain && o.Positions.AdditionalCosts != null))
                 {
                     var price = CalculationHelper.CalculatePositionPrice(true, position.Price,
-                        position.Amount, position.FromDate, position.ToDate);
+                        position.Amount, position.FromDate, position.ToDate, position.Payment);
 
                     var rowElem = XElement.Parse(ReplaceFieldValue(
                         parentTableElement.ToString(), parentTag,
@@ -1047,7 +1047,7 @@ namespace ContainerStar.Lib.Managers
                 {
                     var price = CalculationHelper.CalculatePositionPrice(
                         position.Positions.AdditionalCostId.HasValue ? true : position.Positions.IsSellOrder, 
-                        position.Price, position.Amount, position.FromDate, position.ToDate);
+                        position.Price, position.Amount, position.FromDate, position.ToDate, position.Payment);
 
                     var description = String.Empty;
                     if(position.Positions.ContainerId.HasValue)

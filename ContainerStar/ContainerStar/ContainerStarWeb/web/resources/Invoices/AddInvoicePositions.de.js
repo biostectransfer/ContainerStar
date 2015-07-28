@@ -15,8 +15,8 @@ define(function () {
 	    rentContainer: 'Container vermieten',
 	    saleContainer: 'Container verkaufen',
 	    selectAdditionalCosts: 'Nebenkosten',
-	    amount: 'Menge'
-
+	    amount: 'Menge',
+	    paymentType: 'Preiseinheit'
 	};
 
 	return resources;

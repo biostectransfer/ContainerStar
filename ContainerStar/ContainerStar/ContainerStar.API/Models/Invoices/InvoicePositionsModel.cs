@@ -34,5 +34,9 @@ namespace ContainerStar.API.Models.Invoices
 
         [DataMember]
         public bool isCointainerPosition { get; set; }
+
+        [Required]
+        [DataMember]
+        public int paymentType { get; set; }
     }
 }

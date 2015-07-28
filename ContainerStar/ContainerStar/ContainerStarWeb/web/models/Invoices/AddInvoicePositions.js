@@ -20,6 +20,9 @@ define(function () {
             ,description: { type: "string", editable: false }
             ,amount: { type: "number", editable: false, validation: { required: true } }
             ,isCointainerPosition: { type: "boolean", editable: false, validation: { required: true } }
+            ,paymentType: { type: "number", 
+			                        editable: true,
+				                    validation: { required: true } }
 		},
 		defaults: function () {
 			var dnf = new Date();

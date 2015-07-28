@@ -41,6 +41,7 @@
             return [
                  { field: 'description', title: this.resources.description, filterable: false, sortable: false },
                  { field: 'price', title: this.resources.price },
+                 { field: 'paymentType', title: this.resources.paymentType, collection: this.options.paymentTypes },
                  { field: 'totalPrice', title: this.resources.totalPrice },
                  { field: 'amount', title: this.resources.amount, filterable: false, sortable: false },
                  {

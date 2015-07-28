@@ -11,6 +11,7 @@ define(function () {
 		description: 'Description',
 		fromDate: 'From date',
 		toDate: 'To date',
+		paymentType: 'Payment type'
 	};
 
 	return resources;

@@ -18,8 +18,8 @@ define(function () {
 	    rentContainer: 'Container rent',
 	    saleContainer: 'Container sale',
 	    selectAdditionalCosts: 'additional costs',
-	    amount: 'Amount'
-
+	    amount: 'Amount',
+	    paymentType: 'Payment type'
 	};
 
 	return resources;

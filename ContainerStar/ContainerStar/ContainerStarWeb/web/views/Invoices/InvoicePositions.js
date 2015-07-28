@@ -25,6 +25,7 @@ define([
 		   
 		   return [
 				{ field: 'description', title: this.resources.description, filterable: false, sortable: false },
+                { field: 'paymentType', title: this.resources.paymentType, collection: this.options.paymentTypes },
 				{ field: 'totalPrice', title: this.resources.price },
                 { field: 'fromDate', title: this.resources.fromDate, format: '{0:d}' },
                 { field: 'toDate', title: this.resources.toDate, format: '{0:d}' }

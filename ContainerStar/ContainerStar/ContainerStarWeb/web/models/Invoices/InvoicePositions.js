@@ -15,6 +15,9 @@ define(function () {
 			                        editable: false, 
 				                    validation: { required: false, date: true } }		
             ,description: { type: "string", editable: false }
+            ,paymentType: { type: "number", 
+			                        editable: false,
+				                    validation: { required: true } }
 		},
 		defaults: function () {
 			var dnf = new Date();

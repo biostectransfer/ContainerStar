@@ -58,6 +58,10 @@ namespace ContainerStar.Contracts.Entities
             /// Column name 'Amount' for property <see cref="InvoicePositions.Amount"/>
             /// </summary>
             public static readonly string Amount = "Amount";
+            /// <summary>
+            /// Column name 'PaymentType' for property <see cref="InvoicePositions.PaymentType"/>
+            /// </summary>
+            public static readonly string PaymentType = "PaymentType";
           
         }
         #endregion
@@ -71,6 +75,7 @@ namespace ContainerStar.Contracts.Entities
         public DateTime ChangeDate{ get; set; }
         public DateTime? DeleteDate{ get; set; }
         public int Amount{ get; set; }
+        public int PaymentType{ get; set; }
         public virtual Invoices Invoices{ get; set; }
         public virtual Positions Positions{ get; set; }
         public bool HasInvoices
@@ -118,6 +123,7 @@ namespace ContainerStar.Contracts.Entities
                        ChangeDate = ChangeDate,
                        DeleteDate = DeleteDate,
                        Amount = Amount,
+                       PaymentType = PaymentType,
         	           };
         }
     }

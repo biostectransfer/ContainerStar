@@ -25,6 +25,7 @@ namespace ContainerStar.API.Controllers.Invoices
             model.createDate = ((ISystemFields)entity).CreateDate;
             model.changeDate = ((ISystemFields)entity).ChangeDate;
             model.amount = entity.Amount;
+            model.paymentType = entity.PaymentType;
 
             if (entity.Positions.ContainerId.HasValue)
             {
@@ -33,7 +34,7 @@ namespace ContainerStar.API.Controllers.Invoices
                 model.price = entity.Price;
 
                 model.totalPrice = CalculationHelper.CalculatePositionPrice(entity.Positions.IsSellOrder, entity.Price, entity.Amount, 
-                    entity.FromDate, entity.ToDate);
+                    entity.FromDate, entity.ToDate, entity.Payment);
 
                 if (!entity.Positions.IsSellOrder)
                 {                    
@@ -58,6 +59,8 @@ namespace ContainerStar.API.Controllers.Invoices
 
             if (model.toDate.HasValue)
                 entity.ToDate = model.toDate.Value;
+
+            entity.PaymentType = model.paymentType;
         }
     }
 }

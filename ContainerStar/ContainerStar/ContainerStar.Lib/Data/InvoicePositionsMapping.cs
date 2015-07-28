@@ -63,6 +63,10 @@ namespace ContainerStar.Lib.Data
                 .HasColumnName(InvoicePositions.Fields.Amount)
                 .IsRequired();
 
+            Property(t => t.PaymentType)
+                .HasColumnName(InvoicePositions.Fields.PaymentType)
+                .IsRequired();
+
 
             //Relationships
             HasRequired(i => i.Invoices)

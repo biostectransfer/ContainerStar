@@ -11,6 +11,7 @@ define(function () {
 		description: 'Beschreibung',
 		fromDate: 'Von Datum',
 		toDate: 'Bis Datum',
+		paymentType: 'Preiseinheit'
 	};
 
 	return resources;

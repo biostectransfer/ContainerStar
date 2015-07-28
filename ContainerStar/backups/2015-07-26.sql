@@ -60,3 +60,6 @@ GO
 ALTER TABLE [dbo].[Invoices]
  ADD [LastReminderDate] datetime2(2) NULL
 GO
+ALTER TABLE [dbo].[InvoicePositions]
+ ADD [PaymentType] int NOT NULL default(0)
+GO
