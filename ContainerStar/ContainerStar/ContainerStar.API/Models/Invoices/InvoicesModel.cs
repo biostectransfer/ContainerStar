@@ -73,5 +73,11 @@ namespace ContainerStar.API.Models.Invoices
 
         [DataMember]
         public int? payPartTree { get; set; }
+
+        [DataMember]
+        public int reminderCount { get; set; }
+
+        [DataMember]
+        public DateTime? lastReminderDate { get; set; }
     }
 }

@@ -66,7 +66,7 @@ namespace ContainerStar.API.Controllers
                 case PrintTypes.ReminderMail:
                     path = Path.Combine(dataDirectory, API.Configuration.ReminderFileName);
 
-                    var invoices = invoicesManager.GetEntities(o => !o.PayDate.HasValue &&
+                    var invoices = invoicesManager.GetEntities(o => !o.PayDate.HasValue && o.ReminderCount < 3 &&
                         ( (!o.LastReminderDate.HasValue && o.CreateDate.AddDays(o.PayInDays) < DateTime.Now) ||
                           (o.LastReminderDate.HasValue && o.LastReminderDate.Value.AddDays(8) < DateTime.Now)
                         )).ToList();

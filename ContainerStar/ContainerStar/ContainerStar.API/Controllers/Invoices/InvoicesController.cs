@@ -40,6 +40,8 @@ namespace ContainerStar.API.Controllers.Invoices
             model.payPartOne = entity.PayPartOne;
             model.payPartTwo = entity.PayPartTwo;
             model.payPartTree = entity.PayPartTree;
+            model.reminderCount = entity.ReminderCount;
+            model.lastReminderDate = entity.LastReminderDate;
 
             CalculatePrices(entity, model);
         }

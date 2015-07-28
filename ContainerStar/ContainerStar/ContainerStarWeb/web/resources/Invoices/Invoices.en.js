@@ -19,6 +19,7 @@ define(function () {
 	    generateMonthInvoices: 'Month invoices',
 		pay: 'Pay',
 		rentOrderNumber: 'Rent order number',
+		reminderCount: 'Reminder count'
 	};
 
 	return resources;
