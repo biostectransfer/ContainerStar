@@ -3,11 +3,16 @@
 </div>
 <div class="advanced">
     <form>
-        <div class="editor-field">
+        <div class="editor-field" style="float: left;">
             <label for="name" data-localized="name"></label>
-            <input id="name" name="name" type="text" class="k-textbox" style="width: 483px" />
+            <input id="name" name="name" type="text" class="k-textbox" />
         </div>
-        <button class="k-primary k-button" type="submit" data-localized="apply"></button>
-        <button class="k-button" type="reset" data-localized="cancel"></button>
-    </form>
+        <div class="editor-field" style="float: left; padding-left: 20px; padding-top: 8px;">
+            <input type="checkbox" id="isProspectiveCustomer" /><label for="isProspectiveCustomer" data-localized="isProspectiveCustomer"></label>
+        </div>
+        <div class="editor-field" style="clear: left;">
+            <button class="k-primary k-button" type="submit" data-localized="apply"></button>
+            <button class="k-button" type="reset" data-localized="cancel"></button>
+        </div>
+</form>
 </div>

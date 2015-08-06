@@ -3,7 +3,8 @@ define(function () {
 
 	var resources = {
 
-		name: 'Name',
+		name: 'Value',
+		isProspectiveCustomer: 'Is prospective customer',
 	    searchTitle: 'Advanced search',
 	    apply: 'Apply',
         cancel: 'Cancel'

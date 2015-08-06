@@ -336,6 +336,7 @@
     <Content Include="web\models\InvoiceStornos\AddInvoicePositions.js" />
     <Content Include="web\models\InvoiceStornos\InvoiceStornos.js" />
     <Content Include="web\models\Equipments.js" />
+    <Content Include="web\models\Settings\FilterCustomers.js" />
     <Content Include="web\models\ShowContainer.js" />
     <Content Include="web\models\FilterContainerSmart.js" />
     <Content Include="web\models\FilterOrders.js" />
@@ -377,9 +378,6 @@
       <DependentUpon>web.models.tt</DependentUpon>
     </Content>
     <Content Include="web\models\Settings\FilterContainerTypes.js">
-      <DependentUpon>web.models.tt</DependentUpon>
-    </Content>
-    <Content Include="web\models\Settings\FilterCustomers.js">
       <DependentUpon>web.models.tt</DependentUpon>
     </Content>
     <Content Include="web\models\Settings\FilterEquipments.js">
@@ -448,6 +446,8 @@
     <Content Include="web\resources\Invoices\AddInvoicePositions.en.js" />
     <Content Include="web\resources\Orders\Equipments.de.js" />
     <Content Include="web\resources\Orders\Equipments.en.js" />
+    <Content Include="web\resources\Settings\FilterCustomers.de.js" />
+    <Content Include="web\resources\Settings\FilterCustomers.en.js" />
     <Content Include="web\resources\TransportOrders\TransportProductSearch.de.js" />
     <Content Include="web\resources\TransportOrders\TransportProductSearch.en.js" />
     <Content Include="web\resources\TransportOrders\AddTransportOrders.de.js" />
@@ -696,12 +696,6 @@
     <Content Include="web\resources\Settings\FilterContainerTypes.en.js">
       <DependentUpon>web.filter.resources.tt</DependentUpon>
     </Content>
-    <Content Include="web\resources\Settings\FilterCustomers.de.js">
-      <DependentUpon>web.filter.resources.tt</DependentUpon>
-    </Content>
-    <Content Include="web\resources\Settings\FilterCustomers.en.js">
-      <DependentUpon>web.filter.resources.tt</DependentUpon>
-    </Content>
     <Content Include="web\resources\Settings\FilterEquipments.de.js">
       <DependentUpon>web.filter.resources.tt</DependentUpon>
     </Content>
@@ -847,6 +841,7 @@
     <Content Include="web\templates\Invoices\InvoicesRelationships.html" />
     <Content Include="web\templates\Invoices\AddInvoicePositions.html" />
     <Content Include="web\templates\Orders\Equipments.html" />
+    <Content Include="web\templates\Settings\FilterCustomers.html" />
     <Content Include="web\templates\TransportOrders\TransportProductSearch.html" />
     <Content Include="web\templates\TransportOrders\AddTransportOrders.html" />
     <Content Include="web\templates\TransportOrders\AddTransportPositions.html" />
@@ -969,9 +964,6 @@
     <Content Include="web\templates\Settings\FilterContainerTypes.html">
       <DependentUpon>web.templates.tt</DependentUpon>
     </Content>
-    <Content Include="web\templates\Settings\FilterCustomers.html">
-      <DependentUpon>web.templates.tt</DependentUpon>
-    </Content>
     <Content Include="web\templates\Settings\FilterEquipments.html">
       <DependentUpon>web.templates.tt</DependentUpon>
     </Content>
@@ -1058,6 +1050,7 @@
     <Content Include="web\views\Invoices\InvoicesRelationships.js" />
     <Content Include="web\views\Invoices\AddInvoicePositions.js" />
     <Content Include="web\views\Orders\Equipments.js" />
+    <Content Include="web\views\Settings\FilterCustomers.js" />
     <Content Include="web\views\TransportOrders\TransportProductSearch.js" />
     <Content Include="web\views\TransportOrders\AddTransportOrders.js" />
     <Content Include="web\views\TransportOrders\AddTransportPositions.js" />
@@ -1179,9 +1172,6 @@
       <DependentUpon>web.views.tt</DependentUpon>
     </Content>
     <Content Include="web\views\Settings\FilterContainerTypes.js">
-      <DependentUpon>web.views.tt</DependentUpon>
-    </Content>
-    <Content Include="web\views\Settings\FilterCustomers.js">
       <DependentUpon>web.views.tt</DependentUpon>
     </Content>
     <Content Include="web\views\Settings\FilterEquipments.js">
