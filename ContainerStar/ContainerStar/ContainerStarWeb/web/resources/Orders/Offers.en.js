@@ -13,7 +13,7 @@ define(function () {
 		printRentOrder: 'Print rent order',
 		rentOrderNumber: 'Rent order number',
 		printOffer: 'Print offer',
-	    createDate: 'Date'
+		createDate: 'Date',
 	};
 
 	return resources;

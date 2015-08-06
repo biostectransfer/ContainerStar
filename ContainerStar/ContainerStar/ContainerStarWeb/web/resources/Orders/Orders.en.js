@@ -14,7 +14,9 @@ define(function () {
 		printRentOrder: 'Print rent order',
 		rentOrderNumber: 'Rent order number',
 		closeOrder: 'Close',
-	    copyOrder: 'Copy'
+		copyOrder: 'Copy',
+		printDeliveryNote: 'Delivery note',
+	    printBackDeliveryNote: 'Back delivery note',
 	};
 
 	return resources;

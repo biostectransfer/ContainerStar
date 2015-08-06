@@ -54,6 +54,21 @@ namespace ContainerStar.Contracts
             }
         }
 
+        public static string DeliveryNoteFileName
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["DeliveryNoteFileName"];
+            }
+        }
+        public static string BackDeliveryNoteFileName
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["BackDeliveryNoteFileName"];
+            }
+        }
+
         public static string RentOrderPreffix
         {
             get { return ConfigurationManager.AppSettings["RentOrderNumberPreffix"]; }

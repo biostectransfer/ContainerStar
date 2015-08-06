@@ -333,6 +333,50 @@
                     });
                 }
             },
+            'click .printDeliveryNote': function (e) {
+
+                e.preventDefault();
+                var self = this,
+                    grid = self.grid,
+					dataItem = grid.dataItem(grid.select());
+
+                if (dataItem != undefined) {
+
+                    location.href = Application.apiUrl + 'print/?printTypeId=6&id=' + dataItem.id;
+                }
+                else {
+                    require(['base/information-view'], function (View) {
+                        var view = new View({
+                            title: 'Auftrag auswählen',
+                            message: 'Wählen Sie bitte ein Auftrag aus!'
+                        });
+                        self.addView(view);
+                        self.$el.append(view.render().$el);
+                    });
+                }
+            },
+            'click .printBackDeliveryNote': function (e) {
+
+                e.preventDefault();
+                var self = this,
+                    grid = self.grid,
+					dataItem = grid.dataItem(grid.select());
+
+                if (dataItem != undefined) {
+
+                    location.href = Application.apiUrl + 'print/?printTypeId=7&id=' + dataItem.id;
+                }
+                else {
+                    require(['base/information-view'], function (View) {
+                        var view = new View({
+                            title: 'Auftrag auswählen',
+                            message: 'Wählen Sie bitte ein Auftrag aus!'
+                        });
+                        self.addView(view);
+                        self.$el.append(view.render().$el);
+                    });
+                }
+            },
 		},
 
 		toolbar: function () {
@@ -343,6 +387,8 @@
 		            return '<a class="k-button k-button-icontext" href="' + self.editUrl +
 		            '/create" data-localized="' + self.createNewItemTitle + '"></a>' + 
                     '<a class="k-button k-button-icontext printRentOrder" href="#" data-localized="printRentOrder"></a>' +
+                    '<a class="k-button k-button-icontext printDeliveryNote" href="#" data-localized="printDeliveryNote"></a>' +
+                    '<a class="k-button k-button-icontext printBackDeliveryNote" href="#" data-localized="printBackDeliveryNote"></a>' +
                     '<a class="k-button k-button-icontext generateSellInvoice" href="#" data-localized="generateSellInvoice"></a>' +
 		            '<a class="k-button k-button-icontext generateRentInvoice" href="#" data-localized="generateRentInvoice"></a>' + 
                     '<a class="k-button k-button-icontext closeOrder" href="#" data-localized="closeOrder"></a>' +

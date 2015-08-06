@@ -8,5 +8,7 @@
         ReminderMail = 3,
         Offer = 4,
         TransportInvoice = 5,
+        DeliveryNote = 6,
+        BackDeliveryNote = 7,
     }
 }

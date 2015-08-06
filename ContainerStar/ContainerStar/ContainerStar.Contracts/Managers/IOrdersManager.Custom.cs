@@ -21,5 +21,9 @@ namespace ContainerStar.Contracts.Managers
         MemoryStream PrepareMonthInvoicePrintData(IEnumerable<Invoices> invoices, string path, IInvoicesManager invoicesManager, ITaxesManager taxesManager);
 
         MemoryStream PrepareTransportInvoicePrintData(int id, string path, ITransportOrdersManager transportOrdersManager, ITaxesManager taxesManager);
+
+        MemoryStream PrepareDeliveryNotePrintData(int id, string path);
+
+        MemoryStream PrepareBackDeliveryNotePrintData(int id, string path);
     }
 }

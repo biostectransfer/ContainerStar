@@ -95,6 +95,14 @@ namespace ContainerStar.API.Controllers
                     path = Path.Combine(dataDirectory, Contracts.Configuration.TransportInvoiceFileName);
                     stream = Manager.PrepareTransportInvoicePrintData(id, path, transportOrdersManager, taxesManager);
                     break;
+                case PrintTypes.DeliveryNote:
+                    path = Path.Combine(dataDirectory, Contracts.Configuration.DeliveryNoteFileName);
+                    stream = Manager.PrepareDeliveryNotePrintData(id, path);
+                    break;
+                case PrintTypes.BackDeliveryNote:
+                    path = Path.Combine(dataDirectory, Contracts.Configuration.BackDeliveryNoteFileName);
+                    stream = Manager.PrepareBackDeliveryNotePrintData(id, path);
+                    break;
                 default:
                     throw new NotImplementedException();
             }

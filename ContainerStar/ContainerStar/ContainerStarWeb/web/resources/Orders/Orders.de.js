@@ -14,7 +14,9 @@ define(function () {
 		printRentOrder: 'MV drucken',
 		rentOrderNumber: 'MV-Nummer',
 		closeOrder: 'Abschließen',
-	    copyOrder: 'Kopieren'
+		copyOrder: 'Kopieren',
+		printDeliveryNote: 'Lieferschein',
+		printBackDeliveryNote: 'Rücklieferschein',
 	};
 
 	return resources;

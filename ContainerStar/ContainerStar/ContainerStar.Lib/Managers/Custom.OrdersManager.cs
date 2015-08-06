@@ -43,6 +43,16 @@ namespace ContainerStar.Lib.Managers
             return PrepareCommonOrderPrintData(id, path, PrintTypes.TransportInvoice, null, taxesManager, null, transportOrdersManager);
         }
 
+        public MemoryStream PrepareDeliveryNotePrintData(int id, string path)
+        {
+            return PrepareCommonOrderPrintData(id, path, PrintTypes.DeliveryNote, null, null);
+        }
+
+        public MemoryStream PrepareBackDeliveryNotePrintData(int id, string path)
+        {
+            return PrepareCommonOrderPrintData(id, path, PrintTypes.BackDeliveryNote, null, null);
+        }
+
         public MemoryStream PrepareMonthInvoicePrintData(IEnumerable<Invoices> invoices, string path, IInvoicesManager invoicesManager, ITaxesManager taxesManager)
         {
             var result = new MemoryStream();
@@ -300,6 +310,60 @@ namespace ContainerStar.Lib.Managers
                     result = ReplaceTransportPositions(transportOrder.TransportPositions.Where(o => !o.DeleteDate.HasValue).ToList(), result);
                     result = ReplaceTransportInvoicePrices(transportOrder, result, taxesManager);
                     break;
+                case PrintTypes.DeliveryNote:
+
+                    order = GetById(id);
+                    result = ReplaceCommonFields(order, result);
+                    result = ReplaceBaseOrderFields(order, result);
+
+                    result = result.Replace("#DeliveryNoteType", "Lieferschein");
+                    result = result.Replace("#DateType", "Liefertermin");
+                    result = result.Replace("#AdressType", "Lieferanschrift");
+                    result = result.Replace("#OrderNumber", order.OrderNumber);
+                    
+                    result = ReplaceOrderedFromInfo(result, order);
+                    result = ReplaceCustomerOrderNumber(result, order);
+
+                    var positions = order.Positions != null ? order.Positions.Where(o => !o.IsSellOrder && !o.DeleteDate.HasValue && o.ContainerId.HasValue).ToList() :
+                        new List<Positions>();
+                    if (positions.Count != 0)
+                    {
+                        var minDate = positions.Min(o => o.FromDate);
+                        result = result.Replace("#DeliveryDate", minDate.ToShortDateString());
+                    }
+                    else
+                    {
+                    }
+
+                    result = ReplacePositionWithDescription(positions, result);
+                    break;
+                case PrintTypes.BackDeliveryNote:
+
+                    order = GetById(id);
+                    result = ReplaceCommonFields(order, result);
+                    result = ReplaceBaseOrderFields(order, result);
+
+                    result = result.Replace("#DeliveryNoteType", "Rücklieferschein");
+                    result = result.Replace("#DateType", "Abholtermin");
+                    result = result.Replace("#AdressType", "Abholanschrift");
+                    result = result.Replace("#OrderNumber", order.OrderNumber);
+
+                    result = ReplaceOrderedFromInfo(result, order);
+                    result = ReplaceCustomerOrderNumber(result, order);
+
+                    positions = order.Positions != null ? order.Positions.Where(o => !o.IsSellOrder && !o.DeleteDate.HasValue && o.ContainerId.HasValue).ToList() :
+                        new List<Positions>();
+                    if (positions.Count != 0)
+                    {
+                        var maxDate = positions.Max(o => o.ToDate);
+                        result = result.Replace("#DeliveryDate", maxDate.ToShortDateString());
+                    }
+                    else
+                    {
+                    }
+
+                    result = ReplacePositionWithDescription(positions, result);
+                    break;
                 default:
                     throw new NotImplementedException();
             }
@@ -374,7 +438,7 @@ namespace ContainerStar.Lib.Managers
 
         private string ReplaceRentPositions(Orders order, string xmlMainXMLDoc, ITaxesManager taxesManager)
         {
-            var positions = order.Positions != null ? order.Positions.Where(o => !o.DeleteDate.HasValue && o.ContainerId.HasValue).ToList() :
+            var positions = order.Positions != null ? order.Positions.Where(o => !o.IsSellOrder && !o.DeleteDate.HasValue && o.ContainerId.HasValue).ToList() :
                 new List<Positions>();
 
             if (positions.Count != 0)
@@ -461,13 +525,13 @@ namespace ContainerStar.Lib.Managers
         {
             if (order.Positions != null && order.Positions.Count != 0)
             {
-                var positions = order.Positions.Where(o => !o.DeleteDate.HasValue && o.AdditionalCostId.HasValue).ToList();
+                var positions = order.Positions.Where(o => !o.IsSellOrder && !o.DeleteDate.HasValue && o.AdditionalCostId.HasValue).ToList();
                 var xmlDoc = XDocument.Parse(xmlMainXMLDoc);
                 var temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#AdditionalCostDescription"));
                 var parentTableElement = GetParentElementByName(temp, "<w:tr ");
                 var prevElement = parentTableElement;
 
-                var hasPauschalPosition = order.Positions.Any(o => !o.DeleteDate.HasValue && o.PaymentType == (int)PaymentTypes.Total);
+                var hasPauschalPosition = order.Positions.Any(o => !o.IsSellOrder && !o.DeleteDate.HasValue && o.PaymentType == (int)PaymentTypes.Total);
 
                 if (parentTableElement != null)
                 {
@@ -574,7 +638,7 @@ namespace ContainerStar.Lib.Managers
                     prevTextElem.AddAfterSelf(elem);
                     prevTextElem = elem;
 
-                    foreach (var equipment in position.Containers.ContainerEquipmentRsps)
+                    foreach (var equipment in position.Containers.OrderContainerEquipmentRsps)
                     {
                         elem = XElement.Parse(ReplaceFieldValue(
                             textElem.ToString(), "#ContainerDescription",
@@ -941,7 +1005,7 @@ namespace ContainerStar.Lib.Managers
                     parentElement.Remove();
                     xmlMainXMLDoc = xmlDoc.Root.ToString();
 
-                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PlanedPayDate",  
+                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PlanedPayDate",
                         invoice.IsSellInvoice ? String.Empty : String.Format("am {0}", payDate.ToShortDateString()));
                 }
                 else
@@ -1104,7 +1168,7 @@ namespace ContainerStar.Lib.Managers
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TotalPrice", totalPriceForCustomer.ToString("N2"));
 
                 double reminderPrice = 0;
-                if(invoices.Any(o => o.ReminderCount == 3))
+                if (invoices.Any(o => o.ReminderCount == 3))
                 {
                     reminderPrice = Contracts.Configuration.ReminderLevelTreePrice;
                 }
@@ -1114,9 +1178,9 @@ namespace ContainerStar.Lib.Managers
                 }
 
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TotalPrice", totalPriceForCustomer.ToString("N2"));
-                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#ReminderPrice", reminderPrice != 0 ? 
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#ReminderPrice", reminderPrice != 0 ?
                     String.Format("Mahngebühr: {0}", reminderPrice.ToString("N2")) : String.Empty);
-                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PriceWithReminder", reminderPrice != 0 ? 
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PriceWithReminder", reminderPrice != 0 ?
                     String.Format("Gesamtbetrag: {0}", (totalPriceForCustomer + reminderPrice).ToString("N2")) : String.Empty);
 
                 var maxDate = invoices.Max(o => o.LastReminderDate.Value);

@@ -56,11 +56,13 @@ namespace ContainerStar.API.Controllers
     public partial class ShowContainerController : ApiController
     {
         private readonly IContainersManager manager;
+        private readonly IContainerTypesManager containerTypesManager;
         private readonly IUniqueNumberProvider numberProvider;
 
-        public ShowContainerController(IContainersManager manager, IUniqueNumberProvider numberProvider)
+        public ShowContainerController(IContainersManager manager, IContainerTypesManager containerTypesManager, IUniqueNumberProvider numberProvider)
         {
             this.manager = manager;
+            this.containerTypesManager = containerTypesManager;
             this.numberProvider = numberProvider;
         }
 
@@ -75,6 +77,10 @@ namespace ContainerStar.API.Controllers
                     var positionsQuery = manager.GetActualPositions(model.StartDate, model.EndDate).
                            Where(r => model.ContainerTypeId == 0 || r.Containers.ContainerTypeId == model.ContainerTypeId).
                            Where(r => String.IsNullOrEmpty(model.Name) || r.Containers.Number.ToLower().Contains(model.Name.ToLower()));
+
+                    var containerTypeIds = containerTypesManager.GetEntities(o => o.DispositionRelevant && !o.DeleteDate.HasValue).Select(o => o.Id).ToList();
+
+                    //todo delete positionsQuery = positionsQuery.Where(o => containerTypeIds.Contains(o.Containers.ContainerTypeId));
 
                     if (model.Equipments != null && model.Equipments.Count() != 0)
                     {
@@ -130,7 +136,7 @@ namespace ContainerStar.API.Controllers
                         }
                     }
 
-                    AddFreeContainers(model, result, positions);
+                    AddFreeContainers(model, result, positions, containerTypeIds);
                 }
                 else
                 {
@@ -141,12 +147,15 @@ namespace ContainerStar.API.Controllers
             return Ok(result);
         }
 
-        private void AddFreeContainers(ContainerSearchModel model, List<ContainerViewModel> result, List<Contracts.Entities.Positions> positions)
+        private void AddFreeContainers(ContainerSearchModel model, List<ContainerViewModel> result, List<Contracts.Entities.Positions> positions,
+            List<int> containerTypeIds)
         {
             var ids = positions.Select(o => o.ContainerId.Value).Distinct();
             var freeContainers = manager.GetEntities(o => !o.IsSold && !ids.Contains(o.Id) &&
                 (model.ContainerTypeId == 0 || o.ContainerTypeId == model.ContainerTypeId) &&
                 (String.IsNullOrEmpty(model.Name) || o.Number.ToLower().Contains(model.Name.ToLower())));
+
+            freeContainers = freeContainers.Where(o => containerTypeIds.Contains(o.ContainerTypeId));
 
             if (model.Equipments != null && model.Equipments.Count() != 0)
             {
