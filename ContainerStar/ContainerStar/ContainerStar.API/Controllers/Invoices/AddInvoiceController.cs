@@ -86,7 +86,7 @@ namespace ContainerStar.API.Controllers.Invoices
 
                     if(oldAmount == 0)
                     {
-                        if(orderPosition.AdditionalCosts.IncludeInFirstBill)
+                        if(orderPosition.AdditionalCosts.IncludeInFirstBill || !isMonthlyInvoice)
                         {
                             amount = orderPosition.Amount;
                         }

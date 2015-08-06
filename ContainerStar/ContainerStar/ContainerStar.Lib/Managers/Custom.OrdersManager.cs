@@ -847,6 +847,10 @@ namespace ContainerStar.Lib.Managers
                         //with taxes
                         totalPrice = totalPriceWithoutTax + taxValue;
                     }
+                    else
+                    {
+                        totalPrice = totalPriceWithoutTax;
+                    }
                 }
 
                 //Discount
@@ -922,7 +926,7 @@ namespace ContainerStar.Lib.Managers
             var temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#PlanedPayDate"));
             var parentElement = GetParentElementByName(temp, "<w:tr ");
 
-            var payDate = invoice.CreateDate.AddDays(invoice.PayInDays).ToShortDateString();
+            var payDate = invoice.CreateDate.AddDays(invoice.PayInDays);
 
             //pay due information
             if (parentElement != null)
@@ -934,14 +938,26 @@ namespace ContainerStar.Lib.Managers
                     parentElement.Remove();
                     xmlMainXMLDoc = xmlDoc.Root.ToString();
 
-                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PlanedPayDate", payDate);
+                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PlanedPayDate",  
+                        invoice.IsSellInvoice ? String.Empty : String.Format("am {0}", payDate.ToShortDateString()));
                 }
                 else
                 {
                     parentElement.Remove();
                     xmlMainXMLDoc = xmlDoc.Root.ToString();
-                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PayCashInterval",
-                        invoice.PayInDays == 0 ? "einem Tag" : String.Format("{0} Tage", invoice.PayInDays));
+
+                    if (invoice.IsSellInvoice)
+                    {
+                        temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#PayCashInterval"));
+                        parentElement = GetParentElementByName(temp, "<w:tr ");
+                        parentElement.Remove();
+                        xmlMainXMLDoc = xmlDoc.Root.ToString();
+                    }
+                    else
+                    {
+                        xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PayCashInterval",
+                            invoice.PayInDays == 0 ? "einem Tag" : String.Format("{0} Tage", invoice.PayInDays));
+                    }
                 }
             }
 
@@ -958,9 +974,10 @@ namespace ContainerStar.Lib.Managers
                     xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PayParts",
                         String.Format("{0}% der Gesamtsumme bis {1} rein netto. {2}{3}% der Gesamtsumme nach Lieferung rein netto.",
                             invoice.PayPartOne.HasValue ? invoice.PayPartOne.Value : 75,
-                            payDate,
+                            payDate.ToShortDateString(),
                             invoice.PayPartTwo.HasValue && invoice.PayPartTree.HasValue ?
-                                String.Format("{0}% der Gesamtsumme rein netto. ", invoice.PayPartTwo.Value) : String.Empty,
+                                String.Format("{0}% der Gesamtsumme bis {1} rein netto. ", invoice.PayPartTwo.Value,
+                                payDate.AddDays(invoice.PayInDays).ToShortDateString()) : String.Empty,
                             invoice.PayPartTwo.HasValue && invoice.PayPartTree.HasValue ? invoice.PayPartTree.Value :
                                 invoice.PayPartTwo.HasValue ? invoice.PayPartTwo.Value : 25
                         ));
