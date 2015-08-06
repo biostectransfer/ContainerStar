@@ -13,7 +13,8 @@ define(function () {
 		generateSellInvoice: 'Verkaufs-Rechnung',
 		printRentOrder: 'MV drucken',
 		rentOrderNumber: 'MV-Nummer',
-	    closeOrder: 'Abschließen'
+		closeOrder: 'Abschließen',
+	    copyOrder: 'Kopieren'
 	};
 
 	return resources;

@@ -134,6 +134,7 @@
     <Compile Include="Controllers\Invoices\InvoicePositionsController.cs" />
     <Compile Include="Controllers\Invoices\AddInvoiceController.cs" />
     <Compile Include="Controllers\Invoices\InvoicesController.cs" />
+    <Compile Include="Controllers\Orders\CopyOrderController.cs" />
     <Compile Include="Controllers\Orders\OrderContainerEquipmentsController.cs" />
     <Compile Include="Controllers\TransportOrders\CloseTransportOrderController.cs" />
     <Compile Include="Controllers\TransportOrders\TransportOffersController.cs" />

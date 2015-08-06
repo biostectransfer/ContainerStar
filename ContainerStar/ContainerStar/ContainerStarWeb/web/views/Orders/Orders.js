@@ -87,6 +87,42 @@
             }
         });
     },
+
+    copyOrder = function (dataItem) {
+        var self = this;
+
+        var model = new Backbone.Model();
+        model.url = Application.apiUrl + 'copyOrder';
+        model.set('id', dataItem.id);
+        model.save({}, {
+            success: function (model, response) {
+
+                if (model.id != 0)
+                    location.href = '#Orders/' + model.id;
+                else {
+                    require(['base/information-view'], function (View) {
+                        var view = new View({
+                            title: 'Auftrag kopieren',
+                            message: "Der ausgewählte Auftrag konnte nicht kopiert werden."
+                        });
+                        self.addView(view);
+                        self.$el.append(view.render().$el);
+                    });
+                }
+            },
+            error: function (model, response) {
+
+                require(['base/information-view'], function (View) {
+                    var view = new View({
+                        title: 'Auftrag kopieren',
+                        message: 'Der ausgewählte Auftrag konnte nicht kopiert werden.'
+                    });
+                    self.addView(view);
+                    self.$el.append(view.render().$el);
+                });
+            }
+        });
+    },
     
     view = BaseView.extend({
 
@@ -263,6 +299,40 @@
                     });
                 }
             },
+            'click .copyOrder': function (e) {
+
+                e.preventDefault();
+                var self = this,
+                    grid = self.grid,
+					items = grid.select();
+
+                if (items != undefined && items.length == 1) {
+
+                    var dataItem = grid.dataItem(items[0]);
+
+                    require(['base/confirmation-view'], function (View) {
+
+                        var view = new View({
+                            title: 'Auftrag kopieren',
+                            message: 'Möchten Sie ausgewählten Auftrag kopieren?'
+                        });
+
+                        self.listenTo(view, 'continue', _.bind(copyOrder, self, dataItem));
+                        self.addView(view);
+                        self.$el.append(view.render().$el);
+                    });
+                }
+                else {
+                    require(['base/information-view'], function (View) {
+                        var view = new View({
+                            title: 'Auftrag kopieren',
+                            message: 'Wählen Sie bitte einen Auftrag aus!'
+                        });
+                        self.addView(view);
+                        self.$el.append(view.render().$el);
+                    });
+                }
+            },
 		},
 
 		toolbar: function () {
@@ -275,7 +345,8 @@
                     '<a class="k-button k-button-icontext printRentOrder" href="#" data-localized="printRentOrder"></a>' +
                     '<a class="k-button k-button-icontext generateSellInvoice" href="#" data-localized="generateSellInvoice"></a>' +
 		            '<a class="k-button k-button-icontext generateRentInvoice" href="#" data-localized="generateRentInvoice"></a>' + 
-                    '<a class="k-button k-button-icontext closeOrder" href="#" data-localized="closeOrder"></a>';
+                    '<a class="k-button k-button-icontext closeOrder" href="#" data-localized="closeOrder"></a>' +
+		            '<a class="k-button k-button-icontext copyOrder" href="#" data-localized="copyOrder"></a>';
 		        }
 		    }];
 
