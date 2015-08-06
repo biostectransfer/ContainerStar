@@ -22,5 +22,8 @@ namespace ContainerStar.API.Models.InvoiceStornos
         [Required]
         [DataMember]
         public int invoiceId { get; set; }
+
+        [DataMember]
+        public string freeText { get; set; }
     }
 }

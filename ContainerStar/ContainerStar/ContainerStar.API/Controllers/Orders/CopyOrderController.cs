@@ -54,7 +54,7 @@ namespace ContainerStar.API.Controllers
                 CustomerOrderNumber = order.CustomerOrderNumber,
                 IsOffer = false,
                 OrderNumber = numberProvider.GetNextOrderNumber(),
-                RentOrderNumber = numberProvider.GetNextRentOrderNumber(API.Configuration.RentOrderPreffix),
+                RentOrderNumber = numberProvider.GetNextRentOrderNumber(Contracts.Configuration.RentOrderPreffix),
                 Positions = new List<Positions>(),
                 CreateDate = DateTime.Now,
                 ChangeDate = DateTime.Now,

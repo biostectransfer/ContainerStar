@@ -125,7 +125,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionResults\StreamActionResult.cs" />
-    <Compile Include="Configuration.cs" />
     <Compile Include="Controllers\ClientBaseController.cs" />
     <Compile Include="Controllers\ClientApiController.cs" />
     <Compile Include="Controllers\ClientBaseWithoutDeleteController.cs" />

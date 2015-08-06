@@ -1,6 +1,8 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Text;
-namespace ContainerStar.API
+
+namespace ContainerStar.Contracts
 {
     public static class Configuration
     {
@@ -74,6 +76,38 @@ namespace ContainerStar.API
                 result = "/" + result;
 
             return result;
+        }
+
+        public static double ReminderLevelTwoPrice
+        {
+            get
+            {
+                var configValue = ConfigurationManager.AppSettings["ReminderLevelTwoPrice"];
+
+                double result = 6;
+                if(!String.IsNullOrEmpty(configValue))
+                {
+                    Double.TryParse(configValue, out result);
+                }
+
+                return result;
+            }
+        }
+
+        public static double ReminderLevelTreePrice
+        {
+            get
+            {
+                var configValue = ConfigurationManager.AppSettings["ReminderLevelTreePrice"];
+
+                double result = 12;
+                if (!String.IsNullOrEmpty(configValue))
+                {
+                    Double.TryParse(configValue, out result);
+                }
+
+                return result;
+            }
         }
     }
 }

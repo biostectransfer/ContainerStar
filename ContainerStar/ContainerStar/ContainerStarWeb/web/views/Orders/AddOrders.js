@@ -14,7 +14,7 @@ define([
 				self.model.toJSON(),
                 'id',
                 'changeDate',
-                'deliveryPlace',        
+                'deliveryPlace',
                 'zip',
                 'city',
                 'street',
@@ -44,12 +44,14 @@ define([
                 'autoProlongation',
                 'isOffer',
                 'customerNumber');
-        
+
 
         attributesToSave["newCustomerName"] = $('#newCustomerName').val();
         attributesToSave["customerStreet"] = $('#customerStreet').val();
         attributesToSave["customerCity"] = $('#customerCity').val();
         attributesToSave["customerZip"] = $('#customerZip').val();
+
+        attributesToSave["autoBill"] = self.$el.find('#autoBill')[0].checked;
 
 
         if (self.validate()) {
@@ -58,8 +60,8 @@ define([
                 method: isNew ? 'post' : 'put',
                 contentType: 'application/json',
                 success: function (response) {
-                    
-                    if(response.get('isOffer'))
+
+                    if (response.get('isOffer'))
                         location.href = "#Offers/" + response.id;
                     else
                         location.href = "#Orders/" + response.id;
@@ -75,8 +77,7 @@ define([
         return deferred.promise();
     },
 
-    validate = function(attributes)
-    {
+    validate = function (attributes) {
 
     },
 
@@ -149,7 +150,7 @@ define([
                     visible: true
                 }
             };
-            
+
             return result;
         },
 
@@ -171,8 +172,7 @@ define([
 
             self.listenTo(self.model, 'change:customerSelectType', function (temp) {
                 var customerSelectType = self.model.get('customerSelectType');
-                if(customerSelectType === "1")
-                {
+                if (customerSelectType === "1") {
                     $('#selectCustomerRow').show();
                     $('#customerNumberRow').hide();
                     $('#customerAddressRow').hide();
@@ -184,8 +184,7 @@ define([
                     $('#customerId').val('');
                     $('#customerId_Name').val('');
                 }
-                else if(customerSelectType === "2")
-                {
+                else if (customerSelectType === "2") {
                     $('#selectCustomerRow').hide();
                     $('#customerNumberRow').show();
                     $('#customerAddressRow').show();
@@ -197,7 +196,7 @@ define([
                     $('#customerId').val('0');
                 }
             });
-            
+
             if (!self.model.isNew()) {
                 var model = new Backbone.Model({}),
                 options = _.extend({}, {
@@ -208,7 +207,7 @@ define([
 
                 self.showView(detView, self.containerSelector);
             }
-            
+
             return this;
         },
 
@@ -243,7 +242,7 @@ define([
 
                     self.$el.find('#discount').data("kendoNumericTextBox").value(item.get('discount'));
                     self.model.set('discount', item.get('discount'));
-                    
+
                     var autoBill = item.get('autoBill');
                     self.$el.find('#autoBill').val(autoBill);
                     self.model.set('autoBill', autoBill);

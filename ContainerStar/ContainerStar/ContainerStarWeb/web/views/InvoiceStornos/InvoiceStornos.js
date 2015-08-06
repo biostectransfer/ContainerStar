@@ -25,6 +25,7 @@
 		   return [
 				{ field: 'proceedsAccount', title: this.resources.proceedsAccount, collection: this.options.proceedsAccounts },
 				{ field: 'price', title: this.resources.price },
+                { field: 'freeText', title: this.resources.freeText },
 			];
 		},
 		

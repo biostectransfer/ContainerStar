@@ -51,7 +51,7 @@ namespace ContainerStar.API.Controllers
 
                     if (String.IsNullOrEmpty(order.RentOrderNumber))
                     {
-                        order.RentOrderNumber = numberProvider.GetNextRentOrderNumber(API.Configuration.RentOrderPreffix);
+                        order.RentOrderNumber = numberProvider.GetNextRentOrderNumber(Contracts.Configuration.RentOrderPreffix);
                     }
 
                     Manager.SaveChanges();

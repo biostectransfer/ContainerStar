@@ -59,6 +59,11 @@ namespace ContainerStar.Lib.Data
                 .IsUnicode()
                 .HasMaxLength(128);
 
+            Property(t => t.FreeText)
+                .HasColumnName(InvoiceStornos.Fields.FreeText)
+                .IsUnicode()
+                .HasMaxLength(512);
+
 
             //Relationships
             HasRequired(i => i.Invoices)

@@ -26,12 +26,15 @@ namespace ContainerStar.API.Controllers.InvoiceStorno
             model.price = entity.Price;
             model.proceedsAccount = entity.ProceedsAccount;
             model.invoiceId = entity.InvoiceId;
+            model.freeText = entity.FreeText;
         }
+
         protected override void ModelToEntity(InvoiceStornosModel model, InvoiceStornos entity, ActionTypes actionType)
         {
             entity.Price = model.price;
             entity.ProceedsAccount = model.proceedsAccount;
             entity.InvoiceId = model.invoiceId;
+            entity.FreeText = model.freeText;
         }
     }
 }

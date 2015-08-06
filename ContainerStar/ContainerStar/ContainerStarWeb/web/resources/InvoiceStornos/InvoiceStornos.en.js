@@ -9,7 +9,8 @@ define(function () {
 		pleaseSelect: 'Please select',
 		price: 'Price',
 		proceedsAccount: 'Proceeds Account',
-	    printInvoiceStorno: 'Storno print'
+		printInvoiceStorno: 'Storno print',
+		freeText: 'Free text'
 	};
 
 	return resources;

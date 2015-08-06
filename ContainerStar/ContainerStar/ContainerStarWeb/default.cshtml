@@ -88,7 +88,7 @@
         require(['backbone'], function () {
             Application = {
                 german: true,
-                apiUrl: '@ContainerStar.API.Configuration.CombineUrl(Request.ApplicationPath, "api")',
+                apiUrl: '@ContainerStar.Contracts.Configuration.CombineUrl(Request.ApplicationPath, "api")',
                 user: new Backbone.Model(@Html.Raw(JsonHelper.GetCurrentUserJson(GlobalConfiguration.Configuration.DependencyResolver))),
                 tables: new Backbone.Model(@Html.Raw(JsonHelper.GetSystemTablesJson(GlobalConfiguration.Configuration.DependencyResolver))),
                 hasPermission: function (tableName) {

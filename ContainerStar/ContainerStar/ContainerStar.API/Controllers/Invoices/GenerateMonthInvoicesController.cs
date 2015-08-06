@@ -71,7 +71,7 @@ namespace ContainerStar.API.Controllers.Invoices
             var response = new HttpResponseMessage(HttpStatusCode.OK);
 
             var dataDirectory = Path.Combine(HttpRuntime.AppDomainAppPath, "App_Data");
-            string path = Path.Combine(dataDirectory, API.Configuration.InvoiceFileName);
+            string path = Path.Combine(dataDirectory, Contracts.Configuration.InvoiceFileName);
 
             var stream = ordersManager.PrepareMonthInvoicePrintData(invoicesForCurrentMonth, path, invoicesManager, taxesManager);
             

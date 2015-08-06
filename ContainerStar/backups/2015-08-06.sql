@@ -38,3 +38,7 @@ REFERENCES [dbo].[Equipments] ([Id])
 ON UPDATE CASCADE
 ON DELETE CASCADE
 GO
+
+ALTER TABLE [dbo].[InvoiceStornos]
+ ADD [FreeText] nvarchar(512) NULL
+GO

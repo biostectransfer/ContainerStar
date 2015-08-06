@@ -53,6 +53,10 @@ namespace ContainerStar.Contracts.Entities
             /// Column name 'DateVExportFile' for property <see cref="InvoiceStornos.DateVExportFile"/>
             /// </summary>
             public static readonly string DateVExportFile = "DateVExportFile";
+            /// <summary>
+            /// Column name 'FreeText' for property <see cref="InvoiceStornos.FreeText"/>
+            /// </summary>
+            public static readonly string FreeText = "FreeText";
           
         }
         #endregion
@@ -65,6 +69,7 @@ namespace ContainerStar.Contracts.Entities
         public DateTime? DeleteDate{ get; set; }
         public DateTime? DateVExportDate{ get; set; }
         public string DateVExportFile{ get; set; }
+        public string FreeText{ get; set; }
         public virtual Invoices Invoices{ get; set; }
         public bool HasInvoices
         {
@@ -96,6 +101,7 @@ namespace ContainerStar.Contracts.Entities
                        DeleteDate = DeleteDate,
                        DateVExportDate = DateVExportDate,
                        DateVExportFile = DateVExportFile,
+                       FreeText = FreeText,
         	           };
         }
     }

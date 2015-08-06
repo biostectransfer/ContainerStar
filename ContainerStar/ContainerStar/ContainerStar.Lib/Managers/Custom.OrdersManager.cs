@@ -277,6 +277,9 @@ namespace ContainerStar.Lib.Managers
                     result = ReplaceBaseOrderFields(order, result);
                     result = ReplaceBaseInvoiceFields(invoice, result, printType);
                     result = ReplaceInvoiceStornoPrices(invoiceStorno, result);
+
+                    result = ReplaceFieldValue(result, "#FreeText", invoiceStorno.FreeText);
+
                     break;
                 case PrintTypes.ReminderMail:
 
@@ -1099,6 +1102,22 @@ namespace ContainerStar.Lib.Managers
 
                 xmlMainXMLDoc = xmlDoc.Root.ToString();
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TotalPrice", totalPriceForCustomer.ToString("N2"));
+
+                double reminderPrice = 0;
+                if(invoices.Any(o => o.ReminderCount == 3))
+                {
+                    reminderPrice = Contracts.Configuration.ReminderLevelTreePrice;
+                }
+                else if (invoices.Any(o => o.ReminderCount == 2))
+                {
+                    reminderPrice = Contracts.Configuration.ReminderLevelTwoPrice;
+                }
+
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#TotalPrice", totalPriceForCustomer.ToString("N2"));
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#ReminderPrice", reminderPrice != 0 ? 
+                    String.Format("Mahngebühr: {0}", reminderPrice.ToString("N2")) : String.Empty);
+                xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PriceWithReminder", reminderPrice != 0 ? 
+                    String.Format("Gesamtbetrag: {0}", (totalPriceForCustomer + reminderPrice).ToString("N2")) : String.Empty);
 
                 var maxDate = invoices.Max(o => o.LastReminderDate.Value);
                 xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PayDueDate", maxDate.AddDays(8).ToShortDateString());

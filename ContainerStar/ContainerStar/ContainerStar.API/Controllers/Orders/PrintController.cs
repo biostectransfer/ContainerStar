@@ -52,19 +52,19 @@ namespace ContainerStar.API.Controllers
             switch (report)
             {
                 case PrintTypes.RentOrder:
-                    path = Path.Combine(dataDirectory, API.Configuration.RentOrderFileName);
+                    path = Path.Combine(dataDirectory, Contracts.Configuration.RentOrderFileName);
                     stream = Manager.PrepareRentOrderPrintData(id, path, taxesManager);
                     break;
                 case PrintTypes.Offer:
-                    path = Path.Combine(dataDirectory, API.Configuration.OfferFileName);
+                    path = Path.Combine(dataDirectory, Contracts.Configuration.OfferFileName);
                     stream = Manager.PrepareOfferPrintData(id, path, taxesManager);
                     break;
                 case PrintTypes.Invoice:
-                    path = Path.Combine(dataDirectory, API.Configuration.InvoiceFileName);
+                    path = Path.Combine(dataDirectory, Contracts.Configuration.InvoiceFileName);
                     stream = Manager.PrepareInvoicePrintData(id, path, invoicesManager);
                     break;
                 case PrintTypes.ReminderMail:
-                    path = Path.Combine(dataDirectory, API.Configuration.ReminderFileName);
+                    path = Path.Combine(dataDirectory, Contracts.Configuration.ReminderFileName);
 
                     var invoices = invoicesManager.GetEntities(o => !o.PayDate.HasValue && o.ReminderCount < 3 &&
                         ( (!o.LastReminderDate.HasValue && o.CreateDate.AddDays(o.PayInDays) < DateTime.Now) ||
@@ -88,11 +88,11 @@ namespace ContainerStar.API.Controllers
                     stream = Manager.PrepareReminderPrintData(allInvoicesToReminder, path, invoicesManager, taxesManager);
                     break;
                 case PrintTypes.InvoiceStorno:
-                    path = Path.Combine(dataDirectory, API.Configuration.InvoiceStornoFileName);
+                    path = Path.Combine(dataDirectory, Contracts.Configuration.InvoiceStornoFileName);
                     stream = Manager.PrepareInvoiceStornoPrintData(id, path, invoiceStornosManager);
                     break;
                 case PrintTypes.TransportInvoice:
-                    path = Path.Combine(dataDirectory, API.Configuration.TransportInvoiceFileName);
+                    path = Path.Combine(dataDirectory, Contracts.Configuration.TransportInvoiceFileName);
                     stream = Manager.PrepareTransportInvoicePrintData(id, path, transportOrdersManager, taxesManager);
                     break;
                 default:
