@@ -68,18 +68,18 @@
 
         columns: function () {
             return [
-                 { field: 'description', title: this.resources.description, filterable: false, sortable: false, attributes: { "class": "positions-cell" } },
-                 { field: 'price', title: this.resources.price, attributes: { "class": "positions-cell" } },
-                 { field: 'paymentType', title: this.resources.paymentType, collection: this.options.paymentTypes, attributes: { "class": "positions-cell" } },
+                 { field: 'description', title: this.resources.description, filterable: false, sortable: false, attributes: { "class": "detail-view-grid-cell" } },
+                 { field: 'price', title: this.resources.price, attributes: { "class": "detail-view-grid-cell" } },
+                 { field: 'paymentType', title: this.resources.paymentType, collection: this.options.paymentTypes, attributes: { "class": "detail-view-grid-cell" } },
                  {
                      field: 'amount',
                      editor: amountEditor, template: "#=amount#",
                      title: this.resources.amount,
-                     attributes: { "class": "positions-cell" }
+                     attributes: { "class": "detail-view-grid-cell" }
                  },
-                 { field: 'isMain', title: this.resources.isMain, headerTitle: this.resources.isMain, checkbox: true, attributes: { "class": "positions-cell" } },
-                 { field: 'fromDate', title: this.resources.fromDate, format: '{0:d}', attributes: { "class": "positions-cell" } },
-                 { field: 'toDate', title: this.resources.toDate, format: '{0:d}', attributes: { "class": "positions-cell" } }
+                 { field: 'isMain', title: this.resources.isMain, headerTitle: this.resources.isMain, checkbox: true, attributes: { "class": "detail-view-grid-cell" } },
+                 { field: 'fromDate', title: this.resources.fromDate, format: '{0:d}', attributes: { "class": "detail-view-grid-cell" } },
+                 { field: 'toDate', title: this.resources.toDate, format: '{0:d}', attributes: { "class": "detail-view-grid-cell" } }
             ];
         },
 

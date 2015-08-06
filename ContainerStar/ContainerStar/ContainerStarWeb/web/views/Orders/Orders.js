@@ -125,7 +125,7 @@
 		},
 
 		events: {
-		    'dblclick .k-grid tbody tr:not(k-detail-row) td:not(.k-hierarchy-cell,.k-detail-cell,.commands,.positions-cell)': function (e) {
+		    'dblclick .k-grid tbody tr:not(k-detail-row) td:not(.k-hierarchy-cell,.k-detail-cell,.commands,.detail-view-grid-cell)': function (e) {
 		        
 		        var self = this,
 		            dataItem = self.grid.dataItem(e.currentTarget.parentElement);

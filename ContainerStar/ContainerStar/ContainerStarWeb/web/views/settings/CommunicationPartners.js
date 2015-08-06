@@ -25,12 +25,12 @@ define([
 		columns: function () {
 		   
 		   return [
-				{ field: 'name', title: this.resources.name },
-				{ field: 'firstName', title: this.resources.firstName },
-				{ field: 'phone', title: this.resources.phone },
-				{ field: 'mobile', title: this.resources.mobile },
-				{ field: 'fax', title: this.resources.fax },
-				{ field: 'email', title: this.resources.email },
+				{ field: 'name', title: this.resources.name , attributes: { "class": "detail-view-grid-cell" }},
+				{ field: 'firstName', title: this.resources.firstName , attributes: { "class": "detail-view-grid-cell" }},
+				{ field: 'phone', title: this.resources.phone , attributes: { "class": "detail-view-grid-cell" }},
+				{ field: 'mobile', title: this.resources.mobile , attributes: { "class": "detail-view-grid-cell" }},
+				{ field: 'fax', title: this.resources.fax , attributes: { "class": "detail-view-grid-cell" }},
+				{ field: 'email', title: this.resources.email , attributes: { "class": "detail-view-grid-cell" }},
 			];
 		},
 		

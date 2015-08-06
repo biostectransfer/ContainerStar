@@ -64,7 +64,7 @@ define([
 			if (propContent.ShowInGrid)
             {
 #>
-				{ field: '<#=property.Name#>', title: this.resources.<#=property.Name#> <#=columnInfo#>},
+				{ field: '<#=property.Name#>', title: this.resources.<#=property.Name#> <#=columnInfo#>, attributes: { "class": "detail-view-grid-cell" }},
 <#
 			}
 		}

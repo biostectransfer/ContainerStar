@@ -25,7 +25,7 @@ define([
 		columns: function () {
 		   
 		   return [
-				{ field: 'permissionId', title: this.resources.permissionId , collection: this.options.permission, defaultText: this.resources.pleaseSelect},
+				{ field: 'permissionId', title: this.resources.permissionId , collection: this.options.permission, defaultText: this.resources.pleaseSelect, attributes: { "class": "detail-view-grid-cell" }},
 			];
 		},
 		
