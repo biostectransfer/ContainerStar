@@ -118,7 +118,6 @@ namespace ContainerStar.API.Controllers
             entity.BillTillDate = model.billTillDate;
             entity.IsOffer = model.isOffer;
             entity.CustomerOrderNumber = model.customerOrderNumber;
-            entity.Status = model.status;
 
             if (entity.IsNew())
             {
