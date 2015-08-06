@@ -17,6 +17,7 @@ namespace ContainerStar.API.Controllers
         public bool PaymentIntervals { get; set; }
         public bool PaymentTypes { get; set; }
         public bool ContainerTypesForDisposition { get; set; }
+        public bool ProceedsAccounts { get; set; }
     }
 
     public class IdNameModel<TId>
@@ -75,6 +76,22 @@ namespace ContainerStar.API.Controllers
 
                 result.Add("ContainerTypesForDisposition", containerTypes.Cast<IHasTitle<int>>().OrderBy(o => o.EntityTitle)
                          .Select(o => new IdNameModel<int> { id = o.Id, name = o.EntityTitle }));
+            }
+
+            if (model.ProceedsAccounts)
+            {
+                var proceedsAccounts = new List<int>();
+
+                var containersManager = (IContainersManager)GlobalConfiguration.Configuration.DependencyResolver.
+                    GetService(typeof(IContainersManager));
+                proceedsAccounts.AddRange(containersManager.GetEntities().Select(o => o.ProceedsAccount).Distinct());
+
+                var additionalCostsManager = (IAdditionalCostsManager)GlobalConfiguration.Configuration.DependencyResolver.
+                    GetService(typeof(IAdditionalCostsManager));
+                proceedsAccounts.AddRange(additionalCostsManager.GetEntities().Select(o => o.ProceedsAccount).Distinct());
+
+                result.Add("ProceedsAccounts", proceedsAccounts.OrderBy(o => o)
+                         .Select(o => new IdNameModel<int> { id = o, name = o.ToString() }));
             }
 
             new MasterDataViewCollectionControllerFactory().GetViewCollections(

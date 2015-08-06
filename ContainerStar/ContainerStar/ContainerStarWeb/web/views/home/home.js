@@ -64,7 +64,7 @@
 	},
 
 	view = BaseView.extend({
-
+        
 	    bindings: function () {
 
 	        var self = this;

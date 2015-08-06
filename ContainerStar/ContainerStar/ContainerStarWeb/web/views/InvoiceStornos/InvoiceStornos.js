@@ -23,7 +23,7 @@
 		columns: function () {
 		   
 		   return [
-				{ field: 'proceedsAccount', title: this.resources.proceedsAccount },
+				{ field: 'proceedsAccount', title: this.resources.proceedsAccount, collection: this.options.proceedsAccounts },
 				{ field: 'price', title: this.resources.price },
 			];
 		},
