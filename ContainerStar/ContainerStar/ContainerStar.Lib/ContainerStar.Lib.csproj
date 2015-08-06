@@ -123,6 +123,9 @@
       <DependentUpon>ContainerStar.EntityMapping.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\NumbersMapping.cs" />
+    <Compile Include="Data\OrderContainerEquipmentRspMapping.cs">
+      <DependentUpon>ContainerStar.EntityMapping.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\OrdersMapping.cs">
       <DependentUpon>ContainerStar.EntityMapping.tt</DependentUpon>
     </Compile>
@@ -199,6 +202,9 @@
       <DependentUpon>Managers.tt</DependentUpon>
     </Compile>
     <Compile Include="Managers\InvoiceStornosManager.cs">
+      <DependentUpon>Managers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\OrderContainerEquipmentRspManager.cs">
       <DependentUpon>Managers.tt</DependentUpon>
     </Compile>
     <Compile Include="Managers\OrdersManager.cs">

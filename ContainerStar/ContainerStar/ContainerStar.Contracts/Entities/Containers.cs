@@ -98,6 +98,10 @@ namespace ContainerStar.Contracts.Entities
             /// Column name 'MinPrice' for property <see cref="Containers.MinPrice"/>
             /// </summary>
             public static readonly string MinPrice = "MinPrice";
+            /// <summary>
+            /// Column name 'NewContainerPrice' for property <see cref="Containers.NewContainerPrice"/>
+            /// </summary>
+            public static readonly string NewContainerPrice = "NewContainerPrice";
           
         }
         #endregion
@@ -121,7 +125,9 @@ namespace ContainerStar.Contracts.Entities
         public double SellPrice{ get; set; }
         public bool IsSold{ get; set; }
         public double MinPrice{ get; set; }
+        public double NewContainerPrice{ get; set; }
         public virtual ICollection<Positions> Positions{ get; set; }
+        public virtual ICollection<OrderContainerEquipmentRsp> OrderContainerEquipmentRsps{ get; set; }
         public virtual ContainerTypes ContainerTypes{ get; set; }
         public virtual ICollection<ContainerEquipmentRsp> ContainerEquipmentRsps{ get; set; }
         public bool HasContainerTypes
@@ -165,6 +171,7 @@ namespace ContainerStar.Contracts.Entities
                        SellPrice = SellPrice,
                        IsSold = IsSold,
                        MinPrice = MinPrice,
+                       NewContainerPrice = NewContainerPrice,
         	           };
         }
     }

@@ -6,6 +6,7 @@ using ContainerStar.Contracts.Entities;
 using ContainerStar.Contracts.Enums;
 using ContainerStar.Contracts.Managers;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic;
 
@@ -17,7 +18,16 @@ namespace ContainerStar.API.Controllers
     [AuthorizeByPermissions(PermissionTypes = new[] { Permissions.Orders })]
     public partial class PositionsController: ClientApiController<PositionsModel, Positions, int, IPositionsManager>
     {
-        public PositionsController(IPositionsManager manager) : base(manager) { }
+        public IOrderContainerEquipmentRspManager OrderContainerEquipmentRspManager { get; set; }
+        public IContainersManager ContainerManager { get; set; }
+
+        public PositionsController(IPositionsManager manager, IOrderContainerEquipmentRspManager orderContainerEquipmentRspManager, 
+            IContainersManager containersManager) : 
+            base(manager)
+        {
+            this.OrderContainerEquipmentRspManager = orderContainerEquipmentRspManager;
+            this.ContainerManager = containersManager;
+        }
 
         protected override void EntityToModel(Positions entity, PositionsModel model)
         {
@@ -63,6 +73,21 @@ namespace ContainerStar.API.Controllers
                 entity.Amount = 1;
             else
                 entity.Amount = model.amount;
+
+            if(actionType == ActionTypes.Add && model.containerId.HasValue)
+            {
+                var container = ContainerManager.GetById(model.containerId.Value);
+                foreach (var equipment in container.ContainerEquipmentRsps)
+                {
+                    OrderContainerEquipmentRspManager.AddEntity(new OrderContainerEquipmentRsp()
+                    {
+                        Amount = equipment.Amount,
+                        ContainerId = model.containerId.Value,
+                        OrderId = model.orderId,
+                        EquipmentId = equipment.EquipmentId
+                    });
+                }
+            }
         }
     }
 }

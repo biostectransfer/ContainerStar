@@ -107,6 +107,10 @@ namespace ContainerStar.Lib.Data
                 .HasColumnName(Containers.Fields.MinPrice)
                 .IsRequired();
 
+            Property(t => t.NewContainerPrice)
+                .HasColumnName(Containers.Fields.NewContainerPrice)
+                .IsRequired();
+
 
             //Relationships
             HasRequired(c => c.ContainerTypes)

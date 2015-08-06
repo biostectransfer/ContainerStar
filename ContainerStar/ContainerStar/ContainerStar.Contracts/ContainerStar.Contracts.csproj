@@ -107,6 +107,9 @@
     <Compile Include="Entities\InvoiceStornos.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\OrderContainerEquipmentRsp.cs">
+      <DependentUpon>Entities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Orders.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
@@ -185,6 +188,9 @@
       <DependentUpon>IManagers.tt</DependentUpon>
     </Compile>
     <Compile Include="Managers\IInvoiceStornosManager.cs">
+      <DependentUpon>IManagers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\IOrderContainerEquipmentRspManager.cs">
       <DependentUpon>IManagers.tt</DependentUpon>
     </Compile>
     <Compile Include="Managers\IOrdersManager.cs">

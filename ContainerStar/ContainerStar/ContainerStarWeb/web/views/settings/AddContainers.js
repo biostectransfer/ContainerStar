@@ -33,6 +33,7 @@ define([
 			'#sellPrice': 'sellPrice',
 			'#isSold': 'isSold',
 			'#minPrice': 'minPrice',
+			'#newContainerPrice': 'newContainerPrice',
 			};
 
             return result;
@@ -59,6 +60,7 @@ define([
 			this.disableInput(this, 'sellPrice', 'numeric');
 			this.disableInput(this, 'isSold');
 			this.disableInput(this, 'minPrice', 'numeric');
+			this.disableInput(this, 'newContainerPrice', 'numeric');
 
             return this;
         }

@@ -134,6 +134,7 @@
     <Compile Include="Controllers\Invoices\InvoicePositionsController.cs" />
     <Compile Include="Controllers\Invoices\AddInvoiceController.cs" />
     <Compile Include="Controllers\Invoices\InvoicesController.cs" />
+    <Compile Include="Controllers\Orders\OrderContainerEquipmentsController.cs" />
     <Compile Include="Controllers\TransportOrders\CloseTransportOrderController.cs" />
     <Compile Include="Controllers\TransportOrders\TransportOffersController.cs" />
     <Compile Include="Controllers\TransportOrders\TransportOrdersController.cs" />
@@ -222,6 +223,7 @@
     <Compile Include="Models\Invoices\InvoicesModel.cs" />
     <Compile Include="Models\ISystemModelFields.cs" />
     <Compile Include="Models\IModelIntervalFields.cs" />
+    <Compile Include="Models\Orders\OrderContainerEquipmentModel.cs" />
     <Compile Include="Models\TransportOrders\TransportOrdersModel.cs" />
     <Compile Include="Models\TransportOrders\TransportPositionsModel.cs" />
     <Compile Include="Models\Orders\ContainerSmartModel.cs" />

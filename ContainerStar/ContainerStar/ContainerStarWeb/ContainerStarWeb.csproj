@@ -280,6 +280,7 @@
     <Content Include="web\collections\Invoices\AddInvoicePositions.js" />
     <Content Include="web\collections\Invoices\InvoicePositions.js" />
     <Content Include="web\collections\Invoices\Invoices.js" />
+    <Content Include="web\collections\Equipments.js" />
     <Content Include="web\collections\TransportOrders.js" />
     <Content Include="web\collections\TransportPositions.js" />
     <Content Include="web\collections\Positions.js" />
@@ -334,6 +335,7 @@
     <Content Include="web\models\ContainerSearch.js" />
     <Content Include="web\models\InvoiceStornos\AddInvoicePositions.js" />
     <Content Include="web\models\InvoiceStornos\InvoiceStornos.js" />
+    <Content Include="web\models\Equipments.js" />
     <Content Include="web\models\ShowContainer.js" />
     <Content Include="web\models\FilterContainerSmart.js" />
     <Content Include="web\models\FilterOrders.js" />
@@ -444,6 +446,8 @@
     <Content Include="web\resources\Invoices\InvoicesRelationships.en.js" />
     <Content Include="web\resources\Invoices\AddInvoicePositions.de.js" />
     <Content Include="web\resources\Invoices\AddInvoicePositions.en.js" />
+    <Content Include="web\resources\Orders\Equipments.de.js" />
+    <Content Include="web\resources\Orders\Equipments.en.js" />
     <Content Include="web\resources\TransportOrders\TransportProductSearch.de.js" />
     <Content Include="web\resources\TransportOrders\TransportProductSearch.en.js" />
     <Content Include="web\resources\TransportOrders\AddTransportOrders.de.js" />
@@ -842,6 +846,7 @@
     <Content Include="web\templates\Invoices\Invoices.html" />
     <Content Include="web\templates\Invoices\InvoicesRelationships.html" />
     <Content Include="web\templates\Invoices\AddInvoicePositions.html" />
+    <Content Include="web\templates\Orders\Equipments.html" />
     <Content Include="web\templates\TransportOrders\TransportProductSearch.html" />
     <Content Include="web\templates\TransportOrders\AddTransportOrders.html" />
     <Content Include="web\templates\TransportOrders\AddTransportPositions.html" />
@@ -1052,6 +1057,7 @@
     <Content Include="web\views\Invoices\Invoices.js" />
     <Content Include="web\views\Invoices\InvoicesRelationships.js" />
     <Content Include="web\views\Invoices\AddInvoicePositions.js" />
+    <Content Include="web\views\Orders\Equipments.js" />
     <Content Include="web\views\TransportOrders\TransportProductSearch.js" />
     <Content Include="web\views\TransportOrders\AddTransportOrders.js" />
     <Content Include="web\views\TransportOrders\AddTransportPositions.js" />

@@ -24,6 +24,7 @@ define(function () {
 		sellPrice: 'Verkaufpreis',	
 		isSold: 'verkauft',	
 		minPrice: 'Min Preis',	
+		newContainerPrice: 'Neupreis',	
 	};
 
 	return resources;

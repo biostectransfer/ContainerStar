@@ -27,7 +27,7 @@ namespace ContainerStar.Lib.Managers
         {
             return PrepareCommonOrderPrintData(id, path, PrintTypes.Offer, null, taxesManager);
         }
-        
+
         public MemoryStream PrepareInvoicePrintData(int id, string path, IInvoicesManager invoicesManager)
         {
             return PrepareCommonOrderPrintData(id, path, PrintTypes.Invoice, invoicesManager, null);
@@ -63,7 +63,7 @@ namespace ContainerStar.Lib.Managers
                 bool firstElem = true;
                 foreach (var invoice in invoices)
                 {
-                    if(!firstElem)
+                    if (!firstElem)
                     {
                         var index = templateBody.IndexOf("</w:body");
                         var pageBreak = @"<w:p w:rsidRDefault=""00C97ADC"" w:rsidR=""00C97ADC""><w:pPr><w:rPr><w:lang w:val=""en-GB""/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:val=""en-GB""/>
@@ -79,7 +79,7 @@ namespace ContainerStar.Lib.Managers
                     //replace fields
                     templateBody = ReplaceFields(0, PrintTypes.Invoice, templateBody, invoicesManager, taxesManager, invoice);
                 }
-                
+
                 xmlMainXMLDoc = SaveDoc(result, pkg, part, xmlReader, xmlMainXMLDoc, templateBody);
             }
             catch
@@ -132,7 +132,7 @@ namespace ContainerStar.Lib.Managers
                 //    templateBody = XDocument.Parse(templateBody.Substring(0, templateBody.IndexOf("<w:body>")) + "<w:body>" + 
                 //        templateBody.Substring(templateBody.IndexOf("</w:body"))).Root.ToString();
                 //}
-                
+
                 xmlMainXMLDoc = SaveDoc(result, pkg, part, xmlReader, xmlMainXMLDoc, templateBody);
             }
             catch
@@ -154,7 +154,7 @@ namespace ContainerStar.Lib.Managers
                 XmlReader xmlReader;
                 XDocument xmlMainXMLDoc;
                 GetXmlDoc(path, result, out pkg, out part, out xmlReader, out xmlMainXMLDoc);
-                
+
                 //replace fields
                 var templateBody = ReplaceFields(id, type, xmlMainXMLDoc.Root.ToString(),
                     invoicesManager, taxesManager, null, invoiceStornosManager, transportOrdersManager);
@@ -248,14 +248,14 @@ namespace ContainerStar.Lib.Managers
                     result = ReplaceRentAdditionalCostPositions(order, result);
                     break;
                 case PrintTypes.Invoice:
-                                        
+
                     if (invoice == null)
                     {
                         invoice = invoicesManager.GetById(id);
                     }
 
                     order = invoice.Orders;
-                    
+
                     result = ReplaceCommonFields(order, result);
                     result = ReplaceBaseOrderFields(order, result);
                     result = ReplaceBaseInvoiceFields(invoice, result, printType);
@@ -279,10 +279,10 @@ namespace ContainerStar.Lib.Managers
                     result = ReplaceInvoiceStornoPrices(invoiceStorno, result);
                     break;
                 case PrintTypes.ReminderMail:
-                    
+
                     invoice = invoicesManager.GetById(id);
                     order = invoice.Orders;
-                    
+
                     result = ReplaceCommonFields(order, result);
                     result = ReplaceReminderPositions(invoice.InvoicePositions.ToList(), result);
                     result = ReplaceReminderTotalPrice(invoice, result, taxesManager);
@@ -371,14 +371,14 @@ namespace ContainerStar.Lib.Managers
 
         private string ReplaceRentPositions(Orders order, string xmlMainXMLDoc, ITaxesManager taxesManager)
         {
-            var positions = order.Positions != null ? order.Positions.Where(o => !o.DeleteDate.HasValue && o.ContainerId.HasValue).ToList() : 
+            var positions = order.Positions != null ? order.Positions.Where(o => !o.DeleteDate.HasValue && o.ContainerId.HasValue).ToList() :
                 new List<Positions>();
 
-            if (positions.Count != 0) 
+            if (positions.Count != 0)
             {
                 var minDate = positions.Min(o => o.FromDate);
                 var maxDate = positions.Max(o => o.ToDate);
-                var totalSellPrice = positions.Sum(o => o.Containers.SellPrice);
+                var totalSellPrice = positions.Sum(o => o.Containers.NewContainerPrice);
 
                 if (positions.Any(o => o.Payment == PaymentTypes.Total))
                 {
@@ -464,14 +464,26 @@ namespace ContainerStar.Lib.Managers
                 var parentTableElement = GetParentElementByName(temp, "<w:tr ");
                 var prevElement = parentTableElement;
 
+                var hasPauschalPosition = order.Positions.Any(o => !o.DeleteDate.HasValue && o.PaymentType == (int)PaymentTypes.Total);
+
                 if (parentTableElement != null)
                 {
                     foreach (var position in positions)
                     {
-                        var textElem = XElement.Parse(ReplaceFieldValue(
-                            parentTableElement.ToString(), "#AdditionalCostDescription", 
-                            String.Format("{0} {1}", position.Amount, position.AdditionalCosts.Description)).
-                            Replace("#AdditionalCostPrice", Math.Round(position.Price * position.Amount, 2).ToString("N2")));
+                        var price = Math.Round(position.Price * position.Amount, 2);
+
+                        if (hasPauschalPosition)
+                        {
+                            price = 0;
+                        }
+
+                        var textElem = XElement.Parse(
+                            ReplaceFieldValue(parentTableElement.ToString(), "#AdditionalCostDescription",
+                                position.AdditionalCosts.Name).
+                            Replace("#AdditionalCostType",
+                                String.Format("{0} x {1}", position.Amount, "Container")).
+                            Replace("#AdditionalCostPrice", price.ToString("N2")));
+
                         prevElement.AddAfterSelf(textElem);
                         prevElement = textElem;
                     }
@@ -538,7 +550,7 @@ namespace ContainerStar.Lib.Managers
                     var prevTextElem = textElem;
 
                     var elem = XElement.Parse(ReplaceFieldValue(
-                        textElem.ToString(), "#ContainerDescription", 
+                        textElem.ToString(), "#ContainerDescription",
                         String.Format("*\t 1 Stück {0}", position.Containers.ContainerTypes.Name)));
 
                     prevTextElem.AddAfterSelf(elem);
@@ -581,7 +593,7 @@ namespace ContainerStar.Lib.Managers
         #endregion
 
         #region Invoices
-    
+
         private string ReplaceBaseInvoiceFields(Invoices invoice, string xmlMainXMLDoc, PrintTypes printType)
         {
             var order = invoice.Orders;
@@ -599,13 +611,13 @@ namespace ContainerStar.Lib.Managers
             xmlMainXMLDoc = xmlMainXMLDoc.Replace("#InvoiceDate", invoice.CreateDate.ToShortDateString());
 
             xmlMainXMLDoc = ReplaceOrderedFromInfo(xmlMainXMLDoc, order);
-            
+
             xmlMainXMLDoc = ReplaceCustomerOrderNumber(xmlMainXMLDoc, order);
 
             xmlMainXMLDoc = ReplaceRentOrderInfo(xmlMainXMLDoc, order, invoice);
 
             xmlMainXMLDoc = xmlMainXMLDoc.Replace("#OrderNumber", order.OrderNumber);
-            
+
             xmlMainXMLDoc = ReplaceUstId(xmlMainXMLDoc, order);
 
             xmlMainXMLDoc = ReplaceRentInterval(xmlMainXMLDoc, order, invoice);
@@ -733,7 +745,7 @@ namespace ContainerStar.Lib.Managers
             }
             return xmlMainXMLDoc;
         }
-        
+
         private string ReplaceInvoicePositions(Invoices invoice, List<InvoicePositions> positions, string xmlMainXMLDoc,
             string parentTag, string priceTag, string titleText, bool isMain, ref bool manualPricePrinted)
         {
@@ -762,15 +774,15 @@ namespace ContainerStar.Lib.Managers
                     }
 
                     var rowElem = XElement.Parse(ReplaceFieldValue(
-                        parentTableElement.ToString(), parentTag, 
-                            String.Format("{0}{1} Nr. {2}", firstElem ? titleText : "", 
+                        parentTableElement.ToString(), parentTag,
+                            String.Format("{0}{1} Nr. {2}", firstElem ? titleText : "",
                                 position.Positions.Containers.ContainerTypes.Name,
                                 position.Positions.Containers.Number)).
                         Replace(priceTag, price.ToString("N2")));
                     prevTableElem.AddAfterSelf(rowElem);
                     prevTableElem = rowElem;
 
-                    if(firstElem)
+                    if (firstElem)
                     {
                         firstElem = false;
                     }
@@ -810,7 +822,7 @@ namespace ContainerStar.Lib.Managers
 
             return xmlDoc.Root.ToString();
         }
-        
+
         private string ReplaceInvoicePrices(Invoices invoice, string xmlMainXMLDoc)
         {
             if (invoice.InvoicePositions != null && invoice.InvoicePositions.Count != 0)
@@ -921,14 +933,14 @@ namespace ContainerStar.Lib.Managers
                     parentElement = GetParentElementByName(temp, "<w:tr ");
                     parentElement.Remove();
                     xmlMainXMLDoc = xmlDoc.Root.ToString();
-                    
+
                     xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PlanedPayDate", payDate);
                 }
                 else
                 {
                     parentElement.Remove();
                     xmlMainXMLDoc = xmlDoc.Root.ToString();
-                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PayCashInterval", 
+                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PayCashInterval",
                         invoice.PayInDays == 0 ? "einem Tag" : String.Format("{0} Tage", invoice.PayInDays));
                 }
             }
@@ -943,11 +955,11 @@ namespace ContainerStar.Lib.Managers
             {
                 if (invoice.IsSellInvoice)
                 {
-                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PayParts", 
+                    xmlMainXMLDoc = xmlMainXMLDoc.Replace("#PayParts",
                         String.Format("{0}% der Gesamtsumme bis {1} rein netto. {2}{3}% der Gesamtsumme nach Lieferung rein netto.",
                             invoice.PayPartOne.HasValue ? invoice.PayPartOne.Value : 75,
                             payDate,
-                            invoice.PayPartTwo.HasValue && invoice.PayPartTree.HasValue ? 
+                            invoice.PayPartTwo.HasValue && invoice.PayPartTree.HasValue ?
                                 String.Format("{0}% der Gesamtsumme rein netto. ", invoice.PayPartTwo.Value) : String.Empty,
                             invoice.PayPartTwo.HasValue && invoice.PayPartTree.HasValue ? invoice.PayPartTree.Value :
                                 invoice.PayPartTwo.HasValue ? invoice.PayPartTwo.Value : 25
@@ -981,7 +993,7 @@ namespace ContainerStar.Lib.Managers
 
             return xmlMainXMLDoc;
         }
-        
+
         #endregion
 
         #region Invoice Storno
@@ -1031,7 +1043,7 @@ namespace ContainerStar.Lib.Managers
             var xmlDoc = XDocument.Parse(xmlMainXMLDoc);
             var temp = xmlDoc.Descendants().LastOrDefault(o => o.Value.Contains("#InvoiceNumber"));
             var parentTableElement = GetParentElementByName(temp, "<w:tr ");
-            
+
             if (parentTableElement != null)
             {
                 var prevTableElem = parentTableElement;
@@ -1051,7 +1063,7 @@ namespace ContainerStar.Lib.Managers
                         out totalPrice, out summaryPrice);
 
                     totalPriceForCustomer += summaryPrice;
-                    
+
                     var rowElem = XElement.Parse(parentTableElement.ToString().
                         Replace("#InvoiceNumber", invoice.InvoiceNumber).
                         Replace("#InvoiceDate", invoice.CreateDate.ToShortDateString()).
@@ -1064,7 +1076,7 @@ namespace ContainerStar.Lib.Managers
                     {
                         firstElem = false;
                     }
-                }            
+                }
 
                 parentTableElement.Remove();
 
@@ -1092,11 +1104,11 @@ namespace ContainerStar.Lib.Managers
                 foreach (var position in positions)
                 {
                     var price = CalculationHelper.CalculatePositionPrice(
-                        position.Positions.AdditionalCostId.HasValue ? true : position.Positions.IsSellOrder, 
+                        position.Positions.AdditionalCostId.HasValue ? true : position.Positions.IsSellOrder,
                         position.Price, position.Amount, position.FromDate, position.ToDate, position.Payment);
 
                     var description = String.Empty;
-                    if(position.Positions.ContainerId.HasValue)
+                    if (position.Positions.ContainerId.HasValue)
                     {
                         description = ReplaceFieldValue("#", "#", String.Format("{0} {1}", position.Amount,
                             position.Positions.Containers.ContainerTypes.Name));
@@ -1188,7 +1200,7 @@ namespace ContainerStar.Lib.Managers
             xmlMainXMLDoc = ReplaceTransportOrderedFromInfo(xmlMainXMLDoc, transportOrder);
 
             xmlMainXMLDoc = ReplaceTransportCustomerOrderNumber(xmlMainXMLDoc, transportOrder);
-            
+
             xmlMainXMLDoc = xmlMainXMLDoc.Replace("#OrderNumber", transportOrder.OrderNumber);
 
             xmlMainXMLDoc = ReplaceTransportUstId(xmlMainXMLDoc, transportOrder);
@@ -1422,7 +1434,7 @@ namespace ContainerStar.Lib.Managers
 
         private static string ConvertToTimeString(DateTime date)
         {
-            if(date != DateTime.MinValue && date != DateTime.MaxValue)
+            if (date != DateTime.MinValue && date != DateTime.MaxValue)
                 return date.ToString("dd.MM.yyyy hh:mm");
             else
                 return String.Empty;
@@ -1474,7 +1486,7 @@ namespace ContainerStar.Lib.Managers
 
         private string ReplaceFieldValue(string source, string fieldKey, string fieldValue)
         {
-            if(String.IsNullOrEmpty(fieldValue))
+            if (String.IsNullOrEmpty(fieldValue))
             {
                 fieldValue = String.Empty;
             }

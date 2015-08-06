@@ -25,6 +25,7 @@ define(function () {
 		sellPrice: 'Sell price',	
 		isSold: 'sold',	
 		minPrice: 'Min Price',	
+		newContainerPrice: 'New Container Price',	
 	};
 
 	return resources;

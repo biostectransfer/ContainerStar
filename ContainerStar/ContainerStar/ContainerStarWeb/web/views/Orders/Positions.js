@@ -3,8 +3,9 @@
     'collections/Positions',
     'l!t!Orders/AddPositions',
     'l!t!Orders/SelectContainer',
-    'l!t!Orders/SelectAdditionalCosts'
-], function (BaseView, Collection, AddNewModelView, SelectContainerView, SelectAdditionalCostsView) {
+    'l!t!Orders/SelectAdditionalCosts',
+    'l!t!Orders/Equipments'
+], function (BaseView, Collection, AddNewModelView, SelectContainerView, SelectAdditionalCostsView, DetailView) {
     'use strict';
 
     var amountEditor = function (container, options) {
@@ -47,6 +48,10 @@
         tableName: 'Positions',
 
         addingInPopup: false,
+
+
+        detailView: DetailView,
+
 
         initialize: function () {
             view.__super__.initialize.apply(this, arguments);

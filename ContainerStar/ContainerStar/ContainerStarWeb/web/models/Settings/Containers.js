@@ -53,6 +53,9 @@ define(function () {
 			,minPrice: { type: "number", 
 			                        editable: Application.canTableItemBeEdit('Containers', 'minPrice'), 
 				                    validation: { required: true } }			
+			,newContainerPrice: { type: "number", 
+			                        editable: Application.canTableItemBeEdit('Containers', 'newContainerPrice'), 
+				                    validation: { required: true } }			
 		},
 		defaults: function () {
 			var dnf = new Date();

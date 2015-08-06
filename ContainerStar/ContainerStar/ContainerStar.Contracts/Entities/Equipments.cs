@@ -47,6 +47,7 @@ namespace ContainerStar.Contracts.Entities
         public DateTime CreateDate{ get; set; }
         public DateTime ChangeDate{ get; set; }
         public DateTime? DeleteDate{ get; set; }
+        public virtual ICollection<OrderContainerEquipmentRsp> OrderContainerEquipmentRsps{ get; set; }
         public virtual ICollection<ContainerTypeEquipmentRsp> ContainerTypeEquipmentRsps{ get; set; }
         public virtual ICollection<ContainerEquipmentRsp> ContainerEquipmentRsps{ get; set; }
         string IHasTitle<int>.EntityTitle
