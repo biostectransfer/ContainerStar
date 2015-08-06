@@ -19,7 +19,8 @@ define(function () {
 		selectAdditionalCosts: 'additional costs',
 		amount: 'Amount',
 		isMain: 'Main',
-		paymentType: 'Payment type'
+		paymentType: 'Payment type',
+		deleteAllPositions: 'Delete all positions'
 	};
 
 	return resources;

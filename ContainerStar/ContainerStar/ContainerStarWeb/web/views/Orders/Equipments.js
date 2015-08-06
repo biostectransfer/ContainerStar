@@ -27,8 +27,8 @@
         columns: function () {
 
             return [
-                 { field: 'equipmentId', title: this.resources.equipmentId, collection: this.options.equipments, defaultText: this.resources.pleaseSelect },
-                 { field: 'amount', title: this.resources.amount },
+                 { field: 'equipmentId', title: this.resources.equipmentId, collection: this.options.equipments, defaultText: this.resources.pleaseSelect, attributes: { "class": "detail-view-grid-cell" } },
+                 { field: 'amount', title: this.resources.amount, attributes: { "class": "detail-view-grid-cell" } },
             ];
         },
 

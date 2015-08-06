@@ -19,7 +19,8 @@ define(function () {
 		selectAdditionalCosts: 'Nebenkosten',
 		amount: 'Menge',
 		isMain: 'Haupt',
-		paymentType: 'Preiseinheit'
+		paymentType: 'Preiseinheit',
+		deleteAllPositions: 'Alle löschen'
 	};
 
 	return resources;

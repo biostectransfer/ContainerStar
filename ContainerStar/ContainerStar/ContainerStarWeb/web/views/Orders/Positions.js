@@ -36,6 +36,49 @@
         }
     },
 
+    deleteAllPositions = function (dataItem) {
+        var self = this;
+
+        var model = new Backbone.Model();
+        model.url = Application.apiUrl + 'deleteAllOrderPositions';
+        model.set('id', self.model.id);
+        model.set('isSellOrder', self.isSellOrder);
+
+        model.save({}, {
+            success: function (model, response) {
+                self.grid.dataSource.read();
+                self.grid.refresh();
+            },
+            error: function (model, response) {
+
+                require(['base/information-view'], function (View) {
+                    var view = new View({
+                        title: 'Alle Positionen löschen',
+                        message: 'Alle Positionen in dem ausgewählte Auftrag konnten nicht gelöscht werden.'
+                    });
+                    self.addView(view);
+                    self.$el.append(view.render().$el);
+                });
+            }
+        });
+    },
+
+    initDetailView = function (e) {
+
+        var self = this;
+
+        if (e.data.containerId != null && e.data.containerId != undefined) {
+            var options = _.extend({}, self.options, { model: e.data }),
+                view = new self.detailView(options);
+
+            self.addView(view);
+            e.detailRow.find('.detailsContainer').append(view.render().$el);
+
+            e.masterRow.data('detail-view', view);
+        }
+    },
+
+
     view = BaseView.extend({
 
         isSellOrder: null,
@@ -48,7 +91,7 @@
 
         addingInPopup: false,
 
-
+        initDetailView: initDetailView,
         detailView: DetailView,
 
 
@@ -190,6 +233,23 @@
 
                 self.addView(view);
                 self.$el.append(view.render().$el);
+            },
+            'click .deleteAllPositions': function (e) {
+                e.preventDefault();
+
+                var self = this;
+
+                require(['base/confirmation-view'], function (View) {
+
+                    var view = new View({
+                        title: 'Alle Positionen löschen',
+                        message: 'Möchten Sie alle Positionen in dem ausgewählten Auftrag löschen?'
+                    });
+
+                    self.listenTo(view, 'continue', _.bind(deleteAllPositions, self));
+                    self.addView(view);
+                    self.$el.append(view.render().$el);
+                });
             }
         },
 
@@ -200,7 +260,8 @@
 		        template: function () {
 		            return '<a class="k-button k-button-icontext selectContainer" style="min-width: 180px;" href="#" data-localized="' +
                         (self.isSellOrder ? 'saleContainer' : 'rentContainer') + '"></a>' +
-		                   '<a class="k-button k-button-icontext selectAdditionalCosts"  style="min-width: 120px;"href="#" data-localized="selectAdditionalCosts"></a>';
+		                   '<a class="k-button k-button-icontext selectAdditionalCosts"  style="min-width: 120px;"href="#" data-localized="selectAdditionalCosts"></a>' +
+		            '<a class="k-button k-button-icontext deleteAllPositions"  style="min-width: 120px;"href="#" data-localized="deleteAllPositions"></a>';
 		        }
 		    }];
 
