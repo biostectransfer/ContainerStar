@@ -2,8 +2,10 @@ define([
 'base/base-object-grid-view',
 'collections/Settings/Containers',
 'l!t!Settings/FilterContainers',
-'l!t!Settings/ContainersRelationships'
-], function (BaseView, Collection, FilterView, DetailView) {
+'l!t!Settings/ContainersRelationships',
+'Settings/Custom.Events.Containers',
+'Settings/Custom.Toolbar.Containers'
+], function (BaseView, Collection, FilterView, DetailView, CustomEvents, CustomToolbar) {
 	'use strict';		
 	var view = BaseView.extend({
 
@@ -37,6 +39,9 @@ define([
 			];
 		}
 
+		,events: CustomEvents
+		,toolbar: CustomToolbar
+		,selectable: true
 	});
 
 	return view;

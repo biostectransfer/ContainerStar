@@ -14,7 +14,7 @@
 		
 		context.FileManager.StartNewFile(entityContent.CodeNamePlural + ".js");
 		//Model
-		var defines = String.Format("{0}\n{1}\n{2}{3}{4}{5}{6}",
+		var defines = String.Format("{0}\n{1}\n{2}{3}{4}{5}{6}{7}",
 			"'base/base-object-grid-view',",
 			"'collections/" + context.CurrentRelatedWebPath + "/" + entityContent.CodeNamePlural + "',",
 			"'l!t!" + context.CurrentRelatedWebPath + "/Filter" + entityContent.CodeName + "'",
@@ -24,13 +24,16 @@
 				",\n'" + context.CurrentRelatedWebPath+ "/Custom." + entityContent.CodeName + "'" : "",
 			entityContent.CustomEvents ? 
 				",\n'" + context.CurrentRelatedWebPath+ "/Custom.Events." + entityContent.CodeName + "'" : "",
-			entityContent.ExcelExport ? ",\n'jszip'" : "");
+			entityContent.ExcelExport ? ",\n'jszip'" : "",
+			entityContent.CustomToolbar ? 
+				",\n'" + context.CurrentRelatedWebPath+ "/Custom.Toolbar." + entityContent.CodeName + "'" : "");
 
-		var defineMembers = String.Format("{0}{1}{2}{3}",
+		var defineMembers = String.Format("{0}{1}{2}{3}{4}",
 				!String.IsNullOrEmpty(entityContent.RelationShips) ? ", DetailView" : "", 
 				entityContent.ShowExtraFields ? ", CustomColumns" : "",
 				entityContent.CustomEvents ? ", CustomEvents" : "",
-				entityContent.ExcelExport ? ", JSZip" : "");
+				entityContent.ExcelExport ? ", JSZip" : "",
+				entityContent.CustomToolbar ? ", CustomToolbar" : "");
 
 		var columnsOpenText = entityContent.ShowExtraFields ? "return $.merge( CustomColumns(),\n[" : "return [";
 		var columnsCloseText = entityContent.ShowExtraFields ? "]);" : "];";
@@ -100,6 +103,14 @@ define([
 		{
 #>
 		,events: CustomEvents
+<#
+		}
+	
+		if(entityContent.CustomToolbar)
+		{
+#>
+		,toolbar: CustomToolbar
+		,selectable: true
 <#
 		}
 #>

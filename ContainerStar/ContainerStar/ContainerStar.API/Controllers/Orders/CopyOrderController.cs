@@ -15,7 +15,7 @@ namespace ContainerStar.API.Controllers
 {
 
     /// <summary>
-    ///     Controller for close order
+    ///     Controller for copy order
     /// </summary>
     [AuthorizeByPermissions(PermissionTypes = new[] { Permissions.Orders })]
     public partial class CopyOrderController : ApiController

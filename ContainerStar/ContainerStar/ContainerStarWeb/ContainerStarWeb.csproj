@@ -1055,6 +1055,8 @@
     <Content Include="web\views\Invoices\AddInvoicePositions.js" />
     <Content Include="web\views\Orders\Equipments.js" />
     <Content Include="web\views\Orders\FilterOffersContainerSmart.js" />
+    <Content Include="web\views\Settings\Custom.Toolbar.Containers.js" />
+    <Content Include="web\views\Settings\Custom.Events.Containers.js" />
     <Content Include="web\views\Settings\FilterCustomers.js" />
     <Content Include="web\views\TransportOrders\TransportProductSearch.js" />
     <Content Include="web\views\TransportOrders\AddTransportOrders.js" />
