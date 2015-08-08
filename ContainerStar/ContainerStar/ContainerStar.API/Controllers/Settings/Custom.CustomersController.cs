@@ -26,16 +26,16 @@ namespace ContainerStar.API.Controllers.Settings
                     });
 
                 return String.Format("{0}{1}", String.Join(" or ", clauses),
-                    number != 0 ? String.Format(" or {0} ", number) : String.Empty);
+                    number != 0 ? String.Format(" or Number = {0} ", number) : String.Empty);
             }
-            else if (filter.Field == "isProspectiveCustomer")
+            else if (filter.Field == "isProspectiveCustomerStatus")
             {
-                bool isProspectiveCustomer;
+                int isProspectiveCustomerStatus;
                 if (!String.IsNullOrEmpty(filter.Value))
                 {
-                    Boolean.TryParse(filter.Value, out isProspectiveCustomer);
+                    Int32.TryParse(filter.Value, out isProspectiveCustomerStatus);
 
-                    return String.Format("IsProspectiveCustomer == {0}", isProspectiveCustomer);
+                    return String.Format("IsProspectiveCustomer == {0}", isProspectiveCustomerStatus == 1 ? false : true);
                 }
             }
 

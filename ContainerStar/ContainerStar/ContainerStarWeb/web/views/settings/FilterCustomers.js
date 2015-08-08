@@ -9,20 +9,20 @@ define([
         filter: Filter,
 
         getFilters: function () {
-            
+
             var result = [],
                 isProspectiveCustomer = this.model.get('isProspectiveCustomer'),
                 name = this.model.get('name'),
-                status = 1;
+                isProspectiveCustomerStatus = 1;
 
-            if (isProspectiveCustomer) {
-                status = 2
+            if (isProspectiveCustomer == true) {
+                isProspectiveCustomerStatus = 2
             }
 
             result.push({
-                field: 'isProspectiveCustomer',
+                field: 'isProspectiveCustomerStatus',
                 operator: 'eq',
-                value: isProspectiveCustomer
+                value: isProspectiveCustomerStatus
             });
 
             result.push({

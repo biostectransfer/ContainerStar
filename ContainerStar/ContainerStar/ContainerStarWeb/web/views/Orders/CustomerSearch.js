@@ -37,7 +37,7 @@ define([
 	        view.__super__.initialize.apply(this, arguments);
 
 	        this.defaultFiltering = [
-		        { field: 'isProspectiveCustomer', operator: 'eq', value: false }];
+		        { field: 'isProspectiveCustomerStatus', operator: 'eq', value: 1 }];
 
 	        this.collection = new Collection();
 	    },

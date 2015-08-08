@@ -35,7 +35,7 @@
 					}
 				}).data('kendoWindow');
 
-				self.kendoWindow.center().open();
+			    self.kendoWindow.center().open();
 			}, 0);
 
 			return this;
