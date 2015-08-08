@@ -37,11 +37,15 @@ namespace ContainerStar.API.Controllers
             model.isMain = entity.IsMain;
             model.paymentType = entity.PaymentType;
 
-            if(entity.ContainerId.HasValue)
+            if (entity.ContainerId.HasValue)
             {
                 model.description = String.Format("{0} {1}", entity.Containers.Number, entity.Containers.ContainerTypes.Name);
-                model.fromDate = entity.FromDate;
-                model.toDate = entity.ToDate;
+
+                if(entity.FromDate != DateTime.MinValue)
+                    model.fromDate = entity.FromDate;
+
+                if (entity.ToDate != DateTime.MinValue)
+                    model.toDate = entity.ToDate;
             }
 
             model.additionalCostId = entity.AdditionalCostId;
@@ -56,7 +60,9 @@ namespace ContainerStar.API.Controllers
             model.createDate = ((ISystemFields)entity).CreateDate;
             model.changeDate = ((ISystemFields)entity).ChangeDate;
 
+            model.isOffer = entity.Orders.IsOffer;
         }
+
         protected override void ModelToEntity(PositionsModel model, Positions entity, ActionTypes actionType)
         {
             entity.OrderId = model.orderId;
@@ -64,8 +70,6 @@ namespace ContainerStar.API.Controllers
             entity.ContainerId = model.containerId;
             entity.AdditionalCostId = model.additionalCostId;
             entity.Price = model.price;
-            entity.FromDate = model.fromDate.HasValue ? model.fromDate.Value.Date : DateTime.Now.Date;
-            entity.ToDate = model.toDate.HasValue ? model.toDate.Value.Date : DateTime.Now.Date;
             entity.IsMain = model.isMain;
             entity.PaymentType = model.paymentType;
 
@@ -76,6 +80,9 @@ namespace ContainerStar.API.Controllers
 
             if(actionType == ActionTypes.Add && model.containerId.HasValue)
             {
+                entity.FromDate = model.fromDate.HasValue ? model.fromDate.Value.Date : DateTime.Now.Date;
+                entity.ToDate = model.toDate.HasValue ? model.toDate.Value.Date : DateTime.Now.Date;
+
                 var container = ContainerManager.GetById(model.containerId.Value);
                 foreach (var equipment in container.ContainerEquipmentRsps)
                 {

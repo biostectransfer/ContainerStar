@@ -50,5 +50,8 @@ namespace ContainerStar.API.Models
         [Required]
         [DataMember]
         public bool isMain { get; set; }
+
+        [DataMember]
+        public bool isOffer { get; set; }
     }
 }

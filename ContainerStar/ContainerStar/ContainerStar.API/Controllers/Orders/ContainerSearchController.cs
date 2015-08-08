@@ -80,7 +80,7 @@ namespace ContainerStar.API.Controllers
 
             if (fromDate == DateTime.MinValue || toDate == DateTime.MinValue)
             {
-                return null;
+                return Manager.GetFreeContainers(new List<int>(), typeId, name, equpmentIds); //for offers we return containers independs from booking
             }
 
             var positions = Manager.GetActualPositions(fromDate, toDate);

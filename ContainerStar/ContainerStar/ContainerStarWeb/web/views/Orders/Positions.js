@@ -160,7 +160,9 @@
                 e.preventDefault();
 
                 var self = this,
-                    view = new SelectContainerView(self.options);
+                options = _.extend({}, self.options, { isOffer: self.model.get('isOffer') });
+
+                var view = new SelectContainerView(options);
 
                 self.listenTo(view, 'selectContainer', function (item) {
 

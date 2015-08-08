@@ -27,7 +27,7 @@
                 'Home': _.partial(BaseRouter.showView, this, 'l!t!home/home', { ContainerTypesForDisposition: true, Equipments: true }, { searchFreeContainer: false }),
                 'FreeContainers': _.partial(BaseRouter.showView, this, 'l!t!home/home', { ContainerTypesForDisposition: true, Equipments: true }, { searchFreeContainer: true }),
                 'Settings': _.partial(BaseRouter.showView, this, 'l!t!Settings/Settings'),
-                'Offers': _.partial(BaseRouter.showView, this, 'l!t!Orders/Offers', { ContainerTypes: true, Equipments: true }, { isOffer: true }),
+                'Offers': _.partial(BaseRouter.showView, this, 'l!t!Orders/Offers', { ContainerTypes: true, Equipments: true, PaymentTypes: true }, { isOffer: true }),
                 'Offers/create': _.partial(BaseRouter.showViewWithModel, this, 'l!t!Orders/AddOrders', 'models/Orders', { ContainerTypes: true, CommunicationPartners: true, Equipments: true }, { isOffer: true }),
                 'Offers/:id': _.partial(BaseRouter.showViewWithModel, this, 'l!t!Orders/AddOrders', 'models/Orders', { ContainerTypes: true, CommunicationPartners: true, Equipments: true }, { isOffer: true }),
                 'Orders': _.partial(BaseRouter.showView, this, 'l!t!Orders/Orders', { ContainerTypes: true, Equipments: true, PaymentTypes: true }, { isOffer: false }),

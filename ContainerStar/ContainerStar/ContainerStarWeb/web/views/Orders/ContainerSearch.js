@@ -45,8 +45,13 @@ define([
 	        var self = this;
 
 	        view.__super__.render.apply(self, arguments);            
-            
-	        require(['l!t!Orders/FilterContainerSmart'], function (View) {
+
+	        var path = 'l!t!Orders/FilterContainerSmart';
+	        if (self.options.isOffer) {
+	            path = 'l!t!Orders/FilterOffersContainerSmart';
+	        }
+
+	        require([path], function (View) {
 
 	            self.showView(new View(
                         {
@@ -55,7 +60,7 @@ define([
                             equipments: self.options.equipments
                         }
                     ),
-	                self.filterSelector);
+                    self.filterSelector);
 	        });
 
 	        return self;

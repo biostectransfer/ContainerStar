@@ -1,0 +1,47 @@
+﻿<div class="simple">
+    <a class="toggle" href="javascript:void(0)" data-localized="searchTitle"></a>
+</div>
+<div class="advanced" style="display: block;">
+    <form>
+        <div>
+            <div class="editor-field" style="float: left;">
+                <label data-localized="fromDate"></label>
+                <input type="text" id="fromDate" name="fromDate" data-role="datepicker" />
+                <div style="float: none;">
+                    <span class="k-invalid-msg" data-for="fromDate"></span>
+                </div>
+                <div class="dateValidator" style="float: none; display: none;">
+                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg" role="alert">
+                        <span class="k-icon k-warning"> </span> Von Datum muss größer<br /> als Bis Datum sein
+                    </span>
+                </div>
+            </div>
+            <div class="editor-field" style="float: left; padding-left: 15px;">
+                <label data-localized="toDate"></label>
+                <input type="text" id="toDate" name="toDate" data-role="datepicker" />
+                <div style="float: none;">
+                    <span class="k-invalid-msg" data-for="toDate"></span>
+                </div>
+            </div>
+            <div class="editor-field" style="float: left; padding-left: 25px;">
+                <label data-localized="containerTypeId"></label>
+                <select style="width: 382px" id="containerTypeId" name="containerTypeId"  />
+            </div>
+        </div>
+        <div style="clear: left;">
+            <div class="editor-field" style="float: left;">
+                <label data-localized="name"></label>
+                <input type="text" class="k-textbox" style="width: 250px" id="name" name="name" />
+            </div>
+            <div class="editor-field" style="float: left; padding-left: 25px;">
+                <label data-localized="equipments"></label>
+                <select class="equipments" id="equipments" name="equipments" multiple data-role="selectbox" />
+            </div>
+        </div>
+        <div style="clear: left;">
+            <button class="k-primary k-button" type="submit" data-localized="apply"></button>
+            <button class="k-button" type="reset" data-localized="cancel"></button>
+        </div>
+    </form>
+</div>
+<br/>

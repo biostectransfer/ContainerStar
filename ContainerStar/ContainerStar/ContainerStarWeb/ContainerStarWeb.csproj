@@ -333,6 +333,7 @@
       <DependentUpon>web.collections.tt</DependentUpon>
     </Content>
     <Content Include="web\models\ContainerSearch.js" />
+    <Content Include="web\models\FilterOffersContainerSmart.js" />
     <Content Include="web\models\InvoiceStornos\AddInvoicePositions.js" />
     <Content Include="web\models\InvoiceStornos\InvoiceStornos.js" />
     <Content Include="web\models\Equipments.js" />
@@ -446,6 +447,8 @@
     <Content Include="web\resources\Invoices\AddInvoicePositions.en.js" />
     <Content Include="web\resources\Orders\Equipments.de.js" />
     <Content Include="web\resources\Orders\Equipments.en.js" />
+    <Content Include="web\resources\Orders\FilterOffersContainerSmart.de.js" />
+    <Content Include="web\resources\Orders\FilterOffersContainerSmart.en.js" />
     <Content Include="web\resources\Settings\FilterCustomers.de.js" />
     <Content Include="web\resources\Settings\FilterCustomers.en.js" />
     <Content Include="web\resources\TransportOrders\TransportProductSearch.de.js" />
@@ -841,6 +844,7 @@
     <Content Include="web\templates\Invoices\InvoicesRelationships.html" />
     <Content Include="web\templates\Invoices\AddInvoicePositions.html" />
     <Content Include="web\templates\Orders\Equipments.html" />
+    <Content Include="web\templates\Orders\FilterOffersContainerSmart.html" />
     <Content Include="web\templates\Settings\FilterCustomers.html" />
     <Content Include="web\templates\TransportOrders\TransportProductSearch.html" />
     <Content Include="web\templates\TransportOrders\AddTransportOrders.html" />
@@ -1050,6 +1054,7 @@
     <Content Include="web\views\Invoices\InvoicesRelationships.js" />
     <Content Include="web\views\Invoices\AddInvoicePositions.js" />
     <Content Include="web\views\Orders\Equipments.js" />
+    <Content Include="web\views\Orders\FilterOffersContainerSmart.js" />
     <Content Include="web\views\Settings\FilterCustomers.js" />
     <Content Include="web\views\TransportOrders\TransportProductSearch.js" />
     <Content Include="web\views\TransportOrders\AddTransportOrders.js" />
