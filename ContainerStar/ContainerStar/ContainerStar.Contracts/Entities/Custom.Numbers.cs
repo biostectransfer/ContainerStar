@@ -1,4 +1,6 @@
 ﻿
+using CoreBase.Entities;
+
 namespace ContainerStar.Contracts.Entities
 {
     public class Numbers : IHasId<int>

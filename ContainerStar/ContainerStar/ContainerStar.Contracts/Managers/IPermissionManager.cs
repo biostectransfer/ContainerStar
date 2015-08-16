@@ -1,5 +1,6 @@
 using ContainerStar.Contracts.Entities;
-using ContainerStar.Contracts.Managers.Base;
+using CoreBase.Entities;
+using CoreBase.ManagerInterfaces;
 using System;
 
 namespace ContainerStar.Contracts.Managers

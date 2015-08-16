@@ -1,6 +1,7 @@
 using ContainerStar.API.Controllers;
 using ContainerStar.Contracts.Entities;
 using ContainerStar.Contracts.Managers;
+using CoreBase.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Web.Http.Dependencies;

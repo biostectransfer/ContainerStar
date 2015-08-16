@@ -1,3 +1,5 @@
+using CoreBase.Entities;
+
 namespace ContainerStar.Contracts
 {
     /// <summary>

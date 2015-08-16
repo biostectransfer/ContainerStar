@@ -4,6 +4,7 @@
 <# 
     const string filesDir = @"..\..\Generation\ContainerStar.Generation\Declarations\";
 	defaultNamespace = "ContainerStar.Contracts.Entities";
+	extraUsages = new[] {"CoreBase.Entities"};
 #>
 <#@ include file="..\..\Generation\ContainerStar.Generation\TTMasterData\ContainerStar.GenerationContext.ttinclude" once="true"#>
 <#@ include file="..\..\Generation\ContainerStar.Generation\TTCommon\Entities.ttinclude"  once="true"#>

@@ -2,6 +2,8 @@
 using ContainerStar.Contracts.Entities;
 using System.Web.Http;
 using CoreBase;
+using CoreBase.Models;
+using CoreBase.Controllers;
 
 namespace ContainerStar.API.Controllers.Settings
 {

@@ -4,7 +4,6 @@ using ContainerStar.API.Security;
 using ContainerStar.Contracts;
 using ContainerStar.Contracts.Entities;
 using ContainerStar.Contracts.Enums;
-using ContainerStar.Contracts.Exceptions;
 using ContainerStar.Contracts.Managers;
 using ContainerStar.Contracts.Services;
 using ContainerStar.Lib.Managers;

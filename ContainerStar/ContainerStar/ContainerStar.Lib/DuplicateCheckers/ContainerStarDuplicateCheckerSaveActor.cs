@@ -1,6 +1,6 @@
 ﻿using ContainerStar.Contracts.SaveActors;
-using ContainerStar.Lib.DuplicateCheckers.Base;
 using ContainerStar.Lib.DuplicateCheckers.Interfaces;
+using CoreBase.DuplicateCheckers;
 
 namespace ContainerStar.Lib.DuplicateCheckers
 {

@@ -23,8 +23,8 @@
         context.FileManager.StartNewFile(managerInterface.Name + ".cs");
         context.WriteAllUsings(new[]
         {
-            "ContainerStar.Contracts.Entities",
-            "ContainerStar.Contracts.Managers.Base"
+            "CoreBase.Entities",
+            "CoreBase.ManagerInterfaces"
         }, managerInterface);
         code.WriteLine();
         code.WriteNamespace(); //Area: Namespace

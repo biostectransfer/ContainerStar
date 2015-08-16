@@ -1,4 +1,5 @@
 using ContainerStar.Contracts;
+using CoreBase.Entities;
 using System;
 
 namespace ContainerStar.Contracts.Entities

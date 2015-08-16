@@ -4,9 +4,8 @@ using ContainerStar.Contracts;
 using ContainerStar.Contracts.Entities;
 using ContainerStar.Contracts.Enums;
 using ContainerStar.Contracts.Services;
-using ContainerStar.Lib.Managers.Base;
 using System.Collections.Generic;
-
+using CoreBase.Managers;
 
 namespace ContainerStar.Lib.Services
 {

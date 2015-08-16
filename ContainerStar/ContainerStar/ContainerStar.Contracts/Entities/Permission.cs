@@ -1,4 +1,5 @@
 using ContainerStar.Contracts;
+using CoreBase.Entities;
 using System;
 using System.Collections.Generic;
 

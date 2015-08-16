@@ -1,5 +1,6 @@
-using ContainerStar.API.Validation;
 using ContainerStar.Contracts.Entities;
+using CoreBase.Models;
+using CoreBase.Validation;
 using System;
 using System.Runtime.Serialization;
 // ReSharper disable InconsistentNaming

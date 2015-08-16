@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using ContainerStar.Contracts.SaveActors;
-using ContainerStar.Lib.Data.SaveActors.Base;
+using CoreBase.SaveActors;
 
 namespace ContainerStar.Lib.Data.SaveActors
 {

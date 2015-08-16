@@ -4,6 +4,7 @@ using System.Web.Security;
 using ContainerStar.API.Models;
 using ContainerStar.Contracts.Managers;
 using CoreBase;
+using CoreBase.Models;
 
 namespace ContainerStar.API.Controllers
 {

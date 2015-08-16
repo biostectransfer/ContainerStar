@@ -4,7 +4,7 @@
 <# 
     const string filesDir = @"..\..\..\Generation\ContainerStar.Generation\Declarations\";
 	defaultNamespace = "ContainerStar.API.Controllers";
-	extraUsages = new[] {"ContainerStar.Contracts.Entities", "ContainerStar.Contracts.Managers"};
+	extraUsages = new[] {"ContainerStar.Contracts.Entities", "ContainerStar.Contracts.Managers", "CoreBase.Controllers"};
 	var masterData = "MasterData";
 #>
 <#@ include file="..\..\..\Generation\ContainerStar.Generation\TTMasterData\ContainerStar.GenerationContext.ttinclude" once="true"#>

@@ -1,5 +1,0 @@
-G:\ContainerStar\ContainerStar\Assemblies\Release\CoreBase.dll
-G:\ContainerStar\ContainerStar\Assemblies\Release\CoreBase.pdb
-G:\ContainerStar\ContainerStar\CoreBase\CoreBase\obj\Release\CoreBase.csprojResolveAssemblyReference.cache
-G:\ContainerStar\ContainerStar\CoreBase\CoreBase\obj\Release\CoreBase.dll
-G:\ContainerStar\ContainerStar\CoreBase\CoreBase\obj\Release\CoreBase.pdb

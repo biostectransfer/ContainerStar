@@ -49,6 +49,10 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CoreBase, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\CoreBase.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
@@ -109,7 +113,6 @@
     <Compile Include="Data\CustomersMapping.cs">
       <DependentUpon>ContainerStar.EntityMapping.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\EntitiesBase.cs" />
     <Compile Include="Data\EquipmentsMapping.cs">
       <DependentUpon>ContainerStar.EntityMapping.tt</DependentUpon>
     </Compile>
@@ -141,7 +144,6 @@
     <Compile Include="Data\RolePermissionRspMapping.cs">
       <DependentUpon>ContainerStar.EntityMapping.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\SaveActors\Base\SaveActorManager.cs" />
     <Compile Include="Data\SaveActors\ContainerStarSaveActorManager.cs" />
     <Compile Include="Data\TaxesMapping.cs">
       <DependentUpon>ContainerStar.EntityMapping.tt</DependentUpon>
@@ -158,19 +160,11 @@
     <Compile Include="Data\UserMapping.cs">
       <DependentUpon>ContainerStar.EntityMapping.tt</DependentUpon>
     </Compile>
-    <Compile Include="DuplicateCheckers\Base\BaseDuplicateChecker.cs" />
-    <Compile Include="DuplicateCheckers\Base\BaseDuplicateCheckerSaveActor.cs" />
-    <Compile Include="DuplicateCheckers\Interfaces\IDuplicateChecker.cs" />
     <Compile Include="DuplicateCheckers\Interfaces\IContainerStarDuplicateChecker.cs" />
     <Compile Include="DuplicateCheckers\ContainerStarDuplicateCheckerSaveActor.cs" />
     <Compile Include="Managers\AdditionalCostsManager.cs">
       <DependentUpon>Managers.tt</DependentUpon>
     </Compile>
-    <Compile Include="Managers\Base\EntityManager.cs" />
-    <Compile Include="Managers\Base\Manager.cs" />
-    <Compile Include="Managers\Base\ManagerBase.cs" />
-    <Compile Include="Managers\Base\ReadOnlyEntityManager.cs" />
-    <Compile Include="Managers\Base\ReadOnlyManagerBase.cs" />
     <Compile Include="Managers\CommunicationPartnersManager.cs">
       <DependentUpon>Managers.tt</DependentUpon>
     </Compile>
@@ -242,10 +236,6 @@
     <Compile Include="Services\UniqueNumberProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CoreBase\CoreBase\CoreBase.csproj">
-      <Project>{c8295c9a-6d2c-4034-8880-bc05b7d83c4f}</Project>
-      <Name>CoreBase</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ContainerStar.Contracts\ContainerStar.Contracts.csproj">
       <Project>{2e9c34f0-651a-4b2f-9a9a-0c6c6ec11f4b}</Project>
       <Name>MasterDataModule.Contracts</Name>

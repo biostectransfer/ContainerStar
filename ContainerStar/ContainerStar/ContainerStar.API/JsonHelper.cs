@@ -9,6 +9,8 @@ using ContainerStar.API.Models;
 using ContainerStar.Contracts.Managers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using CoreBase;
+using CoreBase.Models;
 
 namespace ContainerStar.API
 {

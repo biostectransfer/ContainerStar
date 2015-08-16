@@ -1,4 +1,5 @@
-﻿using ContainerStar.Contracts.SaveActors.Base;
+﻿
+using CoreBase.SaveActors;
 
 namespace ContainerStar.Contracts.SaveActors
 {

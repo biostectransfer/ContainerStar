@@ -8,6 +8,8 @@ using ContainerStar.Contracts.Entities;
 using ContainerStar.Contracts.Managers;
 using ContainerStar.API.Security;
 using ContainerStar.Contracts.Enums;
+using CoreBase.Controllers;
+using CoreBase.Entities;
 
 namespace ContainerStar.API.Controllers
 {

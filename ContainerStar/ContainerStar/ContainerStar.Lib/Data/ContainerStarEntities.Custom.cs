@@ -1,4 +1,5 @@
-﻿using ContainerStar.Contracts.SaveActors.Base;
+﻿using CoreBase.Entities;
+using CoreBase.SaveActors;
 using System.Data.Entity;
 using System.Linq;
 

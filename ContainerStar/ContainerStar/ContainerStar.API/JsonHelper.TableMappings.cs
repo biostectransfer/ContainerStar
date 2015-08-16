@@ -5,6 +5,7 @@
 
 
 
+using CoreBase;
 using System.Collections.Generic;
 
 namespace ContainerStar.API

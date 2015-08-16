@@ -5,9 +5,9 @@ using System.Web.Http;
 using ContainerStar.Contracts;
 using ContainerStar.Contracts.Entities;
 using ContainerStar.Contracts.Managers;
-using ContainerStar.Contracts.Managers.Base;
 using System.Web.Http.Dependencies;
-
+using CoreBase.Controllers;
+using CoreBase.Entities;
 
 namespace ContainerStar.API.Controllers
 {
@@ -19,14 +19,7 @@ namespace ContainerStar.API.Controllers
         public bool ContainerTypesForDisposition { get; set; }
         public bool ProceedsAccounts { get; set; }
     }
-
-    public class IdNameModel<TId>
-        where TId : struct, IEquatable<TId>
-    {
-        public TId id { get; set; }
-        public string name { get; set; }
-    }
-
+    
     public class ViewCollectionController: ApiController
     {
         public ViewCollectionController()

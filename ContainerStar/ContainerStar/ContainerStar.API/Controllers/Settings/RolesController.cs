@@ -5,6 +5,8 @@ using ContainerStar.Contracts;
 using ContainerStar.Contracts.Entities;
 using ContainerStar.Contracts.Enums;
 using ContainerStar.Contracts.Managers;
+using CoreBase.Controllers;
+using CoreBase.Entities;
 using System;
 
 namespace ContainerStar.API.Controllers.Settings

@@ -12,7 +12,7 @@
             Name = string.Format("{0}Manager", entity.Name)
         };
 
-		var baseType = TypeUsageInfo.CreateClass("EntityManager", "ContainerStar.Lib.Managers.Base", new[]
+		var baseType = TypeUsageInfo.CreateClass("EntityManager", "CoreBase.Managers", new[]
         {
             entity.GetTypeUsage(),
             typeof (int).ToUsageInfo()
