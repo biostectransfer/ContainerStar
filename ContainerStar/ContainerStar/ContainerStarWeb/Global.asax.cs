@@ -4,7 +4,7 @@ using System.Web.Mvc;
 
 namespace ContainerStarWeb
 {
-    public class MasterDataModuleWebApplication : HttpApplication
+    public class ContainerStarWebApplication : HttpApplication
     {
         protected void Application_Start()
         {

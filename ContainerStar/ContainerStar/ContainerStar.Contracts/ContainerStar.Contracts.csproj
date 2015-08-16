@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ContainerStar.Contracts</RootNamespace>
-    <AssemblyName>ContainerStar..Contracts</AssemblyName>
+    <AssemblyName>ContainerStar.Contracts</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

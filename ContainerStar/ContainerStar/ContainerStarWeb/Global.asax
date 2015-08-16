@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="ContainerStarWeb.MasterDataModuleWebApplication" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="ContainerStarWeb.ContainerStarWebApplication" Language="C#" %>

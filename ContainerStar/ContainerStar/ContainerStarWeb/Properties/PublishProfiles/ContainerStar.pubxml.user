@@ -10,34 +10,34 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
   </PropertyGroup>
   <ItemGroup>
     <File Include="App_Data/InvoiceFile.docx">
-      <publishTime>07/28/2015 15:01:34</publishTime>
+      <publishTime>08/06/2015 11:49:20</publishTime>
     </File>
     <File Include="App_Data/OfferFile.docx">
       <publishTime>07/28/2015 11:13:30</publishTime>
     </File>
     <File Include="App_Data/ReminderFile.docx">
-      <publishTime>07/28/2015 11:53:38</publishTime>
+      <publishTime>08/06/2015 13:15:02</publishTime>
     </File>
     <File Include="App_Data/RentOrderFile.docx">
-      <publishTime>07/27/2015 22:28:04</publishTime>
+      <publishTime>08/06/2015 08:11:37</publishTime>
     </File>
     <File Include="bin/ContainerStar..Contracts.dll">
-      <publishTime>09/29/2015 17:48:25</publishTime>
+      <publishTime>08/11/2015 19:09:25</publishTime>
     </File>
     <File Include="bin/ContainerStar.API.dll">
-      <publishTime>09/29/2015 17:48:33</publishTime>
+      <publishTime>08/11/2015 19:09:27</publishTime>
     </File>
     <File Include="bin/ContainerStar.Configuration.dll">
-      <publishTime>09/29/2015 17:48:29</publishTime>
+      <publishTime>08/11/2015 19:09:26</publishTime>
     </File>
     <File Include="bin/ContainerStar.Lib.dll">
-      <publishTime>09/29/2015 17:48:27</publishTime>
+      <publishTime>08/11/2015 19:09:26</publishTime>
     </File>
     <File Include="bin/ContainerStarWeb.dll">
-      <publishTime>09/29/2015 17:48:41</publishTime>
+      <publishTime>08/11/2015 19:09:28</publishTime>
     </File>
     <File Include="bin/CoreBase.dll">
-      <publishTime>09/29/2015 17:48:25</publishTime>
+      <publishTime>08/11/2015 19:09:25</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>06/28/2015 01:27:07</publishTime>
@@ -334,7 +334,7 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>07/11/2015 13:19:15</publishTime>
     </File>
     <File Include="default.cshtml">
-      <publishTime>07/12/2015 11:38:53</publishTime>
+      <publishTime>08/11/2015 19:05:54</publishTime>
     </File>
     <File Include="Global.asax">
       <publishTime>06/28/2015 01:27:02</publishTime>
@@ -364,7 +364,7 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/base/base-object-grid-view.js">
-      <publishTime>07/01/2015 04:04:48</publishTime>
+      <publishTime>08/06/2015 10:28:10</publishTime>
     </File>
     <File Include="web.components/base/base-object-tab-view.js">
       <publishTime>07/26/2015 10:45:44</publishTime>
@@ -373,7 +373,7 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/28/2015 01:27:02</publishTime>
     </File>
     <File Include="web.components/base/base-window-view.js">
-      <publishTime>06/28/2015 01:27:02</publishTime>
+      <publishTime>08/07/2015 07:32:54</publishTime>
     </File>
     <File Include="web.components/base/confirmation-view.js">
       <publishTime>06/28/2015 01:27:02</publishTime>
@@ -853,7 +853,7 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/29/2015 17:49:12</publishTime>
+      <publishTime>08/08/2015 11:04:42</publishTime>
     </File>
     <File Include="web.libs/backbone.js">
       <publishTime>06/28/2015 01:27:05</publishTime>
@@ -1083,6 +1083,9 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
     <File Include="web/collections/ContainerSearch.js">
       <publishTime>07/10/2015 10:30:24</publishTime>
     </File>
+    <File Include="web/collections/Equipments.js">
+      <publishTime>08/06/2015 08:46:38</publishTime>
+    </File>
     <File Include="web/collections/Invoices/AddInvoicePositions.js">
       <publishTime>07/02/2015 07:42:43</publishTime>
     </File>
@@ -1150,7 +1153,7 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/collections/Settings/web.collections.txt">
-      <publishTime>07/28/2015 14:16:41</publishTime>
+      <publishTime>08/08/2015 08:44:37</publishTime>
     </File>
     <File Include="web/collections/TransportOrders.js">
       <publishTime>07/12/2015 12:18:33</publishTime>
@@ -1167,8 +1170,14 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
     <File Include="web/models/ContainerSearch.js">
       <publishTime>07/10/2015 10:30:36</publishTime>
     </File>
+    <File Include="web/models/Equipments.js">
+      <publishTime>08/06/2015 08:46:41</publishTime>
+    </File>
     <File Include="web/models/FilterContainerSmart.js">
       <publishTime>06/29/2015 00:14:14</publishTime>
+    </File>
+    <File Include="web/models/FilterOffersContainerSmart.js">
+      <publishTime>08/08/2015 08:04:43</publishTime>
     </File>
     <File Include="web/models/FilterOrders.js">
       <publishTime>07/11/2015 18:15:47</publishTime>
@@ -1189,7 +1198,7 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>07/11/2015 22:25:58</publishTime>
     </File>
     <File Include="web/models/InvoiceStornos/InvoiceStornos.js">
-      <publishTime>07/11/2015 22:58:21</publishTime>
+      <publishTime>08/06/2015 13:20:28</publishTime>
     </File>
     <File Include="web/models/login.js">
       <publishTime>06/28/2015 01:27:05</publishTime>
@@ -1210,7 +1219,7 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/models/Settings/Containers.js">
-      <publishTime>07/28/2015 09:09:54</publishTime>
+      <publishTime>08/06/2015 08:31:16</publishTime>
     </File>
     <File Include="web/models/Settings/ContainerTypeEquipmentRsp.js">
       <publishTime>06/28/2015 01:27:05</publishTime>
@@ -1243,7 +1252,7 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/models/Settings/FilterCustomers.js">
-      <publishTime>06/28/2015 01:27:05</publishTime>
+      <publishTime>08/06/2015 13:43:59</publishTime>
     </File>
     <File Include="web/models/Settings/FilterEquipments.js">
       <publishTime>06/28/2015 01:27:05</publishTime>
@@ -1297,7 +1306,7 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/models/Settings/web.models.txt">
-      <publishTime>07/28/2015 14:16:46</publishTime>
+      <publishTime>08/08/2015 08:44:37</publishTime>
     </File>
     <File Include="web/models/ShowContainer.js">
       <publishTime>07/10/2015 12:30:14</publishTime>
@@ -1390,10 +1399,10 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>07/11/2015 22:52:26</publishTime>
     </File>
     <File Include="web/resources/InvoiceStornos/InvoiceStornos.de.js">
-      <publishTime>07/11/2015 23:06:28</publishTime>
+      <publishTime>08/06/2015 13:21:51</publishTime>
     </File>
     <File Include="web/resources/InvoiceStornos/InvoiceStornos.en.js">
-      <publishTime>07/11/2015 23:06:39</publishTime>
+      <publishTime>08/06/2015 13:22:02</publishTime>
     </File>
     <File Include="web/resources/master.de.js">
       <publishTime>07/17/2015 17:37:00</publishTime>
@@ -1437,6 +1446,12 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
     <File Include="web/resources/Orders/CustomerSearch.en.js">
       <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
+    <File Include="web/resources/Orders/Equipments.de.js">
+      <publishTime>08/06/2015 10:12:37</publishTime>
+    </File>
+    <File Include="web/resources/Orders/Equipments.en.js">
+      <publishTime>08/06/2015 08:43:59</publishTime>
+    </File>
     <File Include="web/resources/Orders/FilterContainerSmart.de.js">
       <publishTime>07/24/2015 15:37:56</publishTime>
     </File>
@@ -1449,6 +1464,12 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
     <File Include="web/resources/Orders/FilterOffers.en.js">
       <publishTime>07/11/2015 18:23:40</publishTime>
     </File>
+    <File Include="web/resources/Orders/FilterOffersContainerSmart.de.js">
+      <publishTime>08/08/2015 08:07:57</publishTime>
+    </File>
+    <File Include="web/resources/Orders/FilterOffersContainerSmart.en.js">
+      <publishTime>08/08/2015 08:07:57</publishTime>
+    </File>
     <File Include="web/resources/Orders/FilterOrders.de.js">
       <publishTime>07/11/2015 18:22:57</publishTime>
     </File>
@@ -1459,13 +1480,13 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>07/26/2015 10:16:10</publishTime>
     </File>
     <File Include="web/resources/Orders/Offers.en.js">
-      <publishTime>07/26/2015 10:16:17</publishTime>
+      <publishTime>08/06/2015 15:07:04</publishTime>
     </File>
     <File Include="web/resources/Orders/Orders.de.js">
-      <publishTime>07/11/2015 16:25:28</publishTime>
+      <publishTime>08/06/2015 16:07:09</publishTime>
     </File>
     <File Include="web/resources/Orders/Orders.en.js">
-      <publishTime>07/11/2015 16:25:38</publishTime>
+      <publishTime>08/06/2015 16:06:47</publishTime>
     </File>
     <File Include="web/resources/Orders/OrdersRelationships.de.js">
       <publishTime>06/29/2015 07:45:59</publishTime>
@@ -1480,16 +1501,16 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>07/01/2015 03:06:09</publishTime>
     </File>
     <File Include="web/resources/Orders/RentPositions.de.js">
-      <publishTime>07/28/2015 08:44:31</publishTime>
+      <publishTime>08/06/2015 12:08:28</publishTime>
     </File>
     <File Include="web/resources/Orders/RentPositions.en.js">
-      <publishTime>07/28/2015 08:44:52</publishTime>
+      <publishTime>08/06/2015 12:08:04</publishTime>
     </File>
     <File Include="web/resources/Orders/SalePositions.de.js">
-      <publishTime>07/28/2015 08:44:51</publishTime>
+      <publishTime>08/06/2015 12:08:31</publishTime>
     </File>
     <File Include="web/resources/Orders/SalePositions.en.js">
-      <publishTime>07/28/2015 08:44:49</publishTime>
+      <publishTime>08/06/2015 12:08:08</publishTime>
     </File>
     <File Include="web/resources/Orders/SelectAdditionalCosts.de.js">
       <publishTime>06/28/2015 01:27:05</publishTime>
@@ -1528,10 +1549,10 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/AddContainers.de.js">
-      <publishTime>07/28/2015 09:09:55</publishTime>
+      <publishTime>08/06/2015 08:31:17</publishTime>
     </File>
     <File Include="web/resources/Settings/AddContainers.en.js">
-      <publishTime>07/28/2015 09:09:55</publishTime>
+      <publishTime>08/06/2015 08:31:17</publishTime>
     </File>
     <File Include="web/resources/Settings/AddContainerTypeEquipmentRsp.de.js">
       <publishTime>06/28/2015 01:27:05</publishTime>
@@ -1630,10 +1651,10 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/Containers.de.js">
-      <publishTime>07/28/2015 09:09:59</publishTime>
+      <publishTime>08/06/2015 08:31:22</publishTime>
     </File>
     <File Include="web/resources/Settings/Containers.en.js">
-      <publishTime>07/28/2015 09:09:59</publishTime>
+      <publishTime>08/06/2015 08:31:22</publishTime>
     </File>
     <File Include="web/resources/Settings/ContainersRelationships.de.js">
       <publishTime>06/28/2015 01:27:05</publishTime>
@@ -1738,10 +1759,10 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/FilterCustomers.de.js">
-      <publishTime>06/28/2015 01:27:05</publishTime>
+      <publishTime>08/06/2015 13:35:01</publishTime>
     </File>
     <File Include="web/resources/Settings/FilterCustomers.en.js">
-      <publishTime>06/28/2015 01:27:05</publishTime>
+      <publishTime>08/06/2015 13:35:25</publishTime>
     </File>
     <File Include="web/resources/Settings/FilterEquipments.de.js">
       <publishTime>06/28/2015 01:27:05</publishTime>
@@ -1894,19 +1915,19 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/resources/Settings/web.add.resources.txt">
-      <publishTime>07/28/2015 14:16:47</publishTime>
+      <publishTime>08/08/2015 08:44:38</publishTime>
     </File>
     <File Include="web/resources/Settings/web.filter.resources.txt">
-      <publishTime>07/28/2015 14:16:48</publishTime>
+      <publishTime>08/08/2015 08:44:38</publishTime>
     </File>
     <File Include="web/resources/Settings/web.menu.resources.txt">
-      <publishTime>07/28/2015 14:16:49</publishTime>
+      <publishTime>08/08/2015 08:44:39</publishTime>
     </File>
     <File Include="web/resources/Settings/web.relationships.resources.txt">
-      <publishTime>07/28/2015 14:16:50</publishTime>
+      <publishTime>08/08/2015 08:44:39</publishTime>
     </File>
     <File Include="web/resources/Settings/web.resources.txt">
-      <publishTime>07/28/2015 14:16:52</publishTime>
+      <publishTime>08/08/2015 08:44:40</publishTime>
     </File>
     <File Include="web/resources/TransportOrders/AddTransportOrders.de.js">
       <publishTime>07/12/2015 12:17:23</publishTime>
@@ -1972,7 +1993,7 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/30/2015 08:50:09</publishTime>
     </File>
     <File Include="web/router.js">
-      <publishTime>07/29/2015 09:03:48</publishTime>
+      <publishTime>08/08/2015 08:26:06</publishTime>
     </File>
     <File Include="web/templates/Errors/Forbidden.html">
       <publishTime>06/28/2015 01:27:05</publishTime>
@@ -2037,11 +2058,17 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
     <File Include="web/templates/Orders/CustomerSearch.html">
       <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
+    <File Include="web/templates/Orders/Equipments.html">
+      <publishTime>08/06/2015 08:41:45</publishTime>
+    </File>
     <File Include="web/templates/Orders/FilterContainerSmart.html">
       <publishTime>06/30/2015 05:21:23</publishTime>
     </File>
     <File Include="web/templates/Orders/FilterOffers.html">
       <publishTime>07/11/2015 18:21:56</publishTime>
+    </File>
+    <File Include="web/templates/Orders/FilterOffersContainerSmart.html">
+      <publishTime>08/08/2015 08:11:04</publishTime>
     </File>
     <File Include="web/templates/Orders/FilterOrders.html">
       <publishTime>07/11/2015 18:21:52</publishTime>
@@ -2083,7 +2110,7 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/AddContainers.html">
-      <publishTime>07/28/2015 09:10:50</publishTime>
+      <publishTime>08/06/2015 08:31:24</publishTime>
     </File>
     <File Include="web/templates/Settings/AddContainerTypeEquipmentRsp.html">
       <publishTime>06/28/2015 01:27:05</publishTime>
@@ -2185,7 +2212,7 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/FilterCustomers.html">
-      <publishTime>06/28/2015 01:27:05</publishTime>
+      <publishTime>08/06/2015 13:46:07</publishTime>
     </File>
     <File Include="web/templates/Settings/FilterEquipments.html">
       <publishTime>06/28/2015 01:27:05</publishTime>
@@ -2263,16 +2290,16 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/templates/Settings/web.add.templates.txt">
-      <publishTime>07/28/2015 14:16:53</publishTime>
+      <publishTime>08/08/2015 08:44:40</publishTime>
     </File>
     <File Include="web/templates/Settings/web.menu.template.txt">
-      <publishTime>07/28/2015 14:16:54</publishTime>
+      <publishTime>08/08/2015 08:44:41</publishTime>
     </File>
     <File Include="web/templates/Settings/web.relationships.templates.txt">
-      <publishTime>07/28/2015 14:16:55</publishTime>
+      <publishTime>08/08/2015 08:44:41</publishTime>
     </File>
     <File Include="web/templates/Settings/web.templates.txt">
-      <publishTime>07/28/2015 14:16:56</publishTime>
+      <publishTime>08/08/2015 08:44:42</publishTime>
     </File>
     <File Include="web/templates/TransportOrders/AddTransportOrders.html">
       <publishTime>07/28/2015 08:28:44</publishTime>
@@ -2341,31 +2368,37 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>07/11/2015 22:50:38</publishTime>
     </File>
     <File Include="web/views/InvoiceStornos/InvoiceStornos.js">
-      <publishTime>07/29/2015 08:07:33</publishTime>
+      <publishTime>08/06/2015 13:23:44</publishTime>
     </File>
     <File Include="web/views/Orders/AdditionalCostsSearch.js">
       <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Orders/AddOrders.js">
-      <publishTime>07/28/2015 08:29:51</publishTime>
+      <publishTime>08/06/2015 12:54:16</publishTime>
     </File>
     <File Include="web/views/Orders/AddPositions.js">
       <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Orders/ContainerSearch.js">
-      <publishTime>07/10/2015 10:31:31</publishTime>
+      <publishTime>08/08/2015 08:11:28</publishTime>
     </File>
     <File Include="web/views/Orders/CreateInvoiceConfirmation.js">
       <publishTime>07/02/2015 07:34:17</publishTime>
     </File>
     <File Include="web/views/Orders/CustomerSearch.js">
-      <publishTime>07/26/2015 15:37:21</publishTime>
+      <publishTime>08/08/2015 07:40:57</publishTime>
+    </File>
+    <File Include="web/views/Orders/Equipments.js">
+      <publishTime>08/06/2015 12:27:55</publishTime>
     </File>
     <File Include="web/views/Orders/FilterContainerSmart.js">
       <publishTime>07/11/2015 17:06:35</publishTime>
     </File>
     <File Include="web/views/Orders/FilterOffers.js">
       <publishTime>07/11/2015 18:17:09</publishTime>
+    </File>
+    <File Include="web/views/Orders/FilterOffersContainerSmart.js">
+      <publishTime>08/08/2015 08:21:19</publishTime>
     </File>
     <File Include="web/views/Orders/FilterOrders.js">
       <publishTime>07/11/2015 18:15:26</publishTime>
@@ -2374,13 +2407,13 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>07/28/2015 08:57:33</publishTime>
     </File>
     <File Include="web/views/Orders/Orders.js">
-      <publishTime>07/28/2015 08:57:41</publishTime>
+      <publishTime>08/06/2015 16:06:31</publishTime>
     </File>
     <File Include="web/views/Orders/OrdersRelationships.js">
       <publishTime>06/29/2015 08:30:15</publishTime>
     </File>
     <File Include="web/views/Orders/Positions.js">
-      <publishTime>07/28/2015 08:55:11</publishTime>
+      <publishTime>08/08/2015 08:03:03</publishTime>
     </File>
     <File Include="web/views/Orders/RentPositions.js">
       <publishTime>07/26/2015 10:45:36</publishTime>
@@ -2392,7 +2425,7 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/28/2015 21:21:04</publishTime>
     </File>
     <File Include="web/views/Orders/SelectContainer.js">
-      <publishTime>06/29/2015 08:51:37</publishTime>
+      <publishTime>08/08/2015 08:02:57</publishTime>
     </File>
     <File Include="web/views/Orders/SelectCustomer.js">
       <publishTime>06/28/2015 21:21:08</publishTime>
@@ -2407,7 +2440,7 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/AddContainers.js">
-      <publishTime>07/28/2015 09:10:04</publishTime>
+      <publishTime>08/06/2015 08:31:29</publishTime>
     </File>
     <File Include="web/views/Settings/AddContainerTypeEquipmentRsp.js">
       <publishTime>06/28/2015 01:27:05</publishTime>
@@ -2455,19 +2488,19 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/CommunicationPartners.js">
-      <publishTime>07/11/2015 16:51:36</publishTime>
+      <publishTime>08/06/2015 10:31:45</publishTime>
     </File>
     <File Include="web/views/Settings/ContainerEquipmentRsps.js">
-      <publishTime>06/28/2015 01:27:05</publishTime>
+      <publishTime>08/06/2015 10:31:45</publishTime>
     </File>
     <File Include="web/views/Settings/Containers.js">
-      <publishTime>07/28/2015 09:10:07</publishTime>
+      <publishTime>08/08/2015 08:44:44</publishTime>
     </File>
     <File Include="web/views/Settings/ContainersRelationships.js">
       <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/ContainerTypeEquipmentRsps.js">
-      <publishTime>06/28/2015 01:27:05</publishTime>
+      <publishTime>08/06/2015 10:31:45</publishTime>
     </File>
     <File Include="web/views/Settings/ContainerTypes.js">
       <publishTime>07/27/2015 20:58:18</publishTime>
@@ -2475,8 +2508,14 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
     <File Include="web/views/Settings/ContainerTypesRelationships.js">
       <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
+    <File Include="web/views/Settings/Custom.Events.Containers.js">
+      <publishTime>08/08/2015 09:05:48</publishTime>
+    </File>
     <File Include="web/views/Settings/Custom.Events.User.js">
       <publishTime>06/28/2015 01:27:05</publishTime>
+    </File>
+    <File Include="web/views/Settings/Custom.Toolbar.Containers.js">
+      <publishTime>08/08/2015 08:46:31</publishTime>
     </File>
     <File Include="web/views/Settings/Custom.User.js">
       <publishTime>06/28/2015 01:27:05</publishTime>
@@ -2506,7 +2545,7 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/FilterCustomers.js">
-      <publishTime>06/28/2015 01:27:05</publishTime>
+      <publishTime>08/08/2015 07:41:25</publishTime>
     </File>
     <File Include="web/views/Settings/FilterEquipments.js">
       <publishTime>06/28/2015 01:27:05</publishTime>
@@ -2545,7 +2584,7 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/10/2015 13:57:08</publishTime>
     </File>
     <File Include="web/views/Settings/RolePermissionRsps.js">
-      <publishTime>06/28/2015 01:27:05</publishTime>
+      <publishTime>08/06/2015 10:31:45</publishTime>
     </File>
     <File Include="web/views/Settings/RoleRelationships.js">
       <publishTime>06/28/2015 01:27:05</publishTime>
@@ -2578,16 +2617,16 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>06/28/2015 01:27:05</publishTime>
     </File>
     <File Include="web/views/Settings/web.add.views.txt">
-      <publishTime>07/28/2015 14:16:57</publishTime>
+      <publishTime>08/08/2015 08:44:42</publishTime>
     </File>
     <File Include="web/views/Settings/web.related.views.txt">
-      <publishTime>07/28/2015 14:16:58</publishTime>
+      <publishTime>08/08/2015 08:44:43</publishTime>
     </File>
     <File Include="web/views/Settings/web.relationships.views.txt">
-      <publishTime>07/28/2015 14:17:00</publishTime>
+      <publishTime>08/08/2015 08:44:43</publishTime>
     </File>
     <File Include="web/views/Settings/web.views.txt">
-      <publishTime>07/28/2015 14:17:01</publishTime>
+      <publishTime>08/08/2015 08:44:44</publishTime>
     </File>
     <File Include="web/views/TransportOrders/AddTransportOrders.js">
       <publishTime>07/28/2015 08:30:29</publishTime>
@@ -2620,7 +2659,7 @@ indem Sie diese MSBuild-Datei bearbeiten. Besuchen Sie "http://go.microsoft.com/
       <publishTime>07/12/2015 12:04:54</publishTime>
     </File>
     <File Include="web/web.router.template.txt">
-      <publishTime>07/28/2015 14:17:02</publishTime>
+      <publishTime>08/08/2015 08:44:45</publishTime>
     </File>
   </ItemGroup>
 </Project>
