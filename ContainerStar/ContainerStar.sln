@@ -17,6 +17,27 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContainerStar.Contracts", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContainerStar.Configuration", "ContainerStar\ContainerStar.Configuration\ContainerStar.Configuration.csproj", "{07B1A6B8-BC39-4477-8164-22B79A8E2145}"
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "web.scripts", "http://localhost/web.scripts", "{452D2984-0A67-456D-A2DA-29E962AEF168}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "false"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/web.scripts"
+		Debug.AspNetCompiler.PhysicalPath = "..\..\CoreProjects\web.scripts\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\web.scripts\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/web.scripts"
+		Release.AspNetCompiler.PhysicalPath = "..\..\CoreProjects\web.scripts\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\web.scripts\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "..\..\CoreProjects\web.scripts\"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -149,6 +170,30 @@ Global
 		{07B1A6B8-BC39-4477-8164-22B79A8E2145}.Release|x64.ActiveCfg = Release|x64
 		{07B1A6B8-BC39-4477-8164-22B79A8E2145}.Release|x64.Build.0 = Release|x64
 		{07B1A6B8-BC39-4477-8164-22B79A8E2145}.Release|x86.ActiveCfg = Release|Any CPU
+		{452D2984-0A67-456D-A2DA-29E962AEF168}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{452D2984-0A67-456D-A2DA-29E962AEF168}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{452D2984-0A67-456D-A2DA-29E962AEF168}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{452D2984-0A67-456D-A2DA-29E962AEF168}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{452D2984-0A67-456D-A2DA-29E962AEF168}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{452D2984-0A67-456D-A2DA-29E962AEF168}.Debug|x64.Build.0 = Debug|Any CPU
+		{452D2984-0A67-456D-A2DA-29E962AEF168}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{452D2984-0A67-456D-A2DA-29E962AEF168}.Debug|x86.Build.0 = Debug|Any CPU
+		{452D2984-0A67-456D-A2DA-29E962AEF168}.Msi|Any CPU.ActiveCfg = Debug|Any CPU
+		{452D2984-0A67-456D-A2DA-29E962AEF168}.Msi|Any CPU.Build.0 = Debug|Any CPU
+		{452D2984-0A67-456D-A2DA-29E962AEF168}.Msi|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{452D2984-0A67-456D-A2DA-29E962AEF168}.Msi|Mixed Platforms.Build.0 = Debug|Any CPU
+		{452D2984-0A67-456D-A2DA-29E962AEF168}.Msi|x64.ActiveCfg = Debug|Any CPU
+		{452D2984-0A67-456D-A2DA-29E962AEF168}.Msi|x64.Build.0 = Debug|Any CPU
+		{452D2984-0A67-456D-A2DA-29E962AEF168}.Msi|x86.ActiveCfg = Debug|Any CPU
+		{452D2984-0A67-456D-A2DA-29E962AEF168}.Msi|x86.Build.0 = Debug|Any CPU
+		{452D2984-0A67-456D-A2DA-29E962AEF168}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{452D2984-0A67-456D-A2DA-29E962AEF168}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{452D2984-0A67-456D-A2DA-29E962AEF168}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{452D2984-0A67-456D-A2DA-29E962AEF168}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
+		{452D2984-0A67-456D-A2DA-29E962AEF168}.Release|x64.ActiveCfg = Debug|Any CPU
+		{452D2984-0A67-456D-A2DA-29E962AEF168}.Release|x64.Build.0 = Debug|Any CPU
+		{452D2984-0A67-456D-A2DA-29E962AEF168}.Release|x86.ActiveCfg = Debug|Any CPU
+		{452D2984-0A67-456D-A2DA-29E962AEF168}.Release|x86.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,15 +1,1 @@
-﻿define([	
-    'widgets/kendo-select-box'
-], function () {
-	'use strict';
-
-	var editor = function (container, options) {
-		var self = this,
-			sourceName = 'collection_' + options.field,
-			$select = $('<select data-role="selectbox" multiple="multiple" data-bind="source: ' + sourceName + '" data-text-field="name" data-value-field="id" />').appendTo(container).attr('name', options.field);
-
-		options.model[sourceName] = self.column.collection.toJSON();
-	};
-
-	return editor;
-});
+﻿define(["widgets/kendo-select-box"],function(){"use strict";var e=function(e,t){{var l=this,i="collection_"+t.field;$('<select data-role="selectbox" multiple="multiple" data-bind="source: '+i+'" data-text-field="name" data-value-field="id" />').appendTo(e).attr("name",t.field)}t.model[i]=l.column.collection.toJSON()};return e});
