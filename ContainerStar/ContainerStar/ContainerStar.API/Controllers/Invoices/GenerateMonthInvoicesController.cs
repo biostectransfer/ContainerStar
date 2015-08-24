@@ -22,8 +22,8 @@ namespace ContainerStar.API.Controllers.Invoices
     public partial class GenerateMonthInvoicesController: AddInvoicesController
     {
         public GenerateMonthInvoicesController(IInvoicesManager invoicesManager, IOrdersManager ordersManager,
-            ITaxesManager taxesManager, IInvoicePositionsManager invoicePositionsManager, IUniqueNumberProvider numberProvider) : 
-            base(invoicesManager, ordersManager, taxesManager, invoicePositionsManager, numberProvider)
+            ITaxesManager taxesManager, IInvoicePositionsManager invoicePositionsManager, IUniqueNumberProvider numberProvider, IPrinterManager printerManager) : 
+            base(invoicesManager, ordersManager, taxesManager, invoicePositionsManager, numberProvider, printerManager)
         {
         }
 
@@ -72,7 +72,7 @@ namespace ContainerStar.API.Controllers.Invoices
             var dataDirectory = Path.Combine(HttpRuntime.AppDomainAppPath, "App_Data");
             string path = Path.Combine(dataDirectory, Contracts.Configuration.InvoiceFileName);
 
-            var stream = ordersManager.PrepareMonthInvoicePrintData(invoicesForCurrentMonth, path, invoicesManager, taxesManager);
+            var stream = printerManager.PrepareMonthInvoicePrintData(invoicesForCurrentMonth, path, invoicesManager, taxesManager, ordersManager);
             
             response.Content = new StreamContent(stream);
             response.Content.Headers.ContentType =

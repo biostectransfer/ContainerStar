@@ -22,14 +22,16 @@ namespace ContainerStar.API.Controllers.Invoices
         protected readonly IOrdersManager ordersManager;
         protected readonly ITaxesManager taxesManager;
         protected readonly IInvoicePositionsManager invoicePositionsManager;
+        protected readonly IPrinterManager printerManager;
 
         public AddInvoicesController(IInvoicesManager invoicesManager, IOrdersManager ordersManager,
-            ITaxesManager taxesManager, IInvoicePositionsManager invoicePositionsManager, IUniqueNumberProvider numberProvider)
+            ITaxesManager taxesManager, IInvoicePositionsManager invoicePositionsManager, IUniqueNumberProvider numberProvider, IPrinterManager printerManager)
         {
             this.invoicesManager = invoicesManager;
             this.numberProvider = numberProvider;
             this.ordersManager = ordersManager;
             this.taxesManager = taxesManager;
+            this.printerManager = printerManager;
             this.invoicePositionsManager = invoicePositionsManager;
         }
 

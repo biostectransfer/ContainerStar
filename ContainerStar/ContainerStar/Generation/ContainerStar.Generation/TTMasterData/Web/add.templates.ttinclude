@@ -18,6 +18,7 @@
     <table style="width: 100%; vertical-align: top; padding: 0px; margin: 0px; white-space: nowrap;" cellpadding="0" cellspacing="0">
 <#
 		var rowCount = model.ModelProperties.Max(o => o.Column.Content.RowNumber);
+		var columnCount = model.ModelProperties.Max(o => o.Column.Content.ColumnNumber);
 
 		if(rowCount <= 0)
 			rowCount = 1;
@@ -33,7 +34,7 @@
 #>
 		<tr>
 <#
-			var columnCount = rowProperties.Max(o => o.Column.Content.ColumnNumber);
+			//var columnCount = rowProperties.Max(o => o.Column.Content.ColumnNumber);
 
 			if(columnCount <= 0)
 				columnCount = 1;
@@ -46,7 +47,10 @@
 					columnProperties.AddRange(rowProperties.Where(o => o.Column.Content.ColumnNumber == 0).ToList());
 				}
 
-				var maxColumnWidth = columnProperties.Max(o => o.Column.Content.AddViewColumnWidth);
+				var maxColumnWidth = 370;
+				
+				if(columnProperties.Count() != 0 )
+					maxColumnWidth = columnProperties.Max(o => o.Column.Content.AddViewColumnWidth);
 
 #>
 			<td style="padding-right: 25px; vertical-align: top; <#= maxColumnWidth > 0 ? "width: " + maxColumnWidth + "px;" : "" #>">

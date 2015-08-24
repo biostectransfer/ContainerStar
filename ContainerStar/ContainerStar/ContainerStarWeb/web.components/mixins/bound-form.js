@@ -1,1 +1,106 @@
-﻿define(["backbone.stickit"],function(){"use strict";var t=Backbone.Stickit.getConfiguration($("<select />"));Backbone.Stickit.addHandler([{selector:"select[multiple]",getVal:function(t){var e=t.find("option:selected");return _.map(e,function(t){return Number($(t).val())})},update:function(e,a){t.update.apply(this,arguments);var n=e.data("custom-selectBox");n&&n.restore();var o=e.data("kendoMultiSelect");o&&(o.setDataSource(),o.value(a))}},{selector:"select:not([multiple])",getVal:function(t){return Number(t.find("option:selected").val())},update:function(e,a){t.update.apply(this,arguments);var n=e.data("kendoDropDownList");n&&(n.setDataSource(),n.value(a))}},{selector:"[data-role=datepicker]",getVal:function(t){var e=t.val();return e?kendo.format("{0:yyyy'-'MM'-'dd'T'HH':'mm':'ss}",kendo.parseDate(e)):null},update:function(t,e){t.val(e?kendo.format("{0:d}",kendo.parseDate(e)):"")}}]);var e={render:function(){this.stickit()},close:function(){this.unstickit()}};return e});
+﻿define([
+	'backbone.stickit'
+], function () {
+    'use strict';
+
+    var selectConfig = Backbone.Stickit.getConfiguration($('<select />'));
+
+    Backbone.Stickit.addHandler([{
+        selector: 'select[multiple]',
+        getVal: function ($el, event, options) {
+            var selected = $el.find('option:selected');
+            return _.map(selected, function (el) {
+                return Number($(el).val());
+            });
+        },
+        update: function ($el, values) {
+            selectConfig.update.apply(this, arguments);
+
+            var selectBox = $el.data('custom-selectBox');
+            if (selectBox)
+                selectBox.restore();
+
+            var multiSelect = $el.data('kendoMultiSelect');
+            if (multiSelect) {
+                multiSelect.setDataSource();
+                multiSelect.value(values);
+            }
+
+        }
+    }, {
+        selector: 'select:not([multiple])',
+        getVal: function ($el, event, options) {
+            return Number($el.find('option:selected').val());
+        },
+        update: function ($el, value) {
+            selectConfig.update.apply(this, arguments);
+
+            var dropdownlist = $el.data('kendoDropDownList');
+            if (dropdownlist) {
+                dropdownlist.setDataSource();
+                dropdownlist.value(value);
+            }
+        }
+    }, {
+        selector: '[data-role=datepicker]',
+        getVal: function ($el) {
+            var value = $el.val();
+
+            if (!value)
+                return null;
+
+            return kendo.format("{0:yyyy'-'MM'-'dd'T'HH':'mm':'ss}", kendo.parseDate(value));
+        },
+        update: function ($el, value) {
+            if (!value)
+                $el.val('');
+            else
+                $el.val(kendo.format('{0:d}', kendo.parseDate(value)));
+        }
+    }, {
+        selector: '[data-role=datetimepicker]',
+        getVal: function ($el) {
+            var value = $el.val();
+            return kendo.format("{0:yyyy'-'MM'-'dd'T'HH':'mm':'ss}", kendo.parseDate(value));
+        },
+        update: function ($el, value) {
+            if (!value)
+                $el.val('');
+            else
+                $el.val(kendo.format('{0:g}', kendo.parseDate(value)));
+        }
+    }, {
+        selector: '[data-role=numerictextbox]',
+        getVal: function ($el) {
+            var value = $el.val();
+
+            return kendo.parseFloat(value);
+        },
+        update: function ($el, value) {
+            $el.val(value);
+        }
+    }, {
+        selector: '[data-role=floattextbox]',
+        getVal: function ($el) {
+            var value = $el.val();
+
+            return kendo.parseFloat(value);
+        },
+        update: function ($el, value) {
+            $el.val(value);
+        }
+    }
+    ]);
+
+    var mixin = {
+        render: function () {
+            this.stickit();
+        },
+
+        close: function () {
+            this.unstickit();
+        }
+    };
+
+    return mixin;
+});

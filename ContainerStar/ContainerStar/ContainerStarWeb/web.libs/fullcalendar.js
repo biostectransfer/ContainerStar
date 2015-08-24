@@ -6216,7 +6216,7 @@ TimeGrid.mixin({
 			// assign positioning CSS and insert into container
 			for (i = 0; i < colSegs.length; i++) {
 				seg = colSegs[i];
-				seg.el.css(this.generateSegPositionCss(seg));
+				seg.el.css(this.generateSegPositionCss(seg, i, true));
 
 				// if the height is short, add a className for alternate styling
 				if (seg.bottom - seg.top < 30) {
@@ -6338,7 +6338,7 @@ TimeGrid.mixin({
 
 	// Generates an object with CSS properties/values that should be applied to an event segment element.
 	// Contains important positioning-related properties that should be applied to any event element, customized or not.
-	generateSegPositionCss: function(seg) {
+	generateSegPositionCss: function(seg, index, fixPosition) {
 		var shouldOverlap = this.view.opt('slotEventOverlap');
 		var backwardCoord = seg.backwardCoord; // the left side if LTR. the right side if RTL. floating-point
 		var forwardCoord = seg.forwardCoord; // the right side if LTR. the left side if RTL. floating-point
@@ -6363,6 +6363,13 @@ TimeGrid.mixin({
 		props.zIndex = seg.level + 1; // convert from 0-base to 1-based
 		props.left = left * 100 + '%';
 		props.right = right * 100 + '%';
+
+        //HERE IS OVERRIDE OF STANDARD FUNCTIONALITY (custom logic)
+		if (fixPosition)
+		{
+		    props.left = seg.event.columnIndex * 152 + 'px';
+		    props.right = '0%';
+		}
 
 		if (shouldOverlap && seg.forwardPressure) {
 			// add padding to the edge so that forward stacked events don't cover the resizer's icon

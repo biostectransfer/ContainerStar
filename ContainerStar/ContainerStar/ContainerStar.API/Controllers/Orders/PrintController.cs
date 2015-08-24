@@ -26,16 +26,18 @@ namespace ContainerStar.API.Controllers
         private IInvoicesManager invoicesManager;
         private IInvoiceStornosManager invoiceStornosManager;
         private ITransportOrdersManager transportOrdersManager;
+        private IPrinterManager printerManager;
 
         public PrintController(IOrdersManager manager, IInvoicesManager invoicesManager, 
             IInvoiceStornosManager invoiceStornosManager, ITaxesManager taxesManager,
-            ITransportOrdersManager transportOrdersManager) :
+            ITransportOrdersManager transportOrdersManager, IPrinterManager printerManager) :
             base()
         {
             this.taxesManager = taxesManager;
             this.invoicesManager = invoicesManager;
             this.invoiceStornosManager = invoiceStornosManager;
             this.transportOrdersManager = transportOrdersManager;
+            this.printerManager = printerManager;
             Manager = manager;
             FilterExpressionCreator = new FilterExpressionCreator();
         }
@@ -54,15 +56,15 @@ namespace ContainerStar.API.Controllers
             {
                 case PrintTypes.RentOrder:
                     path = Path.Combine(dataDirectory, Contracts.Configuration.RentOrderFileName);
-                    stream = Manager.PrepareRentOrderPrintData(id, path, taxesManager);
+                    stream = printerManager.PrepareRentOrderPrintData(id, path, taxesManager, Manager);
                     break;
                 case PrintTypes.Offer:
                     path = Path.Combine(dataDirectory, Contracts.Configuration.OfferFileName);
-                    stream = Manager.PrepareOfferPrintData(id, path, taxesManager);
+                    stream = printerManager.PrepareOfferPrintData(id, path, taxesManager, Manager);
                     break;
                 case PrintTypes.Invoice:
                     path = Path.Combine(dataDirectory, Contracts.Configuration.InvoiceFileName);
-                    stream = Manager.PrepareInvoicePrintData(id, path, invoicesManager);
+                    stream = printerManager.PrepareInvoicePrintData(id, path, invoicesManager, Manager);
                     break;
                 case PrintTypes.ReminderMail:
                     path = Path.Combine(dataDirectory, Contracts.Configuration.ReminderFileName);
@@ -86,23 +88,23 @@ namespace ContainerStar.API.Controllers
                     allInvoicesToReminder.AddRange(invoicesManager.GetEntities(o => !o.PayDate.HasValue && o.ReminderCount != 0 &&
                         !newIds.Contains(o.Id)).ToList());
 
-                    stream = Manager.PrepareReminderPrintData(allInvoicesToReminder, path, invoicesManager, taxesManager);
+                    stream = printerManager.PrepareReminderPrintData(allInvoicesToReminder, path, invoicesManager, taxesManager, Manager);
                     break;
                 case PrintTypes.InvoiceStorno:
                     path = Path.Combine(dataDirectory, Contracts.Configuration.InvoiceStornoFileName);
-                    stream = Manager.PrepareInvoiceStornoPrintData(id, path, invoiceStornosManager);
+                    stream = printerManager.PrepareInvoiceStornoPrintData(id, path, invoiceStornosManager, Manager);
                     break;
                 case PrintTypes.TransportInvoice:
                     path = Path.Combine(dataDirectory, Contracts.Configuration.TransportInvoiceFileName);
-                    stream = Manager.PrepareTransportInvoicePrintData(id, path, transportOrdersManager, taxesManager);
+                    stream = printerManager.PrepareTransportInvoicePrintData(id, path, transportOrdersManager, taxesManager, Manager);
                     break;
                 case PrintTypes.DeliveryNote:
                     path = Path.Combine(dataDirectory, Contracts.Configuration.DeliveryNoteFileName);
-                    stream = Manager.PrepareDeliveryNotePrintData(id, path);
+                    stream = printerManager.PrepareDeliveryNotePrintData(id, path, Manager);
                     break;
                 case PrintTypes.BackDeliveryNote:
                     path = Path.Combine(dataDirectory, Contracts.Configuration.BackDeliveryNoteFileName);
-                    stream = Manager.PrepareBackDeliveryNotePrintData(id, path);
+                    stream = printerManager.PrepareBackDeliveryNotePrintData(id, path, Manager);
                     break;
                 default:
                     throw new NotImplementedException();

@@ -182,7 +182,7 @@
     </Compile>
     <Compile Include="Managers\Custom.ContainersManager.cs" />
     <Compile Include="Managers\CalculationHelper.cs" />
-    <Compile Include="Managers\Custom.OrdersManager.cs" />
+    <Compile Include="Managers\PrinterManager.cs" />
     <Compile Include="Managers\CustomersManager.cs">
       <DependentUpon>Managers.tt</DependentUpon>
     </Compile>
