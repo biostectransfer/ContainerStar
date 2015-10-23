@@ -14,7 +14,7 @@ define([
 	'use strict';
 
 	var collection = BaseCollection.extend({
-	    url: 'api/<#=model.Table.Content.CodeNamePlural #>',
+	    url: Application.apiUrl + '/<#=model.Table.Content.CodeNamePlural #>',
 		model: Model
 	});
 

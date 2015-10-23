@@ -2,7 +2,7 @@ define(function () {
 	'use strict';
 
 	var model = Backbone.Model.extend({
-	    urlRoot: 'api/Taxes',
+	    urlRoot: Application.apiUrl + '/Taxes',
 		fields: {
 			id: { type: "number", editable: false }
 			,value: { type: "number", 

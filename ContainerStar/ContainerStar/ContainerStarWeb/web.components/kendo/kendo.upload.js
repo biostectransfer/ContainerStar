@@ -112,7 +112,7 @@
                 "statusWarning": "warning",
                 "statusFailed": "failed",
                 "headerStatusUploading": "Uploading...",
-                "headerStatusUploaded": "Done"
+                "headerStatusUploaded": "Fertig"
             }
         },
 

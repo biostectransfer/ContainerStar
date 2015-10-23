@@ -29,7 +29,7 @@
 				var self = this,
 				userModel = new Backbone.Model();
 
-				userModel.url = '/api/logout';
+				userModel.url = Application.apiUrl + '/logout';
 				userModel.save({}, {
 					data: {
 					},

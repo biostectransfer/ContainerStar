@@ -2,7 +2,7 @@
 	'use strict';
 
 	var model = Backbone.Model.extend({
-		urlRoot: '/api/viewCollection',
+	    urlRoot: Application.apiUrl + '/viewCollection',
 		parse: function (response) {
 			for (var prop in response) {
 				response[prop] = new Backbone.Collection(response[prop]);

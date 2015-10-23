@@ -378,7 +378,8 @@
             that._blur();
         },
 
-        _format: function(format, culture) {
+        _format: function (format, culture) {
+
             var numberFormat = this._culture(culture).numberFormat;
 
             format = format.toLowerCase();

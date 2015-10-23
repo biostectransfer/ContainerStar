@@ -17,7 +17,7 @@
 				var self = this;
 
 				if (self.validate()) {
-					self.model.url = 'api/users',
+				    self.model.url = Application.apiUrl + '/users',
 					self.model.save({
 						id: self.model.id,
 						password: self.model.get('password'),

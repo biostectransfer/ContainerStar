@@ -87,7 +87,8 @@
             return kendo.parseFloat(value);
         },
         update: function ($el, value) {
-            $el.val(value);
+            
+            $el.val(kendo.format("{0:n2}", value));
         }
     }
     ]);

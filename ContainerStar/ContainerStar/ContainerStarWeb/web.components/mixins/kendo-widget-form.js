@@ -46,7 +46,7 @@ function () {
 
             self.$('input[data-role=numerictextbox]').each(function (index, elem) {
                 widgets.push(self.$(elem).kendoNumericTextBox({
-                    format: "#",
+                    format: "n0",
                     decimals: 0,
                     min: 0,
                     max: 9999999,
@@ -56,9 +56,11 @@ function () {
 
 
             self.$('input[data-role=floattextbox]').each(function (index, elem) {
-                widgets.push(self.$(elem).kendoNumericTextBox({
 
-                    format: "{0:n2}",
+
+                widgets.push(self.$(elem).kendoNumericTextBox({
+                    
+                    format: "n2",
                     decimals: 2,
                     min: 0,
                     max: 9999999,

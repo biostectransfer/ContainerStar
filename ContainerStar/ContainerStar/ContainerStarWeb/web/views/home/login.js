@@ -14,7 +14,7 @@
         if (!self.validate())
             return;
 
-        userModel.url = '/api/login';
+        userModel.url = Application.apiUrl + '/login';
         userModel.save({}, {
             data: kendo.stringify(self.model.toJSON()),
             contentType: 'application/json',

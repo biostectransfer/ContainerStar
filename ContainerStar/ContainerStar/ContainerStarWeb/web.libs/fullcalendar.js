@@ -8808,7 +8808,8 @@ function Header(calendar, options) {
 				var isOnlyButtons = true;
 				var groupEl;
 
-				$.each(this.split(','), function(j, buttonName) {
+				$.each(this.split(','), function (j, buttonName) {
+				    var customButtonProps;
 					var viewSpec;
 					var buttonClick;
 					var overrideText; // text explicitly set by calendar's constructor options. overcomes icons
@@ -8824,9 +8825,16 @@ function Header(calendar, options) {
 						isOnlyButtons = false;
 					}
 					else {
-						viewSpec = calendar.getViewSpec(buttonName);
-
-						if (viewSpec) {
+					    if ((customButtonProps = (calendar.options.customButtons || {})[buttonName])) {
+					        buttonClick = function (ev) {
+					            if (customButtonProps.click) {
+					                customButtonProps.click.call(button[0], ev);
+					            }
+					        };
+					        overrideText = ''; // icons will override text
+					        defaultText = customButtonProps.text;
+					    }
+					    else if ((viewSpec = calendar.getViewSpec(buttonName))) {
 							buttonClick = function() {
 								calendar.changeView(buttonName);
 							};

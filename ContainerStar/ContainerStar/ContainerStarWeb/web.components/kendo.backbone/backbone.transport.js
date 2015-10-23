@@ -1,1 +1,92 @@
-define(function(){"use strict";function t(a){for(var e=0;e<a.length;e++){var n=a[e];n.value&&n.value instanceof Date?n.value=kendo.format("{0:yyyy'-'MM'-'dd'T'HH':'mm':'ss}",n.value):n.filters&&t(n.filters)}}function a(t){this.colWrap=t}return _.extend(a.prototype,{create:function(t){var a=t.data;this.colWrap.create(a).done(function(a){t.success({total:1,data:[a]})}).fail(function(){t.error.apply(this,arguments)})},read:function(a){var e=this.colWrap.collection;a.data.filter&&t(a.data.filter.filters),e.fetch({data:a.data,success:function(){a.success({total:e.total,data:e.toJSON()})}})},update:function(t){var a=this.colWrap.collection.get(t.data.cid||t.data.id);for(var e in t.data){var n=t.data[e];n instanceof Date&&(t.data[e]=kendo.format("{0:yyyy'-'MM'-'dd'T'HH':'mm':'ss}",n))}a.save(t.data).done(function(a){t.success({data:a})}).fail(function(){t.error.apply(this,arguments)})},destroy:function(t){var a=this.colWrap.collection.get(t.data.cid||t.data.id);a.destroy({wait:!0}).done(function(a){t.success(a.responseJSON)}).fail(function(){t.error.apply(this,arguments)})}}),a});
+define(function () {
+    "use strict";
+
+    function processFilter(filters) {
+        for (var i = 0; i < filters.length; i++) {
+            var filter = filters[i];
+            if (filter.value && filter.value instanceof Date)
+                filter.value = kendo.format("{0:yyyy'-'MM'-'dd'T'HH':'mm':'ss}", filter.value);
+            else if (filter.filters)
+                processFilter(filter.filters);
+        }
+    }
+
+    function Transport(colWrap) {
+        this.colWrap = colWrap;
+    };
+
+    _.extend(Transport.prototype, {
+
+        create: function (options) {
+            var data = options.data;
+
+            for (var fieldName in data) {
+                var value = data[fieldName];
+                if (value instanceof Date) {
+
+                    data[fieldName] = kendo.format("{0:yyyy'-'MM'-'dd'T'HH':'mm':'ss}", value);
+                }
+            }
+
+            this.colWrap.create(data).done(function (model) {
+                options.success({
+                    total: 1,
+                    data: [model]
+                });
+            }).fail(function (xhr) {
+                options.error.apply(this, arguments);
+            });
+        },
+
+        read: function (options) {
+            var collection = this.colWrap.collection;
+
+            if (options.data.filter)
+                processFilter(options.data.filter.filters);
+
+            collection.fetch({
+                data: options.data,
+                success: function () {
+                    options.success({
+                        total: collection.total,
+                        data: collection.toJSON()
+                    });
+                }
+            });
+        },
+
+        update: function (options) {
+            var model = this.colWrap.collection.get(options.data.cid || options.data.id);
+
+            for (var fieldName in options.data) {
+                var value = options.data[fieldName];
+                if (value instanceof Date) {
+
+                    options.data[fieldName] = kendo.format("{0:yyyy'-'MM'-'dd'T'HH':'mm':'ss}", value);
+                }
+            }
+
+            model.save(options.data).done(function (data) {
+                options.success({
+                    data: data
+                });
+            }).fail(function (xhr) {
+                options.error.apply(this, arguments);
+            });
+        },
+
+        destroy: function (options) {
+            var model = this.colWrap.collection.get(options.data.cid || options.data.id);
+
+            model.destroy({
+                wait: true
+            }).done(function (xhr) {
+                options.success(xhr.responseJSON);
+            }).fail(function () {
+                options.error.apply(this, arguments);
+            });
+        }
+    });
+
+    return Transport;
+});
